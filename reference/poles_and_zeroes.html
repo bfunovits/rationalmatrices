@@ -41,7 +41,13 @@ the eigenvalues of the state transition matrix \(A-BD^{-1}C\) of the inverse are
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -198,7 +204,7 @@ For some more details see the vignette <a href="../doc/rational_matrices.html">R
 <span class="r-in"><span><span class="va">c</span> <span class="op">=</span> <span class="fu"><a href="lmfd.html">lmfd</a></span><span class="op">(</span><span class="fu"><a href="test_polm.html">test_polm</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, degree <span class="op">=</span> <span class="fl">3</span>, random <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>         <span class="fu"><a href="test_polm.html">test_polm</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, degree <span class="op">=</span> <span class="fl">1</span>, random <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">z</span> <span class="op">=</span> <span class="fu">zeroes</span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.8437908 -1.4784083</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.2049177  1.2448546</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">z</span>, <span class="fu">zeroes</span><span class="op">(</span><span class="va">c</span><span class="op">$</span><span class="va">b</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span> </span></span>
@@ -207,7 +213,7 @@ For some more details see the vignette <a href="../doc/rational_matrices.html">R
 <span class="r-in"><span><span class="va">k</span> <span class="op">=</span> <span class="fu"><a href="rmfd.html">rmfd</a></span><span class="op">(</span>c <span class="op">=</span> <span class="fu"><a href="test_polm.html">test_polm</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, degree <span class="op">=</span> <span class="fl">3</span>, random <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>         d <span class="op">=</span> <span class="fu"><a href="test_polm.html">test_polm</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, degree <span class="op">=</span> <span class="fl">1</span>, random <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">z</span> <span class="op">=</span> <span class="fu">zeroes</span><span class="op">(</span><span class="va">k</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  0.3108737 -0.7265708</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]   0.6372353 -11.4740943</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">z</span>, <span class="fu">zeroes</span><span class="op">(</span><span class="va">k</span><span class="op">$</span><span class="va">d</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span> </span></span>
@@ -218,7 +224,7 @@ For some more details see the vignette <a href="../doc/rational_matrices.html">R
 <span class="r-in"><span>         C <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">3</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>         D <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">z</span> <span class="op">=</span> <span class="fu">zeroes</span><span class="op">(</span><span class="va">k</span>, tol <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.05053895+0.0000000i 0.13173966-0.6012227i 0.13173966+0.6012227i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1837212+0.0000000i 0.4998418-0.3803373i 0.4998418+0.3803373i</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">z</span>, <span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/eigen.html" class="external-link">eigen</a></span><span class="op">(</span><span class="va">k</span><span class="op">$</span><span class="va">A</span> <span class="op">-</span> <span class="va">k</span><span class="op">$</span><span class="va">B</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html" class="external-link">solve</a></span><span class="op">(</span><span class="va">k</span><span class="op">$</span><span class="va">D</span>, <span class="va">k</span><span class="op">$</span><span class="va">C</span><span class="op">)</span>, only.values <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">$</span><span class="va">values</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
@@ -240,23 +246,23 @@ For some more details see the vignette <a href="../doc/rational_matrices.html">R
 <span class="r-in"><span><span class="co"># poles of a rational matrix in LMFD form ##################################</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">z</span> <span class="op">=</span> <span class="fu">poles</span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.1489556+0.000000i -0.5366348+0.000000i  1.2358720-0.212441i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4]  1.2358720+0.212441i -1.8012843-1.557224i -1.8012843+1.557224i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  0.2813151+0.0000000i -0.6982848-0.7111637i -0.6982848+0.7111637i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4]  1.0177287+0.0000000i  0.3638302-1.6370207i  0.3638302+1.6370207i</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">z</span>, <span class="fu">zeroes</span><span class="op">(</span><span class="va">c</span><span class="op">$</span><span class="va">a</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># poles of a rational matrix in RMFD form ##################################</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">z</span> <span class="op">=</span> <span class="fu">poles</span><span class="op">(</span><span class="va">c</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.1489556+0.000000i -0.5366348+0.000000i  1.2358720-0.212441i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4]  1.2358720+0.212441i -1.8012843-1.557224i -1.8012843+1.557224i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  0.2813151+0.0000000i -0.6982848-0.7111637i -0.6982848+0.7111637i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4]  1.0177287+0.0000000i  0.3638302-1.6370207i  0.3638302+1.6370207i</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">z</span>, <span class="fu">zeroes</span><span class="op">(</span><span class="va">c</span><span class="op">$</span><span class="va">a</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># poles of a rational matrix in statespace form ###########################</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">z</span> <span class="op">=</span> <span class="fu">poles</span><span class="op">(</span><span class="va">k</span>, tol <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.4452459+0.0000000i  0.1281198-0.7713463i  0.1281198+0.7713463i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.4729606+0.0000000i 0.7541721-0.9958197i 0.7541721+0.9958197i</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">z</span>, <span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/eigen.html" class="external-link">eigen</a></span><span class="op">(</span><span class="va">k</span><span class="op">$</span><span class="va">A</span>, only.values <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">$</span><span class="va">values</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 </code></pre></div>
@@ -266,7 +272,7 @@ For some more details see the vignette <a href="../doc/rational_matrices.html">R
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Wolfgang Scherrer, Bernd Funovits.</p>
+  <p></p><p>Developed by <a href="https://scholar.google.com/citations?user=-Ytb9BYAAAAJ" class="external-link">Wolfgang Scherrer</a>, <a href="https://ch.linkedin.com/in/bernd-funovits-phd-cfa-a8215016" class="external-link">Bernd Funovits</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

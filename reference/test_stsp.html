@@ -33,7 +33,13 @@ in statespace form with statespace dimension \(s\)."><!-- mathjax --><script src
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -142,11 +148,11 @@ generated matrices.</p>
 <span class="r-in"><span><span class="va">x</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> statespace realization [2,2] with s = 3 states</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       s[1]  s[2]  s[3]  u[1]  u[2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> s[1] -0.28  0.08  0.45 -1.09 -0.48</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> s[2]  0.11 -0.05  0.19 -0.17 -0.20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> s[3]  0.95 -0.29  0.20  0.79  0.74</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x[1] -0.45 -0.45 -0.54  1.00  0.00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x[2] -0.06 -0.01 -0.33  0.00  1.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s[1]  0.12 -0.23 -0.57  0.47 -0.70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s[2]  0.02 -0.22 -0.51 -0.68 -0.41</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s[3] -0.02  0.51  0.36  1.04 -0.54</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x[1]  0.38 -0.46  0.21  1.00  0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x[2] -1.13 -0.88  1.86  0.00  1.00</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="fu"><a href="poles_and_zeroes.html">poles</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="fu"><a href="poles_and_zeroes.html">zeroes</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span></span></span>
@@ -162,15 +168,15 @@ generated matrices.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">x</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> statespace realization [3,2] with s = 5 states</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       s[1]  s[2] s[3]  s[4]  s[5]  u[1]  u[2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> s[1]  0.00  0.00 1.00  0.00  0.00  0.27 -0.02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> s[2]  0.00  0.00 0.00  1.00  0.00  0.75 -1.51</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> s[3]  0.18 -0.67 0.14 -0.05  0.00 -1.41 -0.87</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> s[4]  0.00  0.00 0.00  0.00  1.00  0.66 -0.06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> s[5] -0.02 -0.11 1.05  0.22 -0.35 -0.37  0.80</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x[1]  1.00  0.00 0.00  0.00  0.00  1.00  0.00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x[2]  0.00  1.00 0.00  0.00  0.00  0.71  1.00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x[3] -1.26 -0.42 0.00  0.00  0.00  0.39 -0.53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       s[1]  s[2]  s[3]  s[4]  s[5]  u[1]  u[2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s[1]  0.00  0.00  1.00  0.00  0.00  0.22 -0.53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s[2]  0.00  0.00  0.00  1.00  0.00 -0.93  0.05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s[3]  0.43 -0.40 -0.48 -0.21  0.00  0.65  0.07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s[4]  0.00  0.00  0.00  0.00  1.00  0.19  1.11</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s[5] -0.07  0.43  0.12  0.66 -0.07  0.12  0.53</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x[1]  1.00  0.00  0.00  0.00  0.00  1.00  0.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x[2]  0.00  1.00  0.00  0.00  0.00  0.24  1.00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x[3]  0.11 -0.44  0.00  0.00  0.00  0.20 -0.27</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="fu"><a href="poles_and_zeroes.html">poles</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span><span class="fu"><a href="Kronecker-Indices.html">pseries2nu</a></span><span class="op">(</span><span class="fu"><a href="pseries.html">pseries</a></span><span class="op">(</span><span class="va">x</span>, lag.max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="co"># check Kronecker indices</span></span></span>
@@ -182,7 +188,7 @@ generated matrices.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Wolfgang Scherrer, Bernd Funovits.</p>
+  <p></p><p>Developed by <a href="https://scholar.google.com/citations?user=-Ytb9BYAAAAJ" class="external-link">Wolfgang Scherrer</a>, <a href="https://ch.linkedin.com/in/bernd-funovits-phd-cfa-a8215016" class="external-link">Bernd Funovits</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

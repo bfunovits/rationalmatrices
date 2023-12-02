@@ -39,7 +39,13 @@ to make operations on different subclasses of the (super-) class ratm possible."
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -117,19 +123,19 @@ The following ranks are assigned to the <code>ratm</code> objects:</p>
 <span class="r-in"><span><span class="fu">rationalmatrices</span><span class="fu">:::</span><span class="fu">upgrade_objects</span><span class="op">(</span>force <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">l</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> statespace realization [1,1] with s = 1 states</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          s[1]      u[1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> s[1] -1.08899  1.354742</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x[1]  1.00000 -1.026447</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          s[1]     u[1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s[1] 1.181889 4.578742</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x[1] 1.000000 1.856831</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">rationalmatrices</span><span class="fu">:::</span><span class="fu">upgrade_objects</span><span class="op">(</span>force <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">l</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 1 x 1 ) left matrix fraction description a^(-1)(z) b(z) with degrees (p = 1, q = 1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> left factor a(z):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1] z^1 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]        1  1.08899</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1]  z^1 [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]        1 -1.181889</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> right factor b(z):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       z^0 [,1]  z^1 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.026447 0.2369519</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1] z^1 [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 1.856831 2.384173</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Upgrade poly to rmfd</span></span></span>
@@ -144,19 +150,21 @@ The following ranks are assigned to the <code>ratm</code> objects:</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> statespace realization [1,1] with s = 1 states</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            s[1]       u[1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> s[1] -0.3768608  0.4549682</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x[1]  1.0000000 -0.6594440</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s[1] -0.4218751  0.1254212</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x[1]  1.0000000 -2.0095552</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">rationalmatrices</span><span class="fu">:::</span><span class="fu">upgrade_objects</span><span class="op">(</span>force <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">l</span>, <span class="va">ps</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 1 x 1 ) impulse response with maximum lag = 5 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      lag=0 [,1] lag=1 [,1] lag=2 [,1] lag=3 [,1] lag=4 [,1] lag=5 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  -1.026447   1.354742  -1.475301   1.606588  -1.749558   1.905251</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   1.856831   4.578742   5.411566   6.395872   7.559212   8.934152</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 1 x 1 ) impulse response with maximum lag = 5 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      lag=0 [,1] lag=1 [,1] lag=2 [,1] lag=3 [,1] lag=4 [,1] lag=5 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]          1 -0.5873021 -0.4396098 -0.3290586 -0.2463083 -0.1843677</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      lag=0 [,1] lag=1 [,1]   lag=2 [,1]    lag=3 [,1]   lag=4 [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]          1 -0.3728132 0.0009012476 -2.178698e-06 5.266837e-09</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         lag=5 [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.273218e-11</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
@@ -165,7 +173,7 @@ The following ranks are assigned to the <code>ratm</code> objects:</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Wolfgang Scherrer, Bernd Funovits.</p>
+  <p></p><p>Developed by <a href="https://scholar.google.com/citations?user=-Ytb9BYAAAAJ" class="external-link">Wolfgang Scherrer</a>, <a href="https://ch.linkedin.com/in/bernd-funovits-phd-cfa-a8215016" class="external-link">Bernd Funovits</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

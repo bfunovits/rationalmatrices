@@ -49,7 +49,13 @@ elementwise polynomial remainder ('a %% b'),
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -221,11 +227,11 @@ for polynomial matrices (<code>polm</code> objects) or (objects which may be coe
 <span class="r-in"><span><span class="va">a</span> <span class="op">=</span> <span class="fu"><a href="test_polm.html">test_polm</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, degree <span class="op">=</span> <span class="fl">1</span>, random <span class="op">=</span> <span class="cn">TRUE</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">a</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> statespace realization [2,2] with s = 2 states</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           s[1]      s[2]       u[1]     u[2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> s[1] 24.965970 -4.622687 -10.447761 9.373134</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> s[2]  3.846567 -1.368955  -1.492537 1.910448</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x[1] 24.965970 -4.622687 -10.447761 9.373134</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x[2]  3.846567 -1.368955  -1.492537 1.910448</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            s[1]       s[2]      u[1]       u[2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s[1]  1.5431713 -4.8444333 1.6118955  2.2741472</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s[2] -0.9771336  0.5614145 0.2748969 -0.3873547</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x[1]  1.5431713 -4.8444333 1.6118955  2.2741472</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x[2] -0.9771336  0.5614145 0.2748969 -0.3873547</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="pseries.html">pseries</a></span><span class="op">(</span><span class="va">a</span> <span class="op"><a href="ratm_mult.html">%r%</a></span> <span class="va">a</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 2 x 2 ) impulse response with maximum lag = 5 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      lag=0 [,1]  [,2] lag=1 [,1]  [,2] lag=2 [,1]  [,2] lag=3 [,1]  [,2]</span>
@@ -240,9 +246,9 @@ for polynomial matrices (<code>polm</code> objects) or (objects which may be coe
 <span class="r-in"><span><span class="va">b</span> <span class="op">=</span> <span class="fu"><a href="test_polm.html">test_polm</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, degree <span class="op">=</span> <span class="fl">1</span>, random <span class="op">=</span> <span class="cn">TRUE</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">b</span> <span class="op">*</span> <span class="va">a</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 2 x 3 ) matrix polynomial with degree &lt;= 2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1]    [,2]    [,3] z^1 [,1]    [,2]    [,3] z^2 [,1]    [,2]    [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   0.2950  0.1463 -0.0576   0.7573 -1.4638 -0.2208   0.3589  2.8059  0.4284</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]   0.0468 -0.0780 -1.9800  -0.4350 -0.3382 -1.5030   0.5358 -0.3384 -0.0702</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1]    [,2]    [,3] z^1 [,1]   [,2]    [,3] z^2 [,1]    [,2]    [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   1.1424 -0.8580 -1.1826   0.8496 2.3630 -0.8581  -0.6528 -0.5740 -0.0280</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  -0.2745  0.4958  0.3770  -0.6104 0.5379  1.1983  -0.1335  0.1435 -0.5512</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="fu"><a href="zvalues.html">zvalues</a></span><span class="op">(</span><span class="va">a</span> <span class="op">*</span> <span class="va">b</span><span class="op">)</span>, <span class="fu"><a href="zvalues.html">zvalues</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="zvalues.html">zvalues</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 </code></pre></div>
@@ -252,7 +258,7 @@ for polynomial matrices (<code>polm</code> objects) or (objects which may be coe
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Wolfgang Scherrer, Bernd Funovits.</p>
+  <p></p><p>Developed by <a href="https://scholar.google.com/citations?user=-Ytb9BYAAAAJ" class="external-link">Wolfgang Scherrer</a>, <a href="https://ch.linkedin.com/in/bernd-funovits-phd-cfa-a8215016" class="external-link">Bernd Funovits</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

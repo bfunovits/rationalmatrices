@@ -31,7 +31,13 @@
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -106,26 +112,26 @@
 <span class="r-in"><span><span class="op">(</span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="test_lmfd.html">test_lmfd</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span><span class="op">)</span>, degrees <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 2 ) left matrix fraction description a^(-1)(z) b(z) with degrees (p = 1, q = 1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> left factor a(z):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1]  [,2]  [,3]  z^1 [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]        1     0     0 1.3249976  1.7078150 -1.1669165</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]        0     1     0 1.5178235 -2.3328057 -0.1161027</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]        0     0     1 0.7004871 -0.9891472 -0.8800032</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1]  [,2]  [,3]   z^1 [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]        1     0     0  1.1128444  1.5707491  0.2400267</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]        0     1     0 -0.1622396  0.7176393 -1.2201228</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]        0     0     1  1.6799761 -1.3955622  1.2804358</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> right factor b(z):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       z^0 [,1]       [,2]   z^1 [,1]        [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.081509 -0.7079270 -0.5170237  0.18757343</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  1.096239  0.8248984  0.2090721 -0.14121976</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  1.755518  0.8607571 -0.1762874 -0.00452162</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        z^0 [,1]       [,2]   z^1 [,1]        [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.5602858  0.4737814 -0.1401662  0.33412629</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -1.2834204 -0.6066674 -1.1380241 -0.02753544</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  1.1649031 -0.6720017 -0.2829108 -1.11218295</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 2 x 3 ) right matrix fraction description d(z) c^(-1)(z) with degrees deg(c(z)) = p = 1, deg(d(z)) = q = 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> left factor d(z):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       z^0 [,1]      [,2]      [,3]   z^1 [,1]       [,2]        [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.081509 1.0962393 1.7555177 -0.5170237  0.2090721 -0.17628739</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.707927 0.8248984 0.8607571  0.1875734 -0.1412198 -0.00452162</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       z^0 [,1]       [,2]       [,3]   z^1 [,1]        [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.5602858 -1.2834204  1.1649031 -0.1401662 -1.13802408 -0.2829108</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.4737814 -0.6066674 -0.6720017  0.3341263 -0.02753544 -1.1121829</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> right factor c(z):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1]  [,2]  [,3]  z^1 [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]        1     0     0  1.324998  1.5178235  0.7004871</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]        0     1     0  1.707815 -2.3328057 -0.9891472</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]        0     0     1 -1.166916 -0.1161027 -0.8800032</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1]  [,2]  [,3]  z^1 [,1]       [,2]      [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]        1     0     0 1.1128444 -0.1622396  1.679976</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]        0     1     0 1.5707491  0.7176393 -1.395562</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]        0     0     1 0.2400267 -1.2201228  1.280436</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">x</span>, <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
@@ -136,7 +142,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Wolfgang Scherrer, Bernd Funovits.</p>
+  <p></p><p>Developed by <a href="https://scholar.google.com/citations?user=-Ytb9BYAAAAJ" class="external-link">Wolfgang Scherrer</a>, <a href="https://ch.linkedin.com/in/bernd-funovits-phd-cfa-a8215016" class="external-link">Bernd Funovits</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

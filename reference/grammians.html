@@ -33,7 +33,13 @@ balancing the statespace realization.'><!-- mathjax --><script src="https://cdnj
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -122,20 +128,20 @@ minimum phase.</p>
 <span class="r-in"><span><span class="va">gr</span> <span class="op">=</span> <span class="fu">grammians</span><span class="op">(</span><span class="va">obj</span>, which <span class="op">=</span> <span class="st">'lyapunov'</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">gr</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $P</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]        [,2]       [,3]        [,4]        [,5]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.32775483 -0.17964544  0.2725058 -0.07260366 -0.19710672</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.17964544  0.49851755 -0.2198610  0.12244840 -0.02287397</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.27250577 -0.21986096  0.8822231 -0.25291616 -0.51535842</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -0.07260366  0.12244840 -0.2529162  0.54401521  0.09663245</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -0.19710672 -0.02287397 -0.5153584  0.09663245  0.44587725</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]       [,2]      [,3]       [,4]        [,5]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  1.75854575  0.5888279 -1.089629  1.2925305  0.03385251</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.58882791  6.6838386 -1.472853  3.2823785 -2.95932269</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -1.08962856 -1.4728532  2.516513 -1.0414025  2.17289281</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  1.29253046  3.2823785 -1.041403  3.0760257 -0.75763932</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]  0.03385251 -2.9593227  2.172893 -0.7576393  3.33231347</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $Q</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           [,1]       [,2]        [,3]       [,4]        [,5]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 1.4927016  0.2620439  0.44920371  0.2408703  1.04007162</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.2620439  1.7815496  0.29608224 -0.6569566  0.47312261</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 0.4492037  0.2960822  1.38271026 -0.3677217 -0.05605608</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 0.2408703 -0.6569566 -0.36772172  0.9102619  0.37241741</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 1.0400716  0.4731226 -0.05605608  0.3724174  2.29004445</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]      [,2]       [,3]        [,4]      [,5]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  1.65541510 0.3891806 -1.4222349  0.06955503  1.880569</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.38918057 2.2877251  0.1413221  1.29137034  2.870756</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -1.42223495 0.1413221 11.2081417 -1.00520715 -3.134027</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.06955503 1.2913703 -1.0052072  1.95406403  2.624635</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]  1.88056874 2.8707555 -3.1340267  2.62463485  6.654324</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># we could also compute these grammians seperately </span></span></span>
@@ -152,20 +158,20 @@ minimum phase.</p>
 <span class="r-in"><span><span class="va">gr</span> <span class="op">=</span> <span class="fu">grammians</span><span class="op">(</span><span class="va">obj</span>, which <span class="op">=</span> <span class="st">'minimum phase'</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">gr</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $P</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]        [,2]        [,3]       [,4]        [,5]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  1.00795687 -0.67326964 -0.03598985  0.7187124 -0.09349528</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.67326964  1.72101599  0.46772876 -0.8312145  0.01020235</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.03598985  0.46772876  0.49727748 -0.4605188 -0.14528297</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  0.71871236 -0.83121454 -0.46051879  1.2349619  0.07202310</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -0.09349528  0.01020235 -0.14528297  0.0720231  0.44457805</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]        [,2]       [,3]        [,4]       [,5]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.60731526  0.07090535 -0.2155224 -0.43699796 -0.3043777</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.07090535  0.34603138  0.2138768 -0.03911016  0.3622185</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.21552245  0.21387680  0.6117186  0.13560943  0.3866763</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -0.43699796 -0.03911016  0.1356094  1.18824605  0.1541981</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -0.30437773  0.36221851  0.3866763  0.15419809  0.7541223</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $Q</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]         [,2]        [,3]         [,4]       [,5]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  4.4738420  0.635833809  0.48471647 -1.557353187 -1.8806980</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.6358338  0.444292336  0.06511815 -0.004909387 -0.3505099</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.4847165  0.065118147  0.11294231 -0.222718691 -0.1254783</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -1.5573532 -0.004909387 -0.22271869  1.223094897  0.8292980</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -1.8806980 -0.350509869 -0.12547830  0.829298033  1.6631605</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             [,1]        [,2]        [,3]        [,4]       [,5]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.80024906 -0.03445707  0.04089277 -0.06332531 -0.4242316</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.03445707  3.17234195  1.65214181  0.07529511 -0.3142350</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.04089277  1.65214181  2.12236750  0.81670407 -0.4835048</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -0.06332531  0.07529511  0.81670407  0.68035004 -0.1852334</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,] -0.42423163 -0.31423495 -0.48350482 -0.18523338  1.1096180</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># we could also compute these grammians seperately </span></span></span>
@@ -180,7 +186,7 @@ minimum phase.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Wolfgang Scherrer, Bernd Funovits.</p>
+  <p></p><p>Developed by <a href="https://scholar.google.com/citations?user=-Ytb9BYAAAAJ" class="external-link">Wolfgang Scherrer</a>, <a href="https://ch.linkedin.com/in/bernd-funovits-phd-cfa-a8215016" class="external-link">Bernd Funovits</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

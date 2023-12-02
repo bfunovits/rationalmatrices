@@ -37,7 +37,13 @@ sufficiently many lags."><!-- mathjax --><script src="https://cdnjs.cloudflare.c
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -103,23 +109,23 @@ sufficiently many lags.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 2 ) right matrix fraction description d(z) c^(-1)(z) with degrees deg(c(z)) = p = 2, deg(d(z)) = q = 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> left factor d(z):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        z^0 [,1]       [,2]    z^1 [,1]        [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.7112850 -0.5344179 -0.09141650  0.80152319</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.7465091 -2.0518592 -0.05685715 -0.63589298</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  2.2203530 -0.4300648  0.04017560  0.04859415</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -2.1831494 -0.4457638  0.30390007 -0.82913209</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.6797685  0.5949752 -0.09921887 -0.60116121</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  1.0724452  0.2935362 -0.02419149 -0.02075018</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> right factor c(z):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1]  [,2]   z^1 [,1]      [,2]  z^2 [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]        1     0 -1.5654000 0.2725982 0.9980043  1.438483</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]        0     1 -0.4423597 0.6272987 1.0283705 -1.053177</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1]  [,2]   z^1 [,1]      [,2]   z^2 [,1]        [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]        1     0  0.1816492 0.3406148 -1.8294922 -1.86567136</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]        0     1 -1.0440166 1.2773060 -0.6668802  0.04917936</span>
 <span class="r-in"><span><span class="fu">as.stsp</span><span class="op">(</span><span class="va">rr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> statespace realization [3,2] with s = 4 states</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            s[1]       s[2]       s[3]       s[4]       u[1]       u[2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> s[1]  1.5654000 -0.2725982 -0.9980043 -1.4384829  1.0000000  0.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> s[2]  0.4423597 -0.6272987 -1.0283705  1.0531768  0.0000000  1.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> s[3]  1.0000000  0.0000000  0.0000000  0.0000000  0.0000000  0.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> s[4]  0.0000000  1.0000000  0.0000000  0.0000000  0.0000000  0.0000000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x[1] -1.4412670  1.3306579  1.2594451  0.4603348 -0.7112850 -0.5344179</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x[2] -2.1331024  0.8547327  2.8550908 -1.0871298 -0.7465091 -2.0518592</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x[3]  3.3256727 -0.2868911 -1.7736558 -3.6468741  2.2203530 -0.4300648</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             s[1]       s[2]       s[3]        s[4]       u[1]       u[2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s[1] -0.18164918 -0.3406148  1.8294922  1.86567136  1.0000000  0.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s[2]  1.04401660 -1.2773060  0.6668802 -0.04917936  0.0000000  1.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s[3]  1.00000000  0.0000000  0.0000000  0.00000000  0.0000000  0.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s[4]  0.00000000  1.0000000  0.0000000  0.00000000  0.0000000  0.0000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x[1]  0.23508258  0.4838577 -4.2913259 -4.05111697 -2.1831494 -0.4457638</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x[2]  0.39846578 -1.5926659  1.6404083  1.23896404  0.6797685  0.5949752</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x[3]  0.08745638 -0.7609764  2.1577836  1.98639434  1.0724452  0.2935362</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -127,7 +133,7 @@ sufficiently many lags.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Wolfgang Scherrer, Bernd Funovits.</p>
+  <p></p><p>Developed by <a href="https://scholar.google.com/citations?user=-Ytb9BYAAAAJ" class="external-link">Wolfgang Scherrer</a>, <a href="https://ch.linkedin.com/in/bernd-funovits-phd-cfa-a8215016" class="external-link">Bernd Funovits</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

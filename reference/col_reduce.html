@@ -49,7 +49,13 @@ The examples below are taken from (Geurts and Praagman 1996)
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -218,10 +224,10 @@ The function <code>col_reduce</code> is mainly used to compute the Wiener-Hopf f
 <span class="r-in"><span><span class="va">a</span> <span class="op">=</span> <span class="fu"><a href="test_polm.html">test_polm</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>, degree <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="op">-</span><span class="fl">1</span><span class="op">)</span>, random <span class="op">=</span> <span class="cn">TRUE</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">a</span>, format <span class="op">=</span> <span class="st">'c'</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 3 ) matrix polynomial with degree &lt;= 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        [,1]           [,2]  [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   0.72  -0.78 - 1.15z     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  -0.34  -0.73 + 0.42z     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]   0.44   -0.1 - 0.65z     0 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        [,1]          [,2]  [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  -0.72  0.33 + 1.03z     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]   0.75  0.06 + 0.43z     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]   -1.1  -1.32 + 0.1z     0 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># this throws an error, since a(z) is singular</span></span></span>
@@ -233,28 +239,28 @@ The function <code>col_reduce</code> is mainly used to compute the Wiener-Hopf f
 <span class="r-in"><span><span class="va">a</span> <span class="op">=</span> <span class="fu"><a href="test_polm.html">test_polm</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>, degree <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1</span>,<span class="fl">0</span><span class="op">)</span>, random <span class="op">=</span> <span class="cn">TRUE</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">a</span>, format <span class="op">=</span> <span class="st">'c'</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 3 ) matrix polynomial with degree &lt;= 2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          [,1]           [,2]   [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   -1.2 + 1.06z + 0.75z^2  -0.96 - 0.44z  -1.06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  -0.08 - 1.24z + 0.72z^2  -0.68 + 0.94z  -0.06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]   -0.68 + 0.3z + 1.84z^2  -1.26 + 0.51z  -0.05 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          [,1]          [,2]  [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   -1.09 - 0.08z + 0.4z^2  0.32 + 1.18z  0.55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  -0.25 + 1.15z + 0.09z^2  1.92 + 1.01z  -0.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]   1.11 + 0.08z - 0.17z^2  -0.07 - 1.4z  0.34 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Column reduction:</span></span></span>
 <span class="r-in"><span><span class="va">out</span> <span class="op">=</span> <span class="fu">col_reduce</span><span class="op">(</span><span class="va">a</span><span class="op">)</span> </span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">a</span>, format <span class="op">=</span> <span class="st">'c'</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 3 ) matrix polynomial with degree &lt;= 2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          [,1]           [,2]   [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   -1.2 + 1.06z + 0.75z^2  -0.96 - 0.44z  -1.06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  -0.08 - 1.24z + 0.72z^2  -0.68 + 0.94z  -0.06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]   -0.68 + 0.3z + 1.84z^2  -1.26 + 0.51z  -0.05 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          [,1]          [,2]  [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   -1.09 - 0.08z + 0.4z^2  0.32 + 1.18z  0.55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  -0.25 + 1.15z + 0.09z^2  1.92 + 1.01z  -0.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]   1.11 + 0.08z - 0.17z^2  -0.07 - 1.4z  0.34 </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">col_degrees</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 1 0</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">col_end_matrix</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [,1]  [,2]  [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.75 -0.44 -1.06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.72  0.94 -0.06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 1.84  0.51 -0.05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       [,1]  [,2]  [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.40  1.18  0.55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.09  1.01 -0.20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.17 -1.40  0.34</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">col_end_matrix</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/svd.html" class="external-link">svd</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="va">.</span><span class="op">$</span><span class="va">d</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.2520889 1.2636184 0.5146496</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.12622923 0.71094942 0.03605815</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Check:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="fu"><a href="polm.html">polm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="prune.html">prune</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">v</span> <span class="op"><a href="ratm_mult.html">%r%</a></span> <span class="va">out</span><span class="op">$</span><span class="va">v_inv</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -271,36 +277,36 @@ The function <code>col_reduce</code> is mainly used to compute the Wiener-Hopf f
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">a</span>, format <span class="op">=</span> <span class="st">'c'</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 3 ) matrix polynomial with degree &lt;= 2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                          [,1]          [,2]   [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]    0.73 + 0.9z - 2.39z^2  0.16 + 0.75z  -4.73</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  -0.56 + 1.33z - 2.11z^2  -0.47 - 2.4z   0.38</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]     -0.85 - 0.62z - 2z^2  1.77 - 1.69z  -0.51 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  -0.35 + 0.62z + 1.96z^2  1.16 + 0.08z   1.59</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]    1.5 - 0.53z + 0.54z^2  0.05 + 0.18z   0.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]   0.01 + 1.47z - 1.01z^2  0.41 - 0.37z  -1.76 </span>
 <span class="r-in"><span><span class="va">a</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="degree.html">degree</a></span><span class="op">(</span><span class="st">"c"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 1 0</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">a</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="va">col_end_matrix</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       [,1]  [,2]  [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -2.39  0.75 -4.73</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -2.11 -2.40  0.38</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -2.00 -1.69 -0.51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  1.96  0.08  1.59</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.54  0.18  0.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -1.01 -0.37 -1.76</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">a</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="va">col_end_matrix</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/svd.html" class="external-link">svd</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="va">.</span><span class="op">$</span><span class="va">d</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5.550524e+00 3.913041e+00 2.986539e-16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3.3629744 0.6612132 0.0000000</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Column reduction:</span></span></span>
 <span class="r-in"><span><span class="va">out</span> <span class="op">=</span> <span class="fu">col_reduce</span><span class="op">(</span><span class="va">a</span><span class="op">)</span> </span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">a</span>, format <span class="op">=</span> <span class="st">'c'</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 3 ) matrix polynomial with degree &lt;= 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               [,1]           [,2]   [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.16 + 0.75z   0.73 + 0.74z  -4.73</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  -0.47 - 2.4z  -0.56 + 1.79z   0.38</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  1.77 - 1.69z  -0.85 - 2.36z  -0.51 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               [,1]          [,2]   [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  1.16 + 0.08z  -0.35 + 5.4z   1.59</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.05 + 0.18z   1.5 - 0.32z   0.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.41 - 0.37z  0.01 + 3.16z  -1.76 </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">col_degrees</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 1 0</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">col_end_matrix</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [,1]       [,2]  [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.75  0.7425806 -4.73</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -2.40  1.7924194  0.38</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -1.69 -2.3614516 -0.51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       [,1]    [,2]  [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.08  5.3992  1.59</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.18 -0.3240  0.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.37  3.1592 -1.76</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">col_end_matrix</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/svd.html" class="external-link">svd</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="va">.</span><span class="op">$</span><span class="va">d</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4.884202 3.030118 2.873952</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6.28302944 2.52052647 0.02947285</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Check:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="fu"><a href="polm.html">polm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="prune.html">prune</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">v</span> <span class="op"><a href="ratm_mult.html">%r%</a></span> <span class="va">out</span><span class="op">$</span><span class="va">v_inv</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -316,32 +322,32 @@ The function <code>col_reduce</code> is mainly used to compute the Wiener-Hopf f
 <span class="r-in"><span>               digits <span class="op">=</span> <span class="fl">2</span>, col_end_matrix <span class="op">=</span> <span class="va">col_end_matrix</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">a</span>, format <span class="op">=</span> <span class="st">'c'</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 3 ) matrix polynomial with degree &lt;= 2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          [,1]   [,2]           [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  -0.29 - 2.19z - 0.91z^2  -0.12  -1.54 - 0.78z</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]    1.6 + 0.26z - 0.49z^2  -2.59  -0.46 - 0.42z</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]   0.41 - 0.29z + 1.19z^2   0.75   0.25 + 1.02z </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                          [,1]          [,2]           [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   0.63 - 0.14z - 0.24z^2  0.31 - 0.72z  -0.61 + 0.24z</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]   0.87 + 0.72z - 0.15z^2  1.67 - 0.45z   -0.3 + 0.15z</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  -0.33 + 1.32z + 0.27z^2  0.56 + 0.81z  -0.77 - 0.27z </span>
 <span class="r-in"><span><span class="va">a</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="degree.html">degree</a></span><span class="op">(</span><span class="st">"c"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 0 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2 1 1</span>
 <span class="r-in"><span><span class="va">a</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="col_end_matrix.html">col_end_matrix</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/svd.html" class="external-link">svd</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="va">.</span><span class="op">$</span><span class="va">d</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3.022858 1.567428 0.000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.297305e+00 4.583682e-17 0.000000e+00</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Column reduction:</span></span></span>
 <span class="r-in"><span><span class="va">out</span> <span class="op">=</span> <span class="fu">col_reduce</span><span class="op">(</span><span class="va">a</span>, debug <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">a</span>, format <span class="op">=</span> <span class="st">'c'</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 3 ) matrix polynomial with degree &lt;= 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                [,1]           [,2]   [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  -1.54 - 0.78z  -0.29 - 0.39z  -0.12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  -0.46 - 0.42z     1.6 + 0.8z  -2.59</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]   0.25 + 1.02z   0.41 - 0.58z   0.75 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               [,1]           [,2]   [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.31 - 0.72z   0.63 - 0.75z  -0.51</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  1.67 - 0.45z   0.87 + 0.42z   0.26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.56 + 0.81z  -0.33 + 0.55z  -0.58 </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">col_degrees</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 1 0</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">col_end_matrix</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [,1]       [,2]  [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.78 -0.3933333 -0.12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.42  0.7966667 -2.59</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  1.02 -0.5816667  0.75</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       [,1]  [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.72 -0.75 -0.5066667</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.45  0.42  0.2566667</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.81  0.55 -0.5833333</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">col_end_matrix</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/svd.html" class="external-link">svd</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="va">.</span><span class="op">$</span><span class="va">d</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2.9572265 1.1070065 0.5169848</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.4236233 0.9098584 0.4761523</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Check:</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="fu"><a href="polm.html">polm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="prune.html">prune</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">v</span> <span class="op"><a href="ratm_mult.html">%r%</a></span> <span class="va">out</span><span class="op">$</span><span class="va">v_inv</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -1104,7 +1110,7 @@ The function <code>col_reduce</code> is mainly used to compute the Wiener-Hopf f
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Wolfgang Scherrer, Bernd Funovits.</p>
+  <p></p><p>Developed by <a href="https://scholar.google.com/citations?user=-Ytb9BYAAAAJ" class="external-link">Wolfgang Scherrer</a>, <a href="https://ch.linkedin.com/in/bernd-funovits-phd-cfa-a8215016" class="external-link">Bernd Funovits</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

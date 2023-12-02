@@ -39,7 +39,13 @@ frequency response of the filter."><!-- mathjax --><script src="https://cdnjs.cl
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -152,24 +158,24 @@ The dimensions \((m,n,n.f)\) may also be zero, where <code>n.f</code> is the len
 <span class="r-in"><span><span class="op">(</span><span class="va">ll</span> <span class="op">=</span> <span class="fu"><a href="test_lmfd.html">test_lmfd</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, bpoles <span class="op">=</span> <span class="fl">1</span>, bzeroes <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 2 x 2 ) left matrix fraction description a^(-1)(z) b(z) with degrees (p = 1, q = 1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> left factor a(z):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1]  [,2]   z^1 [,1]         [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]        1     0 -0.1117179  0.008887902</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]        0     1  0.8994798 -0.714928485</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1]  [,2]   z^1 [,1]       [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]        1     0 -0.5713466 -0.7654262</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]        0     1 -0.5666530  0.4836197</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> right factor b(z):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        z^0 [,1]       [,2]    z^1 [,1]       [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.3697123 -0.3045451 -0.01513686  0.4533451</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.4141261  0.5098894 -0.57085123 -0.2060265</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        z^0 [,1]       [,2]   z^1 [,1]        [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.1517956 -0.8511016  0.4050516  0.19158946</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.7227983  0.2260162 -0.4814751 -0.03886025</span>
 <span class="r-in"><span><span class="fu">zvalues</span><span class="op">(</span><span class="va">ll</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 2 x 2 ) frequency response</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         z[1] [,1]         [,2]             z[2] [,1]                  [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.604164+0i 0.1619624+0i -1.3973964+0.1701824i -0.2141019-0.4155124i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  4.511807+0i 0.5548822+0i -0.0948641-0.8154555i  0.7090359-0.4541520i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 z[3] [,1]                  [,2]            z[4] [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.2398933+0.081492i -0.6259878-0.2077699i -1.2398933-0.081492i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.0821171-0.143302i  0.1388910-0.2657262i -0.0821171+0.143302i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                       [,2]             z[5] [,1]                  [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.6259878+0.2077699i -1.3973964-0.1701824i -0.2141019+0.4155124i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.1388910+0.2657262i -0.0948641+0.8154555i  0.7090359+0.4541520i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        z[1] [,1]         [,2]           z[2] [,1]                  [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 2.771387+0i -4.130057+0i 0.0127468-0.482435i -0.5347017+0.1780572i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 1.221160+0i -1.451284+0i 0.1271643+0.369789i  0.0553169+0.3321085i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                z[3] [,1]                  [,2]           z[4] [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.320849-1.038616i -0.6555192-0.3774208i -0.320849+1.038616i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.686564+1.743213i  0.3221108+0.8308292i  0.686564-1.743213i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                       [,2]           z[5] [,1]                  [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.6555192+0.3774208i 0.0127468+0.482435i -0.5347017-0.1780572i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.3221108-0.8308292i 0.1271643-0.369789i  0.0553169-0.3321085i</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -177,7 +183,7 @@ The dimensions \((m,n,n.f)\) may also be zero, where <code>n.f</code> is the len
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Wolfgang Scherrer, Bernd Funovits.</p>
+  <p></p><p>Developed by <a href="https://scholar.google.com/citations?user=-Ytb9BYAAAAJ" class="external-link">Wolfgang Scherrer</a>, <a href="https://ch.linkedin.com/in/bernd-funovits-phd-cfa-a8215016" class="external-link">Bernd Funovits</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

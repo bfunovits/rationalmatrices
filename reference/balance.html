@@ -33,7 +33,13 @@ of a rational matrix in statespace form."><!-- mathjax --><script src="https://c
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -258,12 +264,12 @@ inverse <code>K^{-1}(z)</code>.</p>
 <span class="r-in"><span><span class="va">gr</span> <span class="op">=</span> <span class="fu"><a href="grammians.html">grammians</a></span><span class="op">(</span><span class="va">obj</span>, <span class="st">'minimum phase'</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">trunc</span> <span class="op">=</span> <span class="fu">balance</span><span class="op">(</span><span class="va">obj</span>, <span class="va">gr</span>, s0 <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">trunc</span><span class="op">$</span><span class="va">sigma</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 2.209162586 1.318023393 0.699404621 0.417914114 0.304352222 0.104232208</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 0.040550915 0.029675682 0.004633122 0.001629029</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 4.93109117 1.21337534 0.98056829 0.55767576 0.48246007 0.26430938</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] 0.19433453 0.17190152 0.09269254 0.01001912</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">unclass</a></span><span class="op">(</span><span class="fu"><a href="pseries.html">pseries</a></span><span class="op">(</span><span class="va">obj</span>, lag.max <span class="op">=</span> <span class="fl">25</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span> </span></span>
 <span class="r-in"><span>        <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">unclass</a></span><span class="op">(</span><span class="fu"><a href="pseries.html">pseries</a></span><span class="op">(</span><span class="va">trunc</span><span class="op">$</span><span class="va">ob</span>, lag.max <span class="op">=</span> <span class="fl">25</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.06920354</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.09578358</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="pseries.html">pseries</a></span><span class="op">(</span><span class="va">obj</span>, lag.max <span class="op">=</span> <span class="fl">25</span><span class="op">)</span>, x_list<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="pseries.html">pseries</a></span><span class="op">(</span><span class="va">trunc</span><span class="op">$</span><span class="va">obj</span>, lag.max <span class="op">=</span> <span class="fl">25</span><span class="op">)</span><span class="op">)</span>, </span></span>
 <span class="r-in"><span>     type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'l'</span>,<span class="st">'p'</span><span class="op">)</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'s=10'</span>, <span class="st">'s=5'</span><span class="op">)</span><span class="op">)</span> </span></span>
 <span class="r-plt img"><img src="balance-1.png" alt="" width="700" height="433"></span>
@@ -274,7 +280,7 @@ inverse <code>K^{-1}(z)</code>.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Wolfgang Scherrer, Bernd Funovits.</p>
+  <p></p><p>Developed by <a href="https://scholar.google.com/citations?user=-Ytb9BYAAAAJ" class="external-link">Wolfgang Scherrer</a>, <a href="https://ch.linkedin.com/in/bernd-funovits-phd-cfa-a8215016" class="external-link">Bernd Funovits</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

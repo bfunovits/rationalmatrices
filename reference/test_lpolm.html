@@ -39,7 +39,13 @@ Thus, column_end_matrix may potentially overwrite value_at_0."><!-- mathjax --><
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -119,32 +125,32 @@ parameters below are ignored!</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="op">(</span><span class="va">lp</span> <span class="op">=</span> <span class="fu">test_lpolm</span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, degree_max <span class="op">=</span> <span class="fl">1</span>, degree_min <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 1 x 1 ) Laurent polynomial matrix with degree &lt;= 1, and minimal degree &gt;= -2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       z^-2 [,1]  z^-1 [,1] z^0 [,1]  z^1 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.0573139 -0.6091713 1.356686 -1.292133</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       z^-2 [,1]   z^-1 [,1]  z^0 [,1]  z^1 [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.6386418 -0.02363646 -1.415598 -2.130058</span>
 <span class="r-in"><span><span class="op">(</span><span class="va">lp</span> <span class="op">=</span> <span class="fu">test_lpolm</span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>, degree_max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>, degree_min <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 3 ) Laurent polynomial matrix with degree &lt;= 2, and minimal degree &gt;= -2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       z^-2 [,1]       [,2]      [,3]  z^-1 [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.0818170 -1.6777888 0.5634944  0.3613606 -1.0296306 -0.5648035</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.3162265 -0.6745122 0.4016654 -1.2450496  0.7879264  1.2118775</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.5130466  0.2085760 0.2434347 -0.6171134 -0.5576488 -1.0736304</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        z^0 [,1]       [,2]       [,3] z^1 [,1]      [,2]       [,3] z^2 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.3305136 1.02069209 0.02485754        0 -1.186798 -0.9777846        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.5790311 0.02228287 2.63452313        0 -1.170768  0.9766730        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  1.2558528 0.29723744 1.15570761        0  1.180335 -0.5386221        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        z^-2 [,1]       [,2]       [,3]   z^-1 [,1]      [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.00172149 -0.5082567  0.2052962 -0.17643686 0.9120409 0.30013345</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.11169212 -0.2109276  0.1866326 -0.09551422 0.9361289 1.41946783</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -1.37265313  0.4562633 -0.3862650 -2.81839037 0.5914964 0.09397515</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        z^0 [,1]        [,2]      [,3] z^1 [,1]       [,2]       [,3] z^2 [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.7735858 -0.09306234 0.2236165        0  0.1575114  0.4842178        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.4488422 -1.60400013 0.4917717        0 -0.5204071  0.2336085        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.2835388  0.73137283 0.3026959        0  0.2433878 -0.7878802        0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]     0 -0.0789744</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]     0 -0.1980905</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]     0 -0.3045719</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]     0 -1.1624028</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]     0  1.3069491</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]     0  0.1046523</span>
 <span class="r-in"><span><span class="op">(</span><span class="va">lp</span> <span class="op">=</span> <span class="fu">test_lpolm</span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>, degree_max <span class="op">=</span> <span class="fl">1</span>, degree_min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="op">-</span><span class="fl">1</span>,<span class="op">-</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 3 ) Laurent polynomial matrix with degree &lt;= 1, and minimal degree &gt;= -2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      z^-2 [,1]  [,2]       [,3] z^-1 [,1]       [,2]       [,3]   z^0 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]         0     0 -1.2318070         0  0.4427599 -0.2969489  0.6242764</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]         0     0 -2.7866153         0 -0.8854852 -0.5212250 -0.2046457</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]         0     0  0.9879036         0  1.5276170  2.1029635 -0.8817940</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>             [,2]       [,3]   z^1 [,1]     [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.96838387  0.0968671 -0.9206873 0.468321 -0.3119690</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.38789192 -0.1257129 -0.2541162 1.398362 -0.4133924</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.06668116 -0.3040039  0.6562660 1.063606 -1.0929876</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      z^-2 [,1]  [,2]       [,3] z^-1 [,1]        [,2]       [,3]   z^0 [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]         0     0  0.3774721         0 -0.76877520 -2.1662821 -2.4054549</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]         0     0 -1.0121461         0 -0.07447983 -0.6534886 -1.3293992</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]         0     0  0.6938027         0 -0.79862800  0.4024766 -0.2519315</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,2]       [,3]    z^1 [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.1290110  0.3391213 -0.65042744 -0.7474391  0.9843586</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -1.6525061 -1.5153475 -1.73868216 -0.8449526 -0.7580670</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.9866644 -0.5726728 -0.04290366 -2.5081827 -0.2795617</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -152,7 +158,7 @@ parameters below are ignored!</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Wolfgang Scherrer, Bernd Funovits.</p>
+  <p></p><p>Developed by <a href="https://scholar.google.com/citations?user=-Ytb9BYAAAAJ" class="external-link">Wolfgang Scherrer</a>, <a href="https://ch.linkedin.com/in/bernd-funovits-phd-cfa-a8215016" class="external-link">Bernd Funovits</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

@@ -45,7 +45,13 @@ the result is (in general) a Laurent polynomial."><!-- mathjax --><script src="h
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -125,13 +131,13 @@ statespace realization, the procedure <code>Ht()</code> throws an error in this 
 <span class="r-in"><span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="test_stsp.html">test_stsp</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span><span class="op">)</span>, s <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">Ht</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> statespace realization [4,4] with s = 2 states</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            s[1]       s[2]      u[1]        u[2]       u[3]        u[4]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> s[1]  4.1924923  2.1617158  7.812309  2.57442615  7.3629682  -5.1559544</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> s[2]  2.4801583  0.3778927  2.104994  0.01705809  3.5533117  -4.0171188</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x[1] 12.9928352  5.6566007 22.298283  6.23541894 21.8896671 -17.0978747</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x[2] -0.1900343 -0.4691884 -1.391000  0.26283434 -0.6643592  -0.1647283</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x[3]  3.3766392  0.1252050  1.778483 -0.62746679  5.4909792  -5.8869884</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x[4] -4.3316269 -2.3148729 -8.298996 -2.79595267 -7.6798349   6.2396736</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             s[1]       s[2]        u[1]        u[2]        u[3]       u[4]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s[1] -0.24283103 -0.7059684 -0.09989289  0.13315421  0.29724454 -0.6432538</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s[2]  0.85382717 -0.5736553 -0.85310520 -0.53490488 -0.05128600  0.4547386</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x[1] -0.39710942  0.2611624  1.39455055  0.24865760  0.02568736 -0.2148316</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x[2]  0.93899728 -1.6618782 -1.34451967  0.38922929  0.27890504 -0.1095495</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x[3]  0.09675934  0.5834381  0.15887499 -0.04646097  0.78329694  0.4349713</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x[4]  0.93023387 -1.3215050 -1.20394326 -0.59797821  0.17064849  1.0835703</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="fu"><a href="zvalues.html">zvalues</a></span><span class="op">(</span><span class="fu">Ht</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, <span class="fu">Ht</span><span class="op">(</span><span class="fu"><a href="zvalues.html">zvalues</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
@@ -163,7 +169,7 @@ statespace realization, the procedure <code>Ht()</code> throws an error in this 
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Wolfgang Scherrer, Bernd Funovits.</p>
+  <p></p><p>Developed by <a href="https://scholar.google.com/citations?user=-Ytb9BYAAAAJ" class="external-link">Wolfgang Scherrer</a>, <a href="https://ch.linkedin.com/in/bernd-funovits-phd-cfa-a8215016" class="external-link">Bernd Funovits</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

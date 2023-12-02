@@ -31,7 +31,13 @@
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -121,40 +127,40 @@ At least one of the arguments "rows" and "cols" has to be given.</p></dd>
 <span class="r-in"><span>                   education <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'none'</span>,<span class="st">'primary'</span>,<span class="st">'high'</span>,<span class="st">'university'</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                   age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'&lt;20'</span>,<span class="st">'30-40'</span>,<span class="st">'40-50'</span>,<span class="st">'50-60'</span>,<span class="st">'&gt;60'</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">array2data.frame</span><span class="op">(</span><span class="va">x</span>, cols <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     education   age      female       male</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1        none   &lt;20  0.29428262  0.1495922</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2     primary   &lt;20  1.75193125  0.5010902</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3        high   &lt;20 -0.05701830 -0.4776046</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  university   &lt;20 -0.18282365 -0.1097048</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5        none 30-40  0.94032587  0.1151560</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6     primary 30-40  0.34723615  0.0800871</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7        high 30-40 -1.15203196  0.8677256</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  university 30-40 -1.05184478 -0.6718172</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9        none 40-50 -0.19266489  0.8826651</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10    primary 40-50  0.75275053  1.0371300</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11       high 40-50  0.05087321 -0.6823964</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 university 40-50  0.77645610 -2.4229910</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13       none 50-60  2.51335467  1.7956230</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14    primary 50-60 -0.15389086 -0.3472571</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15       high 50-60  0.26050437 -1.1675108</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16 university 50-60 -1.04812214 -0.6097700</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17       none   &gt;60 -0.70621093  0.3645390</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18    primary   &gt;60 -0.12712999 -0.2470875</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19       high   &gt;60  0.32171650  0.5161089</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20 university   &gt;60  0.93547189  0.4893814</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     education   age     female        male</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1        none   &lt;20  0.2912870 -0.11639284</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     primary   &lt;20  0.2286832 -0.21508529</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3        high   &lt;20 -1.9375715  1.57313868</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  university   &lt;20  0.7390487 -0.05978496</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5        none 30-40 -1.5768686 -0.03036814</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6     primary 30-40 -0.1696321  1.75181919</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7        high 30-40 -0.7677395 -0.66016417</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  university 30-40  1.4187800 -0.35884375</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9        none 40-50 -0.2217680 -1.18800769</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10    primary 40-50  1.5089138 -0.64586635</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11       high 40-50 -1.0834977 -0.73025679</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12 university 40-50  0.2551248 -1.35018112</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13       none 50-60 -0.7411637  0.97666206</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14    primary 50-60 -0.7880937  0.58949420</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15       high 50-60  0.2074870 -2.26713309</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16 university 50-60  0.4030332 -1.91325645</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17       none   &gt;60  1.1638880 -0.76630448</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18    primary   &gt;60 -0.4986021 -1.12765643</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19       high   &gt;60  1.0491673 -1.48171641</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20 university   &gt;60 -0.3608579  1.07850521</span>
 <span class="r-in"><span><span class="fu">array2data.frame</span><span class="op">(</span><span class="va">x</span>, cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     age female.none male.none female.primary male.primary female.high</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   &lt;20   0.2942826 0.1495922      1.7519313    0.5010902 -0.05701830</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 30-40   0.9403259 0.1151560      0.3472361    0.0800871 -1.15203196</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 40-50  -0.1926649 0.8826651      0.7527505    1.0371300  0.05087321</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 50-60   2.5133547 1.7956230     -0.1538909   -0.3472571  0.26050437</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5   &gt;60  -0.7062109 0.3645390     -0.1271300   -0.2470875  0.32171650</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     age female.none   male.none female.primary male.primary female.high</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   &lt;20   0.2912870 -0.11639284      0.2286832   -0.2150853  -1.9375715</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 30-40  -1.5768686 -0.03036814     -0.1696321    1.7518192  -0.7677395</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 40-50  -0.2217680 -1.18800769      1.5089138   -0.6458664  -1.0834977</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 50-60  -0.7411637  0.97666206     -0.7880937    0.5894942   0.2074870</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5   &gt;60   1.1638880 -0.76630448     -0.4986021   -1.1276564   1.0491673</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    male.high female.university male.university</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 -0.4776046        -0.1828237      -0.1097048</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  0.8677256        -1.0518448      -0.6718172</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -0.6823964         0.7764561      -2.4229910</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -1.1675108        -1.0481221      -0.6097700</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  0.5161089         0.9354719       0.4893814</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1.5731387         0.7390487     -0.05978496</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -0.6601642         1.4187800     -0.35884375</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -0.7302568         0.2551248     -1.35018112</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -2.2671331         0.4030332     -1.91325645</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -1.4817164        -0.3608579      1.07850521</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># convert an impulse response function into a data.frame</span></span></span>
 <span class="r-in"><span><span class="co"># generate a random statespace model with m=3 outputs, n=2 inputs and s=4 states.</span></span></span>
@@ -167,13 +173,13 @@ At least one of the arguments "rows" and "cols" has to be given.</p></dd>
 <span class="r-in"><span>                   x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">'x['</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,<span class="st">']'</span>,sep<span class="op">=</span><span class="st">''</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                   lag <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="fl">25</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu">array2data.frame</span><span class="op">(</span><span class="va">k</span>, rows <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>, cols<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      y lag       x[1]       x[2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 y[1]   0  1.2353808  2.1302053</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 y[2]   0 -0.9622066 -1.5101288</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 y[3]   0  1.6773689 -0.8899489</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 y[1]   1 -3.5244864  0.1903175</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 y[2]   1 -0.4019647  0.3947148</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 y[3]   1  1.5226602 -0.7445722</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      y lag         x[1]       x[2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 y[1]   0 -1.288669115 -0.9719267</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 y[2]   0  0.009571166 -0.4121729</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 y[3]   0 -0.802024722  0.8045345</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 y[1]   1 -2.177071105  0.1324587</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 y[2]   1 -0.366330235  0.2056882</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 y[3]   1  3.433641161  4.1514886</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -181,7 +187,7 @@ At least one of the arguments "rows" and "cols" has to be given.</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Wolfgang Scherrer, Bernd Funovits.</p>
+  <p></p><p>Developed by <a href="https://scholar.google.com/citations?user=-Ytb9BYAAAAJ" class="external-link">Wolfgang Scherrer</a>, <a href="https://ch.linkedin.com/in/bernd-funovits-phd-cfa-a8215016" class="external-link">Bernd Funovits</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
