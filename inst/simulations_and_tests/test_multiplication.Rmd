@@ -1,0 +1,218 @@
+---
+title: "Test Multiplication of Matrix Polynomials"
+author: "WS"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(rationalmatrices)
+```
+
+Vergleich die "alte" Implementation der Multiplikation von zwei Matrix Polynomen 
+(polm, bzw. pseries Objekten) mit einer neuen Implementation.
+
+* Die neu Implementation vermeidet die "Doppelschleife" und ist daher etwas schneller 
+für Polynome/pseries großer Ordnung. 
+
+
+# "old" implementations 
+
+
+```{r}
+# Internal functions acting on ARRAYS for matrix multiplication ####
+# multiplication of matrix polynomials
+# this function performs only basic checks on the inputs!
+mmult_poly = function(a, b) {
+  # a,b must be two compatible arrays
+  da = dim(a)
+  db = dim(b)
+  if (da[2] != db[1]) stop('arguments are not compatible')
+  # if any of the arguments is an empty polynomial, or a polynomial of degree -1
+  if (min(c(da,db)) == 0) return(array(0, dim = c(da[1], db[2], 0)))
+  
+  # skip zero leading coefficients
+  if (da[3] > 0) {
+    a = a[ , , rev(cumprod(rev(apply(a == 0, MARGIN = 3, FUN = all)))) == 0, drop = FALSE]
+    da = dim(a)
+  }
+  # skip zero leading coefficients
+  if (db[3] > 0) {
+    b = b[ , , rev(cumprod(rev(apply(b == 0, MARGIN = 3, FUN = all)))) == 0, drop = FALSE]
+    db = dim(b)
+  }
+  # if any of the arguments is an empty polynomial, or a polynomial of degree -1
+  if (min(c(da,db)) == 0) return(array(0, dim = c(da[1], db[2], 0)))
+  
+  pa = da[3] - 1
+  pb = db[3] - 1
+  
+  x = array(0, dim = c(da[1], db[2], pa + pb + 1))
+  # the 'convolution' of the coefficients is computed via a double loop
+  # of course this could be implemented more efficiently!
+  for (i in (0:(pa+pb))) {
+    for (k in iseq(max(0, i - pb), min(pa, i))) {
+      x[,,i+1] = x[,,i+1] + 
+        matrix(a[,,k+1], nrow = da[1], ncol = da[2]) %*% 
+          matrix(b[,,i-k+1], nrow = db[1], ncol = db[2])
+    }
+  }
+  return(x)
+}
+
+# internal function
+# multiplication of two impulse response functions
+# this function performs only basic checks on the inputs!
+# almost equal to mmult_poly
+mmult_pseries = function(a, b) {
+  # a,b must be two compatible arrays
+  da = dim(a)
+  db = dim(b)
+  if (da[2] != db[1]) stop('arguments are not compatible')
+  # if any of the arguments is an empty pseries, or a pseries with lag.max = -1
+  if (min(c(da,db)) == 0) return(array(0, dim = c(da[1], db[2], min(da[3], db[3]))))
+  
+  lag.max = min(da[3], db[3]) - 1
+  # truncate to the minimum lag.max
+  # a = a[ , , 1:(lag.max+1), drop = FALSE]
+  # b = b[ , , 1:(lag.max+1), drop = FALSE]
+  
+  x = array(0, dim = c(da[1], db[2], lag.max + 1))
+  # the 'convolution' of the impulse response coefficients is computed via a double loop
+  # of course this could be implemented more efficiently!
+  for (i in (0:lag.max)) {
+    for (k in (0:i)) {
+      x[,,i+1] = x[,,i+1] + 
+        matrix(a[,,k+1], nrow = da[1], ncol = da[2]) %*% 
+          matrix(b[,,i-k+1], nrow = db[1], ncol = db[2])
+    }
+  }
+  return(x)
+}
+```
+
+
+# "new" implementation
+
+* avoid double loop
+* however, in order to simplify the code, we do not 
+  care about trailing/leading zero coefficients 
+
+```{r}
+convolve_3D = function(a, b, truncate = FALSE) {
+  
+  # a,b must be two compatible arrays
+  # a is an (m,n) dimensional polynomial of degree p
+  d = dim(a)
+  m = d[1]
+  n = d[2]
+  p = d[3] - 1
+  
+  # d is an (n,o) dimensional polynomial of degree q
+  d = dim(b)
+  if (d[1] != n) stop('arguments are not compatible')
+  o = d[2]
+  q = d[3] - 1
+  
+  # output c = a*b is an (m,o) dimensional polynomial of degree r
+  
+  
+  if (truncate) {
+    # multiplication of two "pseries" objects, 
+    
+    # lag.max = minimum of the number of lags of a,b
+    r = min(p, q)
+    
+    # if any of the arguments is an empty pseries, or a pseries with lag.max -1
+    # ensure that lag.max = r >= 0
+    if (min(c(m, n, o, r+1)) == 0) return(array(0, dim = c(m, o, max(r, 0)+1)))
+
+    if (p > r) a = a[,,1:(r+1), drop = FALSE]
+    if (q > r) b = b[,,1:(r+1), drop = FALSE]
+    p = r
+    q = r
+  } else {
+    # multiplication of two polynomials
+    
+    # if any of the arguments is an empty polynomial, or a polynomial of degree -1
+    if (min(c(m, n, o, p+1, q+1)) == 0) return(array(0, dim = c(m, o, 0)))
+    
+    # degree = sum of the two degrees 
+    r = p + q
+  }
+  
+# cat('truncate', truncate,'\n')  
+  if (p <= q) {
+    c = matrix(0, nrow = m, ncol = o*(r+1))
+    b = matrix(b, nrow = n, ncol = o*(q+1))
+    for (i in (0:p)) {
+      j1 = i
+      j2 = min(j1+q+1, r+1)
+# cat('a*b', i, j1, j2, '|', dim(c), ':', (j1*o + 1), (j2*o), 
+#      '|', dim(b), ':', 1, ((j2-j1)*o), '\n')
+      c[ , (j1*o + 1):(j2*o)] = 
+        c[ , (j1*o + 1):(j2*o)] + 
+          matrix(a[,,i+1], nrow = m, ncol = n) %*% b[,1:((j2-j1)*o) , drop = FALSE]
+    }
+    c = array(c, dim = c(m,o,r+1))
+    return(c)
+  } else {
+    # first compute b' * a'
+    c = matrix(0, nrow = o, ncol = m*(r+1))
+    a = matrix(aperm(a, c(2,1,3)), nrow = n, ncol = m*(p+1))
+    b = aperm(b, c(2,1,3)) 
+    for (i in (0:q)) {
+      j1 = i
+      j2 = min(j1+p+1, r+1)
+# cat('b*a', i, j1, j2, '|', dim(c), ':', (j1*m + 1), (j2*m), 
+# '|', dim(a), ':', 1, ((j2-j1)*m), '\n')
+      c[ , (j1*m + 1):(j2*m)] = 
+        c[ , (j1*m + 1):(j2*m)] + 
+          matrix(b[,,i+1], nrow = o, ncol = n) %*% a[,1:((j2-j1)*m) , drop = FALSE]
+    }
+    c = array(c, dim = c(o,m,r+1))
+    c = aperm(c, c(2,1,3))
+  }
+  return(c)
+}
+```
+
+
+# Test 
+
+```{r}
+n.sim = 1000
+comp.time0 = 0
+comp.time1 = 0
+for (i in (1:n.sim)) {
+  m = sample(0:5,1)
+  n = sample(0:5,1)
+  o = sample(0:5,1)
+  p = sample(0:50,1)
+  q = sample(0:50,1)
+  
+  a = array(rnorm(m*n*(p+1)), dim = c(m,n,p+1))
+  b = array(rnorm(n*o*(q+1)), dim = c(n,o,q+1))
+  
+  start = Sys.time()
+  # polynomial multiplication
+  c0a = mmult_poly(a,b)
+  c0b = mmult_pseries(a,b)
+  comp.time0 = comp.time0 + (Sys.time() - start)
+  
+  start = Sys.time()
+  c1a = convolve_3D(a,b)
+  c1b = convolve_3D(a,b, TRUE)
+  comp.time1 = comp.time1 + (Sys.time() -start)
+
+  testthat::expect_equal(c0a,c1a)
+  testthat::expect_equal(c0b,c1b)
+}
+
+
+print(comp.time0)
+print(comp.time1)
+```
+

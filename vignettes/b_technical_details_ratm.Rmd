@@ -1,0 +1,1252 @@
+---
+title: "Rational Matrices: Technical Details"
+author: "Wolfgang Scherrer and Bernd Funovits"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    fig_width: 12
+    fig_height: 9
+    toc: yes
+    toc_depth: 2
+    number_sections: true
+vignette: >
+  %\VignetteIndexEntry{Rational_Matrices_Technical_Details}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r, include = FALSE}
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(rationalmatrices)
+```
+
+## Left Coprime Polynomials
+
+A polynomial matrix $c$ is called *left prime*, if $c(z)$ has full row rank 
+everywhere in the complex plane. Clearly this implies that $c$ 
+is square or "wide", i.e. if $c$ is $(m \times n)$-dimensional then 
+$m \leq n$ must hold. 
+
+A pair $(a,b)$ of (compatible) polynomial matrices is called 
+*left coprime* if the matrix $c=[a,b]$ is left prime. This case is important 
+for the structure of left matrix fraction descriptions. Suppose $c(z)=a^{-1} b(z)$, 
+where $a$ is a square, non singular polynomial matrix. If the pair is 
+$(a,b)$ is *not* left coprime, then we may cancel a common, non unimodular, 
+factor and thus obtain a "simpler" representation for $c(z)$. 
+
+We discuss two strategies for testing whether a polynomial matrix 
+is left prime. The first approach uses a Hermite normal form (HNF) and the 
+second one tackles this problem via a (singular) pencil. 
+
+The approach via singular pencils is numerically stable and thus is implemented 
+in the function `is.coprime()`. See also the examples below.
+
+First note that the problem is easy to tackle in the case that 
+$c$ has degree zero. Here we just have to check the left kernel of the 
+coefficient matrix of $z^0$. Also the case where $c$ is "tall", i.e. the number of rows 
+is larger than the number of columns is trivial. In this case $c$ clearly cannot 
+be left prime, since the rank of $c(z)$ is smaller than the number of rows for any 
+$z \in \mathbb{C}$.
+
+Therefore throughout this section, we assume that $c$ is 
+an $(m \times n)$-dimensional polynomial matrix with degree $p > 0$
+and $m \leq n$.
+
+
+### Hermite Normal Form 
+
+
+Consider the *row Hermite form* obtained from elementary column operations 
+$$
+c(z) = h(z) u(z) = h_1(z) u_1(z)
+$$
+where $u$ is an $(n \times n)$-dimensional unimodular modular matrix, 
+$h$ is an $(m \times n)$-dimensional lower (quasi) triangular matrix. 
+
+The $(m \times m)$-dimensional matrix $h_1$ is obtained from $h$ 
+by selecting the first $m$ columns and $u_1$ consists of the first 
+$m$ rows of $u$. Note that $h_1$ is a square, lower
+triangular matrix, where the diagonal elements are either monic or zero, and if 
+a diagonal element is non zero, then all elements to the left of this 
+element have a lower degree. 
+
+Furthermore note that the rank of $c(z)$ is equal to the rank of $h_1(z)$ 
+for all $z \in \mathbb{C}$. Therefore the rank of $c(z)$ is less than $m$ if and only 
+$z$ is a zero of the product of the diagonal entries: $h_{11} h_{22} \cdots h_{mm}$. 
+The following cases may occur
+
+1. All diagonal elements $h_{ii}$ are constant (and hence $h_1 = I_m$ must hold). In this 
+   case $\mbox{rk}(c(z))=m$ for all $z\in \mathbb{C}$ and thus $c$ is *coprime*.
+2. One of the diagonal elements is zero: In this case $\mbox{rk}(c(z))<m$ holds 
+   for all $z\in \mathbb{C}$ and thus $c$ is *not coprime*.
+3. The diagonal elements are non zero and at least one of them has a degree larger than zero. 
+   In this case $\mbox{rk}(c(z))=m$ except for the zeroes of the 
+   polynomial $(h_{11} h_{22} \cdots h_{mm})$. Also in this case, $c$ is *not coprime*.
+
+Hence, the polynomial $c$ is left prime if and only if $h_1 = I_m$.
+
+### Generalized Pencils
+
+As reference for generalized pencils, see 
+
+* [@Gantmacher1959, Chapter XII (in particular §4 on page 35ff)]
+* [@Kailath80, page 393ff]
+* [@DemmelKagstroem1993]
+
+We first construct a *pencil* $P(z)=(A-Bz)$ such that for any $z \in \mathbb{C}$ 
+the left kernel of $c(z)$ and of $P(z)$ have the same dimension. This means that $c$ is 
+left prime if and only if $P$ is left prime. Furthermore the zeroes of $P$ and 
+of $c$ are the same.
+
+
+The condition 
+$$
+u c(z) = u (c_0 + c_1 z + \cdots + c_p z^p) = 0
+$$
+for $z \in \mathbb{C}$ and $u \in \mathbb{C}^{1 \times m}, u \neq 0$ is equivalent to the condition that 
+$$
+(v_1,v_2,\ldots,v_p)
+\begin{pmatrix}
+c_0 & 0      & \cdots  & 0 \\
+0   & I_{n}      & \cdots  &  0 \\ 
+0   & \vdots & \ddots  &  \vdots \\ 
+0   & 0      & \cdots  & I_{n} \\ 
+\end{pmatrix} = 
+(v_1,v_2,\ldots,v_p)
+\begin{pmatrix}
+-c_1    & \cdots & -c_{p-1} & -c_p \\
+I_{n}      & \cdots & 0       & 0 \\
+\vdots & \ddots & \vdots  & \vdots \\
+0      & \cdots & I_{n} & 0 
+\end{pmatrix} z
+$$
+for $v_1 \in \mathbb{C}^{1 \times m}$, $v_1 \neq 0$ and $v_j\in \mathbb{C}^{1\times n}$ for $i=2,\ldots ,p$. 
+This follows immediately be rewriting the above condition as 
+$$
+\begin{array}{rcl}
+v_2 z   &=& v_1 c_0 + v_1 c_1 z = v_1 (c_0 + c_1 z) \\
+v_3 z^2 &=& (v_2 + v_1 c_2 z) z = v_1 (c_0 + c_1 z + c_2 z^2) \\
+v_4 z^3 &=& (v_3 + v_1 c_3 z) z^2 = v_1 (c_0 + c_1 z + c_2 z^2 + c_3 z^3) \\
+ & \vdots &  \\
+v_p z^{p-1} &=& v_1 (c_0 + c_1 z + \cdots + c_{p-1} z^{p-1}) \\
+-v_1 c_p z^p &=& v_p z^{p-1}
+\end{array}
+$$
+see also @Kailath80, page 393ff. 
+Combining the last two equations gives
+$$
+0 = v_pz^{p-1} + v_1 c_p z^p = v_1 (c_0 + c_1 z + \cdots + c_{p} z^{p}).
+$$
+
+Therefore the matrix $c(z)$ has a non trivial left kernel if and only if 
+the pencil $P(z) = (A - Bz)$,  
+$$
+A = \begin{pmatrix}
+c_0 & 0      & \cdots  & 0 \\
+0   & I_{n}      & \cdots  &  0 \\ 
+0   & \vdots & \ddots  &  \vdots \\ 
+0   & 0      & \cdots  & I_{n} \\ 
+\end{pmatrix}, \quad
+B = \begin{pmatrix}
+-c_1    & \cdots & -c_{p-1} & -c_p \\
+I_{n}      & \cdots & 0       & 0 \\
+\vdots & \ddots & \vdots  & \vdots \\
+0      & \cdots & I_{n} & 0 
+\end{pmatrix}, 
+$$
+has a non trivial left kernel. This implies $c$ is left prime if and only if $P$ is left prime. 
+
+#### Staircase Form {-}
+
+In order to analyze the left kernel this pencil, we transform the pencil (by multiplication with orthogonal 
+matrices from the left and the right) into a so called *staircase form*. To simplify notation we set 
+$M=(m+n(p-1))$ and $N = np$, i.e. $(M,N)$ now denotes the dimension of the pencil $P(z)$. Note that 
+$M-N = m-n \neq 0$ in general, which means that we have to deal with *non regular* pencils. 
+
+The procedure described below works for an arbitary pencil, i.e. we do not impose the above special 
+structure and we also consider the case $M>N$. 
+
+(a) If the pencil $P(z) = (A-Bz)$ is "tall", i.e. $M > N$, then $P(z)$ 
+    has a non trivial left kernel for all $z \in \mathbb{C}$.     
+    In this case $P$ (and the matrix $c$) is *not* left prime.
+
+(b) If the pencil $P(z)=(A-Bz)$ is square, i.e. $M=N$, and $B$ is non singular, then 
+    the zeroes of the pencil $P(z)$ (and the zeroes of $c(z)$) are the eigenvalues 
+    of the matrix $AB^{-1}$.     
+    In this case $P$ (and the matrix $c$) is *not* left prime.
+
+Now suppose that the *right kernel* of $B$ is $N_1 > 0$ dimensional. If $N_1 = N$, i.e. if $B=0$, 
+then two cases may occur: 
+
+(c) The matrix $A$ has full row rank.     
+    In this case the pencil $P$ (and the matrix $c$) is left prime. 
+(d) The matrix $A$ does not have full row rank and hence $P(z)$ 
+    has a non trivial left kernel for all $z \in \mathbb{C}$.        
+    In this case $P$ (and the matrix $c$) is *not* left prime.
+    
+Finally suppose that $0 < N_1 <N$ holds and let $0 \leq M_1 \leq N_1$ denote the rank of the 
+first $N_1$ columns of $AV$. Then there exists an orthogonal transformation, $U$ say, 
+such that the first $M_1$ rows of the first $N_1$ columns of $U'AV$ have full rank $M_1$ 
+and the remaining rows are zero. 
+
+Using the same symbols for the transformed pencil we get 
+$$
+P (z) = 
+\begin{pmatrix}
+A_{11} & A_{12} \\ 
+0_{(M-M_1) \times N_1} & A_{22} 
+\end{pmatrix} 
+- 
+\begin{pmatrix}
+0_{M_1\times N_1} & B_{12} \\
+0_{(M-M_1) \times N_1} & B_{22}
+\end{pmatrix}z,\quad A_{11} \in \mathbb{R}^{M_1 \times N_1}.
+$$
+Clearly $P(z)$ has full row rank  if and only if the *reduced* pencil $(A_{22} - B_{22} z)$ has full row rank.
+
+Now we iterate this procedure with the reduced pencil $(A_{22} - B_{22}z)$ until we end up with 
+the following staircase form of the pencil:
+$$
+P (z) = 
+\begin{pmatrix}
+A_{11}                 & \cdots & A_{1,k-1}              & A_{1k} \\ 
+\vdots                 & \ddots & \vdots                 & \vdots  \\
+0_{M_{k-1} \times N_1} & \cdots & A_{k-1,k-1}            & A_{k-1, k}\\
+0_{M_k \times N_1}     & \cdots & 0_{M_k \times N_{k-1}} & A_{kk}  \\
+\end{pmatrix} 
+- 
+\begin{pmatrix}
+0_{M_1 \times N_1}     & \cdots & B_{1,k-1}                   & B_{1,k} \\ 
+\vdots                 & \ddots &  \vdots                     & \vdots   \\
+0_{M_{k-1} \times N_1} & \cdots & 0_{M_{k-1} \times N_{k-1}}  & B_{k-1,k} \\
+0_{M_k \times N_1}     & \cdots & 0_{M_k \times N_{k-1}}      & B_{kk} \\
+\end{pmatrix} z
+$$
+The diagonal blocks are of dimension $(M_i\times N_i)$. The first 
+$(k-1)$ diagonal blocks of $A$ have full row rank (and hence $0\leq M_i \leq N_i$) 
+and the first $(k-1)$ diagonal block of $B$ are zero. Therefore 
+$P(z)$ has full row rank if and only if the last block $(A_{kk} - B_{kk}z)$ has full row rank. 
+For this last block the following cases may occur: 
+
+(a) If $(A_{kk} - B_{kk})$ is "tall" ($M_k > N_k$), then $P(z)$ 
+    has a non trivial left kernel for all $z \in \mathbb{C}$.     
+    In this case $P$ (and the matrix $c$) is *not* left prime.
+(b) If the pencil $(A_{kk} - B_{kk})$ is square ($M_k=N_k$) and $B_{kk}$ is non singular, 
+    then the zeroes of the pencil $P(z)$ (and the zeroes of $c(z)$) are the eigenvalues 
+    of the matrix $A_{kk}B_{kk}^{-1}$.     
+    In this case $P$ (and the matrix $c$) is *not* left prime.
+(c) If $B_{kk}$ is zero and the matrix $A$ has full row rank, then 
+    $P(z)$ has full row rank for all $z\in \mathbb{C}$.     
+    In this case the pencil $P$ (and the matrix $c$) is left prime. 
+(d) If $B_{kk}$ is zero and the matrix $A$ does not have full row rank, 
+    then $P(z)$ has a non trivial left kernel for all $z \in \mathbb{C}$.        
+    In this case $P$ (and the matrix $c$) is *not* left prime.
+
+
+The function `is.coprime()` uses this approach to test wether a polynomial 
+is left prime (or a pair of polynomials is left coprime). In the default case 
+the function just returns a boolean variable. However, if the optional argument 
+`only.answer` is set to `FALSE`, then a list is returned which contains the 
+above described staircase form. The list contains the following slots: 
+
+`answer` is `TRUE`, if the polynomial is prime (the pair is left coprime).    
+`A`,`B`  hold the two matrices $A$ and $B$ (in staircase form).       
+`m`,`n`  are two integer vectors which contain the size of the blocks 
+         $(M_i)$ and $(N_i)$ respectively.                
+`zeroes` is a vector which contains the zeroes of the pencil (the polynomial $c$). 
+         In the (co-)prime case this vector is empty and if $P$ is rank deficient 
+         for all $z \in \mathbb{C}$ then `zeroes = NA_real_`. 
+
+
+### Examples
+
+We present three examples pertaining to the three different outcomes:
+
+* coprime polynomial matrices $a(z)$ and $b(z)$
+* non-coprime polynomial matrices with a finite number of common zeros
+* non-coprime polynomial matrices with reduced rank for all $z\in\mathbb{C}$
+
+#### Coprime Polynomials {-}
+
+Two "generic" polynomials are coprime.
+
+```{r}
+# Generate a random (m x m), and a random (m x n) polynomial matrix, with degree p=2
+m = 2
+n = 3
+set.seed(1803)
+a = test_polm(dim = c(m,m), degree = 2, digits = 1, random = TRUE)
+b = test_polm(dim = c(m,n), degree = 2, digits = 1, random = TRUE)
+```
+
+##### Hermite Form {-}
+
+The Hermite form of $\left( a(z), b(z)\right)$ is
+```{r}
+HNF = hnf(cbind(a,b), from_left = FALSE)
+print(HNF$h, digits = 2, format = 'character')
+```
+
+The square submatrix $h_1$ of the Hermite form $h$ is equal to the identity matrix, 
+hence $(a,b)$ are left coprime. 
+
+##### Pencil {-}
+
+The method using the pencil gives the same answer:
+
+* There are no common zeros.
+* The polynomial matrices are left coprime.
+
+```{r}
+out = is.coprime(a, b, debug = FALSE, only.answer = FALSE)
+cat("The polynomials are left coprime: ", out$answer,"\n", 
+    "The zeros of the pencil are: ", out$zeroes, sep = '')
+```
+
+
+#### Not coprime: Finite Number of Zeros {-}
+
+Here we consider an example where $c(z)= [a(z),b(z)]$ is rank deficient for some (but not all) $z\in \mathbb{C}$.
+We generate these polynomials by multiplying them with a common (matrix) factor.
+We show that (at least) one singular value of $c(z)$ evaluated at the zeros of the common factor is zero.
+
+```{r}
+a0 = a
+b0 = b
+
+# Generate random common factor  with degree 1
+r = test_polm(dim = c(m,m), degree = 1, digits = 1, random = TRUE)
+
+# Generate polynomials with a common factor
+a = r %r% a0
+b = r %r% b0
+c = cbind(a,b)
+
+z_r = zeroes(r)
+cat("The zeros of the common factor r(z) are: \n", z_r, "\n\n")
+
+d = svd(unclass(zvalues(c, z = z_r[1]))[,,1])$d
+cat("minimal singular value of c(z_0): ", d[m], sep="")
+```
+
+##### Hermite Form {-}
+
+The Hermite Form of $c(z) = (a(z), b(z))$ is
+```{r}
+HNF = hnf(cbind(a,b), from_left = FALSE)
+print(HNF$h, digits = 2, format = 'character')
+```
+
+We calculate the zeros of $c(z)= [a(z),b(z)]$ by calculating the zeros of the diagonal 
+elements of the square submatrix $h_1(z)$. Note that for this example 
+the $(1,1)$ element is equal to $1$. 
+
+The (common) zeros are therefore
+
+```{r}
+zeroes(HNF$h[m,m])
+```
+
+Note that these zeroes are identical to the zeroes of the common factor $r(z)$. 
+
+##### Pencil {-}
+
+The outcome for the pencil is the same as above.
+
+```{r}
+out = is.coprime(a, b, debug = FALSE, only.answer = FALSE)
+cat("The polynomials are left coprime: ", out$answer,"\n", 
+    "The zeros of the pencil are: ", out$zeroes, sep = '')
+```
+
+#### Not coprime: Everywhere Rank Deficient {-}
+
+Finally let us consider the case, where $c(z) = (a(z),b(z))$ is rank deficient for all $z$.
+We generate a pair of polynomial matrices of this kind by multiplying the two polynomials 
+$a(z), b(z)$ (from left) with a singular common factor.
+
+To verify that $c(z)$ is of reduced row rank for all $z\in\mathbb{C}$, 
+we print the singular values of $c(z)$ at a randomly selected point.
+
+```{r}
+# generate a square polynomial matrix with rank one!
+r = test_polm(dim = c(m,1), degree = 1, digits = 1, random = TRUE) %r% 
+    test_polm(dim = c(1,m), degree = 1, digits = 1, random = TRUE) 
+print(r, format = 'c')
+
+a = r %r% a0
+b = r %r% b0
+
+# Evaluate c(z) = (a(z),b(z)) at a random point z0 and print the corresponding singular values
+z0 = complex(real = rnorm(1), imaginary = rnorm(1))
+d = svd( unclass(zvalues(cbind(a,b), z = z0))[,,1], nu = 0, nv = 0 )$d
+
+cat("The singular values of c(z) \n evaluated at z0 = ", z0, "\n are: ", d, "\n\n")
+```
+
+##### Hermite Form {-}
+
+The Hermite Form of $c(z) = (a(z), b(z))$ is
+```{r}
+HNF = hnf(cbind(a,b), from_left = FALSE)
+print(HNF$h, digits = 1, format = 'char')
+```
+
+The matrix $c(z)$ is rank deficient (for all $z$) since $h[2,2] = 0$! The procedure `hnf` returns also 
+an estimate of the rank of $c(z)$ (when $c(z)$ is considered as rational matrix). Here we get 
+```{r}
+cat(HNF$rank,'\n')
+```
+which again means that $c(z)$ is rank deficient for all $z \in \mathbb{C}$. 
+
+##### Pencil {-}
+
+The result for pencils is the same.
+
+```{r}
+out = is.coprime(a, b, debug = FALSE, only.answer = FALSE)
+cat("The polynomials are left coprime: ", out$answer,"\n", 
+    "The zeros of the pencil are: ", out$zeroes, sep = '')
+```
+
+## Column Reduced Matrix
+
+**Note:** The functions `degree` (`col_end_matrix`) and `col_reduce` use different strategies to 
+compute the column degrees (column end matrix). 
+
+* The first two consider the elements, whereas 
+* `col_reduce` considers the euclidean norm of the respective columns. 
+
+Let $a(z) = a^0 + a^1 z + \cdots + a^p z^p$, $a^k = (a^k_{ij})$ and $a^k_j=(a^k_{1j}, \ldots, a^k_{mj})'$. 
+The function `degree` sets the degree of the $j$-th column to $p_j$ iff $a^{p_j}_{ij} > \tau$ for at least 
+one $i$ and $a^{k}_{ij} \leq \tau$ for all $i$ and $k>p_j$. The column end matrix is constructed correspondingly. 
+The function `col_reduce` sets the degree of the $j$-th column to $p_j$ iff $\|a^{p_j}_{j}\| > \tau$
+and $\|a^{k}_{j}\| \leq \tau$ for all $k>p_j$. 
+
+Therefore one may get different results!
+
+The basic strategy to construct a column reduced matrix (for the case that $a(z)$ is square and non singular) 
+is as follows. First permute the columns of $a(z)$ such that the column degrees $p_1 \leq p_2 \leq \cdots \leq p_m$ 
+are ordered. Now suppose that the $k$-th column, $c_k$ say, of the column end matrix is linearly 
+dependent from the previous columns ($c_j$, $1\leq j < k$), i.e. $c_k = \alpha_1 c_1 + \cdots \alpha_{k-1} c_{k-1}$. 
+Then we substract from the $k$-th column of $a(z)$, $z^{p_k-p_j}\alpha_j$ times the
+$j$-th column. This operation reduces the degree of the $k$-th column by one. 
+
+This procedure is repeated until the column end matrix is regular. 
+
+See also @Wolovich1974.
+
+The coefficients $\alpha_j$ are determined from an SVD of the column end matrix. 
+
+## Realization Algorithms 
+
+### Impulse Response 
+
+One of the main features of the rational functions is that the 
+Hankel matrix of the impulse response coefficients has finite rank: 
+
+$$
+H = \begin{pmatrix}
+k_1 & k_2 & \cdots \\
+k_2 & k_3 & \cdots \\
+\vdots & \vdots & 
+\end{pmatrix}
+$$
+Note that the impulse response function is only well defined if the rational matrix has 
+no pole at $z=0$. 
+
+#### LMFD  {-}
+
+We consider a $(m,n)$-dimensional rational matrix in LMFD form
+$$
+k(z) = a^{-1}(z) b(z) = k_0 + k_1 z + k_2 z^2 + \cdots
+$$
+where $a(z)=a_0 + a_1 z + \cdots + a_p z^p$ and $b(z)=b_0 + b_1 z +\cdots + b_p z^p$. W.l.o.g we set $p=q$. This implies 
+$$
+\begin{array}{rcl}
+a(z)(k(z) - k_0) &=& b(z) - a(z)k_0 \\
+(a_0 + a_1 z + \cdots + a_p z^p)(k_1 z + k_2 z + \cdots ) &=& (b_0-a_0k_0) + (b_1-a_1 k_0) z + \cdots + (b_p-a_p k_0) z^p
+\end{array}
+$$
+and thus
+$$
+\sum_{i=0}^p a_{p-i} k_{j+i} = 0 \mbox{ for } j\geq 1. 
+$$
+By the above identity it follows that the Hankel matrix $H$ has finite rank and that the coefficients of the 
+polynomial $a(z)$ are closely related to the left kernel of $H$. In the following we discuss, how to 
+construct a unique LMFD of the rational matrix $k()$ via the above identity. 
+
+In order to describe the linear dependence structure 
+of the rows of $H$ it is convenient to use a "double" index for the rows: Let $h(i,j)\in \mathbb{R}^{1\times \infty}$ 
+denote the $j$-th row in the $i$-th block row of $H$, i.e. $h(i,j)$ is the $((i-1)m+j)$-th row of $H$. 
+
+A selection $\mathcal{S}=\{(i_k,j_k) \,|\, k=1,\ldots ,s\}$ of rows of the Hankel matrix is called a 
+*nice* selection, if there are no "holes" in the sense that $(i,j)\in \mathcal{S}$, $i>1$ 
+implies that $(i-1,j)\in \mathcal{S}$. Nice selections may be described 
+by a multi-index $\nu = (\nu_1, \ldots ,\nu_m)$, where $\nu_j=\max \{i\,|\,(i,j)\in \mathcal{S}\}$. 
+
+Suppose that $H$ has rank $s$. In general there are many different selections of rows of $H$ which form a 
+basis for the row space of $H$. In the following we choose the *first* $s$ rows of $H$ which form a basis of 
+the row space and denote the corresponding selection with $\mathcal{S}=\{(i_k,j_k) \,|\, k=1,\ldots ,s\}$. 
+Due to the Hankel structure of $H$ this is a nice selection in the above sense. 
+The corresponding $\nu_j$'s are called *Kronecker indices* of the Hankel matrix (respectively of the 
+rational matrix $k(\cdot)$).  Note that the sum of the Kronecker indices is equal to the rank of $H$: 
+$\sum_{j=1}^m \nu _j = s$.
+
+The row $h(\nu_j+1,j)$ is linearly dependent on the previous (basis) rows and therefore 
+$$
+h(\nu_j+1,j) + \sum_{\substack{(\nu_j+1-i,l) \in \mathcal{S} \\ (\nu_j+1-i,l) < (\nu_j+1,j)}} a_{i,jl} h(\nu_j+1-i,l) = 0
+$$
+holds for suitably chosen coefficients $a_{i,jl}$. The sum runs over all 
+basis rows previous to the row $h(\nu_j+1,j)$, i.e. the notation 
+$(k,l) < (i,j)$ means ($k < i$) or ($k=i$ and $l<j)$). This equation now 
+(uniquely) defines a polynomial matrix $a(z) = a_0 + a_1 z + \cdots + a_p z^p$, with $p=\max_j{\nu_j}$.  
+Let $a_{i,jl}$ denote the $(jl)$-th entry of the matrix $a_i$. The entries 
+$a_{i,jl}$, for $(\nu_j+1-i,l) \in \mathcal{S}$ and 
+$(\nu_j+1-i,l) < (\nu_j+1,j)$ are read off from the above equation, 
+$a_{0,jj}$ is set to one ($a_{0,jj}=1$) and all other entries are set to zero. 
+
+By construction $a(z)(k(z)-k_0)$ is a polynomial (with degree less than or equal to $p=\max_j\nu_j$). 
+In the last step we set 
+$$
+b(z) = a(z)(k(z)-k_0) + a(z)k_0.
+$$
+
+By the above construction one gets a unique LMFD representation of the rational matrix $k(z)$
+with the following properties:
+
+* $a_0$ is a lower triangular matrix with ones on the diagonal.
+* $b_0 = a_0 k_0$. In particular for a square rational matrix with $k_0=I_m$ we have $b_0=a_0$. 
+* the row degrees of $(a(z),b(z))$ are equal to $\nu_1,\ldots,\nu_m$,  
+* the elements $a_{ij}(z)$ are divisible by $z^{\nu_{ij}}$, where 
+  $\nu_{ij} = \max(\nu_i+1-\nu_j,1)$ for $j>i$ and
+  $\nu_{ij} = \max(\nu_i+1-\nu_j,0)$ for $j<i$. 
+* the pair $(a(z), b(z))$ is left coprime and row reduced. 
+
+A pair $(a(z),b(z))$ which satisfied the above conditions is said to be in *echelon canonical form*. 
+
+#### Ho-Kalman {-}
+
+A quite analogous strategy may be used to construct a (unique) state space realization of 
+a rational matrix. Suppose that the Hankel matrix $H$ has rank $s$ and that $S\in \mathbb{R}^{s\times \infty}$ 
+is such that $SH$ is a basis for the row space of $H$. Then a state space representation of the rational matrix 
+$k(\cdot)$ is obtained by a solving the following equations
+$$
+\begin{array}{rcl}
+SH_{-1,.} &=& A SH \\
+H_{1,.} &=& C SH \\
+SH_{.,1} &=& B \\
+k_0 &=& D,
+\end{array}
+$$
+where 
+$$
+H_{-1,.} = \begin{pmatrix}
+k_2 & k_3 & \cdots \\
+k_3 & k_4 & \cdots \\
+\vdots & \vdots & 
+\end{pmatrix}
+\, \quad
+H_{1,.} = \begin{pmatrix}
+k_1 & k_2 & \cdots
+\end{pmatrix}
+\, \mbox{ and }
+H_{,1} = \begin{pmatrix}
+k_1 \\ 
+k_2 \\
+\vdots
+\end{pmatrix}
+$$
+
+The obtained result clearly depends on the matrix $S$, i.e. on the choice of the basis of the row space of $H$. 
+
+Two choices are implemented: 
+
+* echelon form: here $S$ is the selection matrix which selects the first $s$ linearly independent rows of $H$. 
+   The statespace realization obtained then is in *echelon canonical form*. 
+* balanced form: here $S$ is obtained via an SVD decomposition of a finite dimensional sub matrix 
+  of $H$. For more details, see ... 
+
+
+#### Notes: {-} 
+
+The above constructions for a LMFD or statespace representations also work for a finite 
+dimensional sub matrix 
+$$
+H_{fp} = 
+\begin{pmatrix}
+k_1 & k_2 & \cdots & k_p \\
+k_2 & k_3 & \cdots & k_{p+1}\\
+\vdots & \vdots &  & \vdots \\
+k_f & k_{f+1} & \cdots & k_{f+p-1}
+\end{pmatrix}
+$$
+provided that $(f,p)$ is "large enough".
+
+For a more detailed discussion on Kronecker indices and echelon canonical forms, 
+see @Hannan.Deistler12.
+
+## Operations with/on Statespace Realizations
+
+### Addition 
+
+$$
+(C_1 (z^{-1} - A_1)^{-1} B_1 + D_1) + 
+(C_2 (z^{-1} - A_2)^{-1} B_2 + D_2)
+$$
+
+$$
+\left[\begin{array}{@{}cc|c@{}}
+A_1      & 0   & B_1   \\
+0        & A_2 & B_2 \\  \hline
+C_1      & C_2 & D_1 + D_2
+\end{array}\right]
+$$
+
+See `Ops.ratm()` in particular `a + b`.
+
+
+### Multiplication 
+
+$$
+(C_1 (z^{-1} - A_1)^{-1} B_1 + D_1) \cdot
+(C_2 (z^{-1} - A_2)^{-1} B_2 + D_2)
+$$
+
+$$
+\left[\begin{array}{@{}cc|c@{}}
+A_1      & B_1 C_2 & B_1 D_2   \\
+0        & A_2     & B_2 \\  \hline
+C_1      & D_1 C_2 & D_1 D_2
+\end{array}\right]
+$$
+
+See `a %r% b`.
+
+### Inverse 
+
+$$
+(C (z^{-1} - A)^{-1} B + D)^{-1}
+$$
+
+$$
+\left[\begin{array}{@{}c|c@{}}
+A - B D^{-1} C & BD^{-1}   \\ \hline
+-D^{-1}C       & D^{-1}
+\end{array}\right]
+$$
+
+See `Ops.ratm()` in particular `x^{-1}`.
+
+### Bind by columns or rows
+
+$$
+\begin{pmatrix} 
+C_1 (z^{-1} - A_1)^{-1} B_1 + D_1) & 
+C_2 (z^{-1} - A_2)^{-1} B_2 + D_2) 
+\end{pmatrix}
+$$
+
+$$
+\left[\begin{array}{@{}cc|cc@{}}
+A_1      & 0       & B_1 & 0   \\
+0        & A_2     & 0   & B_2 \\  \hline
+C_1      & C_2     & D_1 & D_2
+\end{array}\right]
+$$
+See `cbind.ratm()`.
+
+$$
+\begin{pmatrix} 
+C_1 (z^{-1} - A_1)^{-1} B_1 + D_1 \\
+C_2 (z^{-1} - A_2)^{-1} B_2 + D_2
+\end{pmatrix}
+$$
+
+$$
+\left[\begin{array}{@{}cc|c@{}}
+A_1      & 0       & B_1 \\
+0        & A_2     & B_2 \\  \hline
+C_1      & 0       & D_1 \\
+0        & C_2     & D_2
+\end{array}\right]
+$$
+See `rbind.ratm()`.
+
+
+### Elementwise Multiplication 
+
+First consider the product of two $(m\times 1)$ matrices, and write the elementwise product 
+as the product of a suitable diagonal matrix with the second factor 
+
+
+$$
+\left[\begin{array}{@{}cccc|c@{}}
+A_1     & \cdots  & 0       & B_1 C_{2,1}     & B_1 D_{2,1}   \\
+\vdots  & \ddots  & \vdots  & \vdots          & \vdots        \\
+0       & \cdots  & A_1     & B_1 C_{2,m}     & B_1 D_{2,m}   \\
+0       & \cdots  & 0       & A_2             & B_2           \\  \hline
+C_{1,1} & \cdots  & 0       & D_{1,1} C_{2,1} & D_{1,1} C_{2,1}  \\
+\vdots  & \ddots  & \vdots  & \vdots          & \vdots           \\
+0       & \cdots  & C_{1,m} & D_{1,m} C_{2,m} & D_{1,m} D_{2,m}  
+\end{array}\right]
+$$
+where $C_{i,k}$ denotes the $k$-th row of $C_i$ and $D_{i,k}$  is the $k$-entry of the $(m\times 1)$-dimensional matrix 
+$D_i$.
+
+It can be shown (???) that the controllability matrix of the above statespace model has rank at most 
+$(s_1 + s_2)$. Therefore we may construct an equivalent model with state dimension $(s_1 + s_2)$. 
+
+Now we simply do this construction for all columns of the two factors $a(z)$ and $b(z)$  and then "column-bind" the result. 
+The statespace realisation then has state dimension $n(s_1+s_2)$. 
+
+For "wide" matrices ($m< n$) we consider the transpose of the two factors. This gives statespace realisations
+with 
+$$
+s = \min(m,n)(s_1+s_2). 
+$$
+
+
+* proof ???
+* kann man die $(s_1+s_2)$ Zustandsraum Darstellung direkt "hinschreiben"? 
+
+See `Ops.ratm()` in particular `a * b`.
+
+### Transpose
+
+
+$$
+(C(z^{-1}I - A)^{-1} B + D)' = B'(z^{-1}I - A')^{-1} C + D'
+$$
+
+
+$$
+\left[\begin{array}{@{}c|c@{}}
+A' & C'  \\  \hline
+B' & D'
+\end{array}\right]
+$$
+
+See `t()`. 
+
+### Hermitean Transpose
+
+
+$$
+\begin{array}{rcl}
+[C(z^{-1}I - A)^{-1} B + D]^* &=& B' (zI - A')^{-1} C' + D' \\
+ &=& B' [(-A'z)(z^{-1}I -A^{-T})]^{-1}C' + D' \\
+ &=& B' [(-A^{-T}z^{-1})(zI + z^2A^{-T} + z^3A^{-2T} + \cdots)]C' + D' \\
+ &=& (-A^{-1}B)' [zI + z^2A^{-T} + Z^3A^{-2T} + \cdots)](CA^{-1})' + D' - B' A^{-T}C'\\
+ &=& (-A^{-1}B)' (z^{-1} I - A^{-T})^{-1}(CA^{-1})' + (D' - B' A^{-T}C')\\
+\end{array}
+$$
+
+
+
+$$
+\left[\begin{array}{@{}c|c@{}}
+A^{-T}      & (CA^{-1})'  \\  \hline
+(-A^{-1}B)' & D' - B' A^{-T} C'
+\end{array}\right]
+$$
+
+See `Ht()`. 
+
+### Derivative
+
+$$
+\begin{array}{rcl}
+\frac{d}{dz} (C(z^{-1} - A)^{-1}B+D) &=& \frac{d}{dz}(D + CBz + CABz^2 + CA^2Bz^3  + CA^2Bz^4 + \cdots )\\
+ &=& CB + 2CABz + 3CA^2Bz^2 + 4CA^2Bz^3 +\cdots \\
+ &=& \bar{C}\bar{A}\bar{B} + \bar{C}\bar{A}^2\bar{B}z + \bar{C}\bar{A}^3\bar{B}z^2  + \bar{C}\bar{A}^4\bar{B}z^3 +\cdots \\
+\end{array}
+$$
+with 
+$$
+\bar{C} = \begin{pmatrix} C & 0 \end{pmatrix},\ 
+\bar{A} = \begin{pmatrix} A & I \\ 0 & A \end{pmatrix} \mbox{ and }
+\bar{B} = \begin{pmatrix} 0 \\ B \end{pmatrix}.
+$$
+The corresponding statespace realization is 
+
+$$
+\left[\begin{array}{@{}cc|c@{}}
+A     & I       & B  \\
+0     & A       & AB \\  \hline
+CA    & C       & CB
+\end{array}\right]
+$$
+See `derivative.stsp()`.
+
+### Construct statespace representation of rational matrix in LMFD form
+
+Suppose $c(z)=a^{-1}(z) b(z)$ with $a(z) = a_0 + a_1 z + a_2 z^2 + \cdots + a_p z^p$, $b(z) = b_0 + b_1 z + \cdots + b_q z^q$ is given. 
+The construction, detailed below, assumes that $a_0$ is non singular and hence we rewrite the polynomial $a(z)$ as  
+$a(z) = I_m - a_1 z - a_2 z^2 - \cdots - a_p z^p$. Furthermore we assume, w.l.o.g that 
+$p=q$. The powerseries expansion of $c(\cdot)$ is  $c(z)=k_0 + k_1 z + \cdots + k_pz^p + \cdots$. 
+
+Then a statespace realization of $c(\cdot)$ is 
+$$
+\left[\begin{array}{@{}cccc|c@{}}
+a_1   & \cdots & a_{p-1} & a_p    & k_p     \\
+I_m   & \cdots & 0       & 0      & k_{p-1} \\
+\vdots& \ddots & \vdots  & \vdots & \vdots  \\
+0     & \cdots & I_m     & 0      & k_1     \\ \hline
+0     & \cdots & 0       & I_m    & k_0 
+\end{array}\right]
+$$
+This scheme is implemented in `as.stsp.lmfd` (and `as.stsp.polm`).
+
+### Construct statespace representation of rational matrix in RMFD form
+
+Likewise, it is possible to write an RMFD $k(z)=d(z) c^{-1}(z) $, where $c(z) = c_0 + c_1 z + c_2 z^2 + \cdots + c_p z^p$, and $d(z) = d_0 + d_1 z + \cdots + d_q z^q$ is given. 
+Again, we simplify the exposition by setting the non-singular $c_0$ equal to the $m$-dimensional identity matrix $I_m$.
+In the case $p \geq q$, the state space realization of $k(z)$ is 
+
+$$
+\left[\begin{array}{@{}cccc|c@{}}
+c_1   & \cdots & c_{p-1} & c_p    & I_m     \\
+I_m   & \cdots & 0       & 0      & 0 \\
+\vdots& \ddots & \vdots  & \vdots & \vdots  \\
+0     & \cdots & I_m     & 0      & 0     \\ \hline
+d_1     & \cdots & d_{q-1}       & d_q    & d_0 
+\end{array}\right]
+$$
+If $p>q$, some zeros appear in the $C$ matrix.
+If $p<q$, some zeros are padded into the $A$ matrix. 
+This scheme is implemented in `as.stsp.rmfd`.
+
+
+## Schur, QZ decomposition, Lyapunov and Riccati Equations
+
+
+### Lyapunov equation 
+
+The generalized (non-symmetric) Lyapunov equation is 
+
+$$
+X = A X B^* + Q
+$$
+
+With a Schur factorization of $A$ and $B$ we obtain a form with triangular matrices $A$, $B$
+
+$$
+\begin{array}{rcl}
+\begin{pmatrix}
+X_{11} & X_{12} \\
+X_{21} & X_{22} 
+\end{pmatrix}
+&=& 
+\begin{pmatrix}
+A_{11} & A_{12} \\
+0 & A_{22} 
+\end{pmatrix}
+\begin{pmatrix}
+X_{11} & X_{12} \\
+X_{21} & X_{22} 
+\end{pmatrix}
+\begin{pmatrix}
+B_{11}^* & 0 \\
+B_{12}^* & B_{22}^* 
+\end{pmatrix}
++
+\begin{pmatrix}
+Q_{11} & Q_{12} \\
+Q_{21} & Q_{22} 
+\end{pmatrix} \\
+&=&
+\begin{pmatrix}
+A_{11}X_{11}B_{11}^* +  A_{11}X_{12}B_{12}^* + A_{12}X_{21}B_{11}^* + A_{12}X_{22}B_{12}^* & 
+    (A_{11}X_{12}+A_{12}X_{22})B_{22}^*
+    \\
+A_{22}(X_{21}B_{11}^*+X_{22}B_{12}^*) & A_{22}X_{22}B^*_{22} 
+\end{pmatrix}
++
+\begin{pmatrix}
+Q_{11} & Q_{12} \\
+Q_{21} & Q_{22} 
+\end{pmatrix}
+\end{array}
+$$
+
+* 22-block: solve for $X_{22}$
+* 12-block: solve for $X_{12}$
+* 21-block: solve for $X_{21}$
+* continue with 11-block 
+
+we could also consider the non-square case, where $A$ is $m\times m$, $B$ is $n\times n$ and $Q$ is $m\times n$.
+
+### Balancing and Balanced Truncation
+
+Consider a pair of Grammians $P,Q$. We first compute the sqare roots $P=MM'$ and $Q=NN'$ and 
+then consider the SVD^[The squared singular values of $M'N$ are the eigenvalues of $M'NN'M$. Therefore 
+the non zero, squared singular values are equal to the non zero eigenvalues of $MM'NN'=PQ$.] of $M'N$:
+
+$$
+M'N = U \Sigma V' = 
+[U_1, U_2] 
+\begin{pmatrix}
+\Sigma_{11} & 0 \\
+0 & \Sigma_{22}
+\end{pmatrix}
+[V_1, V_2]'
+$$
+where the diagonal blocks $\Sigma_{11}$, $\Sigma_{22}$ are of size $(s_1,s_1)$ and $(s_2,s_2)$ respectively. 
+We assume that $\Sigma_{11}$ is positive definite and set 
+$$
+\begin{array}{rcl}
+T_1 &=& \Sigma_{11}^{-1/2} V_1' N' \\
+S_1 &=& M U_1\Sigma_{11}^{-1/2}
+\end{array}
+$$
+and note that 
+$$
+\begin{array}{rcl}
+T_1 S_1 &=& \Sigma_{11}^{-1/2} V_1' N' M U_1\Sigma_{11}^{-1/2} \\
+        &=& \Sigma_{11}^{-1/2} V_1' V \Sigma U' M U_1\Sigma_{11}^{-1/2} = I_{s_1}
+\end{array}
+$$
+We extend these matrices to square $(s\times s)$ matrices 
+$$
+T = \begin{pmatrix} T_1 \\ T_2 \end{pmatrix} \mbox{ and } 
+S = \begin{pmatrix} S_1 & S_2 \end{pmatrix}
+$$
+
+such that $TS=ST= I_s$, i.e. $S= T^{-1}$. To this end we consider the SVD's 
+
+$$
+\begin{array}{rclcl}
+S_1 T_1 &=& \bar{U}_1 \bar{\Sigma}_{11} \bar{V}_1' &&\bar{U}_1,\bar{V}_1\in \mathbb{R}^{s\times s_1},\, 
+                                                     \bar{\Sigma}_{11} \in \mathbb{R}^{s_1 \times s_1} \\
+\bar{U}_2'\bar{V}_2 &=& \hat{U}\hat{\Sigma}\hat{V}' &&\hat{U},\hat{V},\hat{\Sigma} \in \mathbb{R}^{s_2\times s_2}
+\end{array}
+$$
+and set $T_2 = \hat{\Sigma}^{-1/2}\hat{U}'\bar{U}_2'$ and $S_2 = \bar{V}_2\hat{V}\hat{\Sigma}^{-1/2}$. 
+
+We now consider the *transformed* statespace realization 
+$$
+\left[\begin{array}{@{}c|c@{}}
+A & B \\ \hline
+C & D 
+\end{array}\right] \; \longrightarrow \;
+\left[\begin{array}{@{}cc|c@{}}
+T_1 A S_1 & T_1 A S_2 & T_1 B \\ 
+T_2 A S_1 & T_2 A S_2 & T_2 B \\ \hline
+C S_1 & C S_2  & D 
+\end{array}\right]
+$$
+and the Grammians are transformed as $P \rightarrow TPT'$ and $Q \rightarrow S' QS$.
+
+$$
+T M = \begin{pmatrix} \Sigma_{11}^{-1/2} V_1' N' M \\ T_2 M \end{pmatrix} 
+    = \begin{pmatrix} \Sigma_{11}^{1/2} U_1' \\ T_2 M \end{pmatrix} 
+$$
+
+
+$$
+S' N = \begin{pmatrix} \Sigma_{11}^{-1/2} U_1' M' N \\ S_2' N \end{pmatrix} 
+    = \begin{pmatrix} \Sigma_{11}^{1/2} V_1' \\ S_2' N \end{pmatrix} 
+$$
+$$
+TPT' = (TM)(TM)' = 
+\begin{pmatrix} 
+\Sigma_{11}^{1/2} U_1' U_1 \Sigma_{11}^{1/2}  & \Sigma_{11}^{1/2} U_1' M' T_2'  \\ 
+T_2 M U_1 \Sigma_{11}^{1/2}                    & T_2 MM' T_2' 
+\end{pmatrix} = 
+\begin{pmatrix} 
+\Sigma_{11} & 0 \\ 
+0           & T_2 P T_2' 
+\end{pmatrix}
+$$
+
+$$
+S'QS = (S'N)(S'N)' = 
+\begin{pmatrix} 
+\Sigma_{11}^{-1/2} V_1' V_1 \Sigma_{11}^{1/2}  & \Sigma_{11}^{1/2} V_1' N' S_2  \\ 
+S_2' N V_1 \Sigma_{11}^{1/2}                    & S_2' NN' S_2  
+\end{pmatrix} = 
+\begin{pmatrix} 
+\Sigma_{11} & 0 \\ 
+0           & S_2' Q S_2 
+\end{pmatrix}
+$$
+Here we have used that $T_2 M U_1 \Sigma_{11}^{1/2} = T_2 S_1 \Sigma_{11} = 0$ and 
+$\Sigma_{11}^{1/2} V_1' N' S_2 = \Sigma_{11} T_1 S_2 = 0$. 
+Due to the block diagonal structure of $TPT'$ and $S'QS$ we also immediately get 
+
+$$
+TPQS = TPT' S'QS =  
+\begin{pmatrix} 
+\Sigma_{11}^2 & 0 \\ 
+0           & T_2 P Q S_2 
+\end{pmatrix}
+$$
+
+and 
+
+$$
+T_2 PQ S_2 = T_2 MM' NN' S_2 = T_2 M U\Sigma V' N'S_2 = 
+ \underbrace{T_2 M U_1}_{=0}\Sigma_{11} \underbrace{V_1' N' S_2}_{=0} + T_2 M U_2\Sigma_{22} V_2' N' S_2 = 
+ T_2 M U_2\Sigma_{22} V_2' N' S_2. 
+$$
+
+The following scenarios are of particular interest: 
+
+* $s_2=0$: The model is *minimal* and the above procedure renders the statespace realization into 
+  balanced form. 
+* $s_2>0$ and $\Sigma_{22} = 0$: The above procedure renders the model in a form where the 
+  controllable and observable states are clearly seperated from the non observable or non controllable states. 
+  In particular the truncated model 
+$$
+\left[\begin{array}{@{}c|c@{}}
+T_1 A S_1 & T_1 B \\ 
+T_2 A S_1 & T_2 B \\ \hline
+C S_1     & D 
+\end{array}\right]
+$$
+  is equivalent to the original model and it is minimal and in balanced form
+* If $s_2>0$ but $\Sigma_{22} \neq 0$ then the truncated model is just an approximation of the original model. 
+  The quality depends on the size of the neglected singular values. Note also that the truncated model 
+  is not balanced. 
+  
+Note that the determination of the number of non zeroe singular values is quite tricky. (difficult due to 
+numerics). 
+Currently the number of non zero singular values is chosen as the number of singular values which satisfy 
+$\sigma_k > \tau \sigma_1$ where $\tau$ is a user defined tolerance parameter. 
+
+
+### Reflect Poles and Zeroes 
+
+#### All-Pass Matrices 
+
+A rational matrix $k(z)$ is all-pass if $k(z) k'\left(\frac{1}{z}\right) = k'\left(\frac{1}{z}\right) k(z) = I_m$. If $(A,B,C,D)$ is a statespace realization 
+of $k(z)$ then the product $k(z) k'\left(\frac{1}{z}\right)$ has a realization given by 
+$$
+\left[\begin{array}{@{}cc|c@{}}
+A   & -BB'A^{-T}   & BD' - BB'A^{-T}C' \\
+0   & A^{-T}       & A^{-T}C' \\ \hline
+C   & -DB'A^{-T}   & DD' - DB' A^{-T} C'
+\end{array}\right]
+$$
+
+A state transformation gives 
+
+$$
+\left[
+\begin{array}{@{}cc|c@{}}
+I & X & 0 \\
+0 & I & 0 \\ \hline
+0 & 0 & I 
+\end{array}
+\right]
+\left[\begin{array}{@{}cc|c@{}}
+A   & -BB'A^{-T}   & BD' - BB'A^{-T}C' \\
+0   & A^{-T}       & A^{-T}C' \\ \hline
+C   & -DB'A^{-T}   & DD' - DB' A^{-T} C'
+\end{array}\right]
+\left[
+\begin{array}{@{}cc|c@{}}
+I & -X & 0 \\
+0 & I & 0 \\ \hline
+0 & 0 & I 
+\end{array}
+\right]
+=
+\left[\begin{array}{@{}cc|c@{}}
+A   & XA^{-T}-AX-BB'A^{-T}   & BD' - BB'A^{-T}C' + X A^{-T}C'\\
+0   & A^{-T}                 & A^{-T}C' \\ \hline
+C   & -DB'A^{-T}-CX   & DD' - DB' A^{-T} C'
+\end{array}\right]
+$$
+
+The (1,1) block is not controllable and the (2,2) block is not observable if 
+
+$$
+\begin{array}{rclcrcl}
+XA^{-T}-AX-BB'A^{-T} &=& 0 & \Longleftrightarrow   & X -AXA' - BB' &=& 0 \\
+-DB'A^{-T}-CX &=& 0        &  \Longleftrightarrow  & [X', A^{-1}B] [C, D]' &=& 0\\
+BD' - BB'A^{-T}C' + X A^{-T}C' &=& 0 
+                           &  \Longleftrightarrow  & [XA^{-T}-BB'A^{-T}, B][C, D]'  &=& 0\\
+ & &                       &  \Longleftrightarrow  & [AX', B][C, D]'  &=& 0\\
+\end{array}
+$$
+Furthermore 
+$$
+DD' - DB' A^{-T} C' = D[B'A^{-T}, -I][C,D]' = I
+$$
+must hold.
+
+It follows that we end up with the system
+$$
+\left[\begin{array}{@{}cc|c@{}}
+A   & 0   & 0\\
+0   & A^{-T}                 & A^{-T}C' \\ \hline
+C   & 0   & I
+\end{array}\right]
+$$
+whose transfer function is equal to
+$$
+\begin{pmatrix} C & 0 \end{pmatrix} \left( I z^{-1} - \begin{pmatrix} A & 0 \\ 0 & A^{-T} \end{pmatrix} \right)^{-1} \begin{pmatrix} 0 \\ A^{-T}C' \end{pmatrix} + I_m,
+$$
+i.e. the identity matrix as required.
+
+In the following we need to construct an allpass matrix with given $(A,B)$ (or given $(A,C)$). 
+
+1) From the above Lyapunov equation $X = AXA' + BB'$ determine $X$. 
+2) Determine the row space of $[C,D]$ from the left kernel of $[AX',B]'$. 
+3) Determine the scaling matrix from the requirement $DD' - DB' A^{-T} C' = I$.
+
+*Note:* Wann gibt es Probleme? ....
+
+
+#### zero cancellations
+
+Let $k(z)$ be given. We want to find an allpass transfer function $\hat{k}(z)$ such 
+some of the poles of $k(z)$ are cancelled in $k(z)\hat{k}(z)$.
+
+Consider the state transformation of the realization of $k\hat{k}$: 
+
+$$
+\left[
+\begin{array}{@{}ccc|c@{}}
+I & 0 & 0 & 0 \\
+0 & I & 0  & 0 \\
+I & 0 & I  & 0 \\ \hline
+0 & 0 & 0  & I 
+\end{array}
+\right]
+\left[
+\begin{array}{@{}ccc|c@{}}
+A_{11} & A_{12} & B_{1}\hat{C} & B_{1}\hat{D} \\
+A_{21} & A_{22} & B_{2}\hat{C} & B_{2}\hat{D} \\ 
+     0 & 0      & \hat{A}      & \hat{B} \\ \hline 
+C_{1}  & C_{2}  & D\hat{C}     & D\hat{D}
+\end{array}
+\right]
+\left[
+\begin{array}{@{}ccc|c@{}}
+I & 0 & 0 & 0 \\
+0 & I & 0 & 0 \\
+-I & 0 & I & 0 \\ \hline
+0 & 0 & 0 & I 
+\end{array}
+\right] = 
+\left[
+\begin{array}{@{}ccc|c@{}}
+A_{11}-B_{1}\hat{C}    & A_{12} & B_{1}\hat{C} & B_{1}\hat{D}\\
+A_{21}-B_{2}\hat{C}    & A_{22} & B_{2}\hat{C}           & B_2 \hat{D} \\ 
+A_{11}-B_{1}\hat{C} -\hat{A}         & A_{12}      & \hat{A} + B_{1}\hat{C}  & B_{1}\hat{D} + \hat{B} \\ \hline 
+C_{1}-D\hat{C}  & C_{2}  & D\hat{C}                  & D\hat{D} 
+\end{array}
+\right]
+$$
+The $(1,1)$ block is not observable if 
+$$
+\begin{array}{rclcrcl}
+A_{21} - B_2 \hat{C} &=& 0 &\Longleftrightarrow& A_{21} - B_2 D^{-1} C_1 &=& 0\\
+A_{11}-B_{1}\hat{C} -\hat{A} &=& 0 &\Longleftrightarrow& \hat{A} &=& A_{11} - B_1 D^{-1} C_1 \\
+C_{1}-D\hat{C} &=& 0 &\Longleftrightarrow& \hat{C} &=& D^{-1} C_1 \\
+\end{array}
+$$
+
+
+#### pole cancellations
+
+Let $k(z)$ be given. We want to find an allpass transfer function $\hat{k}(z)$ such 
+some of the poles of $k(z)$ are cancelled in $k(z)\hat{k}(z)$.
+
+Consider the state transformation of the realization of $k\hat{k}$: 
+
+$$
+\left[
+\begin{array}{@{}ccc|c@{}}
+I & 0 & -I & 0 \\
+0 & I & 0  & 0 \\
+0 & 0 & I  & 0 \\ \hline
+0 & 0 & 0  & I 
+\end{array}
+\right]
+\left[
+\begin{array}{@{}ccc|c@{}}
+A_{11} & A_{12} & B_{1}\hat{C} & B_{1}\hat{D} \\
+A_{21} & A_{22} & B_{2}\hat{C} & B_{2}\hat{D} \\ 
+     0 & 0      & \hat{A}      & \hat{B} \\ \hline 
+C_{1}  & C_{2}  & D\hat{C}     & D\hat{D}
+\end{array}
+\right]
+\left[
+\begin{array}{@{}ccc|c@{}}
+I & 0 & I & 0 \\
+0 & I & 0 & 0 \\
+0 & 0 & I & 0 \\ \hline
+0 & 0 & 0 & I 
+\end{array}
+\right] = 
+\left[
+\begin{array}{@{}ccc|c@{}}
+A_{11}    & A_{12} & A_{11} + B_{1}\hat{C} - \hat{A} & B_{1}\hat{D} - \hat{B} \\
+A_{21}    & A_{22} & A_{21} + B_{2}\hat{C}           & B_2 \hat{D} \\ 
+0         & 0      & \hat{A}                         & \hat{B} \\ \hline 
+C_{1}     & C_{2}  & C_1 + D\hat{C}                  & D\hat{D} 
+\end{array}
+\right]
+$$
+
+The (1,1) block is not controllable if 
+
+$$
+\begin{array}{rclcrcl}
+A_{12} &=& 0                       & \Longleftrightarrow & A_{12} &=& 0\\
+\hat{A} &=& A_{11} + B_1 \hat{C}   & \Longleftrightarrow & (\hat{A} - \hat{B} \hat{D}^{-1} \hat{C}) &=& A_{11}\\
+\hat{B} &=& B_1 \hat{D}            & \Longleftrightarrow & (\hat{B}\hat{D}^{-1}) &=& B_{1}
+\end{array}
+$$
+
+Hence the "$A,B$" matrices of the inverse of $\hat{k}^{-1}$ are determined.
+
+
+
+## QR decomposition, Rank and Null Space 
+
+Consider the following example 
+
+```{r}
+tol = 1e-7
+tol2 = tol/10
+
+x = diag(c(1,tol2, tol2^2, tol2^3))
+qr_x = qr(x, tol = tol)
+
+x
+qr_x$rank
+qr_x$pivot
+qr.R(qr_x)
+```
+
+Is this the desired result for the rank (and the null space)? The main reason for this somewhat 
+strange results is that `qr()` considers a column as zero, if and only if the projection 
+onto the space spanned by the previous columns reduces the norm by a factor which is larger than `tol`. 
+
+
+The following example works as desired 
+
+```{r}
+x[1,] = 1
+x[nrow(x), ncol(x)] = 1
+qr_x = qr(x, tol = tol)
+
+x
+qr_x$rank
+qr_x$pivot
+qr.R(qr_x)
+```
+
+
+## References {-}

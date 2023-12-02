@@ -1,0 +1,38 @@
+Package: rationalmatrices
+Title: Classes and Methods for Rational Matrices
+Version: 0.3.3
+Authors@R: 
+    c(person(given = "Wolfgang", family = "Scherrer",
+             role = c("aut"), email = "wolfgang.scherrer@tuwien.ac.at"),
+      person(given = "Bernd", family = "Funovits",
+             role = c("aut", "cre"), email = "bernd.funovits@gmail.com"))
+Description: This package implements classes and methods for rational matrices, 
+   such that rational matrices may be handled and manipulated similar to 
+   numeric or complex matrices.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    graphics,
+    grDevices,
+    magrittr,
+    purrr,
+    Rcpp,
+    Rdpack,
+    scales,
+    stats,
+    shiny,
+    QZ
+Suggests: 
+    DiagrammeR,
+    kableExtra,
+    knitr,
+    rmarkdown,
+    testthat (>= 2.1.0),
+    tibble
+RoxygenNote: 7.2.3
+LinkingTo: 
+    Rcpp,
+    RcppArmadillo
+RdMacros: Rdpack
+VignetteBuilder: knitr

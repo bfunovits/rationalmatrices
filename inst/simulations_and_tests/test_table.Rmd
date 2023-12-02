@@ -1,0 +1,98 @@
+---
+title: "test"
+author: "WS"
+date: "2/15/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r include=FALSE}
+html_table = function(x, table_style, td_default_style, td_styles) {
+  m = nrow(x)
+  n = ncol(x)
+  cat('\n<table style="', table_style, '">\n', sep = '')
+  for (i in (1:m)) {
+    cat('<tr>\n', sep = '')
+    for (j in (1:n)) {
+      cat('<td style = "', paste(td_default_style, td_styles[i,j]), '">', 
+      x[i,j], '</td>\n', sep = '')
+    }
+    cat('</tr>\n')
+  }
+  cat('</table>\n\n')
+}
+```
+
+```{r results='asis', echo=FALSE}
+x = matrix(c(
+'',       'polm',   'lpolm',       'lmfd',          'rmfd',          'stsp',          'pseries',       'zvalues',
+'matrix', 'polm(x)','lpolm(x,...)','lmfd(b=x)',     'rmfd(d=x)',     'stsp(D=x)',     'pseries(x,...)','zvalues(x,...)',
+'polm',   '',       '???',         'lmfd(b=x)',     'rmfd(d=x)',     'as.stsp(x)',    'pseries(x,...)','zvalues(x,...)',
+'lpolm',  '',       '',            '',              '',              '',              '',              'zvalues(x,...)',
+'lmfd',   '',       '',            '',              '???',           'as.stsp(x)',    'pseries(x,...)','zvalues(x,...)',
+'rmfd',   '',       '',            '???',           '',              'as.stsp(x)',    'pseries(x,...)','zvalues(x,...)',
+'stsp',   '',       '',            '',              '',              '',              'pseries(x,...)','zvalues(x,...)',
+'pseries','',       '',            'as.lmfd(x,...)','as.rmfd(x,...)','as.stsp(x,...)','',              '',
+'zvalues','',       '',            '',              '',              '',              '',              ''),
+  nrow = 9, ncol = 8, byrow = TRUE)
+x[1,1] = '$x \\Rightarrow y$'
+
+td_styles = matrix('background-color: LightGray;', nrow = 9, ncol = 8)
+td_styles[1, 1] = 'background-color: LightGray; font-size: 1em;'
+td_styles[1, 2:8] = 'background-color: Gray; font-weight: bold;'
+td_styles[2:9, 1] = 'background-color: Gray; font-weight: bold;'
+for (i in (2:8)) td_styles[i+1,i] = 'background-color: white;'
+td_styles[3, 3] = 'background-color: Orange;'
+td_styles[4, c(2, 6:7)] = 'background-color: Tomato;'
+td_styles[4, 4:5] = 'background-color: Orange;'
+td_styles[5, c(2:3)] = 'background-color: Tomato;'
+td_styles[5, 5] = 'background-color: Orange;'
+td_styles[6, c(2:3)] = 'background-color: Tomato;'
+td_styles[6, 4] = 'background-color: Orange;'
+td_styles[7, c(2:3)] = 'background-color: Tomato;'
+td_styles[7, c(4:5)] = 'background-color: MediumSeaGreen;'
+td_styles[8, c(2:3)] = 'background-color: Tomato;'
+td_styles[8, 8] = 'background-color: MediumSeaGreen;'
+td_styles[9, c(2:3,6:7)] = 'background-color: Tomato;'
+td_styles[9, 4:5] = 'background-color: Orange;'
+
+html_table(x, 
+        paste('border-collapse: collapse;',
+              'font-family: monospace;',
+              'font-size: 0.8em;'),
+        'border: 4px solid white; padding: 2px;',
+        td_styles)
+```
+
+
+
+```{r results='asis', echo=FALSE}
+x = matrix('zvalues', nrow = 8, ncol = 8)
+x[1:7, 1:7] = 'pseries'
+x[1:6, 1:6] = 'stsp'
+x[1:3, 1:3] = 'lpolm'
+x[1:2, 1:2] = 'polm'
+x[1,1:8] = c('a o b', 'polm','lpolm','lmfd','rmfd','stsp','pseries','zvalues')
+x[1:8,1] = c('a o b', 'polm','lpolm','lmfd','rmfd','stsp','pseries','zvalues')
+x[3, 4:7] = ''
+x[4:7, 3] = ''
+
+
+td_styles = matrix('background-color: LightGray;', nrow = 8, ncol = 8)
+td_styles[1, 2:8] = 'background-color: Gray; font-weight: bold;'
+td_styles[2:8, 1] = 'background-color: Gray; font-weight: bold;'
+td_styles[3, 4:7] = 'background-color: Tomato;'
+td_styles[4:7, 3] = 'background-color: Tomato;'
+
+html_table(x, 
+        paste('border-collapse: collapse;',
+              'font-family: monospace;'),
+        'border: 4px solid white; padding: 4px;',
+        td_styles)
+```
+

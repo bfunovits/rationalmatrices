@@ -1,0 +1,8 @@
+^history_and_notes.md$
+^.*\.Rproj$
+^\.Rproj\.user$
+^simulations_and_tests$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$

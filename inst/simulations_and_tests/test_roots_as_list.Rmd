@@ -1,0 +1,83 @@
+---
+title: "test roots_as_list"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{test}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(rationalmatrices)
+```
+
+
+```{r}
+tol = .Machine$double.eps
+p = 3
+z = polyroot(rnorm(p+1))
+# z = eigen(matrix(rnorm(p*p), nrow = p, ncol = p))$values
+
+print(z)
+
+j = match_vectors(z)
+print(cbind(z, j, Conj(z[j])))
+
+out = roots_as_list(z)
+print(out)
+```
+
+```{r}
+set.seed(12345)
+
+p = 5
+a = rnorm(p+1)   # coefficients of a random polynomial a(z) of degree p = 5
+z = polyroot(a)  # compute the roots of a(z)
+z
+
+# z[1] and z[5] are complex conjugate (up to numerical errors)
+# z[1] and z[5] are complex conjugate (up to numerical errors)
+# z[4] is a real (up to numerical errors)
+print( c(z[1], z[2], z[4]) - Conj(c(z[5], z[3], z[4])) )
+
+# coerce the vector "z" to a list
+z_list = roots_as_list(z)
+# the first two slots contain the complex roots and thus are of class "complex"
+# z_list[[1]] = (z[1] + Conj(z[5])/2
+# z_list[[2]] = (z[2] + Conj(z[3])/2
+# the third entry contains the real root (and thus is of class "numeric")
+# z_list[[3]] = Re(z[4])
+z_list
+
+# Note that the function 'zeroes' uses the function 'eigen' (to compute 
+# the eigenvalues of the companion matrix) and thus returns exact conjugate pairs:
+z = zeroes(polm(a))
+z
+
+all.equal(c(z[1], z[3], z[5]), Conj(c(z[2], z[3], z[4])))
+
+# coerce the vector "z" to a list
+z_list = roots_as_list(z)
+z_list
+
+set.seed(NULL)
+
+```
+```{r}
+for (isim in (1:10000)) {
+  p = sample(1:10, 1)
+  # x = complex(real = rnorm(p), imaginary = rnorm(p))
+  x = polyroot(rnorm(p+1))
+  j = match_vectors(x)
+  jj = j[j]
+  if ( any(jj != (1:p)) ) stop('pair')
+}
+data.frame(x = x, j = j, y = Conj(x)[j], d = x - Conj(x)[j], jj = jj)
+#sum(i == (1:p))
+```
+
