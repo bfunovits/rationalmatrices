@@ -5,7 +5,8 @@ Authors@R:
     c(person(given = "Wolfgang", family = "Scherrer",
              role = c("aut"), email = "wolfgang.scherrer@tuwien.ac.at"),
       person(given = "Bernd", family = "Funovits",
-             role = c("aut", "cre"), email = "bernd.funovits@gmail.com"))
+             role = c("aut", "cre"), email = "bernd.funovits@gmail.com",
+             comment = c(ORCID = "0000-0002-8247-6840")))
 Description: This package implements classes and methods for rational matrices, 
    such that rational matrices may be handled and manipulated similar to 
    numeric or complex matrices.

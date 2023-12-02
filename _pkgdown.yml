@@ -1,6 +1,18 @@
 url: https://bfunovits.github.io/rationalmatrices/
 template:
   bootstrap: 5
+navbar:
+  structure:
+    left:  [intro, reference, articles]
+    right: [search, github]
+repo:
+  url:
+    home: https://github.com/bfunovits/rationalmatrices/
+authors:
+  Wolfgang Scherrer:
+    href: https://scholar.google.com/citations?user=-Ytb9BYAAAAJ
+  Bernd Funovits:
+    href: https://ch.linkedin.com/in/bernd-funovits-phd-cfa-a8215016
 reference:
 - title: Basic Classes
   desc: |

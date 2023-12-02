@@ -1,6 +1,7 @@
 # A Package for Rational Matrices
 
-`rationalmatrices` collects classes, methods and tools for creating and manipulating rational matrices, i.e. matrices whose entries are rational functions. 
+`rationalmatrices` collects classes, methods and tools for creating and manipulating rational matrices, i.e. matrices whose entries are rational functions.
+It provides the fundamentals for the R package `RLDM` (Rational Linear Dynamic Models).
    
 ## Installation
 
