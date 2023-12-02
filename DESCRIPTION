@@ -36,3 +36,4 @@ LinkingTo:
     RcppArmadillo
 RdMacros: Rdpack
 VignetteBuilder: knitr
+URL: https://bfunovits.github.io/rationalmatrices/

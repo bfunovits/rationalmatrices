@@ -1,44 +1,38 @@
-url: https://bfunovits.github.io/rationalmatrices 
+url: https://bfunovits.github.io/rationalmatrices/
 template:
   bootstrap: 5
 reference:
-- title: "Basic Classes"
-  desc: >
+- title: Basic Classes
+  desc: |
     Different representations of rational matrix functions and special cases.
   contents:
-  - lmfd 
+  - lmfd
   - rmfd
   - stsp
   - polm
-  - lpolm 
+  - lpolm
   - pseries
-
-- title: "Transformation between Different Representations"
-  desc: >
+- title: Transformation between Different Representations
+  desc: |
     as.* methods
   contents:
-  - starts_with("as\\.") 
+  - starts_with("as\\.")
   - pseries2lmfd
   - pseries2rmfd
   - pseries2stsp
   - Kronecker-Indices
-
-- title: "Poles and Zeros"
+- title: Poles and Zeros
   contents:
   - poles and zeroes
   - zvalue
-  - zvalues 
-
-- title: "is.* Methods"
-  contents: 
+  - zvalues
+- title: is.* Methods
+  contents:
   - check objects
   - starts_with("is\\.")
-
-- title: "Helpers for creating objects for testing"
-  contents:
-  - starts_with("test_")
-
-- title: "Arithmetic (incl derivative and transpose)"
+- title: Helpers for creating objects for testing
+  contents: starts_with("test_")
+- title: Arithmetic (incl derivative and transpose)
   contents:
   - '%r%'
   - Ops.ratm
@@ -47,9 +41,8 @@ reference:
   - derivative
   - Ht
   - transpose
-
-- title: "Generic Functions"
-  desc: >
+- title: Generic Functions
+  desc: |
     Standard methods for basic S3 classes and their helpers.
   contents:
   - extract
@@ -62,17 +55,15 @@ reference:
   - plot_3D
   - zoom_plot
   - starts_with("as_")
-
-- title: "Factorisations, including Wiener-Hopf-Factorisation (WHF) specific functions"
-  contents: 
+- title: Factorisations, including Wiener-Hopf-Factorisation (WHF) specific functions
+  contents:
   - whf
   - polm2fwd
   - get_fwd
   - snf
   - hnf
-
-- title: "Numeric Reduction and Factorisation (including Degree)"
-  contents: 
+- title: Numeric Reduction and Factorisation (including Degree)
+  contents:
   - col_end_matrix
   - col_reduce
   - degree
@@ -80,24 +71,21 @@ reference:
   - prune
   - schur
   - QL and LQ decomposition
-
-- title: "Blaschke et al."
+- title: Blaschke et al.
   contents:
   - blaschke
   - roots_as_list
   - reflect_poles
   - reflect_zeroes
-
-- title: "State Space specific Functions"
+- title: State Space specific Functions
   contents:
-  - balance 
+  - balance
   - companion_matrix
   - ctr_matrix
   - grammians
   - state_trafo
   - lyapunov
-
-- title: "Block Matrices"
+- title: Block Matrices
   contents:
   - bdiag
   - bmatrix
@@ -105,10 +93,10 @@ reference:
   - bhankel
   - dbind
   - array2data.frame
-
-- title: "Other Stuff"
+- title: Other Stuff
   contents:
   - idx_trafo
   - iseq
   - rationalmatrices
-  - '%>%' 
+  - '%>%'
+
