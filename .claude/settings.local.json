@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc:*)",
+      "Bash(grep:*)",
+      "Bash(git -C /media/bernd/nvme/r_projects/acad_rationalmatrices log --oneline)",
+      "Bash(git -C /media/bernd/nvme/r_projects/acad_rationalmatrices branch -a)"
+    ]
+  }
+}

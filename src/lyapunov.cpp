@@ -26,6 +26,32 @@ using namespace Rcpp;
 // RcppArmadillo does not fully implement "pass by reference for complex vectors"
 // therefore I simply split the eigenvalues (lambda) into the real and imaginary part
 
+// Core loop for solving Lyapunov equation via Schur method
+// This helper function performs one iteration of the recursive solution algorithm
+static inline void solve_lyapunov_core_loop(int i, arma::cx_mat& cQ, const arma::cx_mat& cS, arma::cx_mat& cA) {
+  // P22 = S22 * P22 * conj(S22) + Q22
+  // Q22 <- P22 = Q22 / ( 1- S22*conj(S22)) )
+  cQ(i,i) = cQ(i,i) / (1.0 - cS(i,i) * conj(cS(i,i)));
+
+  // [Q11, Q12] <- [Q11, Q12] + S12 * P22 * [conj(S21), conj(S22)]
+  cQ.submat(0,0,i-1,i) = cQ.submat(0,0,i-1,i) + ( cS.submat(0,i,i-1,i) * cQ(i,i) ) * cS.submat(0,i,i,i).t();
+
+  // (I - S11 *conj(S22))
+  cA.submat(0,0,i-1,i-1) = (-conj(cS(i,i))) * cS.submat(0,0,i-1,i-1);
+  cA.submat(0,0,i-1,i-1).diag() += 1;
+
+  // Q12 <- P12 = (I - S11 B22)^-1 * Q12
+  cQ.submat(0,i,i-1,i) = solve(trimatu(cA.submat(0,0,i-1,i-1)), cQ.submat(0,i,i-1,i));
+  // Q21 <- P21 = conj(P12)
+  cQ.submat(i,0,i,i-1) = cQ.submat(0,i,i-1,i).t();
+
+  // S11 * P12 * conj(S12)
+  cA.submat(0,0,i-1,i-1) = ( cS.submat(0,0,i-1,i-1) * cQ.submat(0,i,i-1,i) ) * ( cS.submat(0,i,i-1,i).t() );
+
+  // Q11 <- Q11 + S11 * P12 * conj(S12) + conj(S11 * P12 * conj(S12))
+  cQ.submat(0,0,i-1,i-1) = cQ.submat(0,0,i-1,i-1) + cA.submat(0,0,i-1,i-1) + cA.submat(0,0,i-1,i-1).t();
+}
+
 // [[Rcpp::export]]
 bool lyapunov_cpp(const arma::mat& A, const arma::mat& Q, arma::mat& P,
               arma::vec& lambda_r, arma::vec& lambda_i, bool stop_if_non_stable) {
@@ -66,31 +92,10 @@ bool lyapunov_cpp(const arma::mat& A, const arma::mat& Q, arma::mat& P,
   // cQ is recursively overwritten with the desired solution P
   int i;
   for (i = (m-1); i>0; i--) {
-    // P22 = S22 * P22 * conj(S22) + Q22 
-    // Q22 <- P22 = Q22 / ( 1- S22*conj(S22)) )
-    cQ(i,i) = cQ(i,i) / (1.0 - cS(i,i) * conj(cS(i,i)));
-
-    // [Q11, Q12] <- [Q11, Q12] + S12 * P22 * [conj(S21), conj(S22)]  
-    cQ.submat(0,0,i-1,i) = cQ.submat(0,0,i-1,i) + ( cS.submat(0,i,i-1,i) * cQ(i,i) ) * cS.submat(0,i,i,i).t();
-
-    // (I - S11 *conj(S22))
-    cA.submat(0,0,i-1,i-1) = (-conj(cS(i,i))) * cS.submat(0,0,i-1,i-1);
-    cA.submat(0,0,i-1,i-1).diag() += 1;
-    //    cA.print();
-
-    // Q12 <- P12 = (I - S11 B22)^-1 * Q12
-    cQ.submat(0,i,i-1,i) = solve(trimatu(cA.submat(0,0,i-1,i-1)), cQ.submat(0,i,i-1,i));
-    // Q21 <- P21 = conj(P12)
-    cQ.submat(i,0,i,i-1) = cQ.submat(0,i,i-1,i).t();
-
-    // S11 * P12 * conj(S12)
-    cA.submat(0,0,i-1,i-1) = ( cS.submat(0,0,i-1,i-1) * cQ.submat(0,i,i-1,i) ) * ( cS.submat(0,i,i-1,i).t() );
-
-    // Q11 <- Q11 + S11 * P12 * conj(S12) + conj(S11 * P12 * conj(S12))
-    cQ.submat(0,0,i-1,i-1) = cQ.submat(0,0,i-1,i-1) + cA.submat(0,0,i-1,i-1) + cA.submat(0,0,i-1,i-1).t();
+    solve_lyapunov_core_loop(i, cQ, cS, cA);
   }
   i = 0;
-  cQ(i,i) = cQ(i,i) / (1.0 - cS(i,i) * conj(cS(i,i)));
+  solve_lyapunov_core_loop(i, cQ, cS, cA);
 
   // Rcout << std::endl << "Q" << std::endl << cQ << std::endl;
   
@@ -152,34 +157,13 @@ bool lyapunov_Jacobian_cpp(const arma::mat& A, const arma::mat& Q, arma::mat& P,
   // cQ is recursively overwritten with the desired solution P
   int i;
   for (i = (m-1); i>0; i--) {
-    // P22 = S22 * P22 * conj(S22) + Q22 
-    // Q22 <- P22 = Q22 / ( 1- S22*conj(S22)) )
-    cQ(i,i) = cQ(i,i) / (1.0 - cS(i,i) * conj(cS(i,i)));
-    
-    // [Q11, Q12] <- [Q11, Q12] + S12 * P22 * [conj(S21), conj(S22)]  
-    cQ.submat(0,0,i-1,i) = cQ.submat(0,0,i-1,i) + ( cS.submat(0,i,i-1,i) * cQ(i,i) ) * cS.submat(0,i,i,i).t();
-    
-    // (I - S11 *conj(S22))
-    cA.submat(0,0,i-1,i-1) = (-conj(cS(i,i))) * cS.submat(0,0,i-1,i-1);
-    cA.submat(0,0,i-1,i-1).diag() += 1;
-    //    cA.print();
-    
-    // Q12 <- P12 = (I - S11 B22)^-1 * Q12
-    cQ.submat(0,i,i-1,i) = solve(trimatu(cA.submat(0,0,i-1,i-1)), cQ.submat(0,i,i-1,i));
-    // Q21 <- P21 = conj(P12)
-    cQ.submat(i,0,i,i-1) = cQ.submat(0,i,i-1,i).t();
-    
-    // S11 * P12 * conj(S12)
-    cA.submat(0,0,i-1,i-1) = ( cS.submat(0,0,i-1,i-1) * cQ.submat(0,i,i-1,i) ) * ( cS.submat(0,i,i-1,i).t() );
-    
-    // Q11 <- Q11 + S11 * P12 * conj(S12) + conj(S11 * P12 * conj(S12))
-    cQ.submat(0,0,i-1,i-1) = cQ.submat(0,0,i-1,i-1) + cA.submat(0,0,i-1,i-1) + cA.submat(0,0,i-1,i-1).t();
+    solve_lyapunov_core_loop(i, cQ, cS, cA);
   }
   i = 0;
-  cQ(i,i) = cQ(i,i) / (1.0 - cS(i,i) * conj(cS(i,i)));
-  
+  solve_lyapunov_core_loop(i, cQ, cS, cA);
+
   // Rcout << std::endl << "Q" << std::endl << cQ << std::endl;
-  
+
   // retransform Q
   cQ = cU * cQ * cU.t();
   // make sure that Q is Hermitean
@@ -209,31 +193,10 @@ bool lyapunov_Jacobian_cpp(const arma::mat& A, const arma::mat& Q, arma::mat& P,
 
     // cQ is recursively overwritten with the desired solution P
     for (i = (m-1); i>0; i--) {
-      // P22 = S22 * P22 * conj(S22) + Q22 
-      // Q22 <- P22 = Q22 / ( 1- S22*conj(S22)) )
-      cQ(i,i) = cQ(i,i) / (1.0 - cS(i,i) * conj(cS(i,i)));
-      
-      // [Q11, Q12] <- [Q11, Q12] + S12 * P22 * [conj(S21), conj(S22)]  
-      cQ.submat(0,0,i-1,i) = cQ.submat(0,0,i-1,i) + ( cS.submat(0,i,i-1,i) * cQ(i,i) ) * cS.submat(0,i,i,i).t();
-      
-      // (I - S11 *conj(S22))
-      cA.submat(0,0,i-1,i-1) = (-conj(cS(i,i))) * cS.submat(0,0,i-1,i-1);
-      cA.submat(0,0,i-1,i-1).diag() += 1;
-      //    cA.print();
-      
-      // Q12 <- P12 = (I - S11 B22)^-1 * Q12
-      cQ.submat(0,i,i-1,i) = solve(trimatu(cA.submat(0,0,i-1,i-1)), cQ.submat(0,i,i-1,i));
-      // Q21 <- P21 = conj(P12)
-      cQ.submat(i,0,i,i-1) = cQ.submat(0,i,i-1,i).t();
-      
-      // S11 * P12 * conj(S12)
-      cA.submat(0,0,i-1,i-1) = ( cS.submat(0,0,i-1,i-1) * cQ.submat(0,i,i-1,i) ) * ( cS.submat(0,i,i-1,i).t() );
-      
-      // Q11 <- Q11 + S11 * P12 * conj(S12) + conj(S11 * P12 * conj(S12))
-      cQ.submat(0,0,i-1,i-1) = cQ.submat(0,0,i-1,i-1) + cA.submat(0,0,i-1,i-1) + cA.submat(0,0,i-1,i-1).t();
+      solve_lyapunov_core_loop(i, cQ, cS, cA);
     }
     i = 0;
-    cQ(i,i) = cQ(i,i) / (1.0 - cS(i,i) * conj(cS(i,i)));
+    solve_lyapunov_core_loop(i, cQ, cS, cA);
     
     // Rcout << std::endl << "Q" << std::endl << cQ << std::endl;
     

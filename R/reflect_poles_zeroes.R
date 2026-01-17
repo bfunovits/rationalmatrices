@@ -1,32 +1,30 @@
-# reflect_poles_zeroes.R 
-
-## //' \ifelse{html}{\figure{internal_Rcpp.svg}
-## {options: alt='Internal (Rcpp) function'}}{\strong{Internal (Rcpp)} function}
-
 #' Division Algorithm for Polynomial Matrices
 #'
-#' For given polynomial matrices \eqn{a(z), b(z)} compute two matrices 
-#' \eqn{c(z), d(z)} such that 
+#' For given polynomial matrices \eqn{a(z), b(z)} compute two matrices \eqn{c(z), d(z)} such that 
 #' \deqn{a(z) = c(z) b(z) + d(z)}
 #' where the degree of \eqn{d(z)} is smaller than the degree of \eqn{b(z)}. 
-#' The matrix \eqn{b(z)} must be square with a non singular leading coefficient 
-#' matrix! The matrices must be compatible, i.e. the number of columns of \eqn{a(z)} 
-#' must equal the number of rows (and columns) of \eqn{b(z)}.  
+#' The matrix \eqn{b(z)} must be square with a non singular leading coefficient matrix! 
+#' The matrices must be compatible, i.e. the number of columns of \eqn{a(z)} must equal the number of rows (and columns) of \eqn{b(z)}.  
 #'
 #' @param a,b Two compatible polynomial matrices.  
 #'
 #' @return List with two slots 
-#' \item{qu}{contains the polynomial \eqn{c(z)}}
-#' \item{rem}{contains the polynomial \eqn{d(z)}.}
+#' \itemize{
+#'   \item{qu}{contains the polynomial \eqn{c(z)}}
+#'   \item{rem}{contains the polynomial \eqn{d(z)}.}
+#' }
 #' 
 #' @export
 #'
 #' @examples
 #' a = test_polm(dim = c(3,2), degree = 4, random = TRUE)
 #' b = test_polm(dim = c(2,2), degree = 2, random = TRUE)
+#' 
 #' (out = polm_div(a, b))
+#' 
 #' all.equal(a, out$qu %r% b + out$rem)
 polm_div = function(a, b) {
+  
   # a,b must be 'polm'-objects
   if ((!inherits(a, 'polm')) || (!inherits(b, 'polm'))) {
     stop('The input parameter "a", "b" must be "polm" objects!')
@@ -93,47 +91,31 @@ polm_div = function(a, b) {
 #' The Blaschke factor at \eqn{\alpha}{\alpha} is the rational function
 #' \deqn{B(z) := \frac{1-\bar{\alpha}z}{-\alpha + z}}{
 #'       B(z) := (1-Conj(\alpha)z) / (-\alpha+z)}
-#' This is an all-pass function with a pole at \eqn{z=\alpha} and a zero at
-#' \eqn{z=1/\bar{\alpha}}{z=1/Conj(\alpha)}. The function \code{blaschke(alpha)}
-#' returns this rational \eqn{(1 \times 1)}{(1 x 1)} matrix in
-#' \code{\link{lmfd}} form. Clearly \eqn{B(z)} has complex coefficients, if
-#' \eqn{\alpha} is complex.
+#' This is an all-pass function with a pole at \eqn{z=\alpha} and a zero at \eqn{z=1/\bar{\alpha}}{z=1/Conj(\alpha)}. 
+#' The function \code{blaschke(alpha)} returns this rational \eqn{(1 \times 1)}{(1 x 1)} matrix in \code{\link{lmfd}} form. 
+#' Clearly \eqn{B(z)} has complex coefficients, if \eqn{\alpha} is complex.
 #' \cr
-#' The call \code{blaschke2(alpha, row=NULL)} computes the product of the
-#' Blaschke factors at \eqn{\alpha} and at \eqn{\bar{\alpha}}{Conj(\alpha)},
-#' i.e. the rational function
+#' The call \code{blaschke2(alpha, row=NULL)} computes the product of the Blaschke factors at \eqn{\alpha} and at \eqn{\bar{\alpha}}{Conj(\alpha)}, i.e. the rational function
 #' \deqn{B_{s}(z) := 
 #' \frac{1-2\Re(\alpha)z + |\alpha|^2 z^2}{|\alpha|^2 -2\Re(\alpha) z + z^2}}{
 #'       Bs(z) := 
 #' (1-2Re(\alpha)z + Mod(\alpha)^2 z^2) / (Mod(\alpha)^2 -2Re(\alpha) z + z^2)}
 #' \cr
-#' If \code{blaschke2} is called with an optional argument \code{w} 
-#' (a non zero complex vector of length 2) then 
-#' \code{blaschke2} constructs a \eqn{(2 \times 2)}{(2 x 2)} rational, 
-#' all-pass matrix of the form 
-#' \deqn{B_{2}(z) := a^{-1}(z) b(z)}{B2(z) := a^{-1}(z) b(z)} where 
-#' \eqn{a(z), b(z)} are  two \eqn{(2 \times 2)}{(2 x 2)} polynomial 
-#' matrices (with real coefficients) of degree one. 
-#' This matrix is constructed such that the column space of 
-#' \eqn{a(\alpha)} is spanned by  \eqn{\bar{w}}{Conj(w)} and 
-#' the column space of 
-#' \eqn{a(\bar{\alpha})}{a(Conj(\alpha))} is spanned by the vector \eqn{w}. 
+#' If \code{blaschke2} is called with an optional argument \code{w} (a non zero complex vector of length 2) then  \code{blaschke2} constructs a \eqn{(2 \times 2)}{(2 x 2)} rational, all-pass matrix of the form 
+#' \deqn{B_{2}(z) := a^{-1}(z) b(z)}{B2(z) := a^{-1}(z) b(z)} 
+#' where \eqn{a(z), b(z)} are  two \eqn{(2 \times 2)}{(2 x 2)} polynomial matrices (with real coefficients) of degree one. 
+#' This matrix is constructed such that the column space of \eqn{a(\alpha)} is spanned by  \eqn{\bar{w}}{Conj(w)} and the column space of \eqn{a(\bar{\alpha})}{a(Conj(\alpha))} is spanned by the vector \eqn{w}. 
 #'  
-#' @note The routine \code{blaschke2} throws an error if \eqn{\alpha} is not
-#'   complex (i.e. the imaginary part is zero). If \eqn{\alpha} is close to the
-#'   unit circle then \code{blaschke2(alpha, w)} simply returns an
-#'   \code{\link{lmfd}} representation of the bivariate identity matrix. If
-#'   \eqn{w} and \eqn{\bar{w}}{Conj(w)} are almost linearly dependent, then an
-#'   error is thrown.
+#' @note The routine \code{blaschke2} throws an error if \eqn{\alpha} is not complex (i.e. the imaginary part is zero). 
+#'   If \eqn{\alpha} is close to the unit circle then \code{blaschke2(alpha, w)} simply returns an \code{\link{lmfd}} representation of the bivariate identity matrix. 
+#'   If \eqn{w} and \eqn{\bar{w}}{Conj(w)} are almost linearly dependent, then an error is thrown.
 #' 
 #' @param alpha complex or real scalar, represents \eqn{\alpha}.
 #' @param w \code{NULL} or a (complex) vector of length 2. 
 #' @param tol Tolerance (used to decide whether \code{alpha} 
 #'        has modulus equal to one).
 #'
-#' @return \code{\link{lmfd}} object, which represents the constructed 
-#'         "Blaschke factors" 
-#'         \eqn{B(z)}, \eqn{B_s(z)}{Bs(z)} or \eqn{B_2(z)}{B2(z)}.
+#' @return \code{\link{lmfd}} object, which represents the constructed "Blaschke factors" \eqn{B(z)}, \eqn{B_s(z)}{Bs(z)} or \eqn{B_2(z)}{B2(z)}.
 #' @name blaschke
 #' @export
 #'
@@ -258,8 +240,7 @@ blaschke2 = function(alpha, w = NULL, tol = 100*.Machine$double.eps) {
 
 #' Create an All-Pass Rational Matrix
 #' 
-#' Create a square, all-pass rational matrix in statespace 
-#' form with given \eqn{A,B}. 
+#' Create a square, all-pass rational matrix in statespace form with given \eqn{A,B}. 
 #'
 #' @param A square \eqn{(s,s)} matrix 
 #' @param B \eqn{(s,m)} matrix
@@ -270,9 +251,7 @@ blaschke2 = function(alpha, w = NULL, tol = 100*.Machine$double.eps) {
 #' @keywords internal
 #' 
 #' @section Notes: 
-#' The function is intended as an internal helper function 
-#' and thus does not check the inputs. See also \code{\link{reflect_poles}} 
-#' and \code{\link{reflect_zeroes}}. 
+#' The function is intended as an internal helper function and thus does not check the inputs. See also \code{\link{reflect_poles}} and \code{\link{reflect_zeroes}}. 
 #' 
 #' If \eqn{A,C} is given we can use \code{t(make_allpass(t(A), t(C)))}. 
 #'
@@ -339,8 +318,7 @@ make_allpass = function(A, B) {
 #'          
 #' @note 
 #' The procedures are only implemented for rational matrices with real coefficients. 
-#' Therefore complex zeroes occur in complex conjugated pairs and such pairs are
-#' \bold{jointly} reflected to ensure that the result again has real coefficients. 
+#' Therefore complex zeroes occur in complex conjugated pairs and such pairs are **jointly** reflected to ensure that the result again has real coefficients. 
 #' Note however, that the argument \code{zeroes} must only contain \bold{one} 
 #' element of the pairs to be reflected.
 #' 
