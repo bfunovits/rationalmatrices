@@ -4,7 +4,11 @@
       "Bash(wc:*)",
       "Bash(grep:*)",
       "Bash(git -C /media/bernd/nvme/r_projects/acad_rationalmatrices log --oneline)",
-      "Bash(git -C /media/bernd/nvme/r_projects/acad_rationalmatrices branch -a)"
+      "Bash(git -C /media/bernd/nvme/r_projects/acad_rationalmatrices branch -a)",
+      "Bash(R -e:*)",
+      "Bash(ls:*)",
+      "Bash(xargs:*)",
+      "Bash(find:*)"
     ]
   }
 }

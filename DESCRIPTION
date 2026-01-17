@@ -31,7 +31,7 @@ Suggests:
     rmarkdown,
     testthat (>= 2.1.0),
     tibble
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 LinkingTo: 
     Rcpp,
     RcppArmadillo

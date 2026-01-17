@@ -22,35 +22,35 @@ A rational function can be represented in many equivalent forms:
 
 The package is organized around these major task categories:
 
-### 1. **Representation Management** (`R/classes.R`, `R/as_methods.R`)
+### 1. **Representation Management** (`R/01_representation_classes.R`, `R/01_representation_conversions.R`)
    - Create rational matrices in different forms: `polm()`, `lpolm()`, `lmfd()`, `rmfd()`, `stsp()`, `pseries()`, `zvalues()`
    - Convert between representations: `as.stsp()`, `as.lmfd()`, `as.rmfd()`, `as.polm()`
    - Validate objects: `is.polm()`, `is.stsp()`, `is.lmfd()`, etc.
 
-### 2. **Realization Algorithms** (`R/as_methods.R`, `vignettes/`)
+### 2. **Realization Algorithms** (`R/01_representation_conversions.R`, `R/02_realization_tools.R`, `vignettes/`)
    - **Hankel-based methods**: Derive LMFD/state-space from impulse response using Kronecker indices
    - **Ho-Kalman algorithm**: State-space realization from power series coefficients
    - **Echelon canonical forms**: Structured representations for analysis
 
-### 3. **Arithmetic Operations** (`R/arithmetic_methods.R`)
+### 3. **Arithmetic Operations** (`R/03_arithmetic_operations.R`)
    - Basic: addition (`+`), subtraction (`-`), element-wise multiplication (`*`)
    - Matrix multiplication: `a %r% b` (special rational operator)
    - Power: `a^k` for both positive and negative integers
    - Binding: `rbind()`, `cbind()` to combine matrices
 
-### 4. **Polynomial Manipulation** (`R/polm_methods.R`)
+### 4. **Polynomial Manipulation** (`R/04_polynomial_methods.R`)
    - Normal forms: **HNF** (Hermite), **SNF** (Smith), **WHF** (Wiener-Hopf)
    - Column reduction and echelon forms
    - Polynomial division: `a // b`, `a %% b`
    - Degree computation, column end matrices
 
-### 5. **Analysis & Properties** (`R/poles_and_zeroes.R`, `R/is_methods.R`)
+### 5. **Analysis & Properties** (`R/05_analysis_poles_zeroes.R`, `R/is_methods.R`)
    - **Poles/Zeros**: Compute roots via eigenvalue decomposition
    - **Stability**: Check if all poles inside unit circle
    - **Minimality**: Verify minimal state-space dimension via Hankel matrix rank
    - **Coprimeness**: Test if polynomial pair has common factors (via singular pencils)
 
-### 6. **State-Space Tools** (`R/stsp_methods.R`)
+### 6. **State-Space Tools** (`R/06_statespace_methods.R`)
    - **Grammians**: Controllability and observability Grammians
    - **Balancing**: Transform to balanced realization (diagonalize Grammians)
    - **Balanced truncation**: Approximate high-order systems
@@ -61,17 +61,17 @@ The package is organized around these major task categories:
    - **Stability verification**: Check A eigenvalues
    - C++ header-only implementation for speed and downstream use
 
-### 8. **Pole/Zero Reflection** (`R/reflect_poles_zeroes.R`)
+### 8. **Pole/Zero Reflection** (`R/08_reflection_poles_zeroes.R`)
    - **Allpass matrices**: Multiply to flip poles/zeros
    - **Blaschke factors**: Univariate and multivariate pole/zero reflection
    - Maintain spectral properties (H2 norm, spectral density)
 
-### 9. **Visualization** (`R/plot_methods.R`, `R/plot_tools.R`)
+### 9. **Visualization** (`R/09_visualization_methods.R`, `R/09_visualization_tools.R`)
    - **Frequency response plots**: Magnitude, phase, Nyquist diagrams
    - **Pole-zero diagrams**: Show roots on complex plane
    - **3D visualization**: For matrix-valued functions
 
-### 10. **Utilities & Helpers** (`R/tools.R`, `R/tools_kronecker.R`, `R/munkres.R`)
+### 10. **Utilities & Helpers** (`R/10_utilities_tools.R`, `R/10_utilities_munkres.R`)
    - Matrix operations: Transpose `t()`, Hermitian transpose `Ht()`
    - Derivatives: `derivative()` with respect to z
    - Kronecker products, Hungarian algorithm for matching
@@ -138,12 +138,12 @@ Binary operations automatically upgrade both operands to their maximum type:
 
 ## Key Source Files
 
-- `R/classes.R` - Class constructors (`polm()`, `lmfd()`, `rmfd()`, `stsp()`, etc.)
-- `R/arithmetic_methods.R` - Addition, multiplication, `%r%` operator for matrix multiplication
-- `R/polm_methods.R` - Normal forms (HNF, SNF, WHF), column reduction, polynomial division
-- `R/stsp_methods.R` - Realization algorithms, grammians, controllability/observability
-- `R/as_methods.R` - Type coercion between all class types
-- `R/tools.R` - Helper functions for matrix operations
+- `R/01_representation_classes.R` - Class constructors (`polm()`, `lmfd()`, `rmfd()`, `stsp()`, etc.)
+- `R/03_arithmetic_operations.R` - Addition, multiplication, `%r%` operator for matrix multiplication
+- `R/04_polynomial_methods.R` - Normal forms (HNF, SNF, WHF), column reduction, polynomial division
+- `R/06_statespace_methods.R` - Realization algorithms, grammians, controllability/observability
+- `R/01_representation_conversions.R` - Type coercion between all class types
+- `R/10_utilities_tools.R` - Helper functions for matrix operations
 - `src/lyapunov.cpp` - C++ Lyapunov solver (RcppArmadillo)
 
 ## Important Conventions
