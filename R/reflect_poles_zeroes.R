@@ -526,39 +526,11 @@ reflect_zeroes.lmfd = function(x, zeroes, tol = sqrt(.Machine$double.eps),
 }
 
 
-#' @rdname reflect_zeroes
-#' @export
-#' 
-#'
-#' @examples
-#' 
-#' 
-#' # ###################################################################
-#' # rational matrix in statespace form (stsp object)
-#' 
-#' # create a random (2,2) rational matrix in state space form with 
-#' # state dimension s=5
-#' set.seed(12345)
-#' (x = test_stsp(dim = c(2,2), s = 5))
-#' # zeroes of x(z)
-#' (x_zeroes = zeroes(x))
-#' 
-#' # reflect all unstable zeroes (inside the unit circle) 
-#' # note: for complex zeroes, select only one of the complex conjugated pair!
-#' x1 = reflect_zeroes(x, x_zeroes[(abs(x_zeroes) <1) & (Im(x_zeroes) >=0 )])
-#' 
-#' r_zeroes = x_zeroes
-#' r_zeroes[abs(r_zeroes) < 1] = 1 / r_zeroes[abs(r_zeroes) < 1]
-#' (x1_zeroes = zeroes(x1))
-#' j = match_vectors(r_zeroes, x1_zeroes)
-#' all.equal(r_zeroes, x1_zeroes[j]) 
-#' 
-#' # Check that the transformation matrix U (x1 = x %r% U) is all-pass
-#' all.equal(zvalues(x) %r% Ht(zvalues(x)), zvalues(x1) %r% Ht(zvalues(x1)))
-#' 
-#' set.seed(NULL)
-reflect_zeroes.stsp = function(x, zeroes, tol = sqrt(.Machine$double.eps), ...) {
-  # check inputs ....
+# Internal helper for reflect_poles.stsp and reflect_zeroes.stsp
+# Validates input and preprocesses roots (poles/zeroes)
+# Returns NULL if roots is empty (caller should return x early)
+# Otherwise returns the roots with complex conjugates appended
+validate_stsp_reflect_input <- function(x, roots, tol, root_name) {
   if (!is.numeric(x)) {
     stop('The argument "x" must be a polynomial with real coefficients.')
   }
@@ -566,21 +538,55 @@ reflect_zeroes.stsp = function(x, zeroes, tol = sqrt(.Machine$double.eps), ...) 
   if (d[1] != d[2]) {
     stop('argument "x" must be a square rational matrix (in stsp form).')
   }
-  
-  zeroes = as.vector(zeroes)
-  k = length(zeroes)
-  if (k == 0) {
-    # nothing to do
-    return(x)
+
+  roots = as.vector(roots)
+  if (length(roots) == 0) {
+    return(NULL)
   }
-  
-  if (min(abs(abs(zeroes) - 1)) < tol) {
-    stop('one of the selected zeroes has modulus close to one.')
-  }  
-  
+
+  if (min(abs(abs(roots) - 1)) < tol) {
+    stop(paste0('one of the selected ', root_name, ' has modulus close to one.'))
+  }
+
   # append complex conjugates
-  zeroes = c(zeroes, Conj(zeroes[Im(zeroes) != 0]))
-  
+  c(roots, Conj(roots[Im(roots) != 0]))
+}
+
+#' @rdname reflect_zeroes
+#' @export
+#'
+#'
+#' @examples
+#'
+#'
+#' # ###################################################################
+#' # rational matrix in statespace form (stsp object)
+#'
+#' # create a random (2,2) rational matrix in state space form with
+#' # state dimension s=5
+#' set.seed(12345)
+#' (x = test_stsp(dim = c(2,2), s = 5))
+#' # zeroes of x(z)
+#' (x_zeroes = zeroes(x))
+#'
+#' # reflect all unstable zeroes (inside the unit circle)
+#' # note: for complex zeroes, select only one of the complex conjugated pair!
+#' x1 = reflect_zeroes(x, x_zeroes[(abs(x_zeroes) <1) & (Im(x_zeroes) >=0 )])
+#'
+#' r_zeroes = x_zeroes
+#' r_zeroes[abs(r_zeroes) < 1] = 1 / r_zeroes[abs(r_zeroes) < 1]
+#' (x1_zeroes = zeroes(x1))
+#' j = match_vectors(r_zeroes, x1_zeroes)
+#' all.equal(r_zeroes, x1_zeroes[j])
+#'
+#' # Check that the transformation matrix U (x1 = x %r% U) is all-pass
+#' all.equal(zvalues(x) %r% Ht(zvalues(x)), zvalues(x1) %r% Ht(zvalues(x1)))
+#'
+#' set.seed(NULL)
+reflect_zeroes.stsp = function(x, zeroes, tol = sqrt(.Machine$double.eps), ...) {
+  zeroes = validate_stsp_reflect_input(x, zeroes, tol, "zeroes")
+  if (is.null(zeroes)) return(x)
+
   A = x$A
   B = x$B
   C = x$C
@@ -692,29 +698,9 @@ reflect_poles = function(x, poles, ...) {
 #' 
 #' set.seed(NULL)
 reflect_poles.stsp = function(x, poles, tol = sqrt(.Machine$double.eps), ...) {
-  # check inputs ....
-  if (!is.numeric(x)) {
-    stop('The argument "x" must be a polynomial with real coefficients.')
-  }
-  d = dim(x)
-  if (d[1] != d[2]) {
-    stop('argument "x" must be a square rational matrix (in stsp form).')
-  }
-  
-  poles = as.vector(poles)
-  k = length(poles)
-  if (k == 0) {
-    # nothing to do
-    return(x)
-  }
-  
-  if (min(abs(abs(poles) - 1)) < tol) {
-    stop('one of the selected poles has modulus close to one.')
-  }  
-  
-  # append complex conjugates
-  poles = c(poles, Conj(poles[Im(poles) != 0]))
-  
+  poles = validate_stsp_reflect_input(x, poles, tol, "poles")
+  if (is.null(poles)) return(x)
+
   A = x$A
   B = x$B
   C = x$C

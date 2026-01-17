@@ -1,6 +1,24 @@
-# lyapunov.R 
-# 
+# lyapunov.R
+#
 # These are essentially R wrapper functions for the Rcpp routines!
+
+# Internal helper to validate common inputs for lyapunov functions
+validate_lyapunov_inputs <- function(A, Q) {
+  if ( (!is.numeric(A)) || (!is.matrix(A)) || (nrow(A) != ncol(A)) ) {
+    stop('"A" must be a square, numeric  matrix ')
+  }
+
+  if ( (!is.numeric(Q)) || (!is.matrix(Q)) || any(dim(Q) != dim(A)) ) {
+    stop('"Q" must be a numeric matrix with the same dimension as "A"')
+  }
+
+  m <- nrow(A)
+  if (m == 0) {
+    stop('A,Q are "empty"')
+  }
+
+  invisible(m)
+}
 
 #' Lyapunov Equation
 #'
@@ -64,25 +82,12 @@
 #' # throw an error
 #' P = lyapunov(A, Q, non_stable = 'stop')
 #' }
-lyapunov = function(A, Q, 
+lyapunov = function(A, Q,
                     non_stable = c("ignore", "warn", "stop"),
                     attach_lambda = FALSE) {
-  # check inputs 
-  if ( (!is.numeric(A)) || (!is.matrix(A)) || (nrow(A) != ncol(A)) ) {
-    stop('"A" must be a square, numeric  matrix ')
-  }
-  
-  if ( (!is.numeric(Q)) || (!is.matrix(Q)) || any(dim(Q) != dim(A)) ) {
-    stop('"Q" must be a numeric matrix with the same dimension as "A"')
-  }
-  
+  m <- validate_lyapunov_inputs(A, Q)
   non_stable = match.arg(non_stable)
   attach_lambda = as.logical(attach_lambda)[1]
-  
-  m = ncol(A)
-  if (m == 0) {
-    stop('A,Q are "empty"')
-  }
 
   P = matrix(0, nrow = m, ncol = m)
   lambda_r = numeric(m)
@@ -162,35 +167,25 @@ lyapunov = function(A, Q,
 #'               Q + matrix(dQ %*% theta, nrow = m, ncol = m)*eps)
 #' all.equal(matrix(out$J %*% theta, nrow = m, ncol = m), 
 #'           (dP - P)/eps, scale = mean(abs(out$J)), tol = 1e-6)
-lyapunov_Jacobian = function(A, Q, dA, dQ, 
+lyapunov_Jacobian = function(A, Q, dA, dQ,
                              non_stable = c("ignore", "warn", "stop")) {
-  # check inputs 
-  if ( (!is.numeric(A)) || (!is.matrix(A)) || (nrow(A) != ncol(A)) ) {
-    stop('"A" must be a square, numeric  matrix ')
-  }
-  
-  if ( (!is.numeric(Q)) || (!is.matrix(Q)) || any(dim(Q) != dim(A)) ) {
-    stop('"Q" must be a numeric matrix with the same dimension as "A"')
-  }
-  
-  m = nrow(A)
-  
+  m <- validate_lyapunov_inputs(A, Q)
+
   if ( (!is.numeric(dA)) || (!is.matrix(dA)) || (nrow(dA) != (m^2) ) ) {
     stop('"dA" must be a (m^2, k) dimensional numeric  matrix ')
   }
-  
+
   if ( (!is.numeric(dQ)) || (!is.matrix(dQ)) || any(dim(dA) != dim(dQ)) ) {
     stop('"dQ" is not compatible with "A" or "dA"')
   }
-  
+
   n = ncol(dA)
-  
   non_stable = match.arg(non_stable)
 
-  if (m*n == 0) {
-    stop('A, Q, dA or dQ are "empty"')
+  if (n == 0) {
+    stop('dA or dQ are "empty"')
   }
-  
+
   P = matrix(0, nrow = m, ncol = m)
   J = matrix(0, nrow = m^2, ncol = n)
   lambda_r = numeric(m)
