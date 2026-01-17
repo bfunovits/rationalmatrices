@@ -26,15 +26,41 @@ library(rationalmatrices)
 
 ## Introduction
 
-The `rationalmatrices` package is a collection of classes, methods and functions for handling and manipulating
-rational matrices, i.e matrices whose entries are rational functions entries. 
-Such matrices are in particular useful for
-linear dynamic time series models, like VARMA and statespace models. This package is mainly
-designed and written with regard to this application. See also the "companion" package `RLDM`.
+### What are Rational Matrices?
 
-The main goal is to implement classes  for rational matrices such that they may be handled similarly to
-ordinary matrices. In particular, arithmetic operations, like addition, should look and feel as
-the manipulations of ordinary matrices.
+The `rationalmatrices` package handles **rational matrices** - matrices whose entries are rational functions of z (typically z⁻¹ in time-series and control theory applications).
+
+A rational function can be represented in many equivalent forms:
+- **Polynomial**: a(z) = a₀ + a₁z + ... + aₚzᵖ
+- **Matrix fractions**: a⁻¹(z)b(z) (left LMFD) or d(z)c⁻¹(z) (right RMFD)
+- **State-space**: C(z⁻¹I - A)⁻¹B + D (standard in control theory)
+- **Impulse response**: h₀ + h₁z⁻¹ + h₂z⁻² + ... (time-domain)
+- **Frequency response**: function values on the unit circle
+
+### Design Philosophy
+
+The main goal is to implement classes for rational matrices such that they behave similarly to ordinary matrices. **Arithmetic operations should look and feel like standard matrix manipulation**, while seamlessly converting between the most appropriate representation for each task.
+
+This package serves as the foundation for `RLDM` (Rational Linear Dynamic Models) and is particularly useful for:
+- Linear dynamic time series models (VARMA, state-space)
+- Control theory and system analysis
+- Signal processing and filtering
+- Any application requiring multiple mathematical representations of the same object
+
+### Guide to This Vignette
+
+This vignette covers the main user-facing functionality. For implementation details and mathematical theory, see the companion vignette "Technical Details".
+
+**Main sections:**
+- **Classes** → Representation Management (#1 in CLAUDE.md)
+- **Operations and Methods** → Arithmetic Operations (#3), Polynomial Manipulation (#4), Analysis (#5)
+- **Realization Algorithms** → Realization Algorithms (#2)
+- **Methods for Polynomials** → Polynomial Manipulation (#4)
+- **Methods for State-Space Forms** → State-Space Tools (#6)
+
+Quick start examples follow below:
+
+---
 
 We start with some basic examples. First we create a scalar polynomial $a(z)=1+0.9z+0.9z^2+0.9^3z^3$,
 check that the object is "valid" and print it:
@@ -79,69 +105,64 @@ plot(zvalues(c, n.f = 1024), which = 'nyquist')
 ```
 
 
-## Classes
+## Classes {#classes-section}
 
-```{r echo=FALSE}
+### Overview of Representations
+
+There are seven major representations (realizations) for rational matrices, each suited to different tasks:
+
+1. **Polynomial matrices** (`polm`) - Direct coefficient representation
+2. **Laurent polynomials** (`lpolm`) - Allows negative powers
+3. **Left matrix fraction** (`lmfd`) - For analysis: a⁻¹(z)b(z)
+4. **Right matrix fraction** (`rmfd`) - Transpose dual: d(z)c⁻¹(z)
+5. **State-space** (`stsp`) - For computation: C(z⁻¹I-A)⁻¹B+D
+6. **Power series** (`pseries`) - Impulse response coefficients
+7. **Frequency response** (`zvalues`) - Values at specific z points
+
+The package enables seamless conversion between all these forms. Furthermore, the coefficients of the power series expansion (here called *impulse response function*) and a sufficiently rich set of values of the rational matrix (here called *frequency response function*) uniquely determine the rational matrix and hence may be seen as another way to represent such a rational matrix.
+
+Note: There are no separate classes for rational *scalars* or rational *vectors*. A scalar is simply a (1×1) matrix and a vector is a (m×1) or (1×n) matrix.
+
+### Representation Conversion Diagram
+
+```{r echo=FALSE, eval=FALSE}
+# Keep original diagram for reference - can be displayed if needed
 DiagrammeR::grViz("
   digraph G {
     compound=true;
-        splines = lines;
-
+    splines = lines;
     graph [layout = dot, rankdir = LR]
-      splines = lines
-
-        ra [label='Class polm(): \n\n Polynomial matrix object. \n Stored as 3-dim array (#Rows, #Cols, #Coeff) ']
-      ra -> rb;
-      ra -> rc;
-
-
-      # Rational function representations
+    splines = lines
+    ra [label='polm():\nPolynomial']
+    ra -> rb;
+    ra -> rc;
     subgraph cluster_repr {
-      label = 'Different representation of matrices \n whose elements are rational functions'
-      fontsize = 16
-      fontname = 'times-bold'
-          # Polynomial
-
-
-      rb [shape=polygon,sides=4,label='Class lmfd(): \n\n Left matrix fraction description object (a(z), b(z)). \n Stored as matrix of dim \n (#Rows, #Cols x (#Coeffs_of_a(z) + #Coeffs_of_b(z)))']
-      rc [shape=polygon,sides=4,label='Class rmfd(): \n\n Right matrix fraction description object. \n Stored as matrix of dim \n (#Rows x (#Coeffs_of_c(z) + #Coeffs_of_d(z)), #Cols)']
-
-      rd [shape=polygon,sides=4,label = 'Class stsp(): \n\n State space object (A,B,C,D). \n Stored as a matrix.']
+      label = 'Matrix Fraction & State-Space'
+      fontsize = 14
+      rb [label='lmfd():\nLeft Fraction\na⁻¹(z)b(z)']
+      rc [label='rmfd():\nRight Fraction\nd(z)c⁻¹(z)']
+      rd [label = 'stsp():\nState-Space\nC(z⁻¹I-A)⁻¹B+D']
       {rank=same; rb,rc,rd}
     }
-
     subgraph cluster_pseries {
-      label = 'Power series \n aka transfer function \n aka impulse response function'
-      fontsize = 16
-      fontname = 'times-bold'
-
-      pa [shape=polygon, sides=4, label = 'Class pseries(): \n\n Power series coefficients obtained from \n a rational matrix.' ]
+      label = 'Impulse & Frequency Response'
+      pa [label = 'pseries():\nPower Series']
+      pz [label = 'zvalues():\nFunction Values']
     }
-
-    ha [label = 'Hankel matrix: \n Representation of transfer function.' ]
-    pa -> ha[label = 'Shifting \n transfer function \n coefficients']
-
-    splines = lines
-
-    ha -> rb [label = '(Left)- \n echelon \n form', color = 'red']
-    ha -> rc [label = '(right)- \n echelon \n form', color = 'red']
-    ha -> rd [label = '(left)- echelon form or \n balanced realization', color = 'red']
-
-    rb -> pa [label = 'pseries.lmfd(): \n Obtain \n transfer function \n from LMFD', color = 'blue']
-    rc -> pa [label = 'pseries.rmfd(): \n Obtain \n transfer function \n from RMFD', color = 'blue']
-    rd -> pa [label = 'pseries.stsp(): \n Obtain \n transfer function \n from state space \n representation', color = 'blue']
-    }
-  ")
-
+    ha [label = 'Hankel Matrix\n(Rank Analysis)' ]
+    pa -> ha[label = 'via lags']
+    ha -> rb [label = 'Left\nEchelon', color = 'red']
+    ha -> rd [label = 'Balanced\nRealization', color = 'red']
+    rb -> pa [label = 'Extract', color = 'blue']
+    rd -> pa [label = 'Extract', color = 'blue']
+  }")
 ```
 
-There are several useful representations (realizations) for rational matrices. 
-Here, we only consider polynomial matrices and rational matrices represented by a *left matrix fraction description* or by a *statespace realization*. 
-Furthermore, the coefficients of the power series expansion (here called *impulse response function*) and a (sufficently rich) set of values of the rational matrix (here called *frequency response function*) uniquely determine the rational matrix and hence may be seen as another way to represent such a rational matrix.
+The color scheme:
+- **Red**: Realization from Hankel matrix (impulse response)
+- **Blue**: Power series extraction from fractions/state-space
 
-There are no separate classes for rational *scalars* or rational *vectors*. 
-A scalar is
-simply considered as an $(1\times 1)$ matrix and a vector is a $(m\times 1)$ (or$(1 \times n)$) matrix.
+Here, we focus on polynomial matrices and rational matrices represented by a *left matrix fraction description* or by a *statespace realization*.
 
 ### Polynomial Matrices
 
@@ -267,7 +288,13 @@ $$
   sufficiently rich) set of values. 
   However, we have not implemented an algorithm which computes an "LMFD" or "statespace" representation for given frequency response.
 
-## Operations and Methods
+## Operations and Methods {#operations-section}
+
+This section covers the main functional areas:
+- **General Methods** - Representation Management (#1)
+- **Convert from Class x to Class y** - Realization Algorithms (#2)
+- **Arithmetics** - Arithmetic Operations (#3)
+- **Poles and Zeroes** - Analysis & Properties (#5)
 
 ### General Methods
 
@@ -974,8 +1001,9 @@ all.equal(pseries(derivative(x), lag.max = 10),
 ```
 
 
-## Methods for Polynomials
+## Methods for Polynomials {#polynomial-methods}
 
+This section implements **Polynomial Manipulation** (#4 in CLAUDE.md) and related analysis tools.
 
 ### Normal Forms
 
@@ -1308,7 +1336,9 @@ like the Hermite normal form, of polynomial matrices.
             the pivot element.
 
 
-## Methods for Statespace Forms
+## Methods for State-Space Forms {#stsp-methods}
+
+This section implements **State-Space Tools** (#6), **Pole/Zero Reflection** (#8), and **Utilities** (#10) from CLAUDE.md.
 
 ### Grammians and Balanced Realizations {#balance}
 

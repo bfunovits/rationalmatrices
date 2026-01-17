@@ -15,6 +15,21 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+## Introduction
+
+This vignette provides technical implementation details and mathematical theory underlying the `rationalmatrices` package. It complements the main user guide (Rational Matrices vignette) with in-depth coverage of algorithms, numerical methods, and theoretical foundations.
+
+**Topics covered:**
+- **Left Coprime Polynomials** - Part of Analysis & Properties (#5)
+- **Column Reduced Matrix** - Supporting theory for Normal Forms (#4)
+- **Realization Algorithms** - Deep dive into Realization Algorithms (#2)
+- **Operations with State-Space Realizations** - Theory for State-Space Tools (#6)
+- **Schur, QZ, Lyapunov** - Numerical Methods (#7)
+- **Reflect Poles and Zeroes** - Theory for Pole/Zero Reflection (#8)
+
+For implementation details of these topics, see the source files listed in CLAUDE.md and the main vignette.
+
+---
 
 ```{r, include = FALSE}
 
@@ -26,7 +41,11 @@ knitr::opts_chunk$set(
 library(rationalmatrices)
 ```
 
-## Left Coprime Polynomials
+## Left Coprime Polynomials {#coprime-section}
+
+### Functional Area: Analysis & Properties (#5)
+
+See `R/is_methods.R` for implementation.
 
 A polynomial matrix $c$ is called *left prime*, if $c(z)$ has full row rank 
 everywhere in the complex plane. Clearly this implies that $c$ 
@@ -415,7 +434,11 @@ cat("The polynomials are left coprime: ", out$answer,"\n",
     "The zeros of the pencil are: ", out$zeroes, sep = '')
 ```
 
-## Column Reduced Matrix
+## Column Reduced Matrix {#colreduced-section}
+
+### Functional Area: Polynomial Manipulation (#4)
+
+See `R/polm_methods.R` for implementation.
 
 **Note:** The functions `degree` (`col_end_matrix`) and `col_reduce` use different strategies to 
 compute the column degrees (column end matrix). 
@@ -444,7 +467,11 @@ See also @Wolovich1974.
 
 The coefficients $\alpha_j$ are determined from an SVD of the column end matrix. 
 
-## Realization Algorithms 
+## Realization Algorithms {#realization-section}
+
+### Functional Area: Realization Algorithms (#2)
+
+See `R/as_methods.R` and related functions like `pseries2stsp()`, `pseries2lmfd()` for implementation.
 
 ### Impulse Response 
 
@@ -592,7 +619,11 @@ provided that $(f,p)$ is "large enough".
 For a more detailed discussion on Kronecker indices and echelon canonical forms, 
 see @Hannan.Deistler12.
 
-## Operations with/on Statespace Realizations
+## Operations with State-Space Realizations {#stsp-ops-section}
+
+### Functional Area: State-Space Tools (#6)
+
+See `R/arithmetic_methods.R` and `R/stsp_methods.R` for implementation.
 
 ### Addition 
 
@@ -824,10 +855,13 @@ If $p<q$, some zeros are padded into the $A$ matrix.
 This scheme is implemented in `as.stsp.rmfd`.
 
 
-## Schur, QZ decomposition, Lyapunov and Riccati Equations
+## Schur, QZ Decomposition, Lyapunov and Riccati Equations {#lyapunov-section}
 
+### Functional Area: Numerical Methods (#7)
 
-### Lyapunov equation 
+See `src/lyapunov.cpp`, `inst/include/rationalmatrices_lyapunov.h`, and `R/lyapunov.R` for implementation.
+
+### Lyapunov Equation 
 
 The generalized (non-symmetric) Lyapunov equation is 
 
@@ -1022,7 +1056,11 @@ Currently the number of non zero singular values is chosen as the number of sing
 $\sigma_k > \tau \sigma_1$ where $\tau$ is a user defined tolerance parameter. 
 
 
-### Reflect Poles and Zeroes 
+### Reflect Poles and Zeroes {#reflect-section}
+
+#### Functional Area: Pole/Zero Reflection (#8)
+
+See `R/reflect_poles_zeroes.R` for implementation.
 
 #### All-Pass Matrices 
 
@@ -1213,7 +1251,11 @@ Hence the "$A,B$" matrices of the inverse of $\hat{k}^{-1}$ are determined.
 
 
 
-## QR decomposition, Rank and Null Space 
+## QR Decomposition, Rank and Null Space {#qr-section}
+
+### Functional Area: Utilities & Helpers (#10)
+
+Supporting theory for rank computation and null space analysis in polynomial operations.
 
 Consider the following example 
 
