@@ -68,15 +68,14 @@ NULL
 #'
 #' References: See Also: Examples:
 #' 
-#' @docType package
-#' @name rationalmatrices
-#'
+       
+#' @keywords internal
+"_PACKAGE"
+
 #' @useDynLib rationalmatrices, .registration = TRUE
 #' @importFrom Rcpp sourceCpp
 #' @importFrom Rdpack reprompt
-NULL
-
-#' Pipe operator
+NULL#' Pipe operator
 #'
 #' Re-export pipe operator \code{\%>\%} to turn function composition into a series of imperative statements.
 #' For more extensive description, see function \code{`\%>\%`} in package \emph{magrittr}.
