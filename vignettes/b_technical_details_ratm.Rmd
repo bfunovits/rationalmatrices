@@ -9,6 +9,7 @@ output:
     toc: yes
     toc_depth: 2
     number_sections: true
+bibliography: "`r system.file('REFERENCES.bib', package='rationalmatrices')`"
 vignette: >
   %\VignetteIndexEntry{Rational Matrices: Technical Details}
   %\VignetteEngine{knitr::rmarkdown}
@@ -20,6 +21,7 @@ vignette: >
 This vignette provides technical implementation details and mathematical theory underlying the `rationalmatrices` package. It complements the main user guide (Rational Matrices vignette) with in-depth coverage of algorithms, numerical methods, and theoretical foundations.
 
 **Topics covered:**
+
 - **Left Coprime Polynomials** - Part of Analysis & Properties (#5)
 - **Column Reduced Matrix** - Supporting theory for Normal Forms (#4)
 - **Realization Algorithms** - Deep dive into Realization Algorithms (#2)
@@ -1141,7 +1143,6 @@ In the following we need to construct an allpass matrix with given $(A,B)$ (or g
 2) Determine the row space of $[C,D]$ from the left kernel of $[AX',B]'$. 
 3) Determine the scaling matrix from the requirement $DD' - DB' A^{-T} C' = I$.
 
-*Note:* Wann gibt es Probleme? ....
 
 
 #### zero cancellations
@@ -1292,3 +1293,6 @@ qr.R(qr_x)
 
 
 ## References {-}
+
+::: {#refs}
+:::

@@ -9,6 +9,7 @@ output:
     toc: yes
     toc_depth: 2
     number_sections: true
+bibliography: "`r system.file('REFERENCES.bib', package='rationalmatrices')`"
 vignette: >
   %\VignetteIndexEntry{Rational Matrices}
   %\VignetteEngine{knitr::rmarkdown}
@@ -28,13 +29,14 @@ library(rationalmatrices)
 
 ### What are Rational Matrices?
 
-The `rationalmatrices` package handles **rational matrices** - matrices whose entries are rational functions of z (typically z⁻¹ in time-series and control theory applications).
+The `rationalmatrices` package handles **rational matrices** - matrices whose entries are rational functions of the lag-operator $z$ (typically $z^{-1}$ in  control theory applications).
 
 A rational function can be represented in many equivalent forms:
-- **Polynomial**: a(z) = a₀ + a₁z + ... + aₚzᵖ
-- **Matrix fractions**: a⁻¹(z)b(z) (left LMFD) or d(z)c⁻¹(z) (right RMFD)
-- **State-space**: C(z⁻¹I - A)⁻¹B + D (standard in control theory)
-- **Impulse response**: h₀ + h₁z⁻¹ + h₂z⁻² + ... (time-domain)
+
+- **Polynomial**: $a(z) = a_0 + a_1 z + \cdots + a_p z^p$
+- **Matrix fractions**: $a^{-1}(z)b(z)$ (left LMFD) or $d(z)c^{-1}(z)$ (right RMFD)
+- **State-space**: $C(z^{-1}I - A)^{-1}B + D$ (standard in control theory)
+- **Impulse response**: $h_0 + h_1 z + h_2 z^{2} + \cdots$ (time-domain)
 - **Frequency response**: function values on the unit circle
 
 ### Design Philosophy
@@ -42,6 +44,7 @@ A rational function can be represented in many equivalent forms:
 The main goal is to implement classes for rational matrices such that they behave similarly to ordinary matrices. **Arithmetic operations should look and feel like standard matrix manipulation**, while seamlessly converting between the most appropriate representation for each task.
 
 This package serves as the foundation for `RLDM` (Rational Linear Dynamic Models) and is particularly useful for:
+
 - Linear dynamic time series models (VARMA, state-space)
 - Control theory and system analysis
 - Signal processing and filtering
@@ -49,9 +52,11 @@ This package serves as the foundation for `RLDM` (Rational Linear Dynamic Models
 
 ### Guide to This Vignette
 
-This vignette covers the main user-facing functionality. For implementation details and mathematical theory, see the companion vignette "Technical Details".
+This vignette covers the main user-facing functionality. 
+For implementation details and mathematical theory, see the companion vignette "Technical Details".
 
 **Main sections:**
+
 - **Classes** → Representation Management (#1 in CLAUDE.md)
 - **Operations and Methods** → Arithmetic Operations (#3), Polynomial Manipulation (#4), Analysis (#5)
 - **Realization Algorithms** → Realization Algorithms (#2)
@@ -119,13 +124,15 @@ There are seven major representations (realizations) for rational matrices, each
 6. **Power series** (`pseries`) - Impulse response coefficients
 7. **Frequency response** (`zvalues`) - Values at specific z points
 
-The package enables seamless conversion between all these forms. Furthermore, the coefficients of the power series expansion (here called *impulse response function*) and a sufficiently rich set of values of the rational matrix (here called *frequency response function*) uniquely determine the rational matrix and hence may be seen as another way to represent such a rational matrix.
+The package enables seamless conversion between all these forms. 
+Furthermore, the coefficients of the power series expansion (here called *impulse response function*) and a sufficiently rich set of values of the rational matrix (here called *frequency response function*) uniquely determine the rational matrix and hence may be seen as another way to represent such a rational matrix.
 
-Note: There are no separate classes for rational *scalars* or rational *vectors*. A scalar is simply a (1×1) matrix and a vector is a (m×1) or (1×n) matrix.
+Note: There are no separate classes for rational *scalars* or rational *vectors*. 
+A scalar is simply a (1×1) matrix and a vector is a (m×1) or (1×n) matrix.
 
 ### Representation Conversion Diagram
 
-```{r echo=FALSE, eval=FALSE}
+```{r}
 # Keep original diagram for reference - can be displayed if needed
 DiagrammeR::grViz("
   digraph G {
@@ -159,6 +166,7 @@ DiagrammeR::grViz("
 ```
 
 The color scheme:
+
 - **Red**: Realization from Hankel matrix (impulse response)
 - **Blue**: Power series extraction from fractions/state-space
 
@@ -193,7 +201,9 @@ $$
 b(z) = b_0 + b_1 z + \cdots + b_q z^q
 $$
 is an $(m \times n)$ dimensional matrix polynomial of degree $q$.  
-The matrix $c(z)$ is thus described by the pair $(a(z), b(z))$. Note that the "factors" $a(z), b(z)$ are by no means unique for given $c(z)$.
+
+The matrix $c(z)$ is thus described by the pair $(a(z), b(z))$. 
+Note that the "factors" $a(z), b(z)$ are by no means unique for given $c(z)$.
 
 Internally such LMFDs are stored as a matrix
 
@@ -216,8 +226,10 @@ Any rational ($(m \times n)$-dimensional) matrix $c(z)$ which has no pole at $z=
 $$
 c(z) = C(z^{-1}I_s - A)^{-1}B + D
 $$
+
 where $A\in \mathbb{R}^{s\times s}$,  $B\in \mathbb{R}^{s\times n}$,
 $C\in \mathbb{R}^{m\times s}$ and  $D\in \mathbb{R}^{m\times n}$.
+
 The integer $s$ is called the *state dimension* of the above realization.
 Statespace representations are by no means unique, even the state dimension $s$ is not unique. 
 If the state dimension $s$ is minimal among all possible realizations
@@ -262,7 +274,7 @@ dimensional  array with a class attribute `c('stsp','ratm')`.
 
 **Note:** Due to the rational structure, a *finite* sequence of coefficients is
 sufficient to reconstruct the rational matrix $c(z)$, see e.g. the Ho-Kalman
-realization algorithm implemented in `pseries2stsp` and the function
+realization algorithm [@Ho.Kalman66] implemented in `pseries2stsp` and the function
 `pseries2lmfd`. (Of course the number of coefficients has to be
 large enough.) Hence, we can interpret (a finite) impulse response function as
 another way to represent rational matrices.
@@ -1618,3 +1630,6 @@ plot(cbind(fr[1:2,1], fr[3:4,1]),
 ```
 
 ## References
+
+::: {#refs}
+:::
