@@ -33,7 +33,11 @@ reference:
   desc: |
     as.* methods
   contents:
-  - starts_with("as\\.")
+  - as.lmfd
+  - as.rmfd
+  - as.stsp
+  - as.polm
+  - as.lpolm
   - pseries2lmfd
   - pseries2rmfd
   - pseries2stsp
@@ -43,12 +47,24 @@ reference:
   - poles and zeroes
   - zvalue
   - zvalues
-- title: is.* Methods
+- title: Check Object Methods
   contents:
+  - is.lmfd
+  - is.rmfd
+  - is.stsp
+  - is.polm
+  - is.lpolm
+  - is.coprime
+  - is.minimal
   - check objects
-  - starts_with("is\\.")
-- title: Helpers for creating objects for testing
-  contents: starts_with("test_")
+- title: Helpers for Creating Test Objects
+  contents:
+  - test_lmfd
+  - test_rmfd
+  - test_stsp
+  - test_polm
+  - test_lpolm
+  - test_array
 - title: Arithmetic (incl derivative and transpose)
   contents:
   - '%r%'
