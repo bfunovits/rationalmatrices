@@ -5,7 +5,7 @@ Of course the impulse response must contain sufficiently many lags.
 The constructed LMFD is in echelon canonical form."><meta property="og:description" content="This (helper) function constructs a left matrix fraction description
 of a rational matrix from its impulse response.
 Of course the impulse response must contain sufficiently many lags.
-The constructed LMFD is in echelon canonical form."></head><body>
+The constructed LMFD is in echelon canonical form."><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -27,6 +27,7 @@ The constructed LMFD is in echelon canonical form."></head><body>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/a_rational_matrices.html">Rational Matrices</a></li>
     <li><a class="dropdown-item" href="../articles/b_technical_details_ratm.html">Rational Matrices: Technical Details</a></li>
   </ul></li>
+<li class="nav-item"><a class="nav-link" href="../claude.html">Claude Guide</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -122,15 +123,15 @@ If these restrictions are not satisfied an error is thrown.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $Xl</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 2 ) left matrix fraction description a^(-1)(z) b(z) with degrees (p = 1, q = 1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> left factor a(z):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1]  [,2]  [,3]    z^1 [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]        1     0     0 -0.09689396  0.1288137  0.2504258</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]        0     1     0 -0.28856566  0.2908807 -0.2004376</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]        0     0     1 -0.20170738 -0.4079080 -0.2134212</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1]  [,2]  [,3]     z^1 [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]        1     0     0 -0.006911964  0.7127661 -1.5267106</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]        0     1     0 -0.003477361  0.2490580 -0.4782623</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]        0     0     1  0.049013059 -0.6321853 -0.3212550</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> right factor b(z):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       z^0 [,1]       [,2]  z^1 [,1]       [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.1612558 -1.2614246 -3.940664 -1.8820022</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 1.8591409 -2.1324443 -4.289259 -2.4525251</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 1.3089943  0.2891434 -1.245475 -0.2485643</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       z^0 [,1]        [,2]   z^1 [,1]       [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 1.8271897 -0.87821457 -1.1016513 0.57336537</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.7698252 -0.08715286 -0.1636610 0.15127154</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 0.2278321  1.03854642 -0.1061596 0.04172095</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $nu</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 1 1</span>

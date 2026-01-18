@@ -7,7 +7,7 @@ to make operations on different subclasses of the (super-) class ratm possible."
 rbind,
 ratm_mult,
 and Ops.ratm
-to make operations on different subclasses of the (super-) class ratm possible."></head><body>
+to make operations on different subclasses of the (super-) class ratm possible."><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -29,6 +29,7 @@ to make operations on different subclasses of the (super-) class ratm possible."
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/a_rational_matrices.html">Rational Matrices</a></li>
     <li><a class="dropdown-item" href="../articles/b_technical_details_ratm.html">Rational Matrices: Technical Details</a></li>
   </ul></li>
+<li class="nav-item"><a class="nav-link" href="../claude.html">Claude Guide</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -111,19 +112,19 @@ The following ranks are assigned to the <code>ratm</code> objects:</p>
 <span class="r-in"><span><span class="fu">rationalmatrices</span><span class="fu">:::</span><span class="fu">upgrade_objects</span><span class="op">(</span>force <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">l</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> statespace realization [1,1] with s = 1 states</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           s[1]       u[1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> s[1] 0.8016991 -0.4665939</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x[1] 1.0000000  0.4609451</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           s[1]     u[1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s[1] 0.6234621 2.173405</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x[1] 1.0000000 1.505084</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">rationalmatrices</span><span class="fu">:::</span><span class="fu">upgrade_objects</span><span class="op">(</span>force <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">l</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 1 x 1 ) left matrix fraction description a^(-1)(z) b(z) with degrees (p = 1, q = 1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> left factor a(z):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1]   z^1 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]        1 -0.8016991</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]        1 -0.6234621</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> right factor b(z):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       z^0 [,1]   z^1 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.4609451 -0.8361331</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1] z^1 [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 1.505084 1.235042</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Upgrade poly to rmfd</span></span></span>
@@ -137,20 +138,20 @@ The following ranks are assigned to the <code>ratm</code> objects:</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> statespace realization [1,1] with s = 1 states</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          s[1]      u[1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> s[1] 1.362329 -2.200286</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x[1] 1.000000 -1.439654</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         s[1]       u[1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> s[1] 1.05146 -0.1372637</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x[1] 1.00000 -1.4568443</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">rationalmatrices</span><span class="fu">:::</span><span class="fu">upgrade_objects</span><span class="op">(</span>force <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">l</span>, <span class="va">ps</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 1 x 1 ) impulse response with maximum lag = 5 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      lag=0 [,1] lag=1 [,1] lag=2 [,1] lag=3 [,1] lag=4 [,1] lag=5 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.4609451 -0.4665939 -0.3740679 -0.2998899 -0.2404215 -0.1927457</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   1.505084   2.173405   1.355036  0.8448133  0.5267091  0.3283831</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 1 x 1 ) impulse response with maximum lag = 5 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      lag=0 [,1] lag=1 [,1] lag=2 [,1]  lag=3 [,1]  lag=4 [,1]  lag=5 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]          1 -0.4762331  -0.210765 -0.09327765 -0.04128161 -0.01826988</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      lag=0 [,1] lag=1 [,1] lag=2 [,1] lag=3 [,1] lag=4 [,1] lag=5 [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]          1  0.9021904  0.3396013  0.1278323 0.04811845 0.01811268</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>

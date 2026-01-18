@@ -15,7 +15,7 @@ polm object stores the coefficients in an (m,n,p+1) dimensional (numeric or comp
 array together with a class attribute c("polm","ratm").
 
 The constructor function polm(a) takes a (numeric or complex) vector, matrix or
-3-dimensional array and returns a polm object.'></head><body>
+3-dimensional array and returns a polm object.'><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -37,6 +37,7 @@ The constructor function polm(a) takes a (numeric or complex) vector, matrix or
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/a_rational_matrices.html">Rational Matrices</a></li>
     <li><a class="dropdown-item" href="../articles/b_technical_details_ratm.html">Rational Matrices: Technical Details</a></li>
   </ul></li>
+<li class="nav-item"><a class="nav-link" href="../claude.html">Claude Guide</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -135,12 +136,12 @@ if the third dimension is zero, then the <code>polm</code> object is interpreted
 <span class="r-in"><span><span class="co"># random (2 x 3) polynomial matrix a(z) = a0 + a1 z + a2 z^2 + a3 z^3 (degree = 3)</span></span></span>
 <span class="r-in"><span><span class="fu">polm</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="fl">3</span><span class="op">*</span><span class="fl">4</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 2 x 3 ) matrix polynomial with degree &lt;= 3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        z^0 [,1]       [,2]         [,3]  z^1 [,1]        [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.1524489 -1.2983448 -0.768052156 1.6407608  0.08860872 -1.162073</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -1.4101398 -0.6999564 -0.004662403 0.7525396 -0.51284008  0.932685</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        z^2 [,1]      [,2]      [,3]   z^3 [,1]      [,2]      [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.1321463 0.4199629 0.5641583 -0.4832749 0.3143538 -1.111787</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.9446715 1.0907373 0.1811509  0.1394623 1.3254972  1.041035</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        z^0 [,1]       [,2]       [,3]  z^1 [,1]      [,2]      [,3]   z^2 [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.6775613  2.5608409  0.1927945  1.008282 -1.734546 0.5753295  1.5399118</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.3507323 -0.1777376 -0.4289415 -0.872292  1.509788 1.0183546 -0.9538422</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          [,2]      [,3]  z^3 [,1]      [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 1.428601 2.0597542 0.1719504 -1.361190 0.54367045</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 1.714943 0.9336601 0.5530064  0.768606 0.08115584</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># random (2 x 1) polynomial matrix with complex coefficients (degree = 2)</span></span></span>
 <span class="r-in"><span><span class="va">a</span> <span class="op">=</span> <span class="fu">polm</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/complex.html" class="external-link">complex</a></span><span class="op">(</span>real <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="fl">1</span><span class="op">*</span><span class="fl">3</span><span class="op">)</span>, </span></span>
@@ -154,9 +155,9 @@ if the third dimension is zero, then the <code>polm</code> object is interpreted
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 2 x 1 ) matrix polynomial with degree &lt;= 2</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">a</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 2 x 1 ) matrix polynomial with degree &lt;= 2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          z^0 [,1]      z^1 [,1]     z^2 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.436+0.549i -1.208-0.397i 0.820+0.518i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 1.295+0.701i  0.044-0.177i 0.583+0.506i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           z^0 [,1]      z^1 [,1]      z^2 [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  1.279-1.171i -1.440+0.404i -0.136-1.391i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.474+1.604i  0.085+0.577i -1.577-1.699i</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

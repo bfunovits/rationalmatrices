@@ -5,7 +5,7 @@ that \(x(z) = a^{-1}(z) b(z)\).
 The polynomial matrix \(a(z)\) must be square and invertible."><meta property="og:description" content="A Left Matrix Fraction Description (LMFD) of a rational matrix, \(x(z)\) say, is a
 pair \((a(z),b(z))\) of polynomial matrices, such
 that \(x(z) = a^{-1}(z) b(z)\).
-The polynomial matrix \(a(z)\) must be square and invertible."></head><body>
+The polynomial matrix \(a(z)\) must be square and invertible."><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -27,6 +27,7 @@ The polynomial matrix \(a(z)\) must be square and invertible."></head><body>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/a_rational_matrices.html">Rational Matrices</a></li>
     <li><a class="dropdown-item" href="../articles/b_technical_details_ratm.html">Rational Matrices: Technical Details</a></li>
   </ul></li>
+<li class="nav-item"><a class="nav-link" href="../claude.html">Claude Guide</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -137,12 +138,12 @@ attribute <code>order = c(m,n,p,q)</code> and a class attribute <code>c("lmfd", 
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 2 x 3 ) left matrix fraction description a^(-1)(z) b(z) with degrees (p = 1, q = 1)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> left factor a(z):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1]  [,2] z^1 [,1]  [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]    -0.55 -0.28    -0.13 -0.55</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]    -0.98 -0.21    -0.86  0.14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]     1.19 -0.41     0.18  0.42</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]     1.60  1.05     0.14  0.01</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> right factor b(z):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1]  [,2]  [,3] z^1 [,1]  [,2]  [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]     0.14  0.28 -0.62    -0.28 -0.69   0.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]    -0.31  1.34 -0.43    -1.21 -0.08  -0.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]    -0.74  0.07  0.19    -0.36 -0.38 -0.37</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]     1.30 -0.27  0.58    -0.22 -1.11  1.28</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="co">### the following calls to lmfd() throw an error </span></span></span>

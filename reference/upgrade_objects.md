@@ -113,19 +113,19 @@ zv = zvalues(ss)
 rationalmatrices:::upgrade_objects(force = TRUE, l)
 #> [[1]]
 #> statespace realization [1,1] with s = 1 states
-#>           s[1]       u[1]
-#> s[1] 0.8016991 -0.4665939
-#> x[1] 1.0000000  0.4609451
+#>           s[1]     u[1]
+#> s[1] 0.6234621 2.173405
+#> x[1] 1.0000000 1.505084
 #> 
 rationalmatrices:::upgrade_objects(force = FALSE, l)
 #> [[1]]
 #> ( 1 x 1 ) left matrix fraction description a^(-1)(z) b(z) with degrees (p = 1, q = 1)
 #> left factor a(z):
 #>      z^0 [,1]   z^1 [,1]
-#> [1,]        1 -0.8016991
+#> [1,]        1 -0.6234621
 #> right factor b(z):
-#>       z^0 [,1]   z^1 [,1]
-#> [1,] 0.4609451 -0.8361331
+#>      z^0 [,1] z^1 [,1]
+#> [1,] 1.505084 1.235042
 #> 
 
 # Upgrade poly to rmfd
@@ -139,19 +139,19 @@ rationalmatrices:::upgrade_objects(force = TRUE, p, r)
 #> 
 #> [[2]]
 #> statespace realization [1,1] with s = 1 states
-#>          s[1]      u[1]
-#> s[1] 1.362329 -2.200286
-#> x[1] 1.000000 -1.439654
+#>         s[1]       u[1]
+#> s[1] 1.05146 -0.1372637
+#> x[1] 1.00000 -1.4568443
 #> 
 rationalmatrices:::upgrade_objects(force = TRUE, l, ps)
 #> [[1]]
 #> ( 1 x 1 ) impulse response with maximum lag = 5 
 #>      lag=0 [,1] lag=1 [,1] lag=2 [,1] lag=3 [,1] lag=4 [,1] lag=5 [,1]
-#> [1,]  0.4609451 -0.4665939 -0.3740679 -0.2998899 -0.2404215 -0.1927457
+#> [1,]   1.505084   2.173405   1.355036  0.8448133  0.5267091  0.3283831
 #> 
 #> [[2]]
 #> ( 1 x 1 ) impulse response with maximum lag = 5 
-#>      lag=0 [,1] lag=1 [,1] lag=2 [,1]  lag=3 [,1]  lag=4 [,1]  lag=5 [,1]
-#> [1,]          1 -0.4762331  -0.210765 -0.09327765 -0.04128161 -0.01826988
+#>      lag=0 [,1] lag=1 [,1] lag=2 [,1] lag=3 [,1] lag=4 [,1] lag=5 [,1]
+#> [1,]          1  0.9021904  0.3396013  0.1278323 0.04811845 0.01811268
 #> 
 ```

@@ -23,7 +23,7 @@ If \(A\) is stable (i.e. the spectral radius of \(A\) is less than one) and
 The procedure uses the Schur decomposition(s) of \(A\) and computes
 the solution &quot;column by column&quot;,
 see (Kitagawa 1977; Hammarling 1982)
-."></head><body>
+."><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -45,6 +45,7 @@ see (Kitagawa 1977; Hammarling 1982)
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/a_rational_matrices.html">Rational Matrices</a></li>
     <li><a class="dropdown-item" href="../articles/b_technical_details_ratm.html">Rational Matrices: Technical Details</a></li>
   </ul></li>
+<li class="nav-item"><a class="nav-link" href="../claude.html">Claude Guide</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -140,18 +141,18 @@ ISSN 0272-4979 (print), 1464-3642 (electronic).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span><span class="co"># note that the solution P (in general) is not positive semidefinite</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/eigen.html" class="external-link">eigen</a></span><span class="op">(</span><span class="va">P</span>, only.values<span class="op">=</span> <span class="cn">TRUE</span>, symmetric <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">$</span><span class="va">values</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  75.3550891   5.8986281   0.9932723 -73.4661932</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  13.236079   4.348068   1.108100 -55.326145</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># attach the eigenvalues of A to the solution P</span></span></span>
 <span class="r-in"><span><span class="va">P</span> <span class="op">=</span> <span class="fu">lyapunov</span><span class="op">(</span><span class="va">A</span>, <span class="va">Q</span>, attach <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">P</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           [,1]       [,2]       [,3]       [,4]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  53.19286  10.500677 -33.998202 -10.024255</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  10.50068 -37.674413   8.497668  36.731780</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -33.99820   8.497668  21.564463  -3.197688</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -10.02426  36.731780  -3.197688 -28.302114</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -10.58683  12.569178 -20.167153  13.821638</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  12.56918   5.023894   9.951874 -11.558506</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -20.16715   9.951874 -21.868632  17.019396</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  13.82164 -11.558506  17.019396  -9.202329</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"lambda")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  2.0000000+0i -0.5596211+0i  0.3561857+0i  0.3021294+0i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  2.00000000+0i -0.42318501+0i -0.12399466+0i  0.01362026+0i</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># issue a warning message</span></span></span>
 <span class="r-in"><span><span class="va">P</span> <span class="op">=</span> <span class="fu">lyapunov</span><span class="op">(</span><span class="va">A</span>, <span class="va">Q</span>, non_stable <span class="op">=</span> <span class="st">'warn'</span><span class="op">)</span></span></span>

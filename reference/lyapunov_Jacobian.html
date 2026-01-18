@@ -9,7 +9,7 @@ $$P = A P A' + Q$$
 where \(A,Q\) are real valued, square matrices and \(Q\) is symmetric.
 The directional derivative of \(P\) along (the matrices) \(dA\), \(dQ\)
 is given by the solution of the Lyapunov Equation:
-$$dP = A dP A' + dA P A' + A P dA' + dQ$$"></head><body>
+$$dP = A dP A' + dA P A' + A P dA' + dQ$$"><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -31,6 +31,7 @@ $$dP = A dP A' + dA P A' + A P dA' + dQ$$"></head><body>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/a_rational_matrices.html">Rational Matrices</a></li>
     <li><a class="dropdown-item" href="../articles/b_technical_details_ratm.html">Rational Matrices: Technical Details</a></li>
   </ul></li>
+<li class="nav-item"><a class="nav-link" href="../claude.html">Claude Guide</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -131,12 +132,12 @@ silently assumes that each column of \(dQ\) represents a symmetric matrix
 <span class="r-in"><span><span class="va">eps</span> <span class="op">=</span> <span class="fl">1e-8</span></span></span>
 <span class="r-in"><span><span class="va">theta</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">J</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">theta</span>, nrow <span class="op">=</span> <span class="va">m</span>, ncol <span class="op">=</span> <span class="va">m</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]      [,3]      [,4]      [,5]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   73.79928 -133.42202 -91.52057 -36.99219 -69.90643</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -133.42202  248.21825 144.23692  63.61531 107.13161</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  -91.52057  144.23692 347.25351 -23.82065 324.63611</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  -36.99219   63.61531 -23.82065  57.38041 -33.49289</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]  -69.90643  107.13161 324.63611 -33.49289 290.65510</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]       [,3]      [,4]        [,5]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  16.260190  -67.33575   4.145523 -34.42496   51.194829</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -67.335749  -83.10334 116.255670 214.70885 -284.355679</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]   4.145523  116.25567   2.613889 -21.61458  122.114984</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -34.424960  214.70885 -21.614584  18.22915   27.226789</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]  51.194829 -284.35568 122.114984  27.22679    1.000307</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># compute the derivative via "finite differences"</span></span></span>
 <span class="r-in"><span><span class="va">dP</span> <span class="op">=</span> <span class="fu"><a href="lyapunov.html">lyapunov</a></span><span class="op">(</span><span class="va">A</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">dA</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">theta</span>, nrow <span class="op">=</span> <span class="va">m</span>, ncol <span class="op">=</span> <span class="va">m</span><span class="op">)</span><span class="op">*</span><span class="va">eps</span>, </span></span>

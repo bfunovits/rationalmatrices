@@ -7,13 +7,16 @@ theory underlying the `rationalmatrices` package. It complements the
 main user guide (Rational Matrices vignette) with in-depth coverage of
 algorithms, numerical methods, and theoretical foundations.
 
-**Topics covered:** - **Left Coprime Polynomials** - Part of Analysis &
-Properties (#5) - **Column Reduced Matrix** - Supporting theory for
-Normal Forms (#4) - **Realization Algorithms** - Deep dive into
-Realization Algorithms (#2) - **Operations with State-Space
-Realizations** - Theory for State-Space Tools (#6) - **Schur, QZ,
-Lyapunov** - Numerical Methods (#7) - **Reflect Poles and Zeroes** -
-Theory for Pole/Zero Reflection (#8)
+**Topics covered:**
+
+- **Left Coprime Polynomials** - Part of Analysis & Properties (#5)
+- **Column Reduced Matrix** - Supporting theory for Normal Forms (#4)
+- **Realization Algorithms** - Deep dive into Realization Algorithms
+  (#2)
+- **Operations with State-Space Realizations** - Theory for State-Space
+  Tools (#6)
+- **Schur, QZ, Lyapunov** - Numerical Methods (#7)
+- **Reflect Poles and Zeroes** - Theory for Pole/Zero Reflection (#8)
 
 For implementation details of these topics, see the source files listed
 in CLAUDE.md and the main vignette.
@@ -97,9 +100,9 @@ Hence, the polynomial $c$ is left prime if and only if $h_{1} = I_{m}$.
 
 As reference for generalized pencils, see
 
-- \[@Gantmacher1959, Chapter XII (in particular §4 on page 35ff)\]
-- \[@Kailath80, page 393ff\]
-- \[@DemmelKagstroem1993\]
+- (Gantmacher 1959, vol. 2, chap. XII (in particular §4 on page 35ff))
+- (Kailath 1980, 393ff)
+- (Demmel and Kågström 1993)
 
 We first construct a *pencil* $P(z) = (A - Bz)$ such that for any
 $z \in {\mathbb{C}}$ the left kernel of $c(z)$ and of $P(z)$ have the
@@ -131,8 +134,8 @@ condition as $$\begin{array}{rcl}
  & \vdots & \\
 {v_{p}z^{p - 1}} & = & {v_{1}\left( c_{0} + c_{1}z + \cdots + c_{p - 1}z^{p - 1} \right)} \\
 {- v_{1}c_{p}z^{p}} & = & {v_{p}z^{p - 1}}
-\end{array}$$ see also @Kailath80, page 393ff. Combining the last two
-equations gives
+\end{array}$$ see also Kailath (1980), page 393ff. Combining the last
+two equations gives
 $$0 = v_{p}z^{p - 1} + v_{1}c_{p}z^{p} = v_{1}\left( c_{0} + c_{1}z + \cdots + c_{p}z^{p} \right).$$
 
 Therefore the matrix $c(z)$ has a non trivial left kernel if and only if
@@ -489,7 +492,7 @@ reduces the degree of the $k$-th column by one.
 
 This procedure is repeated until the column end matrix is regular.
 
-See also @Wolovich1974.
+See also Wolovich (1974).
 
 The coefficients $\alpha_{j}$ are determined from an SVD of the column
 end matrix.
@@ -640,7 +643,7 @@ k_{f} & k_{f + 1} & \cdots & k_{f + p - 1}
 \end{pmatrix}$$ provided that $(f,p)$ is “large enough”.
 
 For a more detailed discussion on Kronecker indices and echelon
-canonical forms, see @Hannan.Deistler12.
+canonical forms, see Hannan and Deistler (2012).
 
 ## Operations with State-Space Realizations
 
@@ -1040,8 +1043,6 @@ $(A,B)$ (or given $(A,C)$).
 3.  Determine the scaling matrix from the requirement
     $DD\prime - DB\prime A^{- T}C\prime = I$.
 
-*Note:* Wann gibt es Probleme? ….
-
 #### zero cancellations
 
 Let $k(z)$ be given. We want to find an allpass transfer function
@@ -1167,6 +1168,25 @@ qr.R(qr_x)
 ```
 
 ## References
+
+Demmel, James, and Bo Kågström. 1993. “The Generalized Schur
+Decomposition of an Arbitrary Pencil a - Lambda b; Robust Software with
+Error Bounds and Applications. Part II: Software and Applications.” *ACM
+Trans. Math. Softw.* 19 (2): 175–201.
+<https://doi.org/10.1145/152613.152616>.
+
+Gantmacher, F. R. 1959. *The Theory of Matrices*. Vol. 2. Chelsea
+Publishing Company.
+
+Hannan, Edward James, and Manfred Deistler. 2012. *The Statistical
+Theory of Linear Systems*. Classics in Applied Mathematics.
+Philadelphia: SIAM.
+
+Kailath, Thomas. 1980. *Linear Systems*. Englewood Cliffs, New Jersey:
+Prentice Hall.
+
+Wolovich, W. A. 1974. *Linear Multivariable Systems*. Applied
+Mathematical Sciences. Springer-Verlag.
 
 ------------------------------------------------------------------------
 

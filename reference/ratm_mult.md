@@ -32,14 +32,14 @@ arguments `e1,e1`.
 ``` r
 (lp1 = test_lpolm(degree_max = 1, degree_min = -1, random = TRUE))
 #> ( 1 x 1 ) Laurent polynomial matrix with degree <= 1, and minimal degree >= -1
-#>      z^-1 [,1]   z^0 [,1]   z^1 [,1]
-#> [1,]  1.080949 0.06279657 -0.5134393
+#>       z^-1 [,1]  z^0 [,1]  z^1 [,1]
+#> [1,] -0.4533987 0.4327917 0.2958176
 (lp2 = test_lpolm(degree_max = 1, degree_min = -1, random = TRUE))
 #> ( 1 x 1 ) Laurent polynomial matrix with degree <= 1, and minimal degree >= -1
-#>      z^-1 [,1]  z^0 [,1]  z^1 [,1]
-#> [1,]  1.037321 -2.096774 -1.044749
+#>      z^-1 [,1]  z^0 [,1]    z^1 [,1]
+#> [1,] -1.116322 -0.115548 -0.03419717
 lp1 %r% lp2
 #> ( 1 x 1 ) Laurent polynomial matrix with degree <= 2, and minimal degree >= -2
-#>      z^-2 [,1] z^-1 [,1]  z^0 [,1] z^1 [,1] z^2 [,1]
-#> [1,]  1.121291 -2.201366 -1.793592  1.01096 0.536415
+#>      z^-2 [,1]  z^-1 [,1]   z^0 [,1]    z^1 [,1]    z^2 [,1]
+#> [1,] 0.5061389 -0.4307456 -0.3647309 -0.04898138 -0.01011613
 ```

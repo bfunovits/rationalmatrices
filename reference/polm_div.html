@@ -7,7 +7,7 @@ The matrices must be compatible, i.e. the number of columns of \(a(z)\) must equ
 $$a(z) = c(z) b(z) + d(z)$$
 where the degree of \(d(z)\) is smaller than the degree of \(b(z)\).
 The matrix \(b(z)\) must be square with a non singular leading coefficient matrix!
-The matrices must be compatible, i.e. the number of columns of \(a(z)\) must equal the number of rows (and columns) of \(b(z)\)."></head><body>
+The matrices must be compatible, i.e. the number of columns of \(a(z)\) must equal the number of rows (and columns) of \(b(z)\)."><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -29,6 +29,7 @@ The matrices must be compatible, i.e. the number of columns of \(a(z)\) must equ
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/a_rational_matrices.html">Rational Matrices</a></li>
     <li><a class="dropdown-item" href="../articles/b_technical_details_ratm.html">Rational Matrices: Technical Details</a></li>
   </ul></li>
+<li class="nav-item"><a class="nav-link" href="../claude.html">Claude Guide</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -80,17 +81,17 @@ The matrices must be compatible, i.e. the number of columns of \(a(z)\) must equ
 <span class="r-in"><span><span class="op">(</span><span class="va">out</span> <span class="op">=</span> <span class="fu">polm_div</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $qu</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 2 ) matrix polynomial with degree &lt;= 2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       z^0 [,1]       [,2]    z^1 [,1]      [,2]   z^2 [,1]       [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.947685  -7.115806  0.03724353  1.660189 -0.2301326 -0.3610648</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -4.915987 -14.650755  1.22579629  3.471123 -0.5963417 -1.3758817</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  6.534776  21.122758 -2.42079170 -5.812314  0.8515300  2.1146335</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       z^0 [,1]      [,2]  z^1 [,1]      [,2]  z^2 [,1]      [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  36.12466  44.29911 13.449209 14.544444 -5.466176 -6.566854</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -65.99837 -72.09624  5.327070  7.312464  6.349676  6.154500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  71.40729  81.53618  7.264565  6.581119 -8.078047 -8.931964</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rem</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 2 ) matrix polynomial with degree &lt;= 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       z^0 [,1]      [,2]   z^1 [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  2.277420 -11.61503   5.849339  11.02783</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  1.935910 -27.33473  15.568595  22.96784</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -2.932782  38.89806 -20.845248 -35.56956</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        z^0 [,1]      [,2]  z^1 [,1]        [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   60.46469 -16.82513  46.56593  -0.9500461</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -100.45128  18.90242 -19.49479 -24.3284306</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  111.57581 -21.92424  46.10258  14.3132742</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">out</span><span class="op">$</span><span class="va">qu</span> <span class="op"><a href="ratm_mult.html">%r%</a></span> <span class="va">b</span> <span class="op">+</span> <span class="va">out</span><span class="op">$</span><span class="va">rem</span><span class="op">)</span></span></span>

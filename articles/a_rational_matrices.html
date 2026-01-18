@@ -11,6 +11,7 @@
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Rational Matrices">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -37,6 +38,7 @@
     <li><a class="dropdown-item" href="../articles/b_technical_details_ratm.html">Rational Matrices: Technical Details</a></li>
   </ul>
 </li>
+<li class="nav-item"><a class="nav-link" href="../claude.html">Claude Guide</a></li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
@@ -52,8 +54,9 @@
 
 
 
-
-<div class="row">
+<link href="a_rational_matrices_files/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<script src="a_rational_matrices_files/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="a_rational_matrices_files/viz-1.8.2/viz.js"></script><link href="a_rational_matrices_files/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
+<script src="a_rational_matrices_files/grViz-binding-1.0.11/grViz.js"></script><div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Rational Matrices</h1>
@@ -75,15 +78,36 @@ Scherrer and Bernd Funovits</h4>
 <h3 id="what-are-rational-matrices">What are Rational Matrices?<a class="anchor" aria-label="anchor" href="#what-are-rational-matrices"></a>
 </h3>
 <p>The <code>rationalmatrices</code> package handles <strong>rational
-matrices</strong> - matrices whose entries are rational functions of z
-(typically z⁻¹ in time-series and control theory applications).</p>
-<p>A rational function can be represented in many equivalent forms: -
-<strong>Polynomial</strong>: a(z) = a₀ + a₁z + … + aₚzᵖ - <strong>Matrix
-fractions</strong>: a⁻¹(z)b(z) (left LMFD) or d(z)c⁻¹(z) (right RMFD) -
-<strong>State-space</strong>: C(z⁻¹I - A)⁻¹B + D (standard in control
-theory) - <strong>Impulse response</strong>: h₀ + h₁z⁻¹ + h₂z⁻² + …
-(time-domain) - <strong>Frequency response</strong>: function values on
-the unit circle</p>
+matrices</strong> - matrices whose entries are rational functions of the
+lag-operator
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>
+(typically
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>z</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><annotation encoding="application/x-tex">z^{-1}</annotation></semantics></math>
+in control theory applications).</p>
+<p>A rational function can be represented in many equivalent forms:</p>
+<ul>
+<li>
+<strong>Polynomial</strong>:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>a</mi><mn>0</mn></msub><mo>+</mo><msub><mi>a</mi><mn>1</mn></msub><mi>z</mi><mo>+</mo><mi>⋯</mi><mo>+</mo><msub><mi>a</mi><mi>p</mi></msub><msup><mi>z</mi><mi>p</mi></msup></mrow><annotation encoding="application/x-tex">a(z) = a_0 + a_1 z + \cdots + a_p z^p</annotation></semantics></math>
+</li>
+<li>
+<strong>Matrix fractions</strong>:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>a</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>b</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">a^{-1}(z)b(z)</annotation></semantics></math>
+(left LMFD) or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><msup><mi>c</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">d(z)c^{-1}(z)</annotation></semantics></math>
+(right RMFD)</li>
+<li>
+<strong>State-space</strong>:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>z</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mi>I</mi><mo>−</mo><mi>A</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mi>B</mi><mo>+</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">C(z^{-1}I - A)^{-1}B + D</annotation></semantics></math>
+(standard in control theory)</li>
+<li>
+<strong>Impulse response</strong>:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mn>0</mn></msub><mo>+</mo><msub><mi>h</mi><mn>1</mn></msub><mi>z</mi><mo>+</mo><msub><mi>h</mi><mn>2</mn></msub><msup><mi>z</mi><mn>2</mn></msup><mo>+</mo><mi>⋯</mi></mrow><annotation encoding="application/x-tex">h_0 + h_1 z + h_2 z^{2} + \cdots</annotation></semantics></math>
+(time-domain)</li>
+<li>
+<strong>Frequency response</strong>: function values on the unit
+circle</li>
+</ul>
 </div>
 <div class="section level3">
 <h3 id="design-philosophy">Design Philosophy<a class="anchor" aria-label="anchor" href="#design-philosophy"></a>
@@ -94,10 +118,14 @@ operations should look and feel like standard matrix
 manipulation</strong>, while seamlessly converting between the most
 appropriate representation for each task.</p>
 <p>This package serves as the foundation for <code>RLDM</code> (Rational
-Linear Dynamic Models) and is particularly useful for: - Linear dynamic
-time series models (VARMA, state-space) - Control theory and system
-analysis - Signal processing and filtering - Any application requiring
-multiple mathematical representations of the same object</p>
+Linear Dynamic Models) and is particularly useful for:</p>
+<ul>
+<li>Linear dynamic time series models (VARMA, state-space)</li>
+<li>Control theory and system analysis</li>
+<li>Signal processing and filtering</li>
+<li>Any application requiring multiple mathematical representations of
+the same object</li>
+</ul>
 </div>
 <div class="section level3">
 <h3 id="guide-to-this-vignette">Guide to This Vignette<a class="anchor" aria-label="anchor" href="#guide-to-this-vignette"></a>
@@ -105,13 +133,24 @@ multiple mathematical representations of the same object</p>
 <p>This vignette covers the main user-facing functionality. For
 implementation details and mathematical theory, see the companion
 vignette “Technical Details”.</p>
-<p><strong>Main sections:</strong> - <strong>Classes</strong> →
-Representation Management (#1 in CLAUDE.md) - <strong>Operations and
-Methods</strong> → Arithmetic Operations (#3), Polynomial Manipulation
-(#4), Analysis (#5) - <strong>Realization Algorithms</strong> →
-Realization Algorithms (#2) - <strong>Methods for Polynomials</strong> →
-Polynomial Manipulation (#4) - <strong>Methods for State-Space
-Forms</strong> → State-Space Tools (#6)</p>
+<p><strong>Main sections:</strong></p>
+<ul>
+<li>
+<strong>Classes</strong> → Representation Management (#1 in
+CLAUDE.md)</li>
+<li>
+<strong>Operations and Methods</strong> → Arithmetic Operations
+(#3), Polynomial Manipulation (#4), Analysis (#5)</li>
+<li>
+<strong>Realization Algorithms</strong> → Realization Algorithms
+(#2)</li>
+<li>
+<strong>Methods for Polynomials</strong> → Polynomial Manipulation
+(#4)</li>
+<li>
+<strong>Methods for State-Space Forms</strong> → State-Space Tools
+(#6)</li>
+</ul>
 <p>Quick start examples follow below:</p>
 <hr>
 <p>We start with some basic examples. First we create a scalar
@@ -226,9 +265,47 @@ vector is a (m×1) or (1×n) matrix.</p>
 <div class="section level3">
 <h3 id="representation-conversion-diagram">Representation Conversion Diagram<a class="anchor" aria-label="anchor" href="#representation-conversion-diagram"></a>
 </h3>
-<p>The color scheme: - <strong>Red</strong>: Realization from Hankel
-matrix (impulse response) - <strong>Blue</strong>: Power series
-extraction from fractions/state-space</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Keep original diagram for reference - can be displayed if needed</span></span>
+<span><span class="fu">DiagrammeR</span><span class="fu">::</span><span class="fu"><a href="https://rich-iannone.github.io/DiagrammeR/reference/grViz.html" class="external-link">grViz</a></span><span class="op">(</span><span class="st">"</span></span>
+<span><span class="st">  digraph G {</span></span>
+<span><span class="st">    compound=true;</span></span>
+<span><span class="st">    splines = lines;</span></span>
+<span><span class="st">    graph [layout = dot, rankdir = LR]</span></span>
+<span><span class="st">    splines = lines</span></span>
+<span><span class="st">    ra [label='polm():\nPolynomial']</span></span>
+<span><span class="st">    ra -&gt; rb;</span></span>
+<span><span class="st">    ra -&gt; rc;</span></span>
+<span><span class="st">    subgraph cluster_repr {</span></span>
+<span><span class="st">      label = 'Matrix Fraction &amp; State-Space'</span></span>
+<span><span class="st">      fontsize = 14</span></span>
+<span><span class="st">      rb [label='lmfd():\nLeft Fraction\na⁻¹(z)b(z)']</span></span>
+<span><span class="st">      rc [label='rmfd():\nRight Fraction\nd(z)c⁻¹(z)']</span></span>
+<span><span class="st">      rd [label = 'stsp():\nState-Space\nC(z⁻¹I-A)⁻¹B+D']</span></span>
+<span><span class="st">      {rank=same; rb,rc,rd}</span></span>
+<span><span class="st">    }</span></span>
+<span><span class="st">    subgraph cluster_pseries {</span></span>
+<span><span class="st">      label = 'Impulse &amp; Frequency Response'</span></span>
+<span><span class="st">      pa [label = 'pseries():\nPower Series']</span></span>
+<span><span class="st">      pz [label = 'zvalues():\nFunction Values']</span></span>
+<span><span class="st">    }</span></span>
+<span><span class="st">    ha [label = 'Hankel Matrix\n(Rank Analysis)' ]</span></span>
+<span><span class="st">    pa -&gt; ha[label = 'via lags']</span></span>
+<span><span class="st">    ha -&gt; rb [label = 'Left\nEchelon', color = 'red']</span></span>
+<span><span class="st">    ha -&gt; rd [label = 'Balanced\nRealization', color = 'red']</span></span>
+<span><span class="st">    rb -&gt; pa [label = 'Extract', color = 'blue']</span></span>
+<span><span class="st">    rd -&gt; pa [label = 'Extract', color = 'blue']</span></span>
+<span><span class="st">  }"</span><span class="op">)</span></span></code></pre></div>
+<div class="grViz html-widget html-fill-item" id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"diagram":"\n  digraph G {\n    compound=true;\n    splines = lines;\n    graph [layout = dot, rankdir = LR]\n    splines = lines\n    ra [label=\"polm():\nPolynomial\"]\n    ra -> rb;\n    ra -> rc;\n    subgraph cluster_repr {\n      label = \"Matrix Fraction & State-Space\"\n      fontsize = 14\n      rb [label=\"lmfd():\nLeft Fraction\na⁻¹(z)b(z)\"]\n      rc [label=\"rmfd():\nRight Fraction\nd(z)c⁻¹(z)\"]\n      rd [label = \"stsp():\nState-Space\nC(z⁻¹I-A)⁻¹B+D\"]\n      {rank=same; rb,rc,rd}\n    }\n    subgraph cluster_pseries {\n      label = \"Impulse & Frequency Response\"\n      pa [label = \"pseries():\nPower Series\"]\n      pz [label = \"zvalues():\nFunction Values\"]\n    }\n    ha [label = \"Hankel Matrix\n(Rank Analysis)\" ]\n    pa -> ha[label = \"via lags\"]\n    ha -> rb [label = \"Left\nEchelon\", color = \"red\"]\n    ha -> rd [label = \"Balanced\nRealization\", color = \"red\"]\n    rb -> pa [label = \"Extract\", color = \"blue\"]\n    rd -> pa [label = \"Extract\", color = \"blue\"]\n  }","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><p>The color scheme:</p>
+<ul>
+<li>
+<strong>Red</strong>: Realization from Hankel matrix (impulse
+response)</li>
+<li>
+<strong>Blue</strong>: Power series extraction from
+fractions/state-space</li>
+</ul>
 <p>Here, we focus on polynomial matrices and rational matrices
 represented by a <em>left matrix fraction description</em> or by a
 <em>statespace realization</em>.</p>
@@ -286,8 +363,8 @@ b(z) = b_0 + b_1 z + \cdots + b_q z^q
 </annotation></semantics></math> is an
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo>×</mo><mi>n</mi><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(m \times n)</annotation></semantics></math>
 dimensional matrix polynomial of degree
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>.<br>
-The matrix
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>.</p>
+<p>The matrix
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">c(z)</annotation></semantics></math>
 is thus described by the pair
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mi>b</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(a(z), b(z))</annotation></semantics></math>.
@@ -326,13 +403,14 @@ which has no pole at
 may be represented as</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>C</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>z</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><msub><mi>I</mi><mi>s</mi></msub><mo>−</mo><mi>A</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mi>B</mi><mo>+</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">
 c(z) = C(z^{-1}I_s - A)^{-1}B + D
-</annotation></semantics></math> where
+</annotation></semantics></math></p>
+<p>where
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>s</mi><mo>×</mo><mi>s</mi></mrow></msup></mrow><annotation encoding="application/x-tex">A\in \mathbb{R}^{s\times s}</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>s</mi><mo>×</mo><mi>n</mi></mrow></msup></mrow><annotation encoding="application/x-tex">B\in \mathbb{R}^{s\times n}</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>m</mi><mo>×</mo><mi>s</mi></mrow></msup></mrow><annotation encoding="application/x-tex">C\in \mathbb{R}^{m\times s}</annotation></semantics></math>
 and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>m</mi><mo>×</mo><mi>n</mi></mrow></msup></mrow><annotation encoding="application/x-tex">D\in \mathbb{R}^{m\times n}</annotation></semantics></math>.
-The integer
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mo>∈</mo><msup><mi>ℝ</mi><mrow><mi>m</mi><mo>×</mo><mi>n</mi></mrow></msup></mrow><annotation encoding="application/x-tex">D\in \mathbb{R}^{m\times n}</annotation></semantics></math>.</p>
+<p>The integer
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>s</mi><annotation encoding="application/x-tex">s</annotation></semantics></math>
 is called the <em>state dimension</em> of the above realization.
 Statespace representations are by no means unique, even the state
@@ -399,11 +477,12 @@ dimensional array with a class attribute
 <em>finite</em> sequence of coefficients is sufficient to reconstruct
 the rational matrix
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">c(z)</annotation></semantics></math>,
-see e.g. the Ho-Kalman realization algorithm implemented in
-<code>pseries2stsp</code> and the function <code>pseries2lmfd</code>.
-(Of course the number of coefficients has to be large enough.) Hence, we
-can interpret (a finite) impulse response function as another way to
-represent rational matrices.</p>
+see e.g. the Ho-Kalman realization algorithm <span class="citation">(Ho
+and Kalman 1966)</span> implemented in <code>pseries2stsp</code> and the
+function <code>pseries2lmfd</code>. (Of course the number of
+coefficients has to be large enough.) Hence, we can interpret (a finite)
+impulse response function as another way to represent rational
+matrices.</p>
 </div>
 <div class="section level3">
 <h3 id="frequency-response">Frequency Response<a class="anchor" aria-label="anchor" href="#frequency-response"></a>
@@ -585,7 +664,8 @@ rational matrix. This procedure is implemented in the tool
 with the <em>Ho-Kalman</em> algorithm. See the tools
 <code><a href="../reference/pseries2stsp.html">pseries2stsp()</a></code> and <code><a href="../reference/as.stsp.html">as.stsp.pseries()</a></code>.</p>
 <p>For a more detailed discussion on Kronecker indices and echelon
-canonical forms, see <span class="citation">@Hannan.Deistler12</span>.</p>
+canonical forms, see <span class="citation">Hannan and Deistler
+(2012)</span>.</p>
 </div>
 <div class="section level4">
 <h4 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
@@ -601,7 +681,7 @@ are
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ν</mi><mn>1</mn></msub><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">\nu_1 = 3</annotation></semantics></math>
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ν</mi><mn>2</mn></msub><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">\nu_2=2</annotation></semantics></math>:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create a random rational matrix in statespace form</span></span>
 <span><span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="../reference/test_stsp.html">test_stsp</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, s <span class="op">=</span> <span class="fl">5</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">X</span></span>
@@ -625,7 +705,7 @@ and
 <span><span class="co">#&gt;        basis rows:  1 2 3 4 5</span></span></code></pre></div>
 <p>Next we take the impulse response function and compute a statespace
 realization of this rational matrix in echelon form:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="../reference/pseries2stsp.html">pseries2stsp</a></span><span class="op">(</span><span class="va">K</span>, method <span class="op">=</span> <span class="st">'echelon'</span><span class="op">)</span><span class="op">$</span><span class="va">Xs</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">X</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; statespace realization [2,2] with s = 5 states</span></span>
@@ -648,7 +728,7 @@ matrix with Kronecker indices
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ν</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\nu =(2,3,1)</annotation></semantics></math>
 and in addition we demand that the matrix is stable. i.e. the matrix no
 poles inside the unit circle:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nu</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="../reference/test_stsp.html">test_stsp</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span><span class="op">)</span>, nu <span class="op">=</span> <span class="va">nu</span>, D <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="cn">NA</span>,<span class="cn">NA</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="cn">NA</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">3</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
 <span>              digits <span class="op">=</span> <span class="fl">2</span>, bpoles <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
@@ -673,7 +753,7 @@ poles inside the unit circle:</p>
 <p>An LMFD realization of this matrix
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
 is obtained a s follows</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="../reference/pseries2lmfd.html">pseries2lmfd</a></span><span class="op">(</span><span class="va">K</span><span class="op">)</span><span class="op">$</span><span class="va">Xl</span></span>
 <span><span class="va">X</span></span>
 <span><span class="co">#&gt; ( 3 x 2 ) left matrix fraction description a^(-1)(z) b(z) with degrees (p = 3, q = 3)</span></span>
@@ -711,7 +791,7 @@ but not the row
 and hence it is not a nice selection. Therefore the function
 <code>basis2nu</code> throws an error, if we try to compute the
 correponding Kronecker indices:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">basis</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">6</span>,<span class="fl">7</span><span class="op">)</span></span>
 <span><span class="va">nu</span> <span class="op">=</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="../reference/Kronecker-Indices.html">basis2nu</a></span><span class="op">(</span><span class="va">basis</span>, m<span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error in basis2nu(basis, m = 3) : </span></span>
@@ -850,7 +930,7 @@ then
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>b</mi><mo accent="true">̂</mo></mover><mi>′</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><mover><mi>a</mi><mo accent="true">̂</mo></mover><mi>′</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>x</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\hat{b}'(z)(\hat{a}')^{-1}(z) = x(z)</annotation></semantics></math>
 is the desired RMFD of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">x(z)</annotation></semantics></math>:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create random rational, stable, (3 x 2) matrix in statespace form</span></span>
 <span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="../reference/test_stsp.html">test_stsp</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span><span class="op">)</span>, s <span class="op">=</span> <span class="fl">2</span>, bpoles <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
@@ -894,7 +974,7 @@ a(z) = \frac{1+0.5z}{1+0.1z+0.1z^2+0.1z^3-0.8z^4}
 </annotation></semantics></math></p>
 </li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">a</span> <span class="op">=</span> <span class="fu"><a href="../reference/as.stsp.html">as.stsp</a></span><span class="op">(</span><span class="fu"><a href="../reference/lmfd.html">lmfd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="op">-</span><span class="fl">0.8</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; statespace realization [1,1] with s = 4 states</span></span>
 <span><span class="co">#&gt;      s[1] s[2] s[3] s[4]    u[1]</span></span>
@@ -910,7 +990,7 @@ a(z) = \frac{1+0.5z}{1+0.1z+0.1z^2+0.1z^3-0.8z^4}
 <span><span class="co">#&gt; [1] 0</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">sp</span>, <span class="fu"><a href="../reference/zvalues.html">zvalues</a></span><span class="op">(</span><span class="va">a</span> <span class="op"><a href="../reference/ratm_mult.html">%r%</a></span> <span class="fu"><a href="../reference/Ht.html">Ht</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span>, n.f <span class="op">=</span> <span class="fl">101</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">sp</span><span class="op">)</span></span></code></pre></div>
 <p><img src="a_rational_matrices_files/figure-html/unnamed-chunk-16-1.png" class="r-plt" alt="Spectral density plot of state-space rational function showing Hermitian transpose properties" width="700"></p>
 <p>The Hermitean transpose plays an important role for the <em>spectral
@@ -963,7 +1043,7 @@ dimensional matrix with elements selected by the index
 <code>x[i,j]</code> returns a matrix with rows selected by
 <code>i</code> and columns selected by <code>j</code>.</li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="../reference/test_polm.html">test_polm</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, degree <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">x</span></span>
 <span><span class="co">#&gt; ( 2 x 3 ) matrix polynomial with degree &lt;= 2 </span></span>
@@ -1010,7 +1090,7 @@ polynomial of a left matrix fraction description (<code>lmfd</code>
 object) and the matrices
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mo>,</mo><mi>B</mi><mo>,</mo><mi>C</mi><mo>,</mo><mi>D</mi></mrow><annotation encoding="application/x-tex">A,B,C,D</annotation></semantics></math>
 of a state space representation (<code>stsp</code> object).</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># extract a(z) polynomial</span></span>
 <span><span class="va">x</span><span class="op">$</span><span class="va">a</span></span>
 <span><span class="co">#&gt; ( 2 x 2 ) matrix polynomial with degree &lt;= 1 </span></span>
@@ -1020,7 +1100,7 @@ of a state space representation (<code>stsp</code> object).</p>
 <p>The assigment operation <code>x[,] &lt;- value</code> is only
 implemented for polynomial matrices and works quite analogously to the
 assigment operation of “ordinary” matrices.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a</span> <span class="op">=</span> <span class="fu"><a href="../reference/test_polm.html">test_polm</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span><span class="op">)</span>, degree <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">a</span>, format <span class="op">=</span> <span class="st">'c'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ( 3 x 2 ) matrix polynomial with degree &lt;= 1 </span></span>
@@ -1081,7 +1161,7 @@ assigment operation of “ordinary” matrices.</p>
 <p><strong>Note:</strong> The subsetting and the assigment operators do
 not allow “named” arguments. Therefore the following statements throw an
 error</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="va">a</span><span class="op">[</span>i<span class="op">=</span><span class="fl">1</span>, j<span class="op">=</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error in `[.polm`(a, i = 1, j = 2) : named dimensions are not supported</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="va">a</span><span class="op">[</span>i<span class="op">=</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">)</span></span>
@@ -1135,7 +1215,7 @@ be skipped.</li>
 is ill conditioned or if the companion matrix
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>A</mi><annotation encoding="application/x-tex">A</annotation></semantics></math>
 is (close to) singular.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># polynomial with degree p = 0 ##############################</span></span>
 <span><span class="fu"><a href="../reference/poles_and_zeroes.html">zeroes</a></span><span class="op">(</span><span class="fu"><a href="../reference/polm.html">polm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>  <span class="co"># returns empty vector</span></span>
 <span><span class="co">#&gt; numeric(0)</span></span>
@@ -1215,7 +1295,7 @@ is <em>not</em> left coprime. Here a pole/zero cancellation may occur,
 which is not taken into account by the methods <code>poles.lmfd</code>
 and <code>zeroes.lmfd</code>. This means that the functions may return
 some <em>spurious</em> poles and zeroes.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create a random rational (2 x 2) matrix in LMFD form with p = 1, q = 2</span></span>
 <span><span class="co"># note that two random polynomials are "generically" left coprime</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">8924</span><span class="op">)</span></span>
@@ -1242,7 +1322,7 @@ with a common factor
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math>
 and note that
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>r</mi><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>r</mi><mi>b</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msup><mi>a</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mi>b</mi><mo>=</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">(r a)^{-1} (r b) = a^{-1} b = c</annotation></semantics></math>.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># generate random common factor</span></span>
 <span><span class="va">r</span> <span class="op">=</span> <span class="fu"><a href="../reference/test_polm.html">test_polm</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, degree <span class="op">=</span> <span class="fl">1</span>, random <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">ra</span> <span class="op">=</span> <span class="va">r</span> <span class="op"><a href="../reference/ratm_mult.html">%r%</a></span> <span class="va">a</span></span>
@@ -1418,20 +1498,20 @@ and/or controllable one may consider the observability and
 controllability matrices (which may be computed with
 <code>obs_matrix</code> and <code>ctr_matrix</code>) or the
 corresponding Grammians (see <code>grammians</code>).</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="../reference/test_stsp.html">test_stsp</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, s <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/is.minimal.html">is.minimal</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
 <p>Note that operations on <code>stsp</code> objects may return non
 minimal realizations. E.g.:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/is.minimal.html">is.minimal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">x</span><span class="op">)</span>, only.answer <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'answer'</span>,<span class="st">'sv'</span>,<span class="st">'s0'</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt; $answer</span></span>
 <span><span class="co">#&gt; [1] FALSE</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $sv</span></span>
-<span><span class="co">#&gt; [1] 3.190673e+01 2.576708e+01 2.788731e-15 2.253522e-15 9.794186e-16</span></span>
-<span><span class="co">#&gt; [6] 5.943141e-16 3.719067e-16 9.477004e-17</span></span>
+<span><span class="co">#&gt; [1] 6.300395e+01 5.292349e+01 7.700432e-15 3.743904e-15 2.753267e-15</span></span>
+<span><span class="co">#&gt; [6] 1.399977e-15 1.046407e-15 4.476098e-16</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $s0</span></span>
 <span><span class="co">#&gt; [1] 2</span></span>
@@ -1440,8 +1520,8 @@ minimal realizations. E.g.:</p>
 <span><span class="co">#&gt; [1] FALSE</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $sv</span></span>
-<span><span class="co">#&gt; [1] 3.524829e-15 1.731706e-15 4.399606e-16 2.880929e-16 1.725717e-16</span></span>
-<span><span class="co">#&gt; [6] 1.000391e-16 6.785629e-17 2.351842e-17</span></span>
+<span><span class="co">#&gt; [1] 1.136170e-12 1.900404e-13 7.902990e-14 2.577351e-14 3.080105e-15</span></span>
+<span><span class="co">#&gt; [6] 1.323681e-15 3.842298e-16 3.872231e-17</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $s0</span></span>
 <span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
@@ -1462,7 +1542,7 @@ supported.</p>
 <p>As a simply example consider a polynomial of degree
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mn>4</mn><annotation encoding="application/x-tex">4</annotation></semantics></math>
 and its derivatives:</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a</span> <span class="op">=</span> <span class="fu"><a href="../reference/polm.html">polm</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">x</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>,<span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">a</span> <span class="op">=</span> <span class="va">a</span> <span class="op">*</span> <span class="fu"><a href="../reference/polm.html">polm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">/</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
@@ -1471,7 +1551,7 @@ and its derivatives:</p>
 <span><span class="co">#&gt; ( 1 x 1 ) matrix polynomial with degree &lt;= 4 </span></span>
 <span><span class="co">#&gt;                        [,1]</span></span>
 <span><span class="co">#&gt; [1,]  1 - 1.25z^2 + 0.25z^4</span></span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">z</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="op">-</span><span class="fl">2.25</span>, to <span class="op">=</span> <span class="fl">2.25</span>, length.out <span class="op">=</span> <span class="fl">201</span><span class="op">)</span></span>
 <span><span class="va">out</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/zvalues.html">zvalues</a></span><span class="op">(</span><span class="va">a</span>, z <span class="op">=</span> <span class="va">z</span><span class="op">)</span>, x_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="../reference/zvalues.html">zvalues</a></span><span class="op">(</span><span class="fu"><a href="../reference/derivative.html">derivative</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span>, z <span class="op">=</span> <span class="va">z</span><span class="op">)</span>,</span>
 <span>                                      <span class="fu"><a href="../reference/zvalues.html">zvalues</a></span><span class="op">(</span><span class="fu"><a href="../reference/derivative.html">derivative</a></span><span class="op">(</span><span class="fu"><a href="../reference/derivative.html">derivative</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">12</span><span class="op">)</span>, z <span class="op">=</span> <span class="va">z</span><span class="op">)</span>,</span>
@@ -1482,11 +1562,11 @@ and its derivatives:</p>
 <span><span class="va">opar</span> <span class="op">=</span> <span class="fu">out</span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">0</span>, col <span class="op">=</span> <span class="st">'darkgray'</span><span class="op">)</span></span></code></pre></div>
 <p><img src="a_rational_matrices_files/figure-html/unnamed-chunk-27-1.png" class="r-plt" alt="Polynomial and its first three derivatives plotted over real axis showing critical points" width="700"></p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span></code></pre></div>
 <p>Note that computing the derivative for an impulse response object
 decreases the number of lags by one!</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">=</span> <span class="fu"><a href="../reference/test_stsp.html">test_stsp</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, s <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="fu"><a href="../reference/pseries.html">pseries</a></span><span class="op">(</span><span class="fu"><a href="../reference/derivative.html">derivative</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, lag.max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>,</span>
@@ -1545,13 +1625,13 @@ for
 or
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi><mo>&lt;</mo><mi>j</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">j &lt; j(i)</annotation></semantics></math>.</li>
 </ul>
-<p>See also <span class="citation">@Kailath80</span>.</p>
+<p>See also <span class="citation">Kailath (1980)</span>.</p>
 <p>Quite analogously one may transform the matrix
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">a(z)</annotation></semantics></math>
 by elementary column operations into “quasi-lower-triangular” form
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>a</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><msup><mi>u</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">h(z) = a(z)u^{-1}(z)</annotation></semantics></math>.
 The corresponding normal form is called <em>row Hermite form</em>.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a</span> <span class="op">=</span> <span class="fu"><a href="../reference/polm.html">polm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.4</span>, <span class="op">-</span><span class="fl">1.3</span>, <span class="op">-</span><span class="fl">0.3</span>,  <span class="fl">0.6</span>, <span class="fl">1.1</span>,  <span class="fl">1</span>,</span>
 <span>                 <span class="op">-</span><span class="fl">1.7</span>,  <span class="fl">0</span>,   <span class="op">-</span><span class="fl">0.8</span>, <span class="op">-</span><span class="fl">0.3</span>, <span class="fl">3.2</span>, <span class="op">-</span><span class="fl">0.4</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">a</span>, format <span class="op">=</span> <span class="st">'c'</span><span class="op">)</span></span>
@@ -1573,7 +1653,7 @@ The corresponding normal form is called <em>row Hermite form</em>.</p>
 <span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
 <p>The <em>row Hermite form</em> may be obtained by calling the function
 <code><a href="../reference/hnf.html">hnf()</a></code> with the options <code>from_left=FALSE</code>.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">out</span> <span class="op">=</span> <span class="fu"><a href="../reference/hnf.html">hnf</a></span><span class="op">(</span><span class="va">a</span>, from_left <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">h</span>, format <span class="op">=</span> <span class="st">'c'</span>, digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ( 2 x 3 ) matrix polynomial with degree &lt;= 0 </span></span>
@@ -1599,7 +1679,7 @@ dimensional polynomial matrix with rank
 The function <code><a href="../reference/hnf.html">hnf()</a></code> returns an “estimate” of the rank and
 the “pivots”
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mi>j</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mi>…</mi><mo>,</mo><mi>j</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>r</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">j(1),j(2),\ldots, j(r)</annotation></semantics></math>.</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">a</span> <span class="op">=</span> <span class="fu"><a href="../reference/polm.html">polm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">2</span>,<span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">2</span>,<span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">6</span>,<span class="op">-</span><span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">3</span>,<span class="fl">0</span>,<span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">2</span>,<span class="op">-</span><span class="fl">1</span>,</span>
 <span>                 <span class="fl">1</span>,<span class="op">-</span><span class="fl">2</span>,<span class="fl">1</span>,<span class="op">-</span><span class="fl">1</span>,<span class="fl">3</span>,<span class="fl">0</span>,<span class="fl">2</span>,<span class="op">-</span><span class="fl">8</span>,<span class="fl">1</span>,<span class="op">-</span><span class="fl">5</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">a</span>, format <span class="op">=</span> <span class="st">'c'</span><span class="op">)</span></span>
@@ -1667,11 +1747,12 @@ for
 </ul>
 <p>The above factorization may be constructed by using elementary
 column- and row- operations.</p>
-<p>For more details, see e.g. <span class="citation">@Kailath80</span>.</p>
+<p>For more details, see e.g. <span class="citation">Kailath
+(1980)</span>.</p>
 <p>As a simple example consider the following
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>4</mn><mo>×</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">4 \times 5</annotation></semantics></math>
 dimensional polynomial matrix</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span> <span class="co"># set seed for random number generation</span></span>
 <span></span>
 <span><span class="va">z</span> <span class="op">=</span> <span class="fu"><a href="../reference/polm.html">polm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
@@ -1741,7 +1822,7 @@ is column reduced.</p>
 <p>As an example consider a random
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">(</mo><mn>3</mn><mo>×</mo><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(3 \times 3)</annotation></semantics></math>,
 polynomial matrix whose column end matrix has rank 1:</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># create a random (3 x 3) polynmial matrix with a column end matrix of rank 1</span></span>
 <span><span class="va">col_end_matrix</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,<span class="fl">1</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">3</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span></span>
 <span>                 <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,<span class="fl">1</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">1</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
@@ -1749,29 +1830,29 @@ polynomial matrix whose column end matrix has rank 1:</p>
 <span>               digits <span class="op">=</span> <span class="fl">2</span>, col_end_matrix <span class="op">=</span> <span class="va">col_end_matrix</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">a</span>, format <span class="op">=</span> <span class="st">'c'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ( 3 x 3 ) matrix polynomial with degree &lt;= 2 </span></span>
-<span><span class="co">#&gt;                          [,1]          [,2]           [,3]</span></span>
-<span><span class="co">#&gt; [1,]  -0.23 - 0.51z - 0.72z^2  -1.8 - 0.72z  -0.59 + 3.84z</span></span>
-<span><span class="co">#&gt; [2,]  -1.05 - 0.11z - 0.24z^2  0.41 - 0.24z  -0.09 + 1.28z</span></span>
-<span><span class="co">#&gt; [3,]            -1.32 + 0.43z         -0.85          -0.09</span></span>
+<span><span class="co">#&gt;                         [,1]          [,2]          [,3]</span></span>
+<span><span class="co">#&gt; [1,]  -0.63 + 1.77z + 0.4z^2  -0.88 + 0.5z  -0.48 + 0.4z</span></span>
+<span><span class="co">#&gt; [2,]  0.69 - 0.01z - 0.08z^2  -0.89 - 0.1z  1.05 - 0.08z</span></span>
+<span><span class="co">#&gt; [3,]  -1.31 - 0.31z - 0.8z^2      0.26 - z   0.54 - 0.8z</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/svd.html" class="external-link">svd</a></span><span class="op">(</span><span class="fu"><a href="../reference/col_end_matrix.html">col_end_matrix</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="va">d</span><span class="op">)</span>       <span class="co"># column end matrix has rank 1</span></span>
-<span><span class="co">#&gt; [1] 4.187601e+00 9.686192e-17 0.000000e+00</span></span>
+<span><span class="co">#&gt; [1] 1.694934e+00 1.695651e-16 9.628233e-18</span></span>
 <span></span>
 <span><span class="va">out</span> <span class="op">=</span> <span class="fu"><a href="../reference/col_reduce.html">col_reduce</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">a</span>, format <span class="op">=</span> <span class="st">'c'</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>   <span class="co"># column reduced matrix</span></span>
 <span><span class="co">#&gt; ( 3 x 3 ) matrix polynomial with degree &lt;= 1 </span></span>
-<span><span class="co">#&gt;               [,1]           [,2]    [,3]</span></span>
-<span><span class="co">#&gt; [1,]  -1.8 - 0.72z  -0.23 + 0.65z  -10.19</span></span>
-<span><span class="co">#&gt; [2,]  0.41 - 0.24z  -1.05 - 0.39z     2.1</span></span>
-<span><span class="co">#&gt; [3,]         -0.85  -1.32 + 0.99z   -4.62</span></span>
+<span><span class="co">#&gt;               [,1]           [,2]  [,3]</span></span>
+<span><span class="co">#&gt; [1,]  -0.88 + 0.5z  -0.63 + 2.25z  0.22</span></span>
+<span><span class="co">#&gt; [2,]  -0.89 - 0.1z   0.69 - 1.06z  1.76</span></span>
+<span><span class="co">#&gt; [3,]      0.26 - z  -1.31 - 0.85z  0.33</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">col_degrees</span><span class="op">)</span>                   <span class="co"># column degrees</span></span>
 <span><span class="co">#&gt; [1] 1 1 0</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">col_end_matrix</span><span class="op">)</span>                <span class="co"># column end matrix</span></span>
-<span><span class="co">#&gt;       [,1]       [,2]       [,3]</span></span>
-<span><span class="co">#&gt; [1,] -0.72  0.6531250 -10.190000</span></span>
-<span><span class="co">#&gt; [2,] -0.24 -0.3889583   2.096667</span></span>
-<span><span class="co">#&gt; [3,]  0.00  0.9910417  -4.623333</span></span>
+<span><span class="co">#&gt;      [,1]  [,2]  [,3]</span></span>
+<span><span class="co">#&gt; [1,]  0.5  2.25 0.224</span></span>
+<span><span class="co">#&gt; [2,] -0.1 -1.06 1.762</span></span>
+<span><span class="co">#&gt; [3,] -1.0 -0.85 0.332</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/svd.html" class="external-link">svd</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">col_end_matrix</span><span class="op">)</span><span class="op">$</span><span class="va">d</span><span class="op">)</span>         <span class="co"># column end matrix is non singular!</span></span>
-<span><span class="co">#&gt; [1] 11.4494680  0.7795513  0.2129076</span></span>
+<span><span class="co">#&gt; [1] 2.8588250 1.6409980 0.7535844</span></span>
 <span></span>
 <span><span class="co"># check reult(s)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="fu"><a href="../reference/polm.html">polm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../reference/prune.html">prune</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">v</span> <span class="op"><a href="../reference/ratm_mult.html">%r%</a></span> <span class="va">out</span><span class="op">$</span><span class="va">v_inv</span><span class="op">)</span><span class="op">)</span></span>
@@ -1825,7 +1906,7 @@ are the <em>partial indices</em> of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">A(z)</annotation></semantics></math>.</p>
 <p>Note that zeroes on the unit circle are not allowed.</p>
 <p>The Wiener-Hopf factorization plays an important role for the
-analysis of linear, rational expectation models. See e.g. <span class="citation">@Al-Sadoon2017</span>.</p>
+analysis of linear, rational expectation models. See e.g. <span class="citation">Al-Sadoon (2017)</span>.</p>
 <p>The WHF is constructed in three steps</p>
 <ul>
 <li>first compute the Smith form
@@ -1856,7 +1937,7 @@ is a polynomial in
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>z</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><annotation encoding="application/x-tex">z^{-1}</annotation></semantics></math>.</li>
 </ul>
 <p>Simulation example:</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">54321</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># create test polynomial</span></span>
@@ -1997,7 +2078,7 @@ polynomial matrix with real coeffcients. This task is accomplished by
 <code>blaschke_multivariate</code>.</p>
 <p>If we want to flip a set of roots, the utility
 <code>transform_allpass</code> may be used.</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1719</span><span class="op">)</span></span>
 <span><span class="va">m0</span> <span class="op">=</span> <span class="fu"><a href="../reference/test_polm.html">test_polm</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, degree <span class="op">=</span> <span class="fl">2</span>, digits <span class="op">=</span> <span class="fl">2</span>, random <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
@@ -2283,7 +2364,7 @@ must be smaller than one. This balancing scheme is therefore called
 <em>minimum phase balancing</em>.</p>
 <p>Some details on how the balanced form is actually computed is given
 in the vignette “Technical Details”.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># example A ############################################################</span></span>
 <span></span>
 <span><span class="co"># "obj" is a (1 by 1) rational matrix in statespace form,</span></span>
@@ -2376,13 +2457,13 @@ in the vignette “Technical Details”.</p>
 <span><span class="va">gr</span> <span class="op">=</span> <span class="fu"><a href="../reference/grammians.html">grammians</a></span><span class="op">(</span><span class="va">obj</span>, <span class="st">'minimum phase'</span><span class="op">)</span></span>
 <span><span class="va">trunc</span> <span class="op">=</span> <span class="fu"><a href="../reference/balance.html">balance</a></span><span class="op">(</span><span class="va">obj</span>, <span class="va">gr</span>, s0 <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">trunc</span><span class="op">$</span><span class="va">sigma</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] 0.4289831713 0.3561010992 0.1135000993 0.1011686568 0.0521755070</span></span>
-<span><span class="co">#&gt;  [6] 0.0113272049 0.0101880822 0.0048271350 0.0013589053 0.0004190745</span></span>
+<span><span class="co">#&gt;  [1] 0.580904673 0.492973132 0.426651235 0.310246516 0.195965988 0.099126844</span></span>
+<span><span class="co">#&gt;  [7] 0.073988375 0.035596157 0.007667147 0.004493532</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">unclass</a></span><span class="op">(</span><span class="fu"><a href="../reference/pseries.html">pseries</a></span><span class="op">(</span><span class="va">obj</span>, lag.max <span class="op">=</span> <span class="fl">25</span><span class="op">)</span><span class="op">)</span> <span class="op">-</span></span>
 <span>        <span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">unclass</a></span><span class="op">(</span><span class="fu"><a href="../reference/pseries.html">pseries</a></span><span class="op">(</span><span class="va">trunc</span><span class="op">$</span><span class="va">ob</span>, lag.max <span class="op">=</span> <span class="fl">25</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.006713588</span></span></code></pre></div>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<span><span class="co">#&gt; [1] 0.03225343</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="../reference/pseries.html">pseries</a></span><span class="op">(</span><span class="va">obj</span>, lag.max <span class="op">=</span> <span class="fl">25</span><span class="op">)</span>, x_list<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="../reference/pseries.html">pseries</a></span><span class="op">(</span><span class="va">trunc</span><span class="op">$</span><span class="va">obj</span>, lag.max <span class="op">=</span> <span class="fl">25</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>     type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'l'</span>,<span class="st">'p'</span><span class="op">)</span>, legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'s=10'</span>, <span class="st">'s=5'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="a_rational_matrices_files/figure-html/unnamed-chunk-37-1.png" class="r-plt" alt="Comparison of full impulse response and balanced truncated impulse response showing approximation quality" width="700"></p>
@@ -2425,7 +2506,7 @@ is outlined in the vignette “technical details”.</p>
 <p>Create a vector of rational functions of the form
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mi>/</mi><msup><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mn>0.9</mn><mi>z</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>k</mi></msup></mrow><annotation encoding="application/x-tex">1/(1-0.9z)^k</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi><mo>=</mo><mn>1</mn><mo>,</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">k=1,2,3,4</annotation></semantics></math>:</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">K0</span> <span class="op">=</span> <span class="fu"><a href="../reference/polm.html">polm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">0.9</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">K</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">K0</span>,</span>
 <span>          <span class="va">K0</span><span class="op">^</span><span class="fl">2</span>,</span>
@@ -2435,7 +2516,7 @@ is outlined in the vignette “technical details”.</p>
 state dimension is
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">s=4</annotation></semantics></math>.)
 Use balance to construct a minimal realization:</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># K is not minimal! minimal state dimension = 4</span></span>
 <span><span class="va">gr</span> <span class="op">=</span> <span class="fu"><a href="../reference/grammians.html">grammians</a></span><span class="op">(</span><span class="va">K</span>, <span class="st">'lyapunov'</span><span class="op">)</span></span>
 <span><span class="va">out</span> <span class="op">=</span> <span class="fu"><a href="../reference/balance.html">balance</a></span><span class="op">(</span><span class="va">K</span>, <span class="va">gr</span>, s <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
@@ -2452,7 +2533,7 @@ Use balance to construct a minimal realization:</p>
 with respect to the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>H</mi><mn>2</mn></msub><annotation encoding="application/x-tex">H_2</annotation></semantics></math>
 inner product.</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">P</span> <span class="op">=</span> <span class="fu"><a href="../reference/lyapunov.html">lyapunov</a></span><span class="op">(</span><span class="va">K</span><span class="op">$</span><span class="va">A</span>, <span class="va">K</span><span class="op">$</span><span class="va">B</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">K</span><span class="op">$</span><span class="va">B</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">Q</span> <span class="op">=</span> <span class="va">K</span><span class="op">$</span><span class="va">C</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">P</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">K</span><span class="op">$</span><span class="va">C</span><span class="op">)</span> <span class="op">+</span> <span class="va">K</span><span class="op">$</span><span class="va">D</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">K</span><span class="op">$</span><span class="va">D</span><span class="op">)</span></span>
 <span></span>
@@ -2475,24 +2556,24 @@ inner product.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">Q</span>, <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
 <p>Plot frequency response</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fr</span> <span class="op">=</span> <span class="fu"><a href="../reference/zvalues.html">zvalues</a></span><span class="op">(</span><span class="va">K0</span>, n.f <span class="op">=</span> <span class="fl">2</span><span class="op">^</span><span class="fl">12</span><span class="op">)</span></span>
 <span><span class="va">fr0</span> <span class="op">=</span> <span class="fu"><a href="../reference/zvalues.html">zvalues</a></span><span class="op">(</span><span class="va">K0</span>, n.f <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">legend</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">K</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">K</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">K</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="va">K</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fr</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span>, x_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">fr</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span>, <span class="va">fr</span><span class="op">[</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">]</span>, <span class="va">fr</span><span class="op">[</span><span class="fl">4</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>, which <span class="op">=</span> <span class="st">'modulus'</span>,</span>
 <span>     legend <span class="op">=</span> <span class="va">legend</span><span class="op">)</span></span></code></pre></div>
 <p><img src="a_rational_matrices_files/figure-html/unnamed-chunk-41-1.png" class="r-plt" alt="Frequency response plots showing modulus, phase, and Nyquist diagrams for rational transfer functions" width="576"></p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fr</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span>, x_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">fr</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span>, <span class="va">fr</span><span class="op">[</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">]</span>, <span class="va">fr</span><span class="op">[</span><span class="fl">4</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>, which <span class="op">=</span> <span class="st">'phase'</span>,</span>
 <span>     legend <span class="op">=</span> <span class="va">legend</span><span class="op">)</span></span></code></pre></div>
 <p><img src="a_rational_matrices_files/figure-html/unnamed-chunk-41-2.png" class="r-plt" alt="Frequency response plots showing modulus, phase, and Nyquist diagrams for rational transfer functions" width="576"></p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fr</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span>, x_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">fr</span><span class="op">[</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">]</span>, <span class="va">fr</span><span class="op">[</span><span class="fl">3</span>,<span class="fl">1</span><span class="op">]</span>, <span class="va">fr</span><span class="op">[</span><span class="fl">4</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span>, which <span class="op">=</span> <span class="st">'nyquist'</span>,</span>
 <span>     legend <span class="op">=</span> <span class="va">legend</span><span class="op">)</span></span></code></pre></div>
 <p><img src="a_rational_matrices_files/figure-html/unnamed-chunk-41-3.png" class="r-plt" alt="Frequency response plots showing modulus, phase, and Nyquist diagrams for rational transfer functions" width="576"></p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">subfigures.main</span> <span class="op">=</span> <span class="va">legend</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">subfigures.main</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span></span>
@@ -2502,7 +2583,7 @@ inner product.</p>
 <span>     which <span class="op">=</span> <span class="st">'nyquist'</span>, subfigures.main <span class="op">=</span> <span class="va">subfigures.main</span><span class="op">)</span></span></code></pre></div>
 <p><img src="a_rational_matrices_files/figure-html/unnamed-chunk-41-4.png" class="r-plt" alt="Frequency response plots showing modulus, phase, and Nyquist diagrams for rational transfer functions" width="576"></p>
 <p>Compute reduced order model (s = 3)</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gr</span> <span class="op">=</span> <span class="fu"><a href="../reference/grammians.html">grammians</a></span><span class="op">(</span><span class="va">K0</span>, <span class="st">'lyapunov'</span><span class="op">)</span></span>
 <span><span class="va">out</span> <span class="op">=</span> <span class="fu"><a href="../reference/balance.html">balance</a></span><span class="op">(</span><span class="va">K0</span>, <span class="va">gr</span>, s <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">sigma</span><span class="op">)</span></span>
@@ -2520,6 +2601,26 @@ inner product.</p>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-Al-Sadoon2017" class="csl-entry">
+Al-Sadoon, Majid M. 2017. <span>“<span class="nocase">The Linear Systems
+Approach to Linear Rational Expectations Models</span>.”</span>
+<em>Econometric Theory</em>, 1–31. <a href="https://doi.org/10.1017/S0266466617000160" class="external-link">https://doi.org/10.1017/S0266466617000160</a>.
+</div>
+<div id="ref-Hannan.Deistler12" class="csl-entry">
+Hannan, Edward James, and Manfred Deistler. 2012. <em><span class="nocase">The Statistical Theory of Linear Systems</span></em>.
+Classics in Applied Mathematics. Philadelphia: SIAM.
+</div>
+<div id="ref-Ho.Kalman66" class="csl-entry">
+Ho, B., and R. E. Kalman. 1966. <span>“<span class="nocase">Efficient
+Construction of Linear State Variable Models From Input/Output
+Functions</span>.”</span> <em>Regelungstechnik</em> 14: 545–48.
+</div>
+<div id="ref-Kailath80" class="csl-entry">
+Kailath, Thomas. 1980. <em><span>Linear Systems</span></em>. Englewood
+Cliffs, New Jersey: Prentice Hall.
+</div>
+</div>
 </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

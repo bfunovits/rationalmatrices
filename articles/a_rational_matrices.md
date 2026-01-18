@@ -5,15 +5,19 @@
 ### What are Rational Matrices?
 
 The `rationalmatrices` package handles **rational matrices** - matrices
-whose entries are rational functions of z (typically z⁻¹ in time-series
-and control theory applications).
+whose entries are rational functions of the lag-operator $z$ (typically
+$z^{- 1}$ in control theory applications).
 
-A rational function can be represented in many equivalent forms: -
-**Polynomial**: a(z) = a₀ + a₁z + … + aₚzᵖ - **Matrix fractions**:
-a⁻¹(z)b(z) (left LMFD) or d(z)c⁻¹(z) (right RMFD) - **State-space**:
-C(z⁻¹I - A)⁻¹B + D (standard in control theory) - **Impulse response**:
-h₀ + h₁z⁻¹ + h₂z⁻² + … (time-domain) - **Frequency response**: function
-values on the unit circle
+A rational function can be represented in many equivalent forms:
+
+- **Polynomial**: $a(z) = a_{0} + a_{1}z + \cdots + a_{p}z^{p}$
+- **Matrix fractions**: $a^{- 1}(z)b(z)$ (left LMFD) or $d(z)c^{- 1}(z)$
+  (right RMFD)
+- **State-space**: $C\left( z^{- 1}I - A \right)^{- 1}B + D$ (standard
+  in control theory)
+- **Impulse response**: $h_{0} + h_{1}z + h_{2}z^{2} + \cdots$
+  (time-domain)
+- **Frequency response**: function values on the unit circle
 
 ### Design Philosophy
 
@@ -24,10 +28,13 @@ seamlessly converting between the most appropriate representation for
 each task.
 
 This package serves as the foundation for `RLDM` (Rational Linear
-Dynamic Models) and is particularly useful for: - Linear dynamic time
-series models (VARMA, state-space) - Control theory and system
-analysis - Signal processing and filtering - Any application requiring
-multiple mathematical representations of the same object
+Dynamic Models) and is particularly useful for:
+
+- Linear dynamic time series models (VARMA, state-space)
+- Control theory and system analysis
+- Signal processing and filtering
+- Any application requiring multiple mathematical representations of the
+  same object
 
 ### Guide to This Vignette
 
@@ -35,12 +42,14 @@ This vignette covers the main user-facing functionality. For
 implementation details and mathematical theory, see the companion
 vignette “Technical Details”.
 
-**Main sections:** - **Classes** → Representation Management (#1 in
-CLAUDE.md) - **Operations and Methods** → Arithmetic Operations (#3),
-Polynomial Manipulation (#4), Analysis (#5) - **Realization Algorithms**
-→ Realization Algorithms (#2) - **Methods for Polynomials** → Polynomial
-Manipulation (#4) - **Methods for State-Space Forms** → State-Space
-Tools (#6)
+**Main sections:**
+
+- **Classes** → Representation Management (#1 in CLAUDE.md)
+- **Operations and Methods** → Arithmetic Operations (#3), Polynomial
+  Manipulation (#4), Analysis (#5)
+- **Realization Algorithms** → Realization Algorithms (#2)
+- **Methods for Polynomials** → Polynomial Manipulation (#4)
+- **Methods for State-Space Forms** → State-Space Tools (#6)
 
 Quick start examples follow below:
 
@@ -151,8 +160,43 @@ Note: There are no separate classes for rational *scalars* or rational
 
 ### Representation Conversion Diagram
 
-The color scheme: - **Red**: Realization from Hankel matrix (impulse
-response) - **Blue**: Power series extraction from fractions/state-space
+``` r
+# Keep original diagram for reference - can be displayed if needed
+DiagrammeR::grViz("
+  digraph G {
+    compound=true;
+    splines = lines;
+    graph [layout = dot, rankdir = LR]
+    splines = lines
+    ra [label='polm():\nPolynomial']
+    ra -> rb;
+    ra -> rc;
+    subgraph cluster_repr {
+      label = 'Matrix Fraction & State-Space'
+      fontsize = 14
+      rb [label='lmfd():\nLeft Fraction\na⁻¹(z)b(z)']
+      rc [label='rmfd():\nRight Fraction\nd(z)c⁻¹(z)']
+      rd [label = 'stsp():\nState-Space\nC(z⁻¹I-A)⁻¹B+D']
+      {rank=same; rb,rc,rd}
+    }
+    subgraph cluster_pseries {
+      label = 'Impulse & Frequency Response'
+      pa [label = 'pseries():\nPower Series']
+      pz [label = 'zvalues():\nFunction Values']
+    }
+    ha [label = 'Hankel Matrix\n(Rank Analysis)' ]
+    pa -> ha[label = 'via lags']
+    ha -> rb [label = 'Left\nEchelon', color = 'red']
+    ha -> rd [label = 'Balanced\nRealization', color = 'red']
+    rb -> pa [label = 'Extract', color = 'blue']
+    rd -> pa [label = 'Extract', color = 'blue']
+  }")
+```
+
+The color scheme:
+
+- **Red**: Realization from Hankel matrix (impulse response)
+- **Blue**: Power series extraction from fractions/state-space
 
 Here, we focus on polynomial matrices and rational matrices represented
 by a *left matrix fraction description* or by a *statespace
@@ -187,7 +231,8 @@ $$a(z) = a_{0} + a_{1}z + \cdots + a_{p}z^{p}$$ is an $(m \times m)$
 (non singular) polynomial matrix of degree $p$, and
 
 $$b(z) = b_{0} + b_{1}z + \cdots + b_{q}z^{q}$$ is an $(m \times n)$
-dimensional matrix polynomial of degree $q$.  
+dimensional matrix polynomial of degree $q$.
+
 The matrix $c(z)$ is thus described by the pair
 $\left( a(z),b(z) \right)$. Note that the “factors” $a(z),b(z)$ are by
 no means unique for given $c(z)$.
@@ -213,9 +258,12 @@ to create (random) rational matrices in LMFD form.
 Any rational ($(m \times n)$-dimensional) matrix $c(z)$ which has no
 pole at $z = 0$ may be represented as
 
-$$c(z) = C\left( z^{- 1}I_{s} - A \right)^{- 1}B + D$$ where
-$A \in {\mathbb{R}}^{s \times s}$, $B \in {\mathbb{R}}^{s \times n}$,
-$C \in {\mathbb{R}}^{m \times s}$ and $D \in {\mathbb{R}}^{m \times n}$.
+$$c(z) = C\left( z^{- 1}I_{s} - A \right)^{- 1}B + D$$
+
+where $A \in {\mathbb{R}}^{s \times s}$,
+$B \in {\mathbb{R}}^{s \times n}$, $C \in {\mathbb{R}}^{m \times s}$ and
+$D \in {\mathbb{R}}^{m \times n}$.
+
 The integer $s$ is called the *state dimension* of the above
 realization. Statespace representations are by no means unique, even the
 state dimension $s$ is not unique. If the state dimension $s$ is minimal
@@ -264,10 +312,11 @@ dimensional array with a class attribute `c('stsp','ratm')`.
 
 **Note:** Due to the rational structure, a *finite* sequence of
 coefficients is sufficient to reconstruct the rational matrix $c(z)$,
-see e.g. the Ho-Kalman realization algorithm implemented in
-`pseries2stsp` and the function `pseries2lmfd`. (Of course the number of
-coefficients has to be large enough.) Hence, we can interpret (a finite)
-impulse response function as another way to represent rational matrices.
+see e.g. the Ho-Kalman realization algorithm (Ho and Kalman 1966)
+implemented in `pseries2stsp` and the function `pseries2lmfd`. (Of
+course the number of coefficients has to be large enough.) Hence, we can
+interpret (a finite) impulse response function as another way to
+represent rational matrices.
 
 ### Frequency Response
 
@@ -400,7 +449,7 @@ and
 [`as.stsp.pseries()`](https://bfunovits.github.io/rationalmatrices/reference/as.stsp.md).
 
 For a more detailed discussion on Kronecker indices and echelon
-canonical forms, see @Hannan.Deistler12.
+canonical forms, see Hannan and Deistler (2012).
 
 #### Examples
 
@@ -1099,8 +1148,8 @@ is.minimal(rbind(x, x), only.answer = FALSE)[c('answer','sv','s0')]
 #> [1] FALSE
 #> 
 #> $sv
-#> [1] 3.190673e+01 2.576708e+01 2.788731e-15 2.253522e-15 9.794186e-16
-#> [6] 5.943141e-16 3.719067e-16 9.477004e-17
+#> [1] 6.300395e+01 5.292349e+01 7.700432e-15 3.743904e-15 2.753267e-15
+#> [6] 1.399977e-15 1.046407e-15 4.476098e-16
 #> 
 #> $s0
 #> [1] 2
@@ -1109,8 +1158,8 @@ is.minimal(x %r% (x^(-1)), only.answer = FALSE)[c('answer','sv','s0')]
 #> [1] FALSE
 #> 
 #> $sv
-#> [1] 3.524829e-15 1.731706e-15 4.399606e-16 2.880929e-16 1.725717e-16
-#> [6] 1.000391e-16 6.785629e-17 2.351842e-17
+#> [1] 1.136170e-12 1.900404e-13 7.902990e-14 2.577351e-14 3.080105e-15
+#> [6] 1.323681e-15 3.842298e-16 3.872231e-17
 #> 
 #> $s0
 #> [1] 0
@@ -1202,7 +1251,7 @@ $1 \leq j(i) < j(2) < \cdots < j(r) \leq n$ such that
   $h_{i,j{(i)}}(z)$ and
 - $h_{i,j}(z) = 0$ for $i > r$ or $j < j(i)$.
 
-See also @Kailath80.
+See also Kailath (1980).
 
 Quite analogously one may transform the matrix $a(z)$ by elementary
 column operations into “quasi-lower-triangular” form
@@ -1304,7 +1353,7 @@ with diagonal entries $d_{i}(z)$ which satisfy
 The above factorization may be constructed by using elementary column-
 and row- operations.
 
-For more details, see e.g. @Kailath80.
+For more details, see e.g. Kailath (1980).
 
 As a simple example consider the following $4 \times 5$ dimensional
 polynomial matrix
@@ -1371,29 +1420,29 @@ a = test_polm(dim = c(3,3), degree = c(2,1,1), random = TRUE,
                digits = 2, col_end_matrix = col_end_matrix)
 print(a, format = 'c')
 #> ( 3 x 3 ) matrix polynomial with degree <= 2 
-#>                          [,1]          [,2]           [,3]
-#> [1,]  -0.23 - 0.51z - 0.72z^2  -1.8 - 0.72z  -0.59 + 3.84z
-#> [2,]  -1.05 - 0.11z - 0.24z^2  0.41 - 0.24z  -0.09 + 1.28z
-#> [3,]            -1.32 + 0.43z         -0.85          -0.09
+#>                         [,1]          [,2]          [,3]
+#> [1,]  -0.63 + 1.77z + 0.4z^2  -0.88 + 0.5z  -0.48 + 0.4z
+#> [2,]  0.69 - 0.01z - 0.08z^2  -0.89 - 0.1z  1.05 - 0.08z
+#> [3,]  -1.31 - 0.31z - 0.8z^2      0.26 - z   0.54 - 0.8z
 print(svd(col_end_matrix(a))$d)       # column end matrix has rank 1
-#> [1] 4.187601e+00 9.686192e-17 0.000000e+00
+#> [1] 1.694934e+00 1.695651e-16 9.628233e-18
 
 out = col_reduce(a)
 print(out$a, format = 'c', digits = 2)   # column reduced matrix
 #> ( 3 x 3 ) matrix polynomial with degree <= 1 
-#>               [,1]           [,2]    [,3]
-#> [1,]  -1.8 - 0.72z  -0.23 + 0.65z  -10.19
-#> [2,]  0.41 - 0.24z  -1.05 - 0.39z     2.1
-#> [3,]         -0.85  -1.32 + 0.99z   -4.62
+#>               [,1]           [,2]  [,3]
+#> [1,]  -0.88 + 0.5z  -0.63 + 2.25z  0.22
+#> [2,]  -0.89 - 0.1z   0.69 - 1.06z  1.76
+#> [3,]      0.26 - z  -1.31 - 0.85z  0.33
 print(out$col_degrees)                   # column degrees
 #> [1] 1 1 0
 print(out$col_end_matrix)                # column end matrix
-#>       [,1]       [,2]       [,3]
-#> [1,] -0.72  0.6531250 -10.190000
-#> [2,] -0.24 -0.3889583   2.096667
-#> [3,]  0.00  0.9910417  -4.623333
+#>      [,1]  [,2]  [,3]
+#> [1,]  0.5  2.25 0.224
+#> [2,] -0.1 -1.06 1.762
+#> [3,] -1.0 -0.85 0.332
 print(svd(out$col_end_matrix)$d)         # column end matrix is non singular!
-#> [1] 11.4494680  0.7795513  0.2129076
+#> [1] 2.8588250 1.6409980 0.7535844
 
 # check reult(s)
 all.equal(polm(diag(3)), prune(out$v %r% out$v_inv))
@@ -1429,7 +1478,7 @@ indices* of $A(z)$.
 Note that zeroes on the unit circle are not allowed.
 
 The Wiener-Hopf factorization plays an important role for the analysis
-of linear, rational expectation models. See e.g. @Al-Sadoon2017.
+of linear, rational expectation models. See e.g. Al-Sadoon (2017).
 
 The WHF is constructed in three steps
 
@@ -1835,12 +1884,12 @@ obj = test_stsp(dim = c(2,2), s = 10, bpoles = 1, bzeroes = 1)
 gr = grammians(obj, 'minimum phase')
 trunc = balance(obj, gr, s0 = 5)
 print(trunc$sigma)
-#>  [1] 0.4289831713 0.3561010992 0.1135000993 0.1011686568 0.0521755070
-#>  [6] 0.0113272049 0.0101880822 0.0048271350 0.0013589053 0.0004190745
+#>  [1] 0.580904673 0.492973132 0.426651235 0.310246516 0.195965988 0.099126844
+#>  [7] 0.073988375 0.035596157 0.007667147 0.004493532
 
 max(abs(unclass(pseries(obj, lag.max = 25)) -
         unclass(pseries(trunc$ob, lag.max = 25))))
-#> [1] 0.006713588
+#> [1] 0.03225343
 ```
 
 ``` r
@@ -1997,6 +2046,21 @@ truncated
 approximation](a_rational_matrices_files/figure-html/unnamed-chunk-42-1.png)
 
 ## References
+
+Al-Sadoon, Majid M. 2017. “The Linear Systems Approach to Linear
+Rational Expectations Models.” *Econometric Theory*, 1–31.
+<https://doi.org/10.1017/S0266466617000160>.
+
+Hannan, Edward James, and Manfred Deistler. 2012. *The Statistical
+Theory of Linear Systems*. Classics in Applied Mathematics.
+Philadelphia: SIAM.
+
+Ho, B., and R. E. Kalman. 1966. “Efficient Construction of Linear State
+Variable Models From Input/Output Functions.” *Regelungstechnik* 14:
+545–48.
+
+Kailath, Thomas. 1980. *Linear Systems*. Englewood Cliffs, New Jersey:
+Prentice Hall.
 
 ------------------------------------------------------------------------
 

@@ -5,7 +5,7 @@ say, is  pair \((c(z),d(z))\) of polynomial matrices, such that
 and invertible."><meta property="og:description" content="A Right Matrix Fraction Description (RMFD) of a rational matrix, \(k(z)\)
 say, is  pair \((c(z),d(z))\) of polynomial matrices, such that
 \(k(z) = d(z) c^{-1}(z)\). The polynomial matrix \(c(z)\) must be square
-and invertible."></head><body>
+and invertible."><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -27,6 +27,7 @@ and invertible."></head><body>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/a_rational_matrices.html">Rational Matrices</a></li>
     <li><a class="dropdown-item" href="../articles/b_technical_details_ratm.html">Rational Matrices: Technical Details</a></li>
   </ul></li>
+<li class="nav-item"><a class="nav-link" href="../claude.html">Claude Guide</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/bfunovits/rationalmatrices/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -139,13 +140,13 @@ attribute <code>order = c(m,n,p,q)</code> and a class attribute <code>c("lmfd",
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 2 ) right matrix fraction description d(z) c^(-1)(z) with degrees deg(c(z)) = p = 1, deg(d(z)) = q = 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> left factor d(z):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1]  [,2] z^1 [,1]  [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]     1.66  0.29    -1.44  0.45</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]     0.89 -0.07    -0.43 -0.58</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]    -0.61 -1.28     1.01  0.80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]     0.05  0.52    -1.29  2.07</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]     1.07 -0.20     1.07  0.46</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]     1.22 -1.61     1.83 -1.13</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> right factor c(z):</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1]  [,2] z^1 [,1]  [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]     0.40  2.11     0.65  0.85</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]     0.57 -0.93    -0.53 -0.30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]     1.52 -0.99     2.50 -0.80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]    -0.18 -0.18     1.37  0.77</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">xr</span> <span class="op">=</span> <span class="fu"><a href="test_rmfd.html">test_rmfd</a></span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span><span class="op">)</span>, degree <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
