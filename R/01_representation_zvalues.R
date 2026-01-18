@@ -51,6 +51,7 @@ zvalues = function(obj, z, f, n.f, sort.frequencies, ...){
 
 # Internal function used by zvalues.____ methods
 # Intended to check the inputs to zvalues() and bring them in a normalized form
+#' @keywords internal
 get_z = function(z = NULL, f = NULL, n.f = 5, sort.frequencies = FALSE) {
   
   # If there are no values in z, 

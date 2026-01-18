@@ -542,6 +542,7 @@ reflect_zeroes.lmfd = function(x, zeroes, tol = sqrt(.Machine$double.eps),
 # Validates input and preprocesses roots (poles/zeroes)
 # Returns NULL if roots is empty (caller should return x early)
 # Otherwise returns the roots with complex conjugates appended
+#' @keywords internal
 validate_stsp_reflect_input <- function(x, roots, tol, root_name) {
   if (!is.numeric(x)) {
     stop('The argument "x" must be a polynomial with real coefficients.')

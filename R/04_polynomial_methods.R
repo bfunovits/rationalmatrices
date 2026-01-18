@@ -613,6 +613,7 @@ prune = function(x, tol = sqrt(.Machine$double.eps), brutal = FALSE) {
 
 # internal function
 # l2 norm of a vector
+#' @keywords internal
 l2_norm = function(x){
   return(sqrt(sum(x^2)))
 } 
@@ -621,6 +622,7 @@ l2_norm = function(x){
 # consider a vector x = c(x[1], ..., x[k],  x[k+1], ..., x[n])
 # return a logical  i = c(FALSE, .., FALSE, TRUE, .., TRuE) 
 # where k is the minimum integer such that | x[s] | <= tol for all s > k 
+#' @keywords internal
 is_small = function(x, tol = sqrt(.Machine$double.eps), count = TRUE) {
   if (length(x) == 0) {
     i = logical(0)
@@ -638,6 +640,7 @@ is_small = function(x, tol = sqrt(.Machine$double.eps), count = TRUE) {
 # consider a vector x = c(x[1], ..., x[k],  x[k+1], ..., x[n])
 # return a logical  i = c(TRUE, .., TRUE, FALSE, .., FALSE) 
 # where k is the minimum integer such that | x[s] | <= tol for all s > k 
+#' @keywords internal
 is_large = function(x, tol = sqrt(.Machine$double.eps), count = TRUE) {
   if (length(x) == 0) {
     i = logical(0)
@@ -1954,6 +1957,7 @@ snf = function(a, tol = sqrt(.Machine$double.eps), debug = FALSE) {
 
 # internal function 
 # factorize a scalar polynomial into an stable and an unstable part
+#' @keywords internal
 whf_scalar = function(a, tol = sqrt(.Machine$double.eps)) {
   a = prune(a, tol = tol)
   z = polyroot(unclass(a))

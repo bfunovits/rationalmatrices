@@ -10,7 +10,7 @@ output:
     toc_depth: 2
     number_sections: true
 vignette: >
-  %\VignetteIndexEntry{Rational_Matrices_Technical_Details}
+  %\VignetteIndexEntry{Rational Matrices: Technical Details}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

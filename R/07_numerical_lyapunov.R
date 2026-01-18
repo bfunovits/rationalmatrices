@@ -14,6 +14,7 @@
 # These are essentially R wrapper functions for the Rcpp routines!
 
 # Internal helper to validate common inputs for lyapunov functions
+#' @keywords internal
 validate_lyapunov_inputs <- function(A, Q) {
   if ( (!is.numeric(A)) || (!is.matrix(A)) || (nrow(A) != ncol(A)) ) {
     stop('"A" must be a square, numeric  matrix ')

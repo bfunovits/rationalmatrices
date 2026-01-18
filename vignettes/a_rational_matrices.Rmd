@@ -10,7 +10,7 @@ output:
     toc_depth: 2
     number_sections: true
 vignette: >
-  %\VignetteIndexEntry{Rational_Matrices}
+  %\VignetteIndexEntry{Rational Matrices}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -100,7 +100,7 @@ print(cf, format = 'iz|j', digits = 2)
 Produce a "Nyquist" plot, where the imaginary part is plotted versus the real part. In order to get a "nice, smooth" 
 path, we evaluate the rational function $c(z)$ on a grid of 1024 points on the unit circle:
 
-```{r}
+```{r fig.alt="Nyquist plot of rational function c(z) showing imaginary versus real part on unit circle"}
 plot(zvalues(c, n.f = 1024), which = 'nyquist')
 ```
 
@@ -312,7 +312,7 @@ conversion of one representation (realization) to another.
 
 The following table gives an overview of these "conversion" procedures:
 
-```{r echo=FALSE, fig.height=2, fig.width=8}
+```{r echo=FALSE, fig.height=2, fig.width=8, fig.alt="Table showing rational matrix representation classes and their conversions"}
 plottable = function(x,label,col) {
   x = cbind(rownames(x),x)
   colnames(x)[1] = label
@@ -535,7 +535,7 @@ To this end we use the following pseudo ordering of classes:
 The following table shows how the class of the result depends on the classes of `a` and `b`:
 
 
-```{r echo=FALSE, fig.height=2, fig.width=5}
+```{r echo=FALSE, fig.height=2, fig.width=5, fig.alt="Type coercion matrix showing binary operation results between different rational matrix types"}
 x = matrix(
 c('',        'polm',    'stsp',    'stsp',    'pseries','zvalues',
   'polm',    'polm',    'stsp',    'stsp',    'pseries','zvalues',
@@ -640,6 +640,8 @@ fr = zvalues(a, n.f = 101)
 sp = fr %r% Ht(fr)
 max(abs(Im(sp)))
 all.equal(sp, zvalues(a %r% Ht(a), n.f = 101))
+
+```{r fig.alt="Spectral density plot of state-space rational function showing Hermitian transpose properties"}
 plot(sp)
 ```
 
@@ -978,6 +980,7 @@ for (x in c(-2,-1,1,2)) {
 }
 print(a, format = 'c')
 
+```{r fig.alt="Polynomial and its first three derivatives plotted over real axis showing critical points"}
 z = seq(from = -2.25, to = 2.25, length.out = 201)
 out = plot(zvalues(a, z = z), x_list = list(zvalues(derivative(a)*(1/4), z = z),
                                       zvalues(derivative(derivative(a))*(1/12), z = z),
@@ -1510,9 +1513,10 @@ print(trunc$sigma)
 
 max(abs(unclass(pseries(obj, lag.max = 25)) -
         unclass(pseries(trunc$ob, lag.max = 25))))
+
+```{r fig.alt="Comparison of full impulse response and balanced truncated impulse response showing approximation quality"}
 plot(pseries(obj, lag.max = 25), x_list= list(pseries(trunc$obj, lag.max = 25)),
      type = c('l','p'), legend = c('s=10', 's=5'))
-
 ```
 
 
@@ -1577,7 +1581,7 @@ all.equal(Q, diag(4))
 
 Plot frequency response
 
-```{r fig.height=4, fig.width=6}
+```{r fig.height=4, fig.width=6, fig.alt="Frequency response plots showing modulus, phase, and Nyquist diagrams for rational transfer functions"}
 fr = zvalues(K0, n.f = 2^12)
 fr0 = zvalues(K0, n.f = 10)
 legend = c(expression(K[1]), expression(K[2]), expression(K[3]), expression(K[4]))
@@ -1600,7 +1604,7 @@ plot(cbind(fr[1:2,1], fr[3:4,1]),
 
 Compute reduced order model (s = 3)
 
-```{r fig.height=4, fig.width=6}
+```{r fig.height=4, fig.width=6, fig.alt="Nyquist plot comparison of full frequency response and balanced truncated approximation"}
 gr = grammians(K0, 'lyapunov')
 out = balance(K0, gr, s = 3)
 print(out$sigma)

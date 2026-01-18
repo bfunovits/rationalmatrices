@@ -301,6 +301,7 @@ pseries2nu = function(obj, Hsize = NULL, tol = sqrt(.Machine$double.eps)) {
 
 # internal function
 # return statespace realization template 
+#' @keywords internal
 nu2stsp_template = function(nu, D) {
   m = nrow(D)
   n = ncol(D)

@@ -1,6 +1,11 @@
 url: https://bfunovits.github.io/rationalmatrices/
 template:
   bootstrap: 5
+build:
+  copy-method: symlink
+  exclude:
+    - CLAUDE.md
+    - QUALITY_ASSESSMENT.md
 navbar:
   structure:
     left:  [intro, reference, articles]

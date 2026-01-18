@@ -471,6 +471,7 @@ convolve_3D = function(a, b, truncate = FALSE) {
 
 # internal function 
 # univariate polynomial division c = a / b 
+#' @keywords internal
 poly_div = function(a, b) {
   # a,b are vectors
   
@@ -509,6 +510,7 @@ poly_div = function(a, b) {
 
 # internal function 
 # univariate polynomial remainder r: a = b * c + r
+#' @keywords internal
 poly_rem = function(a, b) {
   # a,b are vectors
   
@@ -550,6 +552,7 @@ poly_rem = function(a, b) {
 # internal function
 # elementwise multiplication of matrix polynomials
 # this function performs only basic checks on the inputs!
+#' @keywords internal
 emult_poly = function(a, b) {
   # a,b must be two compatible arrays
   da = dim(a)
@@ -591,6 +594,7 @@ emult_poly = function(a, b) {
 # elementwise multiplication of two impulse response functions
 # this function performs only basic checks on the inputs!
 # almost equal to emult_poly
+#' @keywords internal
 emult_pseries = function(a, b) {
   # a,b must be two compatible arrays
   da = dim(a)
@@ -619,6 +623,7 @@ emult_pseries = function(a, b) {
 
 # internal function
 # elementwise multiplication of two rational vectors (in stsp form)
+#' @keywords internal
 emult_stsp_vek = function(a,b) {
 
   dim_a = dim(a)
@@ -673,6 +678,7 @@ emult_stsp_vek = function(a,b) {
 
 # internal function
 # elementwise multiplication of two rational vectors (in stsp form)
+#' @keywords internal
 emult_stsp = function(a,b) {
   dim_a = dim(a)
   m = dim_a[1]
@@ -1712,6 +1718,7 @@ Ops.ratm = function(e1, e2) {
 # internal function 
 # create a diagonal rational matrix from a scalar 
 # brauche ich das noch ????
+#' @keywords internal
 diag_object = function(e, d) {
   cl = class(e)[1]
   

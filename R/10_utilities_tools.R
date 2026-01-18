@@ -53,6 +53,7 @@ iseq = function(from = 1, to = 1) {
 # #' @examples
 # #' expand_letters(4, l = c('a','b'))
 # #' expand_letters(6, l = c('a','b'))
+#' @keywords internal
 expand_letters = function(n, l = letters) {
   if (n == 0) return(character(0))
   if ((n>1) && (length(l) <= 1)) stop('"l" must have at least 2 entries!')
