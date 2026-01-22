@@ -112,18 +112,20 @@ the number of block rows (\(f\)), block columns (\(p\)) of the Hankel matrix and
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># reconstruct a matrix from this impulse response</span></span></span>
 <span class="r-in"><span><span class="va">out</span> <span class="op">=</span> <span class="fu">pseries2rmfd</span><span class="op">(</span><span class="va">Xi</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'X' matrix was collinear</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>'X' matrix was collinear</span>
 <span class="r-in"><span><span class="va">out</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $Xr</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 2 ) right matrix fraction description d(z) c^(-1)(z) with degrees deg(c(z)) = p = 1, deg(d(z)) = q = 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> left factor d(z):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        z^0 [,1]       [,2]   z^1 [,1]       [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.2816436 -0.4837146  2.1026774 -0.4106968</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.3325978  0.1435867 -0.2017607  0.8406282</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -1.9002807  1.3751471  0.4144741 -0.5006694</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       z^0 [,1]       [,2]   z^1 [,1]       [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  49.02065  39.684749  -14.82652  -12.10711</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 148.21825 120.537069 -248.87162 -201.31285</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -10.25606  -8.293895   41.56984   33.61174</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> right factor c(z):</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1]  [,2]   z^1 [,1]       [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]        1     0 0.05934266  0.8553888</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]        0     1 0.27092515 -0.4311620</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      z^0 [,1]  [,2] z^1 [,1]     [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]        1     0 88.46234 70.67135</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]        0     1  0.00000  0.00000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $mu</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1 1</span>
@@ -132,7 +134,7 @@ the number of block rows (\(f\)), block columns (\(p\)) of the Hankel matrix and
 <span class="r-in"><span><span class="co"># check that the lmfd object is a realization of the given impulse response</span></span></span>
 <span class="r-in"><span><span class="va">Xi1</span> <span class="op">=</span> <span class="fu"><a href="pseries.html">pseries</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">Xr</span>, lag.max <span class="op">=</span> <span class="fl">2</span><span class="op">*</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">p</span>,<span class="va">q</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">Xi</span>, <span class="va">Xi1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Mean relative difference: 0.0002085268"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

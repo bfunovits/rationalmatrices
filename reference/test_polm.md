@@ -132,10 +132,10 @@ print(deg)
 a = test_polm(dim = c(3,3), degree = deg, random = TRUE)
 print(a, digits = 2, format = 'c')
 #> ( 3 x 3 ) matrix polynomial with degree <= 2 
-#>                [,1]           [,2]                     [,3]
-#> [1,]           -0.7   2.23 - 0.98z  -2.02 + 0.39z - 0.29z^2
-#> [2,]  -0.66 + 1.11z              0                        0
-#> [3,]  -0.81 + 1.74z  -0.13 - 0.16z            -0.29 + 0.76z 
+#>                [,1]          [,2]                    [,3]
+#> [1,]           0.71  0.44 + 1.86z  0.43 - 1.13z + 0.64z^2
+#> [2,]  -0.19 - 0.67z             0                       0
+#> [3,]  -2.71 + 0.47z  1.17 - 1.61z            -1.31 + 0.3z 
 
 ### random, (3,3) polynomial with prescribed column degree and column end matrix
 cm = matrix(NA_real_, nrow = 3, ncol = 3)
@@ -144,17 +144,17 @@ a = test_polm(dim = c(3,3), degree = c(0,1,2), random = TRUE,
               digits = 2, col_end_matrix = cm)
 print(a, digits = 2, format = 'c')
 #> ( 3 x 3 ) matrix polynomial with degree <= 2 
-#>        [,1]          [,2]                     [,3]
-#> [1,]  -0.33  -0.1 + 0.02z   -0.18 + 2.59z - 0.5z^2
-#> [2,]      0  1.49 + 0.72z    -0.1 - 1.2z - 1.72z^2
-#> [3,]      0         -1.23  -0.15 - 1.06z - 1.16z^2 
+#>        [,1]           [,2]                    [,3]
+#> [1,]  -0.75   1.94 + 0.94z  -0.24 + 0.04z + 0.2z^2
+#> [2,]      0  -1.69 - 1.15z  -0.93 + 0.13z - 0.9z^2
+#> [3,]      0           0.25  -0.08 - 0.84z + 1.5z^2 
 print(degree(a, which = 'column'))
 #> [1] 0 1 2
 print(col_end_matrix(a))
-#>       [,1] [,2]  [,3]
-#> [1,] -0.33 0.02 -0.50
-#> [2,]  0.00 0.72 -1.72
-#> [3,]  0.00 0.00 -1.16
+#>       [,1]  [,2] [,3]
+#> [1,] -0.75  0.94  0.2
+#> [2,]  0.00 -1.15 -0.9
+#> [3,]  0.00  0.00  1.5
 
 ### the parameters column_end_matrix and value_at_zero 
 ### may be in conflict with the prescribed degree(s). 
@@ -165,10 +165,10 @@ a = test_polm(dim = c(3,3), degree = c(0,1,2), random = TRUE,
               digits = 2, col_end_matrix = cm)
 print(a, digits = 2, format = 'c')
 #> ( 3 x 3 ) matrix polynomial with degree <= 2 
-#>        [,1]   [,2]                     [,3]
-#> [1,]  -0.03  -1.25   -0.93 - 0.72z - 0.9z^2
-#> [2,]      0   0.45  -0.81 - 0.04z - 0.85z^2
-#> [3,]      0   0.34   1.49 - 0.59z + 0.63z^2 
+#>        [,1]   [,2]                    [,3]
+#> [1,]  -0.22   -0.5  2.57 - 0.32z - 0.67z^2
+#> [2,]      0   0.09  0.63 - 0.12z + 0.15z^2
+#> [3,]      0  -0.53    2.1 - 0.4z + 1.29z^2 
 
 # then the generated polynomial has column degrees 0,0,2 
 # and the column end matrix is not upper triangular!
@@ -176,9 +176,9 @@ print(degree(a, which = 'column'))
 #> [1] 0 0 2
 print(col_end_matrix(a))
 #>       [,1]  [,2]  [,3]
-#> [1,] -0.03 -1.25 -0.90
-#> [2,]  0.00  0.45 -0.85
-#> [3,]  0.00  0.34  0.63
+#> [1,] -0.22 -0.50 -0.67
+#> [2,]  0.00  0.09  0.15
+#> [3,]  0.00 -0.53  1.29
 
 ### here we set a(0) equal to the identity matrix and 
 ### require that a(z) has no zeroes within the unit circle
@@ -190,8 +190,8 @@ if (!inherits(a, 'try-error')) {
 }
 #> ( 3 x 3 ) matrix polynomial with degree <= 2 
 #>                      [,1]                 [,2]                 [,3]
-#> [1,]  1 + 0.37z - 0.16z^2      0.24z + 0.16z^2      0.12z + 0.67z^2
-#> [2,]     -0.12z - 0.15z^2  1 - 0.86z + 0.01z^2      -0.3z - 0.22z^2
-#> [3,]     -0.04z - 0.06z^2       0.08z - 0.2z^2  1 - 0.12z - 0.35z^2 
-#> [1] 1.253960 1.534687 1.534687 1.660069 3.057788 3.057788
+#> [1,]  1 - 0.32z - 0.39z^2     -0.06z + 0.52z^2                0.17z
+#> [2,]     -0.18z - 0.64z^2  1 + 0.49z + 0.53z^2     -0.18z + 0.02z^2
+#> [3,]       0.18z + 0.4z^2      0.66z - 0.01z^2  1 + 0.21z + 0.07z^2 
+#> [1] 1.278922 1.278922 1.385339 2.257975 2.257975 6.705406
 ```

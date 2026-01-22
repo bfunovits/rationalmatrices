@@ -136,12 +136,12 @@ if the third dimension is zero, then the <code>polm</code> object is interpreted
 <span class="r-in"><span><span class="co"># random (2 x 3) polynomial matrix a(z) = a0 + a1 z + a2 z^2 + a3 z^3 (degree = 3)</span></span></span>
 <span class="r-in"><span><span class="fu">polm</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="fl">3</span><span class="op">*</span><span class="fl">4</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 2 x 3 ) matrix polynomial with degree &lt;= 3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        z^0 [,1]       [,2]       [,3]  z^1 [,1]      [,2]      [,3]   z^2 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.6775613  2.5608409  0.1927945  1.008282 -1.734546 0.5753295  1.5399118</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.3507323 -0.1777376 -0.4289415 -0.872292  1.509788 1.0183546 -0.9538422</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          [,2]      [,3]  z^3 [,1]      [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 1.428601 2.0597542 0.1719504 -1.361190 0.54367045</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 1.714943 0.9336601 0.5530064  0.768606 0.08115584</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        z^0 [,1]        [,2]       [,3]  z^1 [,1]      [,2]      [,3]   z^2 [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.1922934 -0.21436125 -0.4240595 0.2230069 0.6175172  1.549044  1.6649638</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.5095445  0.02217964  0.4082409 0.2830963 1.3574204 -1.334746 -0.7747712</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,2]      [,3]   z^3 [,1]       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 2.22710273 0.3584309  1.4215848  0.8357689 -0.9777903</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.07590854 1.5783306 -0.7467869 -1.6413849  1.3604383</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># random (2 x 1) polynomial matrix with complex coefficients (degree = 2)</span></span></span>
 <span class="r-in"><span><span class="va">a</span> <span class="op">=</span> <span class="fu">polm</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/complex.html" class="external-link">complex</a></span><span class="op">(</span>real <span class="op">=</span> <span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="fl">1</span><span class="op">*</span><span class="fl">3</span><span class="op">)</span>, </span></span>
@@ -156,8 +156,8 @@ if the third dimension is zero, then the <code>polm</code> object is interpreted
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">a</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 2 x 1 ) matrix polynomial with degree &lt;= 2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           z^0 [,1]      z^1 [,1]      z^2 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  1.279-1.171i -1.440+0.404i -0.136-1.391i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.474+1.604i  0.085+0.577i -1.577-1.699i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.312+1.255i -0.987+0.115i -1.771-0.431i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.312+0.354i -0.194+0.253i -0.342-1.195i</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

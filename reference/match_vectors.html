@@ -86,17 +86,17 @@ solving this assignment problem. The procedure throws an error if the length of
 <span class="r-in"><span><span class="va">j</span> <span class="op">=</span> <span class="fu">match_vectors</span><span class="op">(</span><span class="va">z1</span>, <span class="va">z2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>z1 <span class="op">=</span> <span class="va">z1</span>, j <span class="op">=</span> <span class="va">j</span>, `z2[j]` <span class="op">=</span> <span class="va">z2</span><span class="op">[</span><span class="va">j</span><span class="op">]</span>, d <span class="op">=</span> <span class="va">z1</span><span class="op">-</span><span class="va">z2</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                         z1 j                    z2.j.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.1081845-3.805031e-23i 1  0.1081838-3.805031e-23i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  0.6907488+7.141664e-01i 3  0.6907488+7.141650e-01i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  0.6907488-7.141664e-01i 2  0.6907488-7.141650e-01i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -1.9146323+7.502615e-15i 4 -1.9146367+7.530065e-15i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  7.3319114+1.630502e-15i 5  7.3321159+1.735672e-15i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.4551862+8.722798e-18i 2  0.4551868+8.723903e-18i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  0.1034659+9.224606e-01i 3  0.1034656+9.224607e-01i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  0.1034659-9.224606e-01i 5  0.1034656-9.224607e-01i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -1.4531582-1.134652e+00i 1 -1.4531587-1.134653e+00i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -1.4531582+1.134652e+00i 4 -1.4531587+1.134653e+00i</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                             d</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  7.160299e-07+0.000000e+00i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  1.598535e-08+1.405276e-06i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  1.598535e-08-1.405276e-06i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4.372101e-06-2.745073e-17i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -2.044562e-04-1.051698e-16i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 -6.333816e-07-1.105113e-21i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2.543231e-07-1.843963e-07i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  2.543231e-07+1.843963e-07i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  4.839707e-07+4.285411e-07i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  4.839707e-07-4.285411e-07i</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># A polynomial with real coefficients has pairs of complex conjugate roots.</span></span></span>
 <span class="r-in"><span><span class="co"># However, the roots returned by "polyroot" in general do not have this </span></span></span>
@@ -106,17 +106,17 @@ solving this assignment problem. The procedure throws an error if the length of
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>z <span class="op">=</span> <span class="va">z1</span>, j <span class="op">=</span> <span class="va">j</span>, `Conj(z[j])` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/complex.html" class="external-link">Conj</a></span><span class="op">(</span><span class="va">z1</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">)</span>, </span></span>
 <span class="r-in"><span>                 d <span class="op">=</span> <span class="va">z1</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/complex.html" class="external-link">Conj</a></span><span class="op">(</span><span class="va">z1</span><span class="op">[</span><span class="va">j</span><span class="op">]</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                          z j               Conj.z.j..</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.1081845-3.805031e-23i 1  0.1081845+3.805031e-23i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  0.6907488+7.141664e-01i 3  0.6907488+7.141664e-01i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  0.6907488-7.141664e-01i 2  0.6907488-7.141664e-01i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -1.9146323+7.502615e-15i 4 -1.9146323-7.502615e-15i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  7.3319114+1.630502e-15i 5  7.3319114-1.630502e-15i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                             d</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.000000e+00-7.610062e-23i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  1.187939e-14-9.214851e-15i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -1.187939e-14-9.214851e-15i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  0.000000e+00+1.500523e-14i</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  0.000000e+00+3.261005e-15i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.4551862+8.722798e-18i 1  0.4551862-8.722798e-18i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  0.1034659+9.224606e-01i 3  0.1034659+9.224606e-01i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  0.1034659-9.224606e-01i 2  0.1034659-9.224606e-01i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -1.4531582-1.134652e+00i 5 -1.4531582-1.134652e+00i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -1.4531582+1.134652e+00i 4 -1.4531582+1.134652e+00i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                            d</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.000000e+00+1.74456e-17i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -5.551115e-17+0.00000e+00i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  5.551115e-17+0.00000e+00i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  0.000000e+00+0.00000e+00i</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  0.000000e+00+0.00000e+00i</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

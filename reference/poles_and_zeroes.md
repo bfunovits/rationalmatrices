@@ -155,7 +155,7 @@ zeroes(lp)
 c = lmfd(test_polm(dim = c(2,2), degree = 3, random = TRUE),
          test_polm(dim = c(2,2), degree = 1, random = TRUE))
 (z = zeroes(c))
-#> [1] -0.3875626-0.4351629i -0.3875626+0.4351629i
+#> [1] -0.8066625 -4.4370500
 all.equal(z, zeroes(c$b))
 #> [1] TRUE
  
@@ -164,7 +164,7 @@ all.equal(z, zeroes(c$b))
 k = rmfd(c = test_polm(dim = c(2,2), degree = 3, random = TRUE),
          d = test_polm(dim = c(2,2), degree = 1, random = TRUE))
 (z = zeroes(k))
-#> [1]  1.654498 -2.717882
+#> [1] 0.346548-2.352264i 0.346548+2.352264i
 all.equal(z, zeroes(k$d))
 #> [1] TRUE
  
@@ -175,7 +175,7 @@ k = stsp(A = matrix(rnorm(3*3), nrow = 3, ncol = 3),
          C = matrix(rnorm(3*2), nrow = 2, ncol = 3),
          D = matrix(rnorm(2*2), nrow = 2, ncol = 2))
 (z = zeroes(k, tol = 0))
-#> [1] -0.05182903-0.3429019i -0.05182903+0.3429019i 24.69212861+0.0000000i
+#> [1]  0.229787626+0.00000i -0.003167898-0.65787i -0.003167898+0.65787i
 all.equal(z, 1/(eigen(k$A - k$B %*% solve(k$D, k$C), only.values = TRUE)$values))
 #> [1] TRUE
 
@@ -197,23 +197,23 @@ poles(test_polm(dim = c(2,1), degree = 2, random = TRUE))
 # poles of a rational matrix in LMFD form ##################################
 
 (z = poles(c))
-#> [1]  0.1227278+0.000000i  0.1960404+0.000000i  0.5171242-1.309299i
-#> [4]  0.5171242+1.309299i -1.0682088-1.499647i -1.0682088+1.499647i
+#> [1]  0.4641038+0.0000000i  1.2345475+0.0000000i -1.4567079-0.2671334i
+#> [4] -1.4567079+0.2671334i  1.0894051-1.4615420i  1.0894051+1.4615420i
 all.equal(z, zeroes(c$a))
 #> [1] TRUE
 
 # poles of a rational matrix in RMFD form ##################################
 
 (z = poles(c))
-#> [1]  0.1227278+0.000000i  0.1960404+0.000000i  0.5171242-1.309299i
-#> [4]  0.5171242+1.309299i -1.0682088-1.499647i -1.0682088+1.499647i
+#> [1]  0.4641038+0.0000000i  1.2345475+0.0000000i -1.4567079-0.2671334i
+#> [4] -1.4567079+0.2671334i  1.0894051-1.4615420i  1.0894051+1.4615420i
 all.equal(z, zeroes(c$a))
 #> [1] TRUE
 
 # poles of a rational matrix in statespace form ###########################
 
 (z = poles(k, tol = 0))
-#> [1] -0.5266464-0.4236672i -0.5266464+0.4236672i  1.1797597+0.0000000i
+#> [1]  0.455964-0.2853058i  0.455964+0.2853058i -3.696371+0.0000000i
 all.equal(z, 1/(eigen(k$A, only.values = TRUE)$values))
 #> [1] TRUE
 ```

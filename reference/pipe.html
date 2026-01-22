@@ -65,15 +65,15 @@ For more extensive description, see function <code>`%&gt;%`</code> in package <e
 <span class="r-in"><span><span class="co"># Instead of</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="pseries.html">pseries</a></span><span class="op">(</span><span class="fu"><a href="polm.html">polm</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 2 x 1 ) impulse response with maximum lag = 5 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       lag=0 [,1]  lag=1 [,1]   lag=2 [,1] lag=3 [,1] lag=4 [,1] lag=5 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.015168154 -0.00439012 -0.013346550          0          0          0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.001446485 -0.01108749 -0.001351437          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        lag=0 [,1]    lag=1 [,1]   lag=2 [,1] lag=3 [,1] lag=4 [,1] lag=5 [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.014836470  0.0204484548 -0.012872482          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.006548665 -0.0001316217 -0.009101773          0          0          0</span>
 <span class="r-in"><span><span class="co"># you can write</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">%&gt;%</span> <span class="fu"><a href="polm.html">polm</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="pseries.html">pseries</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 2 x 1 ) impulse response with maximum lag = 5 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       lag=0 [,1]  lag=1 [,1]   lag=2 [,1] lag=3 [,1] lag=4 [,1] lag=5 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.015168154 -0.00439012 -0.013346550          0          0          0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.001446485 -0.01108749 -0.001351437          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        lag=0 [,1]    lag=1 [,1]   lag=2 [,1] lag=3 [,1] lag=4 [,1] lag=5 [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.014836470  0.0204484548 -0.012872482          0          0          0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -0.006548665 -0.0001316217 -0.009101773          0          0          0</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

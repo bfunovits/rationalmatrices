@@ -114,32 +114,32 @@ parameters below are ignored!</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="op">(</span><span class="va">lp</span> <span class="op">=</span> <span class="fu">test_lpolm</span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, degree_max <span class="op">=</span> <span class="fl">1</span>, degree_min <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 1 x 1 ) Laurent polynomial matrix with degree &lt;= 1, and minimal degree &gt;= -2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      z^-2 [,1]  z^-1 [,1]  z^0 [,1] z^1 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.183538 -0.5223823 0.3356623 0.135884</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      z^-2 [,1]  z^-1 [,1]  z^0 [,1]  z^1 [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.7703574 -0.5667399 0.7691461 -0.970092</span>
 <span class="r-in"><span><span class="op">(</span><span class="va">lp</span> <span class="op">=</span> <span class="fu">test_lpolm</span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>, degree_max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>, degree_min <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 3 ) Laurent polynomial matrix with degree &lt;= 2, and minimal degree &gt;= -2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       z^-2 [,1]      [,2]       [,3]   z^-1 [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  1.4185591 0.7804362 -0.9556584 -0.07415536  1.7103151  0.3756712</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -2.3872957 0.3375486  0.5982193 -0.15237451  0.4903201 -1.5380296</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.8657112 0.4406170  1.6534641 -0.90333536 -1.3835626 -0.6176619</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       z^0 [,1]        [,2]       [,3] z^1 [,1]       [,2]        [,3] z^2 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 1.4463264  1.50173741  2.1131513        0 0.32181905  0.21269050        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 0.8819043 -0.04179575 -0.7337383        0 0.06194019  0.06286903        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 0.6437654 -0.10949174  1.4620224        0 0.17045338 -0.30132934        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [,2]        [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]     0  0.63696577</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]     0 -1.08153955</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]     0 -0.09892041</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       z^-2 [,1]        [,2]        [,3]  z^-1 [,1]      [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.5334064 -0.87114937  0.01243346  2.7462715 1.5208564  0.1090547</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  2.0895811  0.53027256 -0.25918973 -0.7387114 0.6048041 -0.7374500</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.6744965 -0.05122357 -2.36496061  0.1108115 0.1909321  1.8395403</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        z^0 [,1]       [,2]       [,3] z^1 [,1]       [,2]         [,3] z^2 [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  1.2109067 -0.4762697  0.1512964        0 -1.4024386 -1.348726505        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  1.0155971  0.4510352 -1.0597535        0  0.5249745  0.004989554        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -0.6263027 -0.1783626 -0.7223515        0  0.7506256  1.420991281        0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       [,2]       [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]     0 -0.1747097</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]     0 -0.4395986</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]     0 -0.9522699</span>
 <span class="r-in"><span><span class="op">(</span><span class="va">lp</span> <span class="op">=</span> <span class="fu">test_lpolm</span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>, degree_max <span class="op">=</span> <span class="fl">1</span>, degree_min <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="op">-</span><span class="fl">1</span>,<span class="op">-</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 3 ) Laurent polynomial matrix with degree &lt;= 1, and minimal degree &gt;= -2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      z^-2 [,1]  [,2]       [,3] z^-1 [,1]       [,2]       [,3]   z^0 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]         0     0 -1.3173650         0 -0.8138297  1.3628583 0.07362752</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]         0     0 -0.8902169         0  0.3278782 -0.5961777 0.09018935</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]         0     0  1.2652773         0 -0.2583614 -0.1741298 1.38459544</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           [,2]       [,3]    z^1 [,1]       [,2]       [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 1.5250593 -0.4293988  0.05291071 -0.6577486 -0.3852852</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] 1.2972258  0.3746695 -0.85159231  1.3730604  0.1432845</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 0.3446593 -0.2761916 -0.12536477  0.4879459 -0.6517982</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]         0     0  0.9272210         0 -1.6713656  0.6824373  0.3032544</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]         0     0  1.5077531         0 -0.5654396 -1.2115366 -1.4898429</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]         0     0 -0.9240377         0  0.7369647 -0.7131790  1.0293780</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,2]       [,3]   z^1 [,1]      [,2]      [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.9938029  0.2112275 -2.2356540 0.6471733 -1.722657</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -2.9538384 -0.2305069 -1.3500556 0.4484237 -1.718470</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  1.2440347  1.2035671 -0.6970715 1.0754811  1.594115</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -168,10 +168,10 @@ generated matrices.</p>
 <span class="r-in"><span><span class="va">a</span> <span class="op">=</span> <span class="fu">test_polm</span><span class="op">(</span>dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">3</span><span class="op">)</span>, degree <span class="op">=</span> <span class="va">deg</span>, random <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">a</span>, digits <span class="op">=</span> <span class="fl">2</span>, format <span class="op">=</span> <span class="st">'c'</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 3 ) matrix polynomial with degree &lt;= 2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                [,1]           [,2]                     [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           -0.7   2.23 - 0.98z  -2.02 + 0.39z - 0.29z^2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  -0.66 + 1.11z              0                        0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  -0.81 + 1.74z  -0.13 - 0.16z            -0.29 + 0.76z </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                [,1]          [,2]                    [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]           0.71  0.44 + 1.86z  0.43 - 1.13z + 0.64z^2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  -0.19 - 0.67z             0                       0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  -2.71 + 0.47z  1.17 - 1.61z            -1.31 + 0.3z </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">### random, (3,3) polynomial with prescribed column degree and column end matrix</span></span></span>
 <span class="r-in"><span><span class="va">cm</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="cn">NA_real_</span>, nrow <span class="op">=</span> <span class="fl">3</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
@@ -180,17 +180,17 @@ generated matrices.</p>
 <span class="r-in"><span>              digits <span class="op">=</span> <span class="fl">2</span>, col_end_matrix <span class="op">=</span> <span class="va">cm</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">a</span>, digits <span class="op">=</span> <span class="fl">2</span>, format <span class="op">=</span> <span class="st">'c'</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 3 ) matrix polynomial with degree &lt;= 2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        [,1]          [,2]                     [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  -0.33  -0.1 + 0.02z   -0.18 + 2.59z - 0.5z^2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]      0  1.49 + 0.72z    -0.1 - 1.2z - 1.72z^2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]      0         -1.23  -0.15 - 1.06z - 1.16z^2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        [,1]           [,2]                    [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  -0.75   1.94 + 0.94z  -0.24 + 0.04z + 0.2z^2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]      0  -1.69 - 1.15z  -0.93 + 0.13z - 0.9z^2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]      0           0.25  -0.08 - 0.84z + 1.5z^2 </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="degree.html">degree</a></span><span class="op">(</span><span class="va">a</span>, which <span class="op">=</span> <span class="st">'column'</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0 1 2</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="col_end_matrix.html">col_end_matrix</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [,1] [,2]  [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.33 0.02 -0.50</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.00 0.72 -1.72</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.00 0.00 -1.16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       [,1]  [,2] [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.75  0.94  0.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.00 -1.15 -0.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.00  0.00  1.5</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">### the parameters column_end_matrix and value_at_zero </span></span></span>
 <span class="r-in"><span><span class="co">### may be in conflict with the prescribed degree(s). </span></span></span>
@@ -201,10 +201,10 @@ generated matrices.</p>
 <span class="r-in"><span>              digits <span class="op">=</span> <span class="fl">2</span>, col_end_matrix <span class="op">=</span> <span class="va">cm</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">a</span>, digits <span class="op">=</span> <span class="fl">2</span>, format <span class="op">=</span> <span class="st">'c'</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 3 ) matrix polynomial with degree &lt;= 2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        [,1]   [,2]                     [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  -0.03  -1.25   -0.93 - 0.72z - 0.9z^2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]      0   0.45  -0.81 - 0.04z - 0.85z^2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]      0   0.34   1.49 - 0.59z + 0.63z^2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        [,1]   [,2]                    [,3]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  -0.22   -0.5  2.57 - 0.32z - 0.67z^2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]      0   0.09  0.63 - 0.12z + 0.15z^2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]      0  -0.53    2.1 - 0.4z + 1.29z^2 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># then the generated polynomial has column degrees 0,0,2 </span></span></span>
 <span class="r-in"><span><span class="co"># and the column end matrix is not upper triangular!</span></span></span>
@@ -212,9 +212,9 @@ generated matrices.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0 0 2</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="col_end_matrix.html">col_end_matrix</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       [,1]  [,2]  [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.03 -1.25 -0.90</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.00  0.45 -0.85</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.00  0.34  0.63</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.22 -0.50 -0.67</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  0.00  0.09  0.15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  0.00 -0.53  1.29</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">### here we set a(0) equal to the identity matrix and </span></span></span>
 <span class="r-in"><span><span class="co">### require that a(z) has no zeroes within the unit circle</span></span></span>
@@ -226,10 +226,10 @@ generated matrices.</p>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 3 ) matrix polynomial with degree &lt;= 2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                      [,1]                 [,2]                 [,3]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  1 + 0.37z - 0.16z^2      0.24z + 0.16z^2      0.12z + 0.67z^2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]     -0.12z - 0.15z^2  1 - 0.86z + 0.01z^2      -0.3z - 0.22z^2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]     -0.04z - 0.06z^2       0.08z - 0.2z^2  1 - 0.12z - 0.35z^2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.253960 1.534687 1.534687 1.660069 3.057788 3.057788</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  1 - 0.32z - 0.39z^2     -0.06z + 0.52z^2                0.17z</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]     -0.18z - 0.64z^2  1 + 0.49z + 0.53z^2     -0.18z + 0.02z^2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]       0.18z + 0.4z^2      0.66z - 0.01z^2  1 + 0.21z + 0.07z^2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.278922 1.278922 1.385339 2.257975 2.257975 6.705406</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

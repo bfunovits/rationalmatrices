@@ -81,17 +81,17 @@ The matrices must be compatible, i.e. the number of columns of \(a(z)\) must equ
 <span class="r-in"><span><span class="op">(</span><span class="va">out</span> <span class="op">=</span> <span class="fu">polm_div</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $qu</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 2 ) matrix polynomial with degree &lt;= 2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       z^0 [,1]      [,2]  z^1 [,1]      [,2]  z^2 [,1]      [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  36.12466  44.29911 13.449209 14.544444 -5.466176 -6.566854</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -65.99837 -72.09624  5.327070  7.312464  6.349676  6.154500</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  71.40729  81.53618  7.264565  6.581119 -8.078047 -8.931964</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        z^0 [,1]      [,2]  z^1 [,1]      [,2]  z^2 [,1]      [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   68.63017  133.9147  10.11417  19.19290  2.182392  3.369295</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  302.39270  590.3264  43.09670  76.68699  4.310962 13.347594</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -214.09961 -410.3890 -27.34128 -56.95725 -3.011508 -6.213239</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $rem</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 3 x 2 ) matrix polynomial with degree &lt;= 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        z^0 [,1]      [,2]  z^1 [,1]        [,2]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]   60.46469 -16.82513  46.56593  -0.9500461</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -100.45128  18.90242 -19.49479 -24.3284306</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  111.57581 -21.92424  46.10258  14.3132742</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        z^0 [,1]       [,2]   z^1 [,1]      [,2]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  -40.74383  -54.18968  -78.15372  240.8611</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -182.98575 -241.99021 -348.40940 1067.6433</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  127.80225  169.94282  245.16864 -743.3890</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">out</span><span class="op">$</span><span class="va">qu</span> <span class="op"><a href="ratm_mult.html">%r%</a></span> <span class="va">b</span> <span class="op">+</span> <span class="va">out</span><span class="op">$</span><span class="va">rem</span><span class="op">)</span></span></span>

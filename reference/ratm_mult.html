@@ -66,16 +66,16 @@ or objects which may be coerced to rational matrix objects.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="op">(</span><span class="va">lp1</span> <span class="op">=</span> <span class="fu"><a href="test_lpolm.html">test_lpolm</a></span><span class="op">(</span>degree_max <span class="op">=</span> <span class="fl">1</span>, degree_min <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, random <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 1 x 1 ) Laurent polynomial matrix with degree &lt;= 1, and minimal degree &gt;= -1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       z^-1 [,1]  z^0 [,1]  z^1 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.4533987 0.4327917 0.2958176</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      z^-1 [,1]  z^0 [,1] z^1 [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0.552598 0.2997174 1.005277</span>
 <span class="r-in"><span><span class="op">(</span><span class="va">lp2</span> <span class="op">=</span> <span class="fu"><a href="test_lpolm.html">test_lpolm</a></span><span class="op">(</span>degree_max <span class="op">=</span> <span class="fl">1</span>, degree_min <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, random <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 1 x 1 ) Laurent polynomial matrix with degree &lt;= 1, and minimal degree &gt;= -1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      z^-1 [,1]  z^0 [,1]    z^1 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -1.116322 -0.115548 -0.03419717</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       z^-1 [,1]  z^0 [,1]   z^1 [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.7531662 0.5506115 0.05285033</span>
 <span class="r-in"><span><span class="va">lp1</span> <span class="op">%r%</span> <span class="va">lp2</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ( 1 x 1 ) Laurent polynomial matrix with degree &lt;= 2, and minimal degree &gt;= -2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      z^-2 [,1]  z^-1 [,1]   z^0 [,1]    z^1 [,1]    z^2 [,1]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] 0.5061389 -0.4307456 -0.3647309 -0.04898138 -0.01011613</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       z^-2 [,1]  z^-1 [,1]  z^0 [,1]  z^1 [,1]   z^2 [,1]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,] -0.4161981 0.07852988 -0.562908 0.5693574 0.05312924</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

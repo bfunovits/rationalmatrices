@@ -132,12 +132,12 @@ silently assumes that each column of \(dQ\) represents a symmetric matrix
 <span class="r-in"><span><span class="va">eps</span> <span class="op">=</span> <span class="fl">1e-8</span></span></span>
 <span class="r-in"><span><span class="va">theta</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">out</span><span class="op">$</span><span class="va">J</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">theta</span>, nrow <span class="op">=</span> <span class="va">m</span>, ncol <span class="op">=</span> <span class="va">m</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]       [,2]       [,3]      [,4]        [,5]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  16.260190  -67.33575   4.145523 -34.42496   51.194829</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,] -67.335749  -83.10334 116.255670 214.70885 -284.355679</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]   4.145523  116.25567   2.613889 -21.61458  122.114984</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,] -34.424960  214.70885 -21.614584  18.22915   27.226789</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]  51.194829 -284.35568 122.114984  27.22679    1.000307</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            [,1]        [,2]       [,3]       [,4]       [,5]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  -85.17964 -22.9874324 -114.92720  126.77554   89.23548</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  -22.98743  -0.9746424  -15.02836   40.31829   -7.47606</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3,] -114.92720 -15.0283574 -207.76610  397.31164   13.42717</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  126.77554  40.3182935  397.31164 -636.96941 -105.30728</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5,]   89.23548  -7.4760601   13.42717 -105.30728   42.43628</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># compute the derivative via "finite differences"</span></span></span>
 <span class="r-in"><span><span class="va">dP</span> <span class="op">=</span> <span class="fu"><a href="lyapunov.html">lyapunov</a></span><span class="op">(</span><span class="va">A</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="va">dA</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">theta</span>, nrow <span class="op">=</span> <span class="va">m</span>, ncol <span class="op">=</span> <span class="va">m</span><span class="op">)</span><span class="op">*</span><span class="va">eps</span>, </span></span>
