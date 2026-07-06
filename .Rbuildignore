@@ -8,3 +8,10 @@
 ^\.github$
 ^doc$
 ^Meta$
+^\.planning$
+^\.claude$
+^new-iter\.sh$
+^CLAUDE\.md$
+^QUALITY_ASSESSMENT\.md$
+^z_ignore_this$
+^.*\.code-workspace$

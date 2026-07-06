@@ -9,3 +9,4 @@ docs
 /Meta/
 QUALITY_ASSESSMENT.md
 z_ignore_this/*
+.planning/**/*.html
