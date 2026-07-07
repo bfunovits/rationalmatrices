@@ -69,7 +69,7 @@ as_txt_scalarpoly(coefs, syntax = 'expression', x = 'z')
 as_txt_scalarpoly(coefs = sample((-10):10, 7, replace = TRUE), 
                   syntax = 'txt', x = 'x', 
                   laurent = -3)
-#> [1] "8x^-3 - x^-2 + 2x^-1 + 6 + 3x + 2x^2"
+#> [1] "-5x^-3 - x^-2 - 4x^-1 - 5 - 8x - 7x^2 - 8x^3"
 
 if (FALSE) { # \dontrun{
 # the case syntax = "expression" may be used e.g. as follows

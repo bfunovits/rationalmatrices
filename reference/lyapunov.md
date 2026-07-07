@@ -40,7 +40,7 @@ P (\\(m,m)\\ matrix) the solution of the Lyapunov equation.
 Kitagawa G (1977). “An algorithm for solving the matrix equation X = FXF
 T + S.” *International Journal of Control*, **25**(5), 745-753.
 [doi:10.1080/00207177708922266](https://doi.org/10.1080/00207177708922266)
-, http://dx.doi.org/10.1080/00207177708922266,
+. http://dx.doi.org/10.1080/00207177708922266,
 <http://dx.doi.org/10.1080/00207177708922266>.
 
 Hammarling SJ (1982). “Numerical solution of the stable, nonnegative
@@ -71,18 +71,18 @@ all.equal(P, A %*% P %*% t(A) + Q)
 #> [1] TRUE
 # note that the solution P (in general) is not positive semidefinite
 eigen(P, only.values= TRUE, symmetric = TRUE)$values
-#> [1]  23.0279705   4.2563159   0.7768525 -22.4080598
+#> [1]  1748.209746    18.352750     2.615683 -1126.363272
 
 # attach the eigenvalues of A to the solution P
 P = lyapunov(A, Q, attach = TRUE)
 print(P)
-#>           [,1]      [,2]       [,3]       [,4]
-#> [1,]  2.252003  4.034818 -1.5223909 -2.3998956
-#> [2,]  4.034818  3.675940 18.8459997 -9.8545848
-#> [3,] -1.522391 18.846000 -6.3919721 -0.7017767
-#> [4,] -2.399896 -9.854585 -0.7017767  6.1171076
+#>           [,1]      [,2]      [,3]      [,4]
+#> [1,]  196.2423 -731.5072  369.4595  724.5214
+#> [2,] -731.5072  561.7537  328.0284 -515.6507
+#> [3,]  369.4595  328.0284 -607.9807 -330.6354
+#> [4,]  724.5214 -515.6507 -330.6354  492.7996
 #> attr(,"lambda")
-#> [1]  2.0000000+0i -0.1898799+0i -0.7036820+0i -0.4964202+0i
+#> [1] 2.0000000+0i 0.2923064+0i 0.5248457+0i 0.4321761+0i
 
 # issue a warning message
 P = lyapunov(A, Q, non_stable = 'warn')

@@ -95,4 +95,7 @@ Useful links:
 
 Authors:
 
+- Bernd Funovits <bernd.funovits@gmail.com>
+  ([ORCID](https://orcid.org/0000-0002-8247-6840))
+
 - Wolfgang Scherrer <wolfgang.scherrer@tuwien.ac.at>

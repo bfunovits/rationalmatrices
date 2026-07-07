@@ -66,6 +66,7 @@ of dimension c(m,n,lag.max+1) with a class attribute c('pseries',
 ## Examples
 
 ``` r
+
 (obj = rmfd(c = polm(array(c(c(diag(2)), c(0.5, 0.25, 0.125, 0.5)), dim = c(2,2,2))), d = NULL))
 #> ( 2 x 2 ) right matrix fraction description d(z) c^(-1)(z) with degrees deg(c(z)) = p = 1, deg(d(z)) = q = 0
 #> left factor d(z):

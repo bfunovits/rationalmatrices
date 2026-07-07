@@ -13,6 +13,15 @@ as.lmfd(obj, method, ...)
 
 # S3 method for class 'pseries'
 as.lmfd(obj, method, ...)
+
+# S3 method for class 'stsp'
+as.lmfd(
+  obj,
+  method = c("echelon"),
+  lag.max = NULL,
+  tol = sqrt(.Machine$double.eps),
+  ...
+)
 ```
 
 ## Arguments
@@ -28,6 +37,18 @@ as.lmfd(obj, method, ...)
 - ...:
 
   optional additional arguments
+
+- lag.max:
+
+  Integer. Number of lags for the impulse response computation. Defaults
+  to `max(2 * s, 10)` where `s` is the state dimension of `obj`. Must be
+  large enough for the Hankel matrix to resolve the Kronecker indices.
+
+- tol:
+
+  Tolerance for the rank decision in the Kronecker-index computation
+  (passed to [`qr`](https://rdrr.io/r/base/qr.html)). Default:
+  `sqrt(.Machine$double.eps)`.
 
 ## Value
 

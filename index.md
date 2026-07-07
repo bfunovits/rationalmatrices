@@ -57,7 +57,7 @@ The package also provides some specific methods for rational matrices:
   form, the Smith form, and the Wiener-Hopf factorization.
 - Check for **left primeness** with
   [`is.coprime()`](https://bfunovits.github.io/rationalmatrices/reference/is.coprime.md)
-- Compute the **derivative** (with respect to $z$)
+- Compute the **derivative** (with respect to $`z`$)
 - Tools related to state space representations, e.g. computation of
   **controllability and observability** matrices.
 

@@ -221,12 +221,12 @@ obj = test_stsp(dim = c(2,2), s = 10, bpoles = 1, bzeroes = 1)
 gr = grammians(obj, 'minimum phase')
 trunc = balance(obj, gr, s0 = 5)
 print(trunc$sigma)
-#>  [1] 1.050338828 0.912130569 0.801352887 0.307619618 0.201641532 0.093077495
-#>  [7] 0.026798379 0.015051710 0.004094821 0.002717688
+#>  [1] 19.44450550  6.58780419  3.53952264  2.97888497  0.94609320  0.42452319
+#>  [7]  0.31076732  0.16434554  0.03815294  0.03218524
 
 max(abs(unclass(pseries(obj, lag.max = 25)) - 
         unclass(pseries(trunc$ob, lag.max = 25))))
-#> [1] 0.0305373
+#> [1] 0.2164891
 plot(pseries(obj, lag.max = 25), x_list= list(pseries(trunc$obj, lag.max = 25)), 
      type = c('l','p'), legend = c('s=10', 's=5')) 
 ```

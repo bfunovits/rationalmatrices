@@ -44,20 +44,20 @@ or for `get_bwd` \$\$\[a(z)\]\_+ = a_0 + a_1 z^1 + \cdots + a_p z^p\$\$
 ``` r
 (lp = test_lpolm(degree_max = 2, degree_min = -2))
 #> ( 1 x 1 ) Laurent polynomial matrix with degree <= 2, and minimal degree >= -2
-#>      z^-2 [,1] z^-1 [,1]  z^0 [,1]  z^1 [,1]  z^2 [,1]
-#> [1,] -1.105217 -1.461169 0.2955619 0.6585265 0.6451427
+#>      z^-2 [,1] z^-1 [,1]  z^0 [,1]   z^1 [,1]  z^2 [,1]
+#> [1,] -1.092631 -1.947076 -1.521579 -0.1541234 0.8862193
 get_fwd(lp)
 #> ( 1 x 1 ) Laurent polynomial matrix with degree <= -1, and minimal degree >= -2
 #>      z^-2 [,1] z^-1 [,1]
-#> [1,] -1.105217 -1.461169
+#> [1,] -1.092631 -1.947076
 (lp = test_lpolm(degree_max = 2, degree_min = -2))
 #> ( 1 x 1 ) Laurent polynomial matrix with degree <= 2, and minimal degree >= -2
-#>      z^-2 [,1] z^-1 [,1]   z^0 [,1]   z^1 [,1]  z^2 [,1]
-#> [1,] 0.6236535  2.315849 -0.3815989 0.03168816 0.7766254
+#>      z^-2 [,1] z^-1 [,1]   z^0 [,1]  z^1 [,1] z^2 [,1]
+#> [1,] -1.419259 0.3932093 -0.8518418 0.7281672 1.716373
 get_bwd(lp)
 #> ( 1 x 1 ) Laurent polynomial matrix with degree <= 2, and minimal degree >= 0
-#>        z^0 [,1]   z^1 [,1]  z^2 [,1]
-#> [1,] -0.3815989 0.03168816 0.7766254
+#>        z^0 [,1]  z^1 [,1] z^2 [,1]
+#> [1,] -0.8518418 0.7281672 1.716373
 
 (lp = lpolm(1:3, min_deg = 2))
 #> ( 1 x 1 ) Laurent polynomial matrix with degree <= 4, and minimal degree >= 2

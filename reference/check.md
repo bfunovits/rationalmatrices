@@ -55,9 +55,9 @@ is.stable(pseries(c))
 #> [1] NA
 
 is.miniphase(b[,1:2])
-#> [1] FALSE
+#> [1] TRUE
 is.miniphase(as.stsp(c)[,1:2])
-#> [1] FALSE
+#> [1] TRUE
 
 if (FALSE) { # \dontrun{
 is.miniphase(b)

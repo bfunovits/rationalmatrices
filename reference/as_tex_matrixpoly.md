@@ -32,7 +32,7 @@ character string.
 coefs = array(round(rnorm(2*3*1), 1), dim = c(2,3,2))
 
 as_tex_matrixpoly(coefs)
-#> [1] "\\begin{pmatrix}\n  1.5 + 1.5z & 0.3 + 0.3z & -0.6 - 0.6z  \\\\\n  -0.8 - 0.8z & -0.5 - 0.5z & 1.5 + 1.5z  \\\\\n\\end{pmatrix}"
+#> [1] "\\begin{pmatrix}\n  -1.4 - 1.4z & 0 & 0.4 + 0.4z  \\\\\n  1.4 + 1.4z & -0.1 - 0.1z & 0.1 + 0.1z  \\\\\n\\end{pmatrix}"
 as_tex_matrixpoly(coefs, x = 'x', as_matrix_of_polynomials = FALSE)
-#> [1] " \\begin{pmatrix}\n  1.5 & 0.3 & -0.6  \\\\\n  -0.8 & -0.5 & 1.5  \\\\\n\\end{pmatrix}  +\n \\begin{pmatrix}\n  1.5 & 0.3 & -0.6  \\\\\n  -0.8 & -0.5 & 1.5  \\\\\n\\end{pmatrix} x"
+#> [1] " \\begin{pmatrix}\n  -1.4 & 0 & 0.4  \\\\\n  1.4 & -0.1 & 0.1  \\\\\n\\end{pmatrix}  +\n \\begin{pmatrix}\n  -1.4 & 0 & 0.4  \\\\\n  1.4 & -0.1 & 0.1  \\\\\n\\end{pmatrix} x"
 ```

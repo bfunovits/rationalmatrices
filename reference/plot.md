@@ -227,6 +227,7 @@ vector with a `dim` attribute such that subfigure_main\[i,j\] returns
 the expression which is to be used as title for the \\(i,j)\\-th
 subfigure. E.g. for a \$(2,2)\$ rational matrix one might use
 
+
     subfigure_main = expression(Alpha, Beta, Gamma, Delta)
     dim(subfigure_main) = c(2,2)
 

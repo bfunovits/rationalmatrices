@@ -109,10 +109,10 @@ a = tall  # choose one of the above cases
 out = hnf(a)
 print(out$h, digits = 2, format = 'c')
 #> ( 3 x 2 ) matrix polynomial with degree <= 4 
-#>       [,1]                                    [,2]
-#> [1,]     1     15.46 + 49.73z + 39.45z^2 + 7.31z^3
-#> [2,]     0  1.19 + 4.92z + 7.28z^2 + 4.55z^3 + z^4
-#> [3,]     0                                       0 
+#>       [,1]                                 [,2]
+#> [1,]     1     2.69 + 3.66z + 2.28z^2 + 1.15z^3
+#> [2,]     0  2 + 4.96z + 4.91z^2 + 2.96z^3 + z^4
+#> [3,]     0                                    0 
 
 # check result(s)
 all.equal(a, prune(out$u %r% out$h))
@@ -128,10 +128,10 @@ if (dim(a)[1] == dim(a)[2]) {
 out = hnf(a, from_left = FALSE)
 print(out$h, digits = 2, format = 'c')
 #> ( 3 x 2 ) matrix polynomial with degree <= 4 
-#>                                           [,1]                                     [,2]
-#> [1,]                                         1                                        0
-#> [2,]  337.9 + 1054.18z + 997.65z^2 + 280.38z^3   1.19 + 4.92z + 7.28z^2 + 4.55z^3 + z^4
-#> [3,]  674.8 + 2108.35z + 1995.3z^2 + 560.75z^3  2.38 + 9.85z + 14.57z^2 + 9.1z^3 + 2z^4 
+#>                                           [,1]                                  [,2]
+#> [1,]                                         1                                     0
+#> [2,]     -97.31 - 145.77z - 96.6z^2 - 49.14z^3   2 + 4.96z + 4.91z^2 + 2.96z^3 + z^4
+#> [3,]  -195.62 - 291.53z - 193.19z^2 - 98.29z^3  4 + 9.91z + 9.83z^2 + 5.91z^3 + 2z^4 
 
 # check result(s)
 all.equal(a, prune(out$h %r% out$u))

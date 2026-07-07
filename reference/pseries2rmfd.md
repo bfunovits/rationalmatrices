@@ -83,20 +83,18 @@ Xi = pseries(Xr, lag.max = 2*(max(p,q)+1))
 
 # reconstruct a matrix from this impulse response
 out = pseries2rmfd(Xi)
-#> Warning: 'X' matrix was collinear
-#> Warning: 'X' matrix was collinear
 out
 #> $Xr
 #> ( 3 x 2 ) right matrix fraction description d(z) c^(-1)(z) with degrees deg(c(z)) = p = 1, deg(d(z)) = q = 1
 #> left factor d(z):
-#>       z^0 [,1]       [,2]   z^1 [,1]       [,2]
-#> [1,]  49.02065  39.684749  -14.82652  -12.10711
-#> [2,] 148.21825 120.537069 -248.87162 -201.31285
-#> [3,] -10.25606  -8.293895   41.56984   33.61174
+#>       z^0 [,1]        [,2]   z^1 [,1]       [,2]
+#> [1,] 0.5882406 -0.03285046 0.04454194  1.4703305
+#> [2,] 0.3562176  0.51006222 0.43446926 -0.3763948
+#> [3,] 0.8742659  1.46009971 1.16919551 -0.1230243
 #> right factor c(z):
-#>      z^0 [,1]  [,2] z^1 [,1]     [,2]
-#> [1,]        1     0 88.46234 70.67135
-#> [2,]        0     1  0.00000  0.00000
+#>      z^0 [,1]  [,2]   z^1 [,1]       [,2]
+#> [1,]        1     0  2.1195641 -0.5955592
+#> [2,]        0     1 -0.8331811 -0.6675166
 #> 
 #> $mu
 #> [1] 1 1
@@ -105,5 +103,5 @@ out
 # check that the lmfd object is a realization of the given impulse response
 Xi1 = pseries(out$Xr, lag.max = 2*(max(p,q)+1))
 all.equal(Xi, Xi1)
-#> [1] "Mean relative difference: 0.0002085268"
+#> [1] TRUE
 ```

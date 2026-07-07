@@ -32,5 +32,5 @@ character string.
 coefs = array(round(rnorm(2*3*1), 1), dim = c(2,3,2))
 
 as_tex_matrixfilter(coefs, x = '\\epsilon', t = 's')
-#> [1] " \\begin{pmatrix}\n  -0.1 & 0.1 & -0.5  \\\\\n  0.4 & -0.8 & -1.2  \\\\\n\\end{pmatrix} \\epsilon_{s} +\n \\begin{pmatrix}\n  -0.1 & 0.1 & -0.5  \\\\\n  0.4 & -0.8 & -1.2  \\\\\n\\end{pmatrix} \\epsilon_{s-1}"
+#> [1] " \\begin{pmatrix}\n  1.2 & -0.9 & 1.1  \\\\\n  -1.7 & 1.3 & 1.2  \\\\\n\\end{pmatrix} \\epsilon_{s} +\n \\begin{pmatrix}\n  1.2 & -0.9 & 1.1  \\\\\n  -1.7 & 1.3 & 1.2  \\\\\n\\end{pmatrix} \\epsilon_{s-1}"
 ```

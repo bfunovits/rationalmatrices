@@ -13,13 +13,13 @@
 ## Citation
 
 Scherrer W, Funovits B (2026). *rationalmatrices: Classes and Methods
-for Rational Matrices*. R package version 0.3.3,
+for Rational Matrices*. R package version 0.3.4,
 <https://bfunovits.github.io/rationalmatrices/>.
 
     @Manual{,
       title = {rationalmatrices: Classes and Methods for Rational Matrices},
       author = {Wolfgang Scherrer and Bernd Funovits},
       year = {2026},
-      note = {R package version 0.3.3},
+      note = {R package version 0.3.4},
       url = {https://bfunovits.github.io/rationalmatrices/},
     }

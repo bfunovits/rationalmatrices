@@ -5,17 +5,17 @@
 ### What are Rational Matrices?
 
 The `rationalmatrices` package handles **rational matrices** - matrices
-whose entries are rational functions of the lag-operator $z$ (typically
-$z^{- 1}$ in control theory applications).
+whose entries are rational functions of the lag-operator $`z`$
+(typically $`z^{-1}`$ in control theory applications).
 
 A rational function can be represented in many equivalent forms:
 
-- **Polynomial**: $a(z) = a_{0} + a_{1}z + \cdots + a_{p}z^{p}$
-- **Matrix fractions**: $a^{- 1}(z)b(z)$ (left LMFD) or $d(z)c^{- 1}(z)$
-  (right RMFD)
-- **State-space**: $C\left( z^{- 1}I - A \right)^{- 1}B + D$ (standard
-  in control theory)
-- **Impulse response**: $h_{0} + h_{1}z + h_{2}z^{2} + \cdots$
+- **Polynomial**: $`a(z) = a_0 + a_1 z + \cdots + a_p z^p`$
+- **Matrix fractions**: $`a^{-1}(z)b(z)`$ (left LMFD) or
+  $`d(z)c^{-1}(z)`$ (right RMFD)
+- **State-space**: $`C(z^{-1}I - A)^{-1}B + D`$ (standard in control
+  theory)
+- **Impulse response**: $`h_0 + h_1 z + h_2 z^{2} + \cdots`$
   (time-domain)
 - **Frequency response**: function values on the unit circle
 
@@ -56,10 +56,11 @@ Quick start examples follow below:
 ------------------------------------------------------------------------
 
 We start with some basic examples. First we create a scalar polynomial
-$a(z) = 1 + 0.9z + 0.9z^{2} + 0.9^{3}z^{3}$, check that the object is
-“valid” and print it:
+$`a(z)=1+0.9z+0.9z^2+0.9^3z^3`$, check that the object is “valid” and
+print it:
 
 ``` r
+
 a = polm(c(1,0.9,0.9^2,0.9^3))
 is.polm(a)
 #> [1] TRUE
@@ -69,10 +70,11 @@ print(a, format = 'c')
 #> [1,]  1 + 0.9z + 0.81z^2 + 0.729z^3
 ```
 
-Create a scalar rational matrix $c(z) = a^{- 1}(z)b(z)$ in LMFD form,
+Create a scalar rational matrix $`c(z) = a^{-1}(z) b(z)`$ in LMFD form,
 check that the object is valid and print it:
 
 ``` r
+
 c = lmfd(a, c(1, 0, 0.8^2))
 is.lmfd(c)
 #> [1] TRUE
@@ -86,19 +88,21 @@ print(c)
 #> [1,]        1        0     0.64
 ```
 
-Compute poles and zeroes of $c( \cdot )$
+Compute poles and zeroes of $`c(\cdot)`$
 
 ``` r
+
 poles(c)
 #> [1] -1.713307e-16-1.111111i -1.713307e-16+1.111111i -1.111111e+00+0.000000i
 zeroes(c)
 #> [1] 0-1.25i 0+1.25i
 ```
 
-Evaluate $a(z),b(z),c(z)$ on the unit circle and check that
-$c = a^{- 1}b$:
+Evaluate $`a(z), b(z), c(z)`$ on the unit circle and check that
+$`c=a^{-1}b`$:
 
 ``` r
+
 ## evaluate
 af = zvalues(c$a, n.f = 10)
 bf = zvalues(c$b, n.f = 10)
@@ -122,9 +126,10 @@ print(cf, format = 'iz|j', digits = 2)
 
 Produce a “Nyquist” plot, where the imaginary part is plotted versus the
 real part. In order to get a “nice, smooth” path, we evaluate the
-rational function $c(z)$ on a grid of 1024 points on the unit circle:
+rational function $`c(z)`$ on a grid of 1024 points on the unit circle:
 
 ``` r
+
 plot(zvalues(c, n.f = 1024), which = 'nyquist')
 ```
 
@@ -161,6 +166,7 @@ Note: There are no separate classes for rational *scalars* or rational
 ### Representation Conversion Diagram
 
 ``` r
+
 # Keep original diagram for reference - can be displayed if needed
 DiagrammeR::grViz("
   digraph G {
@@ -206,15 +212,18 @@ realization*.
 
 Polynomial matrices
 
-$$a(z) = a_{0} + a_{1}z + \cdots + a_{p}z^{p},\; a_{i} \in {\mathbb{R}}^{m \times n}{\mspace{6mu}\text{or}\mspace{6mu}}a_{i} \in {\mathbb{C}}^{m \times n}$$
+``` math
+a(z) = a_0 + a_1 z + \cdots + a_p z^p,\; a_i\in \mathbb{R}^{m\times n} \mbox{ or } a_i \in \mathbb{C}^{m\times n}
+```
 are represented by objects of class `polm`. Such a `polm` object is
-simply an $(m,n,p + 1)$-dimensional array which stores the coefficients
-$a_{i}$ together with a class attribute `c('polm','ratm')`.
+simply an $`(m,n,p+1)`$-dimensional array which stores the coefficients
+$`a_i`$ together with a class attribute `c('polm','ratm')`.
 
 **Note:** We allow for *complex* coefficients, *empty* polynomials
-($m = 0$ or $n = 0$) and *zero* polynomials ($a(z) = 0$ for all
-$z \in {\mathbb{C}}$). Zero polynomials may be represented by an
-$(m,n,0)$-dimensional array, i.e. the degree $p$ is equal to $p = - 1$.
+($`m=0`$ or $`n=0`$) and *zero* polynomials ($`a(z)=0`$ for all
+$`z\in \mathbb{C}`$). Zero polynomials may be represented by an
+$`(m,n,0)`$-dimensional array, i.e. the degree $`p`$ is equal to
+$`p=-1`$.
 
 The constructor for polynomial matrices is
 [`polm()`](https://bfunovits.github.io/rationalmatrices/reference/polm.md).
@@ -224,28 +233,35 @@ to create (random) polynomial matrices.
 
 ### Left Matrix Fraction Description
 
-Any rational $(m \times n)$ matrix $c(z)$ may be represented as
-$c(z) = a^{- 1}(z)b(z)$, where
+Any rational $`(m \times n)`$ matrix $`c(z)`$ may be represented as
+$`c(z) = a^{-1}(z) b(z)`$, where
 
-$$a(z) = a_{0} + a_{1}z + \cdots + a_{p}z^{p}$$ is an $(m \times m)$
-(non singular) polynomial matrix of degree $p$, and
+``` math
+a(z)  = a_0 + a_1 z + \cdots + a_p z^p
+```
+is an $`(m \times m)`$ (non singular) polynomial matrix of degree $`p`$,
+and
 
-$$b(z) = b_{0} + b_{1}z + \cdots + b_{q}z^{q}$$ is an $(m \times n)$
-dimensional matrix polynomial of degree $q$.
+``` math
+b(z) = b_0 + b_1 z + \cdots + b_q z^q
+```
+is an $`(m \times n)`$ dimensional matrix polynomial of degree $`q`$.
 
-The matrix $c(z)$ is thus described by the pair
-$\left( a(z),b(z) \right)$. Note that the “factors” $a(z),b(z)$ are by
-no means unique for given $c(z)$.
+The matrix $`c(z)`$ is thus described by the pair $`(a(z), b(z))`$. Note
+that the “factors” $`a(z), b(z)`$ are by no means unique for given
+$`c(z)`$.
 
 Internally such LMFDs are stored as a matrix
 
-$$\left\lbrack a_{0},a_{1},\ldots,a_{p},b_{0},\ldots,b_{q} \right\rbrack \in {\mathbb{R}}^{m \times {(m{(p + 1)} + n{(q + 1)})}}$$
+``` math
+[a_0,a_1,\ldots,a_p,b_0,\ldots,b_q] \in \mathbb{R}^{m \times (m(p+1)+n(q+1))}
+```
 with an attribute `order = c(m,n,p,q)` and a class attribute
 `c('lmfd','ratm')`.
 
-**Note:** We demand $m > 0$, since it is not clear how to interpret the
-inverse of an $(0 \times 0)$-dimensional matrix. Since $a(z)$ is non
-singular, $p \geq 0$ must hold.
+**Note:** We demand $`m>0`$, since it is not clear how to interpret the
+inverse of an $`(0 \times 0)`$-dimensional matrix. Since $`a(z)`$ is non
+singular, $`p\geq 0`$ must hold.
 
 The constructor for `lmfd` objects is
 [`lmfd()`](https://bfunovits.github.io/rationalmatrices/reference/lmfd.md).
@@ -255,34 +271,38 @@ to create (random) rational matrices in LMFD form.
 
 ### Statespace Representation
 
-Any rational ($(m \times n)$-dimensional) matrix $c(z)$ which has no
-pole at $z = 0$ may be represented as
+Any rational ($`(m \times n)`$-dimensional) matrix $`c(z)`$ which has no
+pole at $`z=0`$ may be represented as
 
-$$c(z) = C\left( z^{- 1}I_{s} - A \right)^{- 1}B + D$$
+``` math
+c(z) = C(z^{-1}I_s - A)^{-1}B + D
+```
 
-where $A \in {\mathbb{R}}^{s \times s}$,
-$B \in {\mathbb{R}}^{s \times n}$, $C \in {\mathbb{R}}^{m \times s}$ and
-$D \in {\mathbb{R}}^{m \times n}$.
+where $`A\in \mathbb{R}^{s\times s}`$, $`B\in \mathbb{R}^{s\times n}`$,
+$`C\in \mathbb{R}^{m\times s}`$ and $`D\in \mathbb{R}^{m\times n}`$.
 
-The integer $s$ is called the *state dimension* of the above
+The integer $`s`$ is called the *state dimension* of the above
 realization. Statespace representations are by no means unique, even the
-state dimension $s$ is not unique. If the state dimension $s$ is minimal
-among all possible realizations of $c(z)$ then the representation is
-called *minimal*.
+state dimension $`s`$ is not unique. If the state dimension $`s`$ is
+minimal among all possible realizations of $`c(z)`$ then the
+representation is called *minimal*.
 
 Internally, statespace realizations are stored as a matrix
 
-$$\begin{bmatrix}
+``` math
+\begin{bmatrix}
 A & B \\
 C & D
-\end{bmatrix} \in {\mathbb{R}}^{{(s + m)} \times {(s + n)}}$$ with an
-attribute `order = c(m,n,s)` and a class attribute `c('stsp','ratm')`.
+\end{bmatrix} \in \mathbb{R}^{(s+m) \times (s+n)}
+```
+with an attribute `order = c(m,n,s)` and a class attribute
+`c('stsp','ratm')`.
 
 **Notes**:
 
-- E.g. the elementary rational function $c(z) = z^{- 1}$ does *not* have
+- E.g. the elementary rational function $`c(z)=z^{-1}`$ does *not* have
   a statespace realization of the above form.  
-- Any of the integers $m,n,s$ may be zero.
+- Any of the integers $`m,n,s`$ may be zero.
 - Many (algebraic) operations are very easy to implement in terms of
   statespace representations. Therefore, the package is somewhat
   “biased” towards statespace representations.
@@ -298,20 +318,22 @@ to create (random) rational matrices in statespace form.
 Impulse response function or transfer function are also used for the
 same object.
 
-If the rational matrix $c(z)$ has no pole at $z = 0$, then there exists
-a power series expansion
+If the rational matrix $`c(z)`$ has no pole at $`z=0`$, then there
+exists a power series expansion
 
-$$c(z) = k_{0} + k_{1}z^{1} + k_{2}z^{2} + \cdots$$ which converges in a
-(non-empty) circle around $z = 0$. The sequence of coefficients
-$\left( k_{j}\,|\, j \geq 0 \right)$ here is called *impulse response
-function*[¹](#fn1).
+``` math
+c(z) = k_0 + k_1 z^1 + k_2 z^2 + \cdots
+```
+which converges in a (non-empty) circle around $`z=0`$. The sequence of
+coefficients $`(k_j \,|\, j \geq 0)`$ here is called *impulse response
+function*[^1].
 
-An `pseries` object stores a finite sequence
-$\left( k_{0},\ldots,k_{l} \right)$ as $\left( m,n,(l + 1) \right)$
-dimensional array with a class attribute `c('stsp','ratm')`.
+An `pseries` object stores a finite sequence $`(k_0,\ldots,k_l)`$ as
+$`(m,n,(l+1))`$ dimensional array with a class attribute
+`c('stsp','ratm')`.
 
 **Note:** Due to the rational structure, a *finite* sequence of
-coefficients is sufficient to reconstruct the rational matrix $c(z)$,
+coefficients is sufficient to reconstruct the rational matrix $`c(z)`$,
 see e.g. the Ho-Kalman realization algorithm (Ho and Kalman 1966)
 implemented in `pseries2stsp` and the function `pseries2lmfd`. (Of
 course the number of coefficients has to be large enough.) Hence, we can
@@ -321,17 +343,19 @@ represent rational matrices.
 ### Frequency Response
 
 A rational matrix is also uniquely determined by a (finite) set of
-function values. An object of class `zvalues` is an $(m,n,k)$
-dimensional array (which stores the values $c\left( z_{j} \right)$,
-$j = 1,\ldots,k$ together with an attribute `z` (which is a vector with
-components $z_{j}$, $j = 1,\ldots,k$) and a class attribute
+function values. An object of class `zvalues` is an $`(m,n,k)`$
+dimensional array (which stores the values $`c(z_j)`$, $`j=1,\ldots,k`$
+together with an attribute `z` (which is a vector with components
+$`z_j`$, $`j=1,\ldots,k`$) and a class attribute
 `c('freqressp','ratm')`.
 
 If the rational matrix represents the transfer function of a (rational)
 filter, then often the matrix is evaluated at a grid of points on the
 unit circle
 
-$$f_{j} = (j - 1)/k,\qquad z_{j} = \exp\left( - i\left( 2\pi f_{j} \right) \right),\qquad j = 1,\ldots,k$$
+``` math
+f_j = (j-1)/k,\qquad z_j = \exp(-i(2\pi  f_j)),\qquad j=1,\ldots,k
+```
 
 **Notes**:
 
@@ -384,51 +408,58 @@ more information may be found in the vignette “technical details”.
 #### Realization Algorithms
 
 One of the characteristic features of rational functions is that the
-Hankel matrix of the impulse response[²](#fn2) coefficients
+Hankel matrix of the impulse response[^2] coefficients
 
-$$H = \begin{pmatrix}
-k_{1} & k_{2} & \cdots \\
-k_{2} & k_{3} & \cdots \\
-\vdots & \vdots & 
-\end{pmatrix}$$ has *finite* rank.
+``` math
+H = \begin{pmatrix}
+k_1 & k_2 & \cdots \\
+k_2 & k_3 & \cdots \\
+\vdots & \vdots &
+\end{pmatrix}
+```
+has *finite* rank.
 
-If the rational matrix $k(z)$ has an LMFD representation
-$k(z) = a^{- 1}(z)b(z)$, $a(z) = a_{0} + a_{1}z + \cdots + a_{p}z^{p}$,
-$b(z) = b_{0} + b_{1}z + \cdots + b_{q}z^{q}$ then
+If the rational matrix $`k(z)`$ has an LMFD representation
+$`k(z)=a^{-1}(z)b(z)`$, $`a(z)=a_0 + a_1 z + \cdots + a_p z^p`$,
+$`b(z)=b_0 + b_1 z + \cdots + b_q z^q`$ then
 
-$$a(z)\left( k(z) - k_{0} \right) = b(z) - a(z)k_{0}$$ implies that
+``` math
+a(z)(k(z)-k_0) = b(z) - a(z)k_0
+```
+implies that
 
-$$a_{0}k_{l} + a_{1}k_{l - 1} + \cdots + a_{p}k_{l - p} = 0{\mspace{6mu}\text{for}\mspace{6mu}}l > \max(p,q)$$
+``` math
+a_0 k_l + a_1 k_{l-1} + \cdots + a_p k_{l-p} = 0 \mbox{ for } l>\max(p,q)
+```
 
 This implies that the Hankel matrix indeed has finite rank and
-furthermore that we can construct the matrix $a(z)$ from the left kernel
-of the Hankel matrix. For given $a{()}$ and $k{()}$, $b(z)$ follows from
-$b(z) = a(z)k(z)$.
+furthermore that we can construct the matrix $`a(z)`$ from the left
+kernel of the Hankel matrix. For given $`a()`$ and $`k()`$, $`b(z)`$
+follows from $`b(z)=a(z)k(z)`$.
 
-In order to describe the linear dependence structure of the rows of $H$
-it is convenient to use a “double” index for the rows: Let
-$h(i,j) \in {\mathbb{R}}^{1 \times \infty}$ denote the $j$-th row in the
-$i$-th block row of $H$, i.e. $h(i,j)$ is the
-$\left( (i - 1)m + j \right)$-th row of $H$.
+In order to describe the linear dependence structure of the rows of
+$`H`$ it is convenient to use a “double” index for the rows: Let
+$`h(i,j)\in \mathbb{R}^{1\times \infty}`$ denote the $`j`$-th row in the
+$`i`$-th block row of $`H`$, i.e. $`h(i,j)`$ is the $`((i-1)m+j)`$-th
+row of $`H`$.
 
-A selection
-$\mathcal{S} = \{ h\left( i_{k},j_{k} \right)\,|\, k = 1,\ldots,s\}$ of
-rows of the Hankel matrix is called a *nice* selection, if there are no
-“holes” in the sense that $h(i,j) \in \mathcal{S}$, $i > 1$ implies that
-$h(i - 1,j) \in \mathcal{S}$. Nice selections may be described by a
-multi-index $\nu = \left( \nu_{1},\ldots,\nu_{m} \right)$, where
-$\nu_{j} = \max\{ i\,|\, h(i,j) \in \mathcal{S}\}$.
+A selection $`\mathcal{S}=\{h(i_k,j_k) \,|\, k=1,\ldots ,s\}`$ of rows
+of the Hankel matrix is called a *nice* selection, if there are no
+“holes” in the sense that $`h(i,j)\in \mathcal{S}`$, $`i>1`$ implies
+that $`h(i-1,j)\in \mathcal{S}`$. Nice selections may be described by a
+multi-index $`\nu = (\nu_1, \ldots, \nu_m)`$, where
+$`\nu_j=\max \{i\,|\,h(i,j)\in \mathcal{S}\}`$.
 
-Suppose that $H$ has rank $s$. In general there are many different
-selections of rows of $H$ which form a basis for the row space of $H$.
-In the following we choose the *first* $s$ rows of $H$ which form a
-basis of the row space and denote the corresponding selection with
-$\mathcal{S} = \{ h\left( i_{k},j_{k} \right)\,|\, k = 1,\ldots,s\}$.
-Due to the Hankel structure of $H$ this is a nice selection in the above
-sense. The corresponding $\nu_{j}$’s are called *Kronecker indices* of
-the Hankel matrix (respectively of the rational matrix $k( \cdot )$).
-Note that the sum of the Kronecker indices is equal to the rank of $H$:
-$\sum_{j = 1}^{m}\nu_{j} = s$.
+Suppose that $`H`$ has rank $`s`$. In general there are many different
+selections of rows of $`H`$ which form a basis for the row space of
+$`H`$. In the following we choose the *first* $`s`$ rows of $`H`$ which
+form a basis of the row space and denote the corresponding selection
+with $`\mathcal{S}=\{h(i_k,j_k) \,|\, k=1,\ldots ,s\}`$. Due to the
+Hankel structure of $`H`$ this is a nice selection in the above sense.
+The corresponding $`\nu_j`$’s are called *Kronecker indices* of the
+Hankel matrix (respectively of the rational matrix $`k(\cdot)`$). Note
+that the sum of the Kronecker indices is equal to the rank of $`H`$:
+$`\sum_{j=1}^m \nu _j = s`$.
 
 For a given (nice) selection of basis rows, one may construct a unique
 LMFD representation of the rational matrix. In particular, if we choose
@@ -443,7 +474,7 @@ is just a wrapper function, which calls
 with some default parameters.
 
 Quite analogously one may also construct a statespace realization of
-$k( \cdot )$ with the *Ho-Kalman* algorithm. See the tools
+$`k(\cdot)`$ with the *Ho-Kalman* algorithm. See the tools
 [`pseries2stsp()`](https://bfunovits.github.io/rationalmatrices/reference/pseries2stsp.md)
 and
 [`as.stsp.pseries()`](https://bfunovits.github.io/rationalmatrices/reference/as.stsp.md).
@@ -453,12 +484,13 @@ canonical forms, see Hannan and Deistler (2012).
 
 #### Examples
 
-We first create a random $(2 \times 2)$ rational matrix in statespace
-form with a state dimension $s = 5$. Generically the first $s$ rows of
+We first create a random $`(2 \times 2)`$ rational matrix in statespace
+form with a state dimension $`s=5`$. Generically the first $`s`$ rows of
 the Hankel matrix form a basis and hence the Kronecker indices are
-$\nu_{1} = 3$ and $\nu_{2} = 2$:
+$`\nu_1 = 3`$ and $`\nu_2=2`$:
 
 ``` r
+
 # create a random rational matrix in statespace form
 X = test_stsp(dim = c(2,2), s = 5, digits = 2)
 X
@@ -486,6 +518,7 @@ Next we take the impulse response function and compute a statespace
 realization of this rational matrix in echelon form:
 
 ``` r
+
 X = pseries2stsp(K, method = 'echelon')$Xs
 print(X, digits = 2)
 #> statespace realization [2,2] with s = 5 states
@@ -504,11 +537,12 @@ all.equal(pseries(X, lag.max = 10), K)
 ```
 
 We may also create a rational matrix with prescribed Kronecker indices.
-Here we generate a $(3 \times 2)$ matrix with Kronecker indices
-$\nu = (2,3,1)$ and in addition we demand that the matrix is stable.
+Here we generate a $`(3\times 2)`$ matrix with Kronecker indices
+$`\nu =(2,3,1)`$ and in addition we demand that the matrix is stable.
 i.e. the matrix no poles inside the unit circle:
 
 ``` r
+
 nu = c(2,3,1)
 X = test_stsp(dim = c(3,2), nu = nu, D = matrix(c(1,NA,NA, 0, 1, NA), nrow = 3, ncol = 2),
               digits = 2, bpoles = 1)
@@ -532,9 +566,10 @@ all.equal(pseries2nu(K), nu)
 #> [1] TRUE
 ```
 
-An LMFD realization of this matrix $X$ is obtained a s follows
+An LMFD realization of this matrix $`X`$ is obtained a s follows
 
 ``` r
+
 X = pseries2lmfd(K)$Xl
 X
 #> ( 3 x 2 ) left matrix fraction description a^(-1)(z) b(z) with degrees (p = 3, q = 3)
@@ -557,16 +592,17 @@ all.equal(pseries(X, lag.max = 10), K)
 #> [1] TRUE
 ```
 
-The set $(1,2,3,5,6,7)$ does *not* correspond to a nice selection of
-rows of a Hankel matrix (with $m = 3$). The corresponding set of rows
+The set $`(1,2,3,5,6,7)`$ does *not* correspond to a nice selection of
+rows of a Hankel matrix (with $`m=3`$). The corresponding set of rows
 (using the above described “double indices”) is
-$\mathcal{S} = \{ h(1,1),h(1,2),h(1,3),h(2,2),h(2,3),h(3,1)\}$. The set
-$\mathcal{S}$ contains the row $h(3,1)$ but not the row $h(2,1)$ and
-hence it is not a nice selection. Therefore the function `basis2nu`
+$`\mathcal{S}=\{h(1,1),h(1,2),h(1,3),h(2,2),h(2,3),h(3,1)\}`$. The set
+$`\mathcal{S}`$ contains the row $`h(3,1)`$ but not the row $`h(2,1)`$
+and hence it is not a nice selection. Therefore the function `basis2nu`
 throws an error, if we try to compute the correponding Kronecker
 indices:
 
 ``` r
+
 basis = c(1,2,3,5,6,7)
 nu = try(basis2nu(basis, m= 3))
 #> Error in basis2nu(basis, m = 3) : 
@@ -588,19 +624,19 @@ rational matrix classes.
 #### The Power Operator `a^k`
 
 The power operator `a^k` is only implemented for square, rational
-matrices $a(z)$ and integers $k \in {\mathbb{Z}}$.
+matrices $`a(z)`$ and integers $`k \in \mathbb{Z}`$.
 
 - `a^0` works for all classes and returns the identity matrix,
   represented by an object of the same class as the input argument `a`.
-  **Note:** This means e.g. $0^{0} = 1$!
+  **Note:** This means e.g. $`0^0 = 1`$!
 - `a^1` works for all classes and simply returns the input argument `a`.
-- `a^k` for $k > 1$ is implemented for all classes. However `lmfd`
+- `a^k` for $`k>1`$ is implemented for all classes. However `lmfd`
   objects are first coerced to statespace realizations. Thus the result
   in this case is an object of class `stsp`. In all other cases, the
   result is of the same class as the input argument `a`.
-- `a^k` for $k < 0$ is implemented for all classes. However, $a$ must be
-  non empty and objects of class `polm` and `lmfd` are first coerced to
-  `stsp` objects. This means that the result has class `stsp` if the
+- `a^k` for $`k<0`$ is implemented for all classes. However, $`a`$ must
+  be non empty and objects of class `polm` and `lmfd` are first coerced
+  to `stsp` objects. This means that the result has class `stsp` if the
   input is a `polm`, `lmfd` or `stsp` object and it has class `pseries`
   or `zvalues` if the input is an `pseries` respectively `zvalues`
   object.
@@ -611,8 +647,8 @@ For the binary operators (like ‘a + b’) the two arguments are first
 coerced to a common class. To this end we use the following pseudo
 ordering of classes:
 
-`matrix` $\; \prec \;$`polm` $\; \prec \;$`lmfd` $\; \prec \;$`stsp`
-$\; \prec \;$`pseries` $\; \prec \;$`zvalues`
+`matrix` $`\;\prec\;`$`polm` $`\;\prec\;`$`lmfd` $`\;\prec\;`$`stsp`
+$`\;\prec\;`$`pseries` $`\;\prec\;`$`zvalues`
 
 The following table shows how the class of the result depends on the
 classes of `a` and `b`:
@@ -636,7 +672,7 @@ types](a_rational_matrices_files/figure-html/unnamed-chunk-13-1.png)
 - Of course the two arguments must be compatible, e.g. for elementwise
   operations they must have the same number of rows and columns. However
   for elementwise operations one of the arguments may be a scalar,
-  i.e. a $(1 \times 1)$ matrix. Such arguments are “expanded” to
+  i.e. a $`(1 \times 1)`$ matrix. Such arguments are “expanded” to
   matrices (of compatible dimension) with identical elements.
 - There is no automatic coercion of `pseries` objects to `zvalues`
   objects, since there is no guarantee that the `pseries` object has
@@ -658,20 +694,21 @@ hence the above remark on scalar arguments applies here.
 
 ### Transposition of Rational Matrices
 
-#### “Ordinary” transpose $x\prime(z)$
+#### “Ordinary” transpose $`x'(z)`$
 
 The transposition operator (function) `t(x)` is implemented for all
 classes, except for `lmfd` objects, i.e. rational matrices in LMFD form
 (and should work as expected).
 
 As an example consider the construction of a *Right Matrix Fraction
-Description* of a rational matrix $x(z) = b(z)a^{- 1}(z)$. The trick is
+Description* of a rational matrix $`x(z) = b(z)a^{-1}(z)`$. The trick is
 simply to construct an LMFD of the transpose
-$x\prime(z) = {\widehat{a}}^{- 1}(z)\widehat{b}(z)$, then
-$\widehat{b}\prime(z)\left( \widehat{a}\prime \right)^{- 1}(z) = x(z)$
-is the desired RMFD of $x(z)$:
+$`x'(z) = \hat{a}^{-1}(z) \hat{b}(z)`$, then
+$`\hat{b}'(z)(\hat{a}')^{-1}(z) = x(z)`$ is the desired RMFD of
+$`x(z)`$:
 
 ``` r
+
 # create random rational, stable, (3 x 2) matrix in statespace form
 x = test_stsp(dim = c(3,2), s = 2, bpoles = 1)
 
@@ -689,20 +726,25 @@ all.equal(zvalues(x), zvalues(b) %r% (zvalues(a)^{-1}))
 #> [1] TRUE
 ```
 
-#### Hermitean transpose $x^{*}(z)$
+#### Hermitean transpose $`x^*(z)`$
 
 - The Hermitean transpose `Ht(x)` is only implemented for frequency
   response objects and statespace realizations with a regular state
-  transition matrix $A$.  
-  The Hermitean transpose of a rational matrix $a(z)$ is defined as
-  $$a^{*}(z) = \overline{a\left( {\bar{z}}^{- 1} \right)}\prime$$ If
-  $a(z)$ has real coefficients and $|z| = 1$ then
-  $a^{*}(z) = \overline{a(z)}\prime$.
+  transition matrix $`A`$.  
+  The Hermitean transpose of a rational matrix $`a(z)`$ is defined as
+  ``` math
+  a^*(z) = \overline{a(\bar{z}^{-1})}'
+  ```
+  If $`a(z)`$ has real coefficients and $`|z|=1`$ then
+  $`a^*(z)=\overline{a(z)}'`$.
 
   As an example consider
-  $$a(z) = \frac{1 + 0.5z}{1 + 0.1z + 0.1z^{2} + 0.1z^{3} - 0.8z^{4}}$$
+  ``` math
+  a(z) = \frac{1+0.5z}{1+0.1z+0.1z^2+0.1z^3-0.8z^4}
+  ```
 
 ``` r
+
 (a = as.stsp(lmfd(c(1,0.1,0.1,0.1,-0.8),c(1,0.5))))
 #> statespace realization [1,1] with s = 4 states
 #>      s[1] s[2] s[3] s[4]    u[1]
@@ -721,6 +763,7 @@ all.equal(sp, zvalues(a %r% Ht(a), n.f = 101))
 ```
 
 ``` r
+
 plot(sp)
 ```
 
@@ -761,12 +804,13 @@ same class. However, this operator is not implemented for `lmfd`
 objects. Hence `x[i,j]` throws an error if `x` is an `lmfd` object!
 
 - `x[]` and `x[,]` simply return the object `x`.
-- `x[i]` returns an $(s,1)$ dimensional matrix with elements selected by
-  the index `i`.
+- `x[i]` returns an $`(s,1)`$ dimensional matrix with elements selected
+  by the index `i`.
 - `x[i,j]` returns a matrix with rows selected by `i` and columns
   selected by `j`.
 
 ``` r
+
 x = test_polm(dim = c(2,3), degree = 2)
 x
 #> ( 2 x 3 ) matrix polynomial with degree <= 2 
@@ -808,11 +852,12 @@ try(x[,])  # throws an error
 #> [2,] -0.1504031  1.431033 -1.032457 -0.7005600 -0.3163322 -1.3549281
 ```
 
-The `$` operator may be used to extract the $a$, $b$ polynomial of a
+The `$` operator may be used to extract the $`a`$, $`b`$ polynomial of a
 left matrix fraction description (`lmfd` object) and the matrices
-$A,B,C,D$ of a state space representation (`stsp` object).
+$`A,B,C,D`$ of a state space representation (`stsp` object).
 
 ``` r
+
 # extract a(z) polynomial
 x$a
 #> ( 2 x 2 ) matrix polynomial with degree <= 1 
@@ -826,6 +871,7 @@ polynomial matrices and works quite analogously to the assigment
 operation of “ordinary” matrices.
 
 ``` r
+
 a = test_polm(dim = c(3,2), degree = 1)
 print(a, format = 'c')
 #> ( 3 x 2 ) matrix polynomial with degree <= 1 
@@ -889,6 +935,7 @@ print(a, format = 'c')
 “named” arguments. Therefore the following statements throw an error
 
 ``` r
+
 try(a[i=1, j=2])
 #> Error in `[.polm`(a, i = 1, j = 2) : named dimensions are not supported
 try(a[i=1] <- 1)
@@ -900,22 +947,24 @@ try(a[i=1] <- 1)
 
 #### Polynomials
 
-The zeroes of a square ($m \times m$)-dimensional, non singular
-polynomial matrix $a(z) = a_{0} + a_{1}z + \cdots a_{p}z^{p}$, with
-$\det\left( a_{0} \right) \neq 0$ are the reciprocals of the non zero
-eigenvalues of the companion matrix
+The zeroes of a square ($`m\times m`$)-dimensional, non singular
+polynomial matrix $`a(z)=a_0+a_1z+\cdots a_p z^p`$, with
+$`\det(a_0)\neq 0`$ are the reciprocals of the non zero eigenvalues of
+the companion matrix
 
-$$A = \begin{pmatrix}
-{- a_{0}^{- 1}a_{1}} & \cdots & {- a_{0}^{- 1}a_{p - 1}} & {- a_{0}^{- 1}a_{p}} \\
-I_{m} & \cdots & 0 & 0 \\
-\vdots & \ddots & \vdots & \vdots \\
-0 & \cdots & I_{m} & 0
-\end{pmatrix} \in {\mathbb{R}}^{mp \times mp}$$
+``` math
+A = \begin{pmatrix}
+-a_0^{-1}a_1 & \cdots & -a_0^{-1} a_{p-1} & -a_0^{-1} a_p \\
+I_m          & \cdots & 0                 &          0    \\
+\vdots       & \ddots & \vdots            &     \vdots    \\
+0            & \cdots & I_m               &           0
+\end{pmatrix} \in \mathbb{R}^{mp\times mp}
+```
 
 This fact is used by `zeroes.polm`. However, there are some problems
 with this (simple) approach.
 
-- It does not work for polynomials with a zero at $z = 0$ ($a_{0}$ is
+- It does not work for polynomials with a zero at $`z=0`$ ($`a_0`$ is
   singular). An alternative is to use the function `is.coprime` which
   uses a (singular) pencil. See the examples below.
 - Due to numerical errors the function `eigen` (which is used to compute
@@ -928,10 +977,11 @@ with this (simple) approach.
   the other hand if the bound is too large, then some of the “true”
   zeroes may be skipped.
 
-To summarize. There are numerical problems if the coefficient $a_{0}$ is
-ill conditioned or if the companion matrix $A$ is (close to) singular.
+To summarize. There are numerical problems if the coefficient $`a_0`$ is
+ill conditioned or if the companion matrix $`A`$ is (close to) singular.
 
 ``` r
+
 # polynomial with degree p = 0 ##############################
 zeroes(polm(diag(3)))  # returns empty vector
 #> numeric(0)
@@ -975,24 +1025,25 @@ is.coprime(a, only.answer = FALSE)$zeroes
 
 #### Left Matrix Fraction Descriptions
 
-Suppose $c(z) = a^{- 1}(z)b(z)$ is an $(m \times n)$ dimensional
-rational matrix ($a$ and $b$ are polynomials). If $(a,b)$ are left
-coprime then the poles of $c$ are the zeroes of $a$. Furthermore if $c$
-is square, then the zeroes of $c$ are the zeroes of $b$.
+Suppose $`c(z)= a^{-1}(z) b(z)`$ is an $`(m \times n)`$ dimensional
+rational matrix ($`a`$ and $`b`$ are polynomials). If $`(a,b)`$ are left
+coprime then the poles of $`c`$ are the zeroes of $`a`$. Furthermore if
+$`c`$ is square, then the zeroes of $`c`$ are the zeroes of $`b`$.
 
 Therefore the methods `poles.lmfd` and `zeroes.lmfd` simply use
 `zeroes.polm` in order to compute poles and zeroes of a rational matrix
 given in LMFD form. This implies that all the above caveats also apply
-here. E.g. the methods only work for the case that $a_{0}$ (respectively
-$b_{0}$) is non singular.
+here. E.g. the methods only work for the case that $`a_0`$ (respectively
+$`b_0`$) is non singular.
 
 In addition the routines do not provide the correct answers in the case
-that the pair $(a,b)$ is *not* left coprime. Here a pole/zero
+that the pair $`(a,b)`$ is *not* left coprime. Here a pole/zero
 cancellation may occur, which is not taken into account by the methods
 `poles.lmfd` and `zeroes.lmfd`. This means that the functions may return
 some *spurious* poles and zeroes.
 
 ``` r
+
 # create a random rational (2 x 2) matrix in LMFD form with p = 1, q = 2
 # note that two random polynomials are "generically" left coprime
 set.seed(8924)
@@ -1015,10 +1066,11 @@ all.equal(sort(zeroes(c)), sort(zeroes(b)))
 ```
 
 Now we construct an LMFD where a,b are not coprime. We simply simply
-multiply the above matrices $a,b$ with a common factor $r$ and note that
-$(ra)^{- 1}(rb) = a^{- 1}b = c$.
+multiply the above matrices $`a,b`$ with a common factor $`r`$ and note
+that $`(r a)^{-1} (r b) = a^{-1} b = c`$.
 
 ``` r
+
 # generate random common factor
 r = test_polm(dim = c(2,2), degree = 1, random = TRUE)
 ra = r %r% a
@@ -1043,18 +1095,17 @@ set.seed(NULL)
 
 #### Statespace Representation
 
-Let $k(z) = C\left( z^{- 1}I - A \right)^{- 1}B + D$ be a rational
-matrix, given in state space form. If the statespace representation is
-*minimal* then the poles of $k$ are the reciprocals of the non zero
-eigenvalues of $A$. Furthermore if $k$ is square and if $D$ is regular
-(i.e. if $k(0) = D$ is regular) then the zeroes of $k$ are the
-reciprocals of the eigenvalues of the matrix
-$\left( A - BD^{- 1}C \right)$.
+Let $`k(z) = C(z^{-1}I - A)^{-1}B + D`$ be a rational matrix, given in
+state space form. If the statespace representation is *minimal* then the
+poles of $`k`$ are the reciprocals of the non zero eigenvalues of $`A`$.
+Furthermore if $`k`$ is square and if $`D`$ is regular (i.e. if
+$`k(0)=D`$ is regular) then the zeroes of $`k`$ are the reciprocals of
+the eigenvalues of the matrix $`(A-BD^{-1}C)`$.
 
 The methods `poles.stsp` and `zeroes.stsp` therefore compute the poles
-(and zeroes) of $k$ via the eigenvalues of $A$ (respectively of
-$\left( A - BD^{- 1}C \right)$). However, they do not check whether the
-statespace realization is minimal.
+(and zeroes) of $`k`$ via the eigenvalues of $`A`$ (respectively of
+$`(A-BD^{-1}C)`$). However, they do not check whether the statespace
+realization is minimal.
 
 Here analogous warnings are in place as for the polynomial and the LMFD
 case:
@@ -1064,9 +1115,9 @@ case:
 - The procedures use a threshold (`tol`) in order to decide whether a
   small eigenvalue returned by `eigen` is due to a “true zero”
   eigenvalue or not.
-- The computation of zeroes is only implemented for the case that $k$
-  has no zero at $z = 0$. If $D$ is ill conditioned then the results may
-  be unreliable.
+- The computation of zeroes is only implemented for the case that $`k`$
+  has no zero at $`z=0`$. If $`D`$ is ill conditioned then the results
+  may be unreliable.
 
 ### Checks
 
@@ -1085,47 +1136,49 @@ For `pseries` and `zvalues` objects the functions return `NA`.
 
 #### is.coprime()
 
-A polynomial matrix $c$ is called *left prime*, if $c(z)$ has full row
-rank everywhere in the complex plane. Clearly this implies that $c$ is
-square or “wide”, i.e. if $c$ is $(m \times n)$-dimensional then
-$m \leq n$ must hold.
+A polynomial matrix $`c`$ is called *left prime*, if $`c(z)`$ has full
+row rank everywhere in the complex plane. Clearly this implies that
+$`c`$ is square or “wide”, i.e. if $`c`$ is $`(m \times n)`$-dimensional
+then $`m \leq n`$ must hold.
 
-A pair $(a,b)$ of (compatible) polynomial matrices is called *left
-coprime* if the matrix $c = \lbrack a,b\rbrack$ is left prime. This case
-is important for the structure of left matrix fraction descriptions.
-Suppose $c(z) = a^{- 1}b(z)$, where $a$ is a square, non singular
-polynomial matrix. If the pair is $(a,b)$ is *not* left coprime, then we
-may cancel a common, non unimodular, factor and thus obtain a “simpler”
-representation for $c(z)$.
+A pair $`(a,b)`$ of (compatible) polynomial matrices is called *left
+coprime* if the matrix $`c=[a,b]`$ is left prime. This case is important
+for the structure of left matrix fraction descriptions. Suppose
+$`c(z)=a^{-1} b(z)`$, where $`a`$ is a square, non singular polynomial
+matrix. If the pair is $`(a,b)`$ is *not* left coprime, then we may
+cancel a common, non unimodular, factor and thus obtain a “simpler”
+representation for $`c(z)`$.
 
 The function `is.coprime` may be called with the following syntax:
 
 - `test_coprime(c)` where `c` is an `lmfd` object, which represents a
-  rational matrix $c(z) = a^{- 1}(z)b(z)$, checks whether the pair
-  $(a,b)$ is left coprime.  
+  rational matrix $`c(z)=a^{-1}(z)b(z)`$, checks whether the pair
+  $`(a,b)`$ is left coprime.  
 - `test_coprime(a)` where `a` is an `polm` object, which represents a
-  polynomial matrix $a(z)$, checks whether $a$ is left prime.  
+  polynomial matrix $`a(z)`$, checks whether $`a`$ is left prime.  
 - `test_coprime(a,b)` where `a`, `b` are `polm` objects, which represent
-  the polynomial matrices $a$ and $b$, checks whether the pair $(a,b)$
-  is left coprime.
+  the polynomial matrices $`a`$ and $`b`$, checks whether the pair
+  $`(a,b)`$ is left coprime.
 
 For implementation details see the vignette .
 
 #### is.minimal()
 
-A statespace realization $(A,B,C,D)$ is minimal if and only if the
-Hankel matrix of the impulse response coefficients
-$k_{i} = CA^{i - 1}B$, $i \geq 1$
+A statespace realization $`(A,B,C,D)`$ is minimal if and only if the
+Hankel matrix of the impulse response coefficients $`k_i = CA^{i-1}B`$,
+$`i\geq 1`$
 
-$$\begin{pmatrix}
-k_{1} & k_{2} & \cdots & k_{s} \\
-k_{2} & k_{3} & \cdots & k_{s + 1} \\
-\vdots & \vdots & & \vdots \\
-k_{s} & k_{s + 1} & \cdots & k_{2s - 1}
-\end{pmatrix} \in {\mathbb{R}}^{ms \times ns}$$ has rank $s$. Therefore
-the procedure
+``` math
+\begin{pmatrix}
+k_1 & k_2     & \cdots & k_s \\
+k_2 & k_3     & \cdots & k_{s+1} \\
+\vdots & \vdots &      & \vdots  \\
+k_s & k_{s+1} & \cdots & k_{2s-1}                   
+\end{pmatrix} \in \mathbb{R}^{ms\times ns}
+```
+has rank $`s`$. Therefore the procedure
 [`is.minimal()`](https://bfunovits.github.io/rationalmatrices/reference/is.minimal.md)
-computes the SVD of this matrix and returns `TRUE` if the $s$-th
+computes the SVD of this matrix and returns `TRUE` if the $`s`$-th
 singular value is larger than a given threshold `tol`.
 
 In order to check whether the statespace realization is observable
@@ -1134,6 +1187,7 @@ controllability matrices (which may be computed with `obs_matrix` and
 `ctr_matrix`) or the corresponding Grammians (see `grammians`).
 
 ``` r
+
 x = test_stsp(dim = c(2,2), s = 2)
 is.minimal(x)
 #> [1] TRUE
@@ -1143,13 +1197,14 @@ Note that operations on `stsp` objects may return non minimal
 realizations. E.g.:
 
 ``` r
+
 is.minimal(rbind(x, x), only.answer = FALSE)[c('answer','sv','s0')]
 #> $answer
 #> [1] FALSE
 #> 
 #> $sv
-#> [1] 3.408218e+00 3.632772e-01 1.030808e-16 5.020670e-17 1.097256e-17
-#> [6] 3.918018e-18 2.101469e-18 1.209413e-18
+#> [1] 1.325572e+01 2.096817e+00 8.009642e-16 4.770365e-16 3.631888e-16
+#> [6] 8.886614e-17 4.650582e-17 2.844825e-17
 #> 
 #> $s0
 #> [1] 2
@@ -1158,8 +1213,8 @@ is.minimal(x %r% (x^(-1)), only.answer = FALSE)[c('answer','sv','s0')]
 #> [1] FALSE
 #> 
 #> $sv
-#> [1] 5.452997e-14 1.704625e-14 2.839447e-15 1.188939e-15 5.074035e-16
-#> [6] 3.968177e-16 5.811262e-17 4.978685e-18
+#> [1] 1.346429e-14 1.017461e-14 6.415413e-15 4.372242e-15 1.653732e-15
+#> [6] 3.305412e-16 2.505857e-16 8.793768e-17
 #> 
 #> $s0
 #> [1] 0
@@ -1172,14 +1227,15 @@ In order to construct a minimal realization one may use the procedure
 
 ### Derivatives
 
-The derivative of a rational function (with respect to the argument $z$)
-may be computed with the `S3` method `derivative`. However, `lmfd` and
-`zvalues` objects are not supported.
+The derivative of a rational function (with respect to the argument
+$`z`$) may be computed with the `S3` method `derivative`. However,
+`lmfd` and `zvalues` objects are not supported.
 
-As a simply example consider a polynomial of degree $4$ and its
+As a simply example consider a polynomial of degree $`4`$ and its
 derivatives:
 
 ``` r
+
 a = polm(1)
 for (x in c(-2,-1,1,2)) {
   a = a * polm(c(1, -1/x))
@@ -1191,6 +1247,7 @@ print(a, format = 'c')
 ```
 
 ``` r
+
 z = seq(from = -2.25, to = 2.25, length.out = 201)
 out = plot(zvalues(a, z = z), x_list = list(zvalues(derivative(a)*(1/4), z = z),
                                       zvalues(derivative(derivative(a))*(1/12), z = z),
@@ -1207,6 +1264,7 @@ showing critical
 points](a_rational_matrices_files/figure-html/unnamed-chunk-27-1.png)
 
 ``` r
+
 par(opar)
 ```
 
@@ -1214,6 +1272,7 @@ Note that computing the derivative for an impulse response object
 decreases the number of lags by one!
 
 ``` r
+
 x = test_stsp(dim = c(2,2), s = 12)
 
 all.equal(pseries(derivative(x), lag.max = 10),
@@ -1239,26 +1298,27 @@ polynomial matrices.
 
 Any polynomial matrix can be transformed to a “quasi-upper-triangular”
 matrix by elementary row operations, i.e. by multiplication with a
-unimodular matrix from the left. Suppose that $a(z)$ is an $m \times n$
-dimensional matrix with rank $r \leq \min(m,n)$. Then
-$h(z) = u^{- 1}(z)a(z)$ is the *column Hermite form* of $a(z)$, if
-$u(z)$ is unimodular and if there exist integers
-$1 \leq j(i) < j(2) < \cdots < j(r) \leq n$ such that
+unimodular matrix from the left. Suppose that $`a(z)`$ is an
+$`m \times n`$ dimensional matrix with rank $`r \leq \min(m,n)`$. Then
+$`h(z) = u^{-1}(z) a(z)`$ is the *column Hermite form* of $`a(z)`$, if
+$`u(z)`$ is unimodular and if there exist integers
+$`1\leq j(i) <j(2) < \cdots < j(r)\leq n`$ such that
 
-- $h_{i,j{(i)}}(z)$ is monic (the coefficient pertaining to the highest
+- $`h_{i,j(i)}(z)`$ is monic (the coefficient pertaining to the highest
   degree is equal to one),
-- the elements above $h_{i,j{(i)}}(z)$ have lower polynomial degree than
-  $h_{i,j{(i)}}(z)$ and
-- $h_{i,j}(z) = 0$ for $i > r$ or $j < j(i)$.
+- the elements above $`h_{i,j(i)}(z)`$ have lower polynomial degree than
+  $`h_{i,j(i)}(z)`$ and
+- $`h_{i,j}(z) = 0`$ for $`i>r`$ or $`j < j(i)`$.
 
 See also Kailath (1980).
 
-Quite analogously one may transform the matrix $a(z)$ by elementary
+Quite analogously one may transform the matrix $`a(z)`$ by elementary
 column operations into “quasi-lower-triangular” form
-$h(z) = a(z)u^{- 1}(z)$. The corresponding normal form is called *row
+$`h(z) = a(z)u^{-1}(z)`$. The corresponding normal form is called *row
 Hermite form*.
 
 ``` r
+
 a = polm(array(c(-0.4, -1.3, -0.3,  0.6, 1.1,  1,
                  -1.7,  0,   -0.8, -0.3, 3.2, -0.4), dim = c(2,3,2)))
 print(a, format = 'c')
@@ -1285,6 +1345,7 @@ The *row Hermite form* may be obtained by calling the function
 with the options `from_left=FALSE`.
 
 ``` r
+
 out = hnf(a, from_left = FALSE)
 print(out$h, format = 'c', digits = 1)
 #> ( 2 x 3 ) matrix polynomial with degree <= 0 
@@ -1298,18 +1359,19 @@ all.equal(polm(diag(3)), prune(out$u %r% out$u_inv))
 #> [1] TRUE
 ```
 
-Note that for the polynomial $a(z)$ considered in the above `R`
+Note that for the polynomial $`a(z)`$ considered in the above `R`
 demonstration(s), the row Hermite form is particularly simple, since
-$a(z)$ is left prime. See also the discussion about *left (co)prime*
+$`a(z)`$ is left prime. See also the discussion about *left (co)prime*
 matrices in the vignette “Technical Details”.
 
-The following example is a $(3,5)$ dimensional polynomial matrix with
-rank $2$. The function
+The following example is a $`(3,5)`$ dimensional polynomial matrix with
+rank $`2`$. The function
 [`hnf()`](https://bfunovits.github.io/rationalmatrices/reference/hnf.md)
 returns an “estimate” of the rank and the “pivots”
-$j(1),j(2),\ldots,j(r)$.
+$`j(1),j(2),\ldots, j(r)`$.
 
 ``` r
+
 a = polm(array(c(0,0,0,2,-1,1,2,-1,1,6,-3,3,3,0,2,0,0,0,2,-1,
                  1,-2,1,-1,3,0,2,-8,1,-5,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1), dim = c(3,5,3)))
 print(a, format = 'c')
@@ -1340,25 +1402,29 @@ all.equal(polm(diag(3)), prune(out$u %r% out$u_inv))
 
 #### Smith Normal Form
 
-For any $(m \times n)$ dimensional polynomial matrix $a(z)$ with rank
-$r \leq \min(m,n)$ there exists a factorization
+For any $`(m \times n)`$ dimensional polynomial matrix $`a(z)`$ with
+rank $`r\leq \min(m,n)`$ there exists a factorization
 
-$$a(z) = u(z)s(z)v(z)$$ where $u(z)$ and $v(z)$ are two unimodular
-matrices and $s(z)$ is an $m \times n$ dimensional quasi-diagonal matrix
-with diagonal entries $d_{i}(z)$ which satisfy
+``` math
+a(z) = u(z) s(z) v(z)
+```
+where $`u(z)`$ and $`v(z)`$ are two unimodular matrices and $`s(z)`$ is
+an $`m \times n`$ dimensional quasi-diagonal matrix with diagonal
+entries $`d_i(z)`$ which satisfy
 
-- $d_{i}$ is monic for $i \leq r$ and zero for $i > r$, and
-- $d_{i}$ divides $d_{i + 1}$ for $i < r$.
+- $`d_i`$ is monic for $`i \leq r`$ and zero for $`i>r`$, and
+- $`d_i`$ divides $`d_{i+1}`$ for $`i<r`$.
 
 The above factorization may be constructed by using elementary column-
 and row- operations.
 
 For more details, see e.g. Kailath (1980).
 
-As a simple example consider the following $4 \times 5$ dimensional
+As a simple example consider the following $`4 \times 5`$ dimensional
 polynomial matrix
 
 ``` r
+
 set.seed(1234) # set seed for random number generation
 
 z = polm(c(0,1))
@@ -1394,25 +1460,27 @@ set.seed(NULL)
 
 #### Column Reduced Form
 
-Let $a(z) = a_{0} + a_{1}z + \cdots + a_{p}z^{p}$ be $(m \times n)$,
-polynomial matrix with column degrees $p_{i}$, $i = 1,\ldots,n$. The
-column end matrix of $a(z)$ is the $(m \times n)$ matrix with $i$-th
-column equal to the $i$-th column of the coefficient matrix $a_{p_{i}}$.
+Let $`a(z)=a_0 + a_1 z + \cdots + a_p z^p`$ be $`(m \times n)`$,
+polynomial matrix with column degrees $`p_i`$, $`i=1,\ldots ,n`$. The
+column end matrix of $`a(z)`$ is the $`(m \times n)`$ matrix with
+$`i`$-th column equal to the $`i`$-th column of the coefficient matrix
+$`a_{p_i}`$.
 
-If $a(z)$ is square and if the column end matrix is regular, then $a$ is
-called *column reduced*.
+If $`a(z)`$ is square and if the column end matrix is regular, then
+$`a`$ is called *column reduced*.
 
 Any non singular, square polynomial matrix may be transformed to a
 column reduced matrix by a sequence of elementary column operations.
-This means there exists a unimodular matrix $v(z)$ such that
-$a(z)v^{- 1}(z)$ is column reduced.
+This means there exists a unimodular matrix $`v(z)`$ such that
+$`a(z) v^{-1}(z)`$ is column reduced.
 
 This task is accomplished by the helper function `col_reduce(a, ...)`.
 
-As an example consider a random $(3 \times 3)$, polynomial matrix whose
-column end matrix has rank 1:
+As an example consider a random $`(3 \times 3)`$, polynomial matrix
+whose column end matrix has rank 1:
 
 ``` r
+
 # create a random (3 x 3) polynmial matrix with a column end matrix of rank 1
 col_end_matrix = matrix(round(rnorm(3),1), nrow = 3, ncol = 1) %*%
                  matrix(round(rnorm(3),1), nrow = 1, ncol = 3)
@@ -1420,29 +1488,29 @@ a = test_polm(dim = c(3,3), degree = c(2,1,1), random = TRUE,
                digits = 2, col_end_matrix = col_end_matrix)
 print(a, format = 'c')
 #> ( 3 x 3 ) matrix polynomial with degree <= 2 
-#>                          [,1]          [,2]           [,3]
-#> [1,]  -0.26 - 1.99z - 2.66z^2  0.91 + 0.57z  -0.51 - 0.19z
-#> [2,]   -0.35 + 2.01z - 1.4z^2   -0.7 + 0.3z   -2.18 - 0.1z
-#> [3,]   0.74 - 1.52z - 0.14z^2  0.19 + 0.03z   0.27 - 0.01z
+#>                          [,1]          [,2]          [,3]
+#> [1,]  -0.64 - 0.13z + 0.36z^2  0.32 - 0.02z  1.19 + 0.06z
+#> [2,]   -1.9 - 0.61z + 1.98z^2  1.16 - 0.11z  0.98 + 0.33z
+#> [3,]    0.61 + 0.26z + 3.6z^2   1.49 - 0.2z  -1.68 + 0.6z
 print(svd(col_end_matrix(a))$d)       # column end matrix has rank 1
-#> [1] 3.084996e+00 1.427013e-17 0.000000e+00
+#> [1] 4.187481e+00 1.260284e-16 1.536066e-33
 
 out = col_reduce(a)
 print(out$a, format = 'c', digits = 2)   # column reduced matrix
 #> ( 3 x 3 ) matrix polynomial with degree <= 1 
-#>               [,1]           [,2]   [,3]
-#> [1,]  0.91 + 0.57z  -0.26 + 2.26z  -0.21
-#> [2,]   -0.7 + 0.3z  -0.35 - 1.26z  -2.41
-#> [3,]  0.19 + 0.03z   0.74 - 0.63z   0.33
+#>               [,1]            [,2]  [,3]
+#> [1,]  0.32 - 0.02z  -0.64 - 11.57z  2.15
+#> [2,]  1.16 - 0.11z   -1.9 - 15.41z  4.46
+#> [3,]   1.49 - 0.2z    0.61 + 4.76z  2.79
 print(out$col_degrees)                   # column degrees
 #> [1] 1 1 0
 print(out$col_end_matrix)                # column end matrix
-#>      [,1]       [,2]       [,3]
-#> [1,] 0.57  2.2566667 -0.2066667
-#> [2,] 0.30 -1.2566667 -2.4133333
-#> [3,] 0.03 -0.6333333  0.3333333
+#>       [,1]   [,2] [,3]
+#> [1,] -0.02 -11.57 2.15
+#> [2,] -0.11 -15.41 4.46
+#> [3,] -0.20   4.76 2.79
 print(svd(out$col_end_matrix)$d)         # column end matrix is non singular!
-#> [1] 2.9912225 2.1131372 0.2321762
+#> [1] 20.273866995  3.913004292  0.003807266
 
 # check reult(s)
 all.equal(polm(diag(3)), prune(out$v %r% out$v_inv))
@@ -1455,25 +1523,26 @@ all.equal(col_end_matrix(out$a), out$col_end_matrix)
 
 #### Wiener-Hopf Factorisation
 
-A Wiener-Hopf factorization of a (square $(m,m)$-dimensional, non
-singular) polynomial matrix $A(z)$ is a factorization of the form
+A Wiener-Hopf factorization of a (square $`(m,m)`$-dimensional, non
+singular) polynomial matrix $`A(z)`$ is a factorization of the form
 
-$$A(z) = A_{f}\left( z^{- 1} \right)A_{0}(z)A_{b}(z) = A_{r}(z)A_{b}(z),$$
+``` math
+A(z) = A_f(z^{-1}) A_0(z) A_b(z) = A_r(z) A_b(z),
+```
 where
 
-- $A_{b}(z)$ is a polynomial matrix which has zeroes outside the unit
+- $`A_b(z)`$ is a polynomial matrix which has zeroes outside the unit
   circle,
-- $A_{r}(z)$ is a column reduced polynomial matrix with column degrees
-  $\kappa_{i}$$i = 1,\ldots,m$ and zeroes inside the unit circle,
-- $A_{0}(z)$ is a diagonal matrix with diagonal entries $z^{\kappa_{i}}$
+- $`A_r(z)`$ is a column reduced polynomial matrix with column degrees
+  $`\kappa_i`$$`i=1,\ldots,m`$ and zeroes inside the unit circle,
+- $`A_0(z)`$ is a diagonal matrix with diagonal entries $`z^{\kappa_i}`$
   and  
-- $A_{f}\left( z^{- 1} \right) = A_{r}(z)A_{0}^{- 1}(z)$ is a polynomial
-  in $z^{- 1}$!
+- $`A_f(z^{-1}) = A_r(z)A_0^{-1}(z)`$ is a polynomial in $`z^{-1}`$!
 
-The factors $A_{f}\left( z^{- 1} \right)$, $A_{0}(z)$, $A_{b}(z)$ are
-called *forward*, *null* and *backward* components of $A(z)$, and the
-integers $\left( \kappa_{1},\ldots,\kappa_{n} \right)$ are the *partial
-indices* of $A(z)$.
+The factors $`A_f(z^{-1})`$, $`A_0(z)`$, $`A_b(z)`$ are called
+*forward*, *null* and *backward* components of $`A(z)`$, and the
+integers $`(\kappa_1,\ldots,\kappa_n)`$ are the *partial indices* of
+$`A(z)`$.
 
 Note that zeroes on the unit circle are not allowed.
 
@@ -1482,23 +1551,21 @@ of linear, rational expectation models. See e.g. Al-Sadoon (2017).
 
 The WHF is constructed in three steps
 
-- first compute the Smith form $A(z) = u(z)s(z)v(z)$
-- each diagonal entry $d_{i}$ is factored into a polynomial with zeroes
+- first compute the Smith form $`A(z)= u(z) s(z) v(z)`$
+- each diagonal entry $`d_i`$ is factored into a polynomial with zeroes
   inside, respectivly outside the unit circle. Let
-  $s(z) = s_{r}(z)s_{b}(z)$ denote the corresponding factorization of
-  $s(z)$. This gives
-  $A(z) = \left( u(z)s_{r}(z) \right)\left( s_{b}(z)v(z) \right)$.
-- compute the column reduced form of
-  $\left( u(z)s_{r}(z) \right) = A_{r}(z)w(z)$ and set
-  $A_{b} = w^{- 1}(z)s_{b}(z)v(z)$.
-- Let $\kappa_{i}$ denote the columnn degrees of $A_{r}(z)$ and set
-  $A_{f}\left( z^{- 1} \right) = A_{r}(z)\text{diag}\left( z^{- \kappa_{i}} \right)$.
-  Note that by construction $A_{f}\left( z^{- 1} \right)$ is a
-  polynomial in $z^{- 1}$.
+  $`s(z) = s_r(z) s_b (z)`$ denote the corresponding factorization of
+  $`s(z)`$. This gives $`A(z) = (u(z) s_r(z)) (s_b(z) v(z))`$.
+- compute the column reduced form of $`(u(z) s_r(z)) = A_r(z) w(z)`$ and
+  set $`A_b = w^{-1}(z) s_b(z) v(z)`$.
+- Let $`\kappa_i`$ denote the columnn degrees of $`A_r(z)`$ and set
+  $`A_f(z^{-1}) = A_r(z) \mbox{diag}(z^{-\kappa_i})`$. Note that by
+  construction $`A_f(z^{-1})`$ is a polynomial in $`z^{-1}`$.
 
 Simulation example:
 
 ``` r
+
 set.seed(54321)
 
 # create test polynomial
@@ -1561,48 +1628,61 @@ set.seed(NULL)
 
 A *Blaschke factor* is a rational function of the form
 
-$$a(z) = \frac{1 - \bar{\alpha}z}{- \alpha + z}\frac{\alpha}{\bar{\alpha}}$$
+``` math
+a(z) = \frac{1-\bar{\alpha}z}{-\alpha + z}\frac{\alpha}{\bar{\alpha}}
+```
 This function is *all pass*, i.e.
-$$a(z)a^{*}(z) = \left( \frac{1 - \bar{\alpha}z}{- \alpha + z}\frac{\alpha}{\bar{\alpha}} \right)\left( \frac{1 - \alpha z^{- 1}}{- \bar{\alpha} + z^{- 1}}\frac{\bar{\alpha}}{\alpha} \right) = \left( \frac{1 - \bar{\alpha}z}{- \alpha + z} \right)\left( \frac{z - \alpha}{- \bar{\alpha}z + 1} \right) = 1$$
-If we multiply a (scalar) polynomial $p(z)$, which is zero at
-$z = \alpha$, with such a Blascke factor then we obtain a new
-polynomial, $\widetilde{p}(z) = p(z)a(z)$ say, where the zero at
-$z = \alpha$ is replaced by a zeroe at $z = 1/\bar{\alpha}$. Furthermore
+``` math
+a(z) a^*(z) = \left(\frac{1-\bar{\alpha}z}{-\alpha + z}\frac{\alpha}{\bar{\alpha}}\right)
+              \left(\frac{1-\alpha z^{-1}}{-\bar{\alpha} + z^{-1}}\frac{\bar{\alpha}}{\alpha}\right)
+            =  \left(\frac{1-\bar{\alpha}z}{-\alpha + z}\right)
+              \left(\frac{z-\alpha}{-\bar{\alpha}z + 1}\right) = 1
+```
+If we multiply a (scalar) polynomial $`p(z)`$, which is zero at
+$`z=\alpha`$, with such a Blascke factor then we obtain a new
+polynomial, $`\tilde{p}(z) = p(z)a(z)`$ say, where the zero at
+$`z=\alpha`$ is replaced by a zeroe at $`z=1/\bar{\alpha}`$. Furthermore
 both polynomial generate the same spectral density, i.e.
 
-$$\widetilde{p}(z){\widetilde{p}}^{*}(z) = p(z)a(z)a^{*}(z)p^{*}(z) = p(z)p^{*}(z)$$
+``` math
+\tilde{p}(z) \tilde{p}^*(z) = p(z) a(z) a^*(z) p^*(z) = p(z) p^*(z)
+```
 
-If $p(z)$ is a real polynomial and the root $z = \alpha$ is complex then
-the polynomial $\widetilde{p}$ has complex coefficients. However, if we
-also flip the conjugated root $z = \bar{\alpha}$ then we obtain a
+If $`p(z)`$ is a real polynomial and the root $`z=\alpha`$ is complex
+then the polynomial $`\tilde{p}`$ has complex coefficients. However, if
+we also flip the conjugated root $`z=\bar{\alpha}`$ then we obtain a
 polynomial with real coefficients. This means the polynomial
 
-$$p(z)\left( \frac{1 - \bar{\alpha}z}{- \alpha + z}\frac{\alpha}{\bar{\alpha}} \right)\left( \frac{1 - \alpha z}{- \bar{\alpha} + z}\frac{\bar{\alpha}}{\alpha} \right)$$
-has real coefficients (and the “flipped roots” $1/\bar{\alpha}$ and
-$1/\alpha$).
+``` math
+p(z)\left(\frac{1-\bar{\alpha}z}{-\alpha + z}\frac{\alpha}{\bar{\alpha}}\right)
+    \left(\frac{1-\alpha z}{-\bar{\alpha} + z}\frac{\bar{\alpha}}{\alpha}\right)
+```
+has real coefficients (and the “flipped roots” $`1/\bar{\alpha}`$ and
+$`1/\alpha`$).
 
 The multiplication with a (univariate) Blaschke factor is implemented in
 the routine `blaschke_univariate()`.
 
 This procedure may be generalized to polynomial matrices, see
-`blaschke_multivariate`. Suppose that $p(z)$ is an $(m \times n)$
-dimensional polynomial matrix and that $\alpha$ is a root, i.e
-$p(\alpha)$ is singular. Let $p(\alpha) = U\Sigma V^{*}$ denote the SVD
-of $p(\alpha)$ then the last row of $U^{*}p(\alpha)$ is zero, i.e.
-$(z - \alpha)$ divides all entries of the last row. If we multiply the
+`blaschke_multivariate`. Suppose that $`p(z)`$ is an $`(m \times n)`$
+dimensional polynomial matrix and that $`\alpha`$ is a root, i.e
+$`p(\alpha)`$ is singular. Let $`p(\alpha)=U\Sigma V^*`$ denote the SVD
+of $`p(\alpha)`$ then the last row of $`U^* p(\alpha)`$ is zero, i.e.
+$`(z-\alpha)`$ divides all entries of the last row. If we multiply the
 last row with the corresponding Blaschke factor, we obtain a matrix
-polynomial, where the root $\alpha$ is replaced by the root
-$1/\bar{\alpha}$. (At least the “multiplicity” of the root $\alpha$ has
-been reduced by one.) If $\alpha$ is complex we have to “blaschkerize”
-also the conjugate root $\bar{\alpha}$ and to multiply the result with a
-suitable unitary matrix (see the helper function `transform_polar4real`)
-in order to obtain a polynomial matrix with real coeffcients. This task
-is accomplished by `blaschke_multivariate`.
+polynomial, where the root $`\alpha`$ is replaced by the root
+$`1/\bar{\alpha}`$. (At least the “multiplicity” of the root $`\alpha`$
+has been reduced by one.) If $`\alpha`$ is complex we have to
+“blaschkerize” also the conjugate root $`\bar{\alpha}`$ and to multiply
+the result with a suitable unitary matrix (see the helper function
+`transform_polar4real`) in order to obtain a polynomial matrix with real
+coeffcients. This task is accomplished by `blaschke_multivariate`.
 
 If we want to flip a set of roots, the utility `transform_allpass` may
 be used.
 
 ``` r
+
 set.seed(1719)
 m0 = test_polm(dim = c(2,2), degree = 2, digits = 2, random = TRUE)
 
@@ -1627,20 +1707,22 @@ set.seed(NULL)
 
 #### Companion Matrix
 
-Let $a(z) = a_{0} + a_{1}z + \cdots a_{p}z^{p}$ be a square
-($m \times m$)-dimensional, non singular polynomial matrix with
-$a_{0} \neq 0$. The companion matrix
+Let $`a(z) = a_0+a_1z+\cdots a_p z^p`$ be a square
+($`m\times m`$)-dimensional, non singular polynomial matrix with
+$`a_0\neq 0`$. The companion matrix
 
-$$\begin{pmatrix}
-{- a_{0}^{- 1}a_{1}} & \cdots & {- a_{0}^{- 1}a_{p - 1}} & {- a_{0}^{- 1}a_{p}} \\
-I_{m} & \cdots & 0 & 0 \\
-\vdots & \ddots & \vdots & \vdots \\
-0 & \cdots & I_{m} & 0
-\end{pmatrix} \in {\mathbb{R}}^{mp \times mp}$$ may be computed with the
-helper function
+``` math
+\begin{pmatrix}
+-a_0^{-1}a_1 & \cdots & -a_0^{-1} a_{p-1} & -a_0^{-1} a_p \\
+I_m          & \cdots & 0                 &          0    \\
+\vdots       & \ddots & \vdots            &     \vdots    \\
+0            & \cdots & I_m               &           0
+\end{pmatrix} \in \mathbb{R}^{mp\times mp}
+```
+may be computed with the helper function
 [`companion_matrix()`](https://bfunovits.github.io/rationalmatrices/reference/companion_matrix.md).
 This function throws an error if the argument is not square, has degree
-$- 1$ or if the constant term $a_{0}$ is not invertible.
+$`-1`$ or if the constant term $`a_0`$ is not invertible.
 
 #### Polynomial Degree
 
@@ -1648,8 +1730,8 @@ The helper function
 [`degree()`](https://bfunovits.github.io/rationalmatrices/reference/degree.md)
 returns the polynomial degrees of the elements of a polynomial matrix,
 the maximum degrees of the elements of the columns or rows of the matrix
-and the maximum degree of all elements of $a(z)$. Note that the degree
-of a zero polynomial is set to $- 1$.
+and the maximum degree of all elements of $`a(z)`$. Note that the degree
+of a zero polynomial is set to $`-1`$.
 
 #### Some Workhorse Functions
 
@@ -1675,103 +1757,116 @@ Reflection** (#8), and **Utilities** (#10) from CLAUDE.md.
 
 ### Grammians and Balanced Realizations
 
-We consider a rational matrix
-$K(z) = C\left( z^{- 1}I_{s} - A \right)^{- 1}B + D$ in state space form
-and we assume that $K$ is stable, i.e. the eigenvalues of the matrix $A$
-have moduli less than one.
+We consider a rational matrix $`K(z) = C(z^{-1}I_s - A)^{-1} B +D`$ in
+state space form and we assume that $`K`$ is stable, i.e. the
+eigenvalues of the matrix $`A`$ have moduli less than one.
 
 The *controllability* Grammian of this statespace realization is defined
 as
-$$P = \sum\limits_{j \geq 0}A^{j}BB\prime(A\prime)^{j} = APA\prime + BB\prime$$
+``` math
+P = \sum_{j\geq 0} A^j BB' (A')^j = APA' + BB'
+```
 and the *observability* Grammian is
-$$Q = \sum\limits_{j \geq 0}(A\prime)^{j}C\prime CA^{j} = A\prime QA + C\prime C$$
+``` math
+Q = \sum_{j\geq 0} (A')^j C'C A^j = A'QA + C'C
+```
 These Grammians may be computed with the routine `grammians(obj)`.
 
-The statespace realization is *minimal* if and only if $P$ and $Q$ are
-both positive definite. Furthermore it can by shown that the product
-$PQ$ is diagonalizable (with non negative (real) eigenvalues) and that
-the rank of $PQ$ is equal to the minimal statespace dimension of $K(z)$,
-i.e. there exists a statespace realization of $K(z)$ which has a
-statespace dimension equal to the rank of $PQ$ and for any statespace
-realization of $K(z)$ the statespace dimension is larger than or equal
-to ${rk}(PQ)$.
+The statespace realization is *minimal* if and only if $`P`$ and $`Q`$
+are both positive definite. Furthermore it can by shown that the product
+$`PQ`$ is diagonalizable (with non negative (real) eigenvalues) and that
+the rank of $`PQ`$ is equal to the minimal statespace dimension of
+$`K(z)`$, i.e. there exists a statespace realization of $`K(z)`$ which
+has a statespace dimension equal to the rank of $`PQ`$ and for any
+statespace realization of $`K(z)`$ the statespace dimension is larger
+than or equal to $`\mathrm{rk}(PQ)`$.
 
-If we apply a state space transformation $T$ then the Grammians
+If we apply a state space transformation $`T`$ then the Grammians
 transform as follows
 
-$$\left. P\rightarrow TPT\prime,\; Q\rightarrow\left( T^{- 1} \right)\prime QT^{- 1}{\mspace{6mu}\text{and}\mspace{6mu}}PQ\rightarrow TPQT^{- 1} \right.$$
+``` math
+P \longrightarrow TPT',\; Q \longrightarrow (T^{-1})' Q T^{-1} \text{ and } PQ \longrightarrow TPQT^{-1}
+```
 
-Let
-$\sigma_{1}^{2} \geq \sigma_{2}^{2} \geq \cdots \geq \sigma_{s}^{2} \geq 0$
-denote the ordered eigenvalues of $PQ$ and suppose that $PQ$ has rank
-$s_{0} \leq s$, i.e. $\sigma_{k} > 0$ for $1 \leq k \leq s_{0}$ and
-$\sigma_{k} = 0$ for $k > s_{0}$. Then there exists a state
-transformation $T$ such that the two transformed Grammians are both
-diagonal and the first $s_{0}$ diagonal entries of $P$ and of $Q$ are
-given by $\sigma_{k}$, $k = 1,\ldots,s_{0}$. Therefore
+Let $`\sigma_1^2 \geq \sigma_2^2 \geq \cdots \geq \sigma_{s}^2 \geq 0`$
+denote the ordered eigenvalues of $`PQ`$ and suppose that $`PQ`$ has
+rank $`s_0 \leq s`$, i.e. $`\sigma_k>0`$ for $`1\leq k \leq s_0`$ and
+$`\sigma_k=0`$ for $`k>s_0`$. Then there exists a state transformation
+$`T`$ such that the two transformed Grammians are both diagonal and the
+first $`s_0`$ diagonal entries of $`P`$ and of $`Q`$ are given by
+$`\sigma_k`$, $`k=1,\ldots,s_0`$. Therefore
 
-$$P = \begin{pmatrix}
-P_{11} & 0 \\
-0 & P_{22}
-\end{pmatrix},\; Q = \begin{pmatrix}
-Q_{11} & 0 \\
-0 & Q_{22}
-\end{pmatrix}{\mspace{6mu}\text{with}\mspace{6mu}}P_{11} = Q_{11} = \text{diag}\left( \sigma_{1},\ldots,\sigma_{s_{0}} \right){\mspace{6mu}\text{and}\mspace{6mu}}P_{22}Q_{22} = 0.$$
+``` math
+P = \begin{pmatrix}
+    P_{11} & 0 \\
+    0      & P_{22}
+    \end{pmatrix},\;
+Q = \begin{pmatrix}
+    Q_{11} & 0 \\
+    0      & Q_{22}
+    \end{pmatrix}
+\mbox{ with }
+P_{11} = Q_{11} = \mbox{diag}(\sigma_1,\ldots,\sigma_{s_0})
+\mbox{ and }
+P_{22} Q_{22} = 0.
+```
 
-The $\sigma_{k}$’s are called the *Hankel singular values* of the
+The $`\sigma_k`$’s are called the *Hankel singular values* of the
 statespace realization since they are the singular values of the Hankel
 matrix of the impulse response coefficients.
 
-A *minimal* statespace realization for $K$ then may simply computed by
-truncating the transformed matrices $A,B,C$. If we partition the
-(transformed) state space matrices (conformingly to $P$, $Q$) as
-$$A = \begin{pmatrix}
+A *minimal* statespace realization for $`K`$ then may simply computed by
+truncating the transformed matrices $`A,B,C`$. If we partition the
+(transformed) state space matrices (conformingly to $`P`$, $`Q`$) as
+``` math
+A = \begin{pmatrix}
 A_{11} & A_{12} \\
 A_{21} & A_{22}
-\end{pmatrix},\; B = \begin{pmatrix}
+\end{pmatrix}, \;
+B = \begin{pmatrix}
 B_{1} \\
 B_{2}
-\end{pmatrix}{\mspace{6mu}\text{and}\mspace{6mu}}C = \begin{pmatrix}
-C_{1} & C_{2}
-\end{pmatrix}$$ then
-$K(z) = C_{1}\left( z^{- 1}I_{s_{0}} - A_{11} \right)^{- 1}B_{1} + D)$
-is a minimal statespace realization of $K$.
+\end{pmatrix} \mbox{ and }
+C = \begin{pmatrix}
+C_{1} & C_2
+\end{pmatrix}
+```
+then $`K(z) = C_1(z^{-1}I_{s_0} -A_{11})^{-1} B_1 + D)`$ is a minimal
+statespace realization of $`K`$.
 
 `balance(obj, P,Q, s0, truncate = FALSE)` computes a somewhat simplified
-balanced form, where the two blocks $P_{22}$ and $Q_{22}$ are *not*
+balanced form, where the two blocks $`P_{22}`$ and $`Q_{22}`$ are *not*
 diagonal.
 
 There are three possible scenarios
 
-- the paramater `s0` is equal to the rank of $PQ$. In this case
-  $P_{22}Q_{22} = 0$ (up to numerical errors).
-- the paramater `s0` is less than the rank of $PQ$. In this case
-  $P_{22}Q_{22}$ is not equal to zero.
-- the paramater `s0` is larger than the rank of $PQ$. In this case the
+- the paramater `s0` is equal to the rank of $`PQ`$. In this case
+  $`P_{22}Q_{22} = 0`$ (up to numerical errors).
+- the paramater `s0` is less than the rank of $`PQ`$. In this case
+  $`P_{22}Q_{22}`$ is not equal to zero.
+- the paramater `s0` is larger than the rank of $`PQ`$. In this case the
   procedure may throw an error.
 
 If the optional parameter `truncate=TRUE` then a correspondingly
 truncated statespace realization is returned. In the case that the
-paramater `s0` is less than the rank of $PQ$ this truncated realization
-is only an approximate realization of the rational matrix $K$. The
-approximation error depends on the size of the “neglected” singular
-values. Note also that in this case the statespace realization returned
-is not in balanced form, i.e. the Grammians of this realization are not
-equal to $P_{11}$ and $Q_{11}$.
+paramater `s0` is less than the rank of $`PQ`$ this truncated
+realization is only an approximate realization of the rational matrix
+$`K`$. The approximation error depends on the size of the “neglected”
+singular values. Note also that in this case the statespace realization
+returned is not in balanced form, i.e. the Grammians of this realization
+are not equal to $`P_{11}`$ and $`Q_{11}`$.
 
-If $T = \left( T_{1}\prime,T_{2}\prime \right)\prime$,
-$S = T^{- 1} = \left( S_{1},S_{2} \right)$ denotes the statespace
+If $`T=(T_1',T_2')'`$, $`S=T^{-1}=(S_1,S_2)`$ denotes the statespace
 transformation, which gives the balanced form, then the trancated system
-is $A_{11} = T_{1}AS_{1}$, $B_{1} = T_{1}B$, $C_{1} = CS_{1}$ and
-$D = D$. Note also that in this case (`truncate=TRUE`) the procedure
-just returns $T_{1}$, $S_{1}$ and not the “whole” transformation
-matrices.
+is $`A_{11}=T_1 A S_1`$, $`B_1=T_1 B`$, $`C_1=CS_1`$ and $`D=D`$. Note
+also that in this case (`truncate=TRUE`) the procedure just returns
+$`T_1`$, $`S_1`$ and not the “whole” transformation matrices.
 
 If we call `balance(obj, P, Q, s0=NULL, tol, truncate)` then the
-procedure tries to determine the rank $PQ$ by inspecting the computed
-singular values $\sigma_{k}$. To be precise $s_{0}$ is set to the number
-of singular values $\sigma_{k}$ which are larger than `tol` times the
-largest singular value $\sigma_{1}$. This strategy fails if *all*
+procedure tries to determine the rank $`PQ`$ by inspecting the computed
+singular values $`\sigma_k`$. To be precise $`s_0`$ is set to the number
+of singular values $`\sigma_k`$ which are larger than `tol` times the
+largest singular value $`\sigma_1`$. This strategy fails if *all*
 singular values are equal to zero (up to numerical errors).
 
 Above we have discussed balancing and balanced truncation for the case
@@ -1779,12 +1874,14 @@ of the controllabaility and the observability Grammian. This scheme is
 sometimes called *Lyapunov balancing*. There are other possible choices
 for a pair of Grammians, e.g. one may use the controllabaility matrix
 and the observability matrix of the statespace realization of the
-inverse $K^{- 1}$, i.e.
+inverse $`K^{-1}`$, i.e.
 
-$$Q = \left( A - BD^{- 1}C \right)\prime Q\left( A - BD^{- 1}C \right) + C\prime C$$
+``` math
+Q = (A-BD^{-1}C)' Q (A-BD^{-1}C) + C'C
+```
 
-Of course for this choice the rational marix $K$ must be *minimum
-phase*, i.e. the moduli of the eigenvalues of $A - BD^{- 1}C$ must be
+Of course for this choice the rational marix $`K`$ must be *minimum
+phase*, i.e. the moduli of the eigenvalues of $`A-BD^{-1}C`$ must be
 smaller than one. This balancing scheme is therefore called *minimum
 phase balancing*.
 
@@ -1792,6 +1889,7 @@ Some details on how the balanced form is actually computed is given in
 the vignette “Technical Details”.
 
 ``` r
+
 # example A ############################################################
 
 # "obj" is a (1 by 1) rational matrix in statespace form,
@@ -1884,15 +1982,16 @@ obj = test_stsp(dim = c(2,2), s = 10, bpoles = 1, bzeroes = 1)
 gr = grammians(obj, 'minimum phase')
 trunc = balance(obj, gr, s0 = 5)
 print(trunc$sigma)
-#>  [1] 3.799808e-01 2.487878e-01 1.032412e-01 5.311834e-02 3.207984e-02
-#>  [6] 1.676651e-02 3.777843e-03 1.685034e-03 1.098375e-04 4.053554e-05
+#>  [1] 0.3912123573 0.3575538390 0.2062348945 0.1486498420 0.0736966493
+#>  [6] 0.0488280560 0.0298932299 0.0051693727 0.0026167156 0.0001119644
 
 max(abs(unclass(pseries(obj, lag.max = 25)) -
         unclass(pseries(trunc$ob, lag.max = 25))))
-#> [1] 0.007459183
+#> [1] 0.02202817
 ```
 
 ``` r
+
 plot(pseries(obj, lag.max = 25), x_list= list(pseries(trunc$obj, lag.max = 25)),
      type = c('l','p'), legend = c('s=10', 's=5'))
 ```
@@ -1906,26 +2005,28 @@ quality](a_rational_matrices_files/figure-html/unnamed-chunk-37-1.png)
 The algorithm outlined in “[Reflect Zeroes by Multiplication with All
 Pass Matrices](#blaschke)” to flip the zeroes of a multivariate
 polynomial matrix has a statespace analogon. Let
-$K(z) = C\left( z^{- 1}I - A \right)^{- 1}B + D$ be a square, rational
-matrix in statespace form and suppose that
-$\alpha_{1},\ldots,\alpha_{k}$ are zeroes of $K(z)$. There exists an
-allpass (rational) function $U(z)$, $UU^{*} = U^{*}U = I$ such that  
-$K(z)U(z)$ is a rational matrix, where the roots $\alpha_{i}$ have been
-replaced by the “flipped” roots $1/{\bar{\alpha}}_{i}$. Both $KU$ and
-$U$ have a statespace realization, which is computed by the routine
+$`K(z)=C(z^{-1}I-A)^{-1}B+D`$ be a square, rational matrix in statespace
+form and suppose that $`\alpha_1,\ldots,\alpha_k`$ are zeroes of
+$`K(z)`$. There exists an allpass (rational) function $`U(z)`$,
+$`UU^*=U^*U=I`$ such that  
+$`K(z)U(z)`$ is a rational matrix, where the roots $`\alpha_i`$ have
+been replaced by the “flipped” roots $`1/\bar{\alpha}_i`$. Both $`KU`$
+and $`U`$ have a statespace realization, which is computed by the
+routine
 [`reflect_zeroes()`](https://bfunovits.github.io/rationalmatrices/reference/reflect_zeroes.md).
 
-Quite analogously one may also mirror the poles of $K$.
+Quite analogously one may also mirror the poles of $`K`$.
 
-The construction of the allpass function $U$ is outlined in the vignette
-“technical details”.
+The construction of the allpass function $`U`$ is outlined in the
+vignette “technical details”.
 
 ### H2 norm and orthogonalization
 
-Create a vector of rational functions of the form $1/(1 - 0.9z)^{k}$,
-$k = 1,2,3,4$:
+Create a vector of rational functions of the form $`1/(1-0.9z)^k`$,
+$`k=1,2,3,4`$:
 
 ``` r
+
 K0 = polm(c(1, -0.9))^(-1)
 K = rbind(K0,
           K0^2,
@@ -1934,9 +2035,10 @@ K = rbind(K0,
 ```
 
 The statespac realization (`K`) is not minimal. (Minimal state dimension
-is $s = 4$.) Use balance to construct a minimal realization:
+is $`s=4`$.) Use balance to construct a minimal realization:
 
 ``` r
+
 # K is not minimal! minimal state dimension = 4
 gr = grammians(K, 'lyapunov')
 out = balance(K, gr, s = 4)
@@ -1950,10 +2052,11 @@ all.equal(zvalues(K, n.f = 2^6), zvalues(out$obj, n.f = 2^6))
 K = out$obj
 ```
 
-Orthormalize the components of $K$ with respect to the $H_{2}$ inner
+Orthormalize the components of $`K`$ with respect to the $`H_2`$ inner
 product.
 
 ``` r
+
 P = lyapunov(K$A, K$B %*% t(K$B))
 Q = K$C %*% P %*% t(K$C) + K$D %*% t(K$D)
 
@@ -1980,6 +2083,7 @@ all.equal(Q, diag(4))
 Plot frequency response
 
 ``` r
+
 fr = zvalues(K0, n.f = 2^12)
 fr0 = zvalues(K0, n.f = 10)
 legend = c(expression(K[1]), expression(K[2]), expression(K[3]), expression(K[4]))
@@ -1993,6 +2097,7 @@ functions](a_rational_matrices_files/figure-html/unnamed-chunk-41-1.png)
 
 ``` r
 
+
 plot(fr[1,1], x_list = list(fr[2,1], fr[3,1], fr[4,1]), which = 'phase',
      legend = legend)
 ```
@@ -2003,6 +2108,7 @@ functions](a_rational_matrices_files/figure-html/unnamed-chunk-41-2.png)
 
 ``` r
 
+
 plot(fr[1,1], x_list = list(fr[2,1], fr[3,1], fr[4,1]), which = 'nyquist',
      legend = legend)
 ```
@@ -2012,6 +2118,7 @@ for rational transfer
 functions](a_rational_matrices_files/figure-html/unnamed-chunk-41-3.png)
 
 ``` r
+
 
 subfigures.main = legend
 dim(subfigures.main) = c(2,2)
@@ -2028,6 +2135,7 @@ functions](a_rational_matrices_files/figure-html/unnamed-chunk-41-4.png)
 Compute reduced order model (s = 3)
 
 ``` r
+
 gr = grammians(K0, 'lyapunov')
 out = balance(K0, gr, s = 3)
 print(out$sigma)
@@ -2052,21 +2160,17 @@ Rational Expectations Models.” *Econometric Theory*, 1–31.
 <https://doi.org/10.1017/S0266466617000160>.
 
 Hannan, Edward James, and Manfred Deistler. 2012. *The Statistical
-Theory of Linear Systems*. Classics in Applied Mathematics.
-Philadelphia: SIAM.
+Theory of Linear Systems*. Classics in Applied Mathematics. SIAM.
 
 Ho, B., and R. E. Kalman. 1966. “Efficient Construction of Linear State
 Variable Models From Input/Output Functions.” *Regelungstechnik* 14:
 545–48.
 
-Kailath, Thomas. 1980. *Linear Systems*. Englewood Cliffs, New Jersey:
-Prentice Hall.
+Kailath, Thomas. 1980. *Linear Systems*. Prentice Hall.
 
-------------------------------------------------------------------------
-
-1.  This naming is chosen in regard to the connection between rational
+[^1]: This naming is chosen in regard to the connection between rational
     matrices and VARMA processes and processes represented by statespace
     models.
 
-2.  Note that the impulse response function is only well defined if the
-    rational matrix has no pole at $z = 0$.
+[^2]: Note that the impulse response function is only well defined if
+    the rational matrix has no pole at $`z=0`$.
