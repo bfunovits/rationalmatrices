@@ -45,13 +45,11 @@ This tools plots the grid lines,axes and axes titles/labels. The x-axis may be
 a date/time axis.
 }
 \examples{
-\dontrun{
 date = seq(as.Date("2019/1/1"), by = "month", length.out = 24)
 titles = c(NA, 'y','main', NA)
 plot(date, 1:24, axes = FALSE, xlab = NA, ylab = NA)
 plot_axes(axes = c(TRUE, FALSE, FALSE, TRUE), titles = titles,
           style = style_parameters('gray'), x_date = date[1] - as.numeric(date[1]))
 points(date, 1:24)
-}
 }
 \keyword{internal}

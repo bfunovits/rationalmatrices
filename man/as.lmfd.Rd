@@ -3,11 +3,20 @@
 \name{as.lmfd}
 \alias{as.lmfd}
 \alias{as.lmfd.pseries}
+\alias{as.lmfd.stsp}
 \title{Coerce to Left Matrix Fraction Description}
 \usage{
 as.lmfd(obj, method, ...)
 
 \method{as.lmfd}{pseries}(obj, method, ...)
+
+\method{as.lmfd}{stsp}(
+  obj,
+  method = c("echelon"),
+  lag.max = NULL,
+  tol = sqrt(.Machine$double.eps),
+  ...
+)
 }
 \arguments{
 \item{obj}{object}
@@ -15,6 +24,14 @@ as.lmfd(obj, method, ...)
 \item{method}{character string}
 
 \item{...}{optional additional arguments}
+
+\item{lag.max}{Integer. Number of lags for the impulse response computation.
+Defaults to \code{max(2 * s, 10)} where \code{s} is the state dimension of
+\code{obj}. Must be large enough for the Hankel matrix to resolve the
+Kronecker indices.}
+
+\item{tol}{Tolerance for the rank decision in the Kronecker-index computation
+(passed to \code{\link{qr}}). Default: \code{sqrt(.Machine$double.eps)}.}
 }
 \value{
 object of class \code{\link{lmfd}}

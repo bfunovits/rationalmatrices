@@ -50,10 +50,8 @@ X[,,1] = (X[,,1] + t(X[,,1]))/2
 btoeplitz(R = X)
 btoeplitz(C = X)
 
-\dontrun{
 # the following examples throw an error
 btoeplitz(R = test_array(dim=c(2,1,3)), C = -test_array(dim = c(2,2,2)))
 btoeplitz(R = test_array(dim=c(2,1,3)))
 btoeplitz(C = test_array(dim=c(2,1,3)))
-}
 }

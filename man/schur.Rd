@@ -84,9 +84,7 @@ print(out$S)
 print(out$k) # three eigenvalues have been selected
 print(out$lambda) 
 
-\dontrun{
-# If the "target" eigenvalues do not match the eigenvalues of A 
+# If the "target" eigenvalues do not match the eigenvalues of A
 # then "schur" throws an error:
 out = schur(A, select = lambda[1:3]+ 1)
-}
 }

@@ -2,23 +2,34 @@
 % Please edit documentation in R/03_arithmetic_operations.R
 \name{\%r\%}
 \alias{\%r\%}
-\title{Matrix Multiplication of Rational Matrices}
+\title{Rational Matrix Multiplication}
 \usage{
 e1 \%r\% e2
 }
 \arguments{
-\item{e1, e2}{two rational matrix objects (i.e. \code{\link{polm}}, \code{\link{lmfd}}, \code{\link{rmfd}},
-\code{\link{stsp}}, \code{\link{pseries}} or \code{\link{zvalues}} objects), 
-or objects which may be coerced to rational matrix objects.}
+\item{e1, e2}{rational matrix objects (\code{\link{polm}}, \code{\link{lmfd}},
+\code{\link{rmfd}}, \code{\link{stsp}}, \code{\link{pseries}} or
+\code{\link{zvalues}}), or objects coercible to one of these types.}
 }
 \value{
-rational matrix object. The class depends on the classes of the arguments \code{e1,e1}.
+A rational matrix object whose class depends on the classes of
+  \code{e1} and \code{e2} according to the coercion hierarchy.
 }
 \description{
-Matrix Multiplication of Rational Matrices
+Multiply two rational matrices.  This is the \emph{non-commutative} matrix product
+(rows of the first times columns of the second), \strong{not} element-wise
+multiplication.  Both operands are automatically upgraded to the highest type
+via the coercion hierarchy \code{matrix < polm < lmfd < stsp < pseries < zvalues}.
 }
 \examples{
+# Laurent polynomial multiplication (same class)
 (lp1 = test_lpolm(degree_max = 1, degree_min = -1, random = TRUE))
 (lp2 = test_lpolm(degree_max = 1, degree_min = -1, random = TRUE))
 lp1 \%r\% lp2
+
+# Mixed-class multiplication (polm and stsp — result is stsp)
+pm = test_polm(dim = c(2,2), degree = 1)
+sp = test_stsp(dim = c(2,2), s = 2)
+pm \%r\% sp
 }
+\concept{rational matrix arithmetic}

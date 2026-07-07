@@ -50,9 +50,7 @@ print(a, format = 'c')
 a[, 1] = test_polm(dim = c(2,1), degree = 4) # this gives a warning
 print(a, format = 'c')
 
-\dontrun{
-a[i=1] = 0   # named arguments are not supported
-}  
+a[i=1] = 0   # named arguments are not supported  
 (lp = lpolm(1:3, min_deg = -1))
 lp[1] = 0
 lp

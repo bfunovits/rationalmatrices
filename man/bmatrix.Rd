@@ -38,10 +38,8 @@ bmatrix(x, cols = 2)   # is equivalent to: bmatrix(x, rows = c(1,3), cols = 2)
 bmatrix(x, rows = 1:3) # is equivalent to: bmatrix(x, cols = integer(0))
 bmatrix(x, rows = c(3,1,2))
 
-\dontrun{
 # the examples below throw an error
 bmatrix(x, rows = 1, cols = 2)
 bmatrix(x, rows = c(1,2), cols = c(2,3))
 bmatrix(x, rows = c(1,2,1), cols = 3)
-}
 }

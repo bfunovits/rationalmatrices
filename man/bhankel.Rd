@@ -39,9 +39,7 @@ bhankel(test_array(dim = c(2,3)), d = c(2,2))
 bhankel(test_array(dim = c(2,2,6)), d = c(3,0))
 bhankel(test_array(dim = c(2,2,0)), d = c(2,2))
 
-\dontrun{
 # the following examples throw an error
 bhankel(1:5, d = c(-1,1))
 bhankel(test_array(dim = c(2,3,2,1)))
-}
 }

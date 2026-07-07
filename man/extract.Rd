@@ -103,9 +103,7 @@ a[c(1,1),c(2,1)] # returns a 2 by 2 matrix
 all.equal(pseries(a[c(1,1),c(2,1)]), pseries(a)[c(1,1),c(2,1)])
 all.equal(zvalues(a[c(1,1),c(2,1)]), zvalues(a)[c(1,1),c(2,1)])
 
-\dontrun{
 a[i=1, j=2] # throws an error, since "named" arguments are not allowed.
-}
 
 # the subsetting operator [,] is only implemented for "lmfd" columns
 (l = test_lmfd(dim = c(2,2), degrees = c(1,1)))

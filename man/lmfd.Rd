@@ -46,12 +46,10 @@ dim(x)
 str(x)
 print(x, digits = 2)
 
-\dontrun{
-### the following calls to lmfd() throw an error 
+### the following calls to lmfd() throw an error
 lmfd() # no arguments!
-lmfd(a = test_polm(dim = c(2,3), degree = 1))  # a(z) must be square 
+lmfd(a = test_polm(dim = c(2,3), degree = 1))  # a(z) must be square
 lmfd(a = test_polm(dim = c(2,2), degree = -1)) # a(z) must have degree >= 0
-}
 }
 \seealso{
 Useful methods and functions for the \code{lmfd} class are: 

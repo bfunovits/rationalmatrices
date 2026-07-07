@@ -35,4 +35,3 @@ inflate_object(lp, 2, 2)
 (ss = test_stsp(s = 1))
 inflate_object(ss, 2, 2)
 }
-\keyword{internal}

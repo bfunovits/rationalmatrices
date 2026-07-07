@@ -55,9 +55,7 @@ all.equal(pseries(derivative(K)), derivative(pseries(K, lag.max = 6)))
 K = test_stsp(dim = c(2,2), s = 4, bpoles = 1)
 all.equal(pseries(derivative(K)), derivative(pseries(K, lag.max = 6)))
 
-\dontrun{
 # 'lmfd' objects and 'zvalues' objects are not supported
 derivative(test_lmfd(dim = c(3,3), degrees = c(1,1)))
 derivative(zvalues(K))
-}
 }

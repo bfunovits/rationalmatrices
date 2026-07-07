@@ -39,14 +39,12 @@ This tool writes text into a "colored" box in one of the margins
 of the plot region.
 }
 \examples{
-\dontrun{
 plot(1:10, axes = FALSE)
 graphics::box()
 btext('hallo', side = 1)
 btext('Sigma[11]', side = 2, bg = 'lightblue')
 btext('Sigma[11]', side = 3, bg = NA, border = 'black', size = 1.2, parse_text = TRUE)
 btext(expression(Sigma[11]), side = 4, bg = 'orange', border = 'black', cex = 1.5)
-}
 }
 \seealso{
 \code{\link[graphics]{mtext}} and \code{\link[grDevices]{plotmath}}

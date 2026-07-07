@@ -50,12 +50,10 @@ X = bdiag(A,B,C,D,E)
 X
 str(X)            # output is of type 'cplx'
 
-\dontrun{
 # the inputs must be vectors or matrices. arrays are not supported.
 bdiag(A, array(1, dim = c(2,3,1)))
 
 # character matrices are problematic, since it is not clear how to set the
 # non diagonal elements. Therefore, the following statement throws an error.
 bdiag(A, matrix('B', nrow = 2, ncol = 1), 3:4)
-}
 }

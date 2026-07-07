@@ -39,4 +39,3 @@ print(data.frame(z = z1, j = j, `Conj(z[j])` = Conj(z1[j]),
                  d = z1-Conj(z1[j])))
 
 }
-\keyword{internal}

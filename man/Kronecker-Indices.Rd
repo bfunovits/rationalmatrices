@@ -77,12 +77,10 @@ k = pseries(x, lag.max = 20)
 # compute the Kronecker indices of this  rational matrix
 pseries2nu(k)
 
-\dontrun{
 # Suppose the rational matrix has dimension m=2. Then the rows 1,2,5
 # do not form a "nice" basis for the row space of the Hankel matrix.
 # Therefore "basis2nu" stops with an error message.
 basis2nu(c(1,2,5), m=2)
-}
 
 }
 \references{

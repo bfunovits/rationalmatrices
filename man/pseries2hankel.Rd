@@ -31,4 +31,3 @@ The function throws an error if the conditions \eqn{p\geq 1}{p \ge 1},
 are not satisfied. In particular, this implies that 
 \eqn{l \geq 2}{l \ge 2} must hold.
 }
-\keyword{internal}

@@ -47,4 +47,3 @@ Kf = zvalues(K)
 all.equal(zvalues(polm(diag(m))) + complex(imaginary = 0), 
           Kf \%r\% Ht(Kf) + complex(imaginary = 0))
 }
-\keyword{internal}

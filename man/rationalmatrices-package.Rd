@@ -74,6 +74,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Bernd Funovits \email{bernd.funovits@gmail.com} (\href{https://orcid.org/0000-0002-8247-6840}{ORCID})
   \item Wolfgang Scherrer \email{wolfgang.scherrer@tuwien.ac.at}
 }
 

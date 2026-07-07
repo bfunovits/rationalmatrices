@@ -40,7 +40,6 @@ as_txt_scalarfilter(coefs, syntax = 'txt', x = 'x', t = 't')
 as_txt_scalarfilter(coefs, syntax = 'TeX', x = 'x', t = 's')
 as_txt_scalarfilter(coefs, syntax = 'expression', x = 'x', t = 'k')
 
-\dontrun{
 # the case syntax = "expression" may be used e.g. as follows
 
 # make_filterfun creates a "closure" which computes the filter-output
@@ -80,7 +79,6 @@ legend('topright', bty = 'n',
        legend = c(expression(u[t]),
                   parse(text = paste('x[t] == ',
                      as_txt_scalarfilter(coefs, 'expression', 'u','t')))) )
-}
 }
 \seealso{
 \code{\link{as_txt_scalarpoly}} and \code{\link{as_tex_matrixfilter}}.

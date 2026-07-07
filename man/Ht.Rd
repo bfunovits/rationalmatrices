@@ -74,9 +74,11 @@ x = test_polm(dim = c(2,3), degree = 1)
 Ht(x)
 
 \dontrun{
+# Ht is not implemented for lmfd and rmfd objects:
 Ht(test_lmfd(dim = c(2,2), degrees = c(3,3)))
 Ht(test_rmfd(dim = c(2,2), degrees = c(3,3)))
-Ht(pseries(test_lmfd(dim = c(2,2), degrees = c(3,3))))
 }
+# Workaround: convert to pseries first
+Ht(pseries(test_lmfd(dim = c(2,2), degrees = c(3,3))))
 
 }

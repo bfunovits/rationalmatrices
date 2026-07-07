@@ -45,9 +45,7 @@ cbind(a1, pseries(a2))
 cbind(zvalues(a1), a2)
 
 # the following exmpales throw an error
-\dontrun{
-rbind(a1, a2)   # the number of columns does not coincide 
+rbind(a1, a2)   # the number of columns does not coincide
 cbind(pseries(a1), zvalues(a2)) # there is no automatic coercion
                                  # from pseries to zvalues
-}
 }

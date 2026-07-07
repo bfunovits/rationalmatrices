@@ -85,10 +85,8 @@ all.equal(prune(a), prune(out$a \%r\% out$v))
 a = test_polm(dim = c(3,3), degree = c(0,1,-1), random = TRUE, digits = 2)
 print(a, format = 'c')
 
-\dontrun{
 # this throws an error, since a(z) is singular
 out = col_reduce(a)
-}
 
 
 # Random example: Generic matrices are row reduced ############################################

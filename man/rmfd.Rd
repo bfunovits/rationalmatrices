@@ -50,12 +50,10 @@ print(x, digits = 2)
 
 xr = test_rmfd(dim = c(3,2), degree = c(2,2))
 
-\dontrun{
-### the following calls to rmfd() throw an error 
+### the following calls to rmfd() throw an error
 rmfd() # no arguments!
-rmfd(c = test_polm(dim = c(2,3), degree = 1))  # c(z) must be square 
+rmfd(c = test_polm(dim = c(2,3), degree = 1))  # c(z) must be square
 rmfd(c = test_polm(dim = c(2,2), degree = -1)) # c(z) must have degree >= 0
-}
 }
 \seealso{
 Useful methods and functions for the \code{rmfd} class are: 

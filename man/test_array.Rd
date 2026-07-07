@@ -37,9 +37,7 @@ test_array(dim = 5)
 test_array(dim = c(2,4), dimnames = TRUE)
 test_array(dim = c(2,4,3), dimnames = FALSE)
 
-\dontrun{
 # the examples below throw an error
 test_array(dim = c())
 test_array(dim = c(2,-1,2))
-}
 }

@@ -99,12 +99,10 @@ a = polm(dbind(d = 3, diag(2), test_array(dim = c(2,2,2))))
 az = zvalues(a, z)
 apply(az, MARGIN = 3, FUN = function(x) {d = svd(x)$d; min(d)/max(d)})
 
-\dontrun{
 # the following examples throw an error
 zeroes(polm(c(0, 0, 0, 0.5))) # constant term is zero
 zeroes(polm(test_array(dim = c(2, 1, 3)))) # non-square polynomial
 zeroes(polm(test_array(dim = c(2, 2, 0)))) # zero polynomial
-}
  
 # zeroes of a Laurent polynomial #################################
 (lp = lpolm(1:5, min_deg = -7))
@@ -135,14 +133,12 @@ k = stsp(A = matrix(rnorm(3*3), nrow = 3, ncol = 3),
 (z = zeroes(k, tol = 0))
 all.equal(z, 1/(eigen(k$A - k$B \%*\% solve(k$D, k$C), only.values = TRUE)$values))
 
-\dontrun{
-k = stsp(k$A, k$B, k$C, 
+k = stsp(k$A, k$B, k$C,
          D = matrix(rnorm(2*1), nrow = 2, ncol = 1)[,c(1,1)])  # D is singular
 zeroes(k)                                                      # zeroes() throws an error
 
 k = stsp(k$A, k$B[,1,drop = FALSE], k$C, k$D[,1,drop = FALSE]) # (2 x 1) rational matrix
 zeroes(k)                          # throws an error, since k is not square
-}
 
 # poles of polynomial matrices #############################################
 

@@ -48,7 +48,6 @@ as_txt_scalarpoly(coefs = sample((-10):10, 7, replace = TRUE),
                   syntax = 'txt', x = 'x', 
                   laurent = -3)
 
-\dontrun{
 # the case syntax = "expression" may be used e.g. as follows
 
 # make_polyfun creates a "closure" which evaluates the polynomial at given points
@@ -70,5 +69,4 @@ x_grid = seq(from = -1, to = 1, length.out = 101)
 plot(x_grid, a(x_grid), type = 'l', xlab = 'x', ylab = 'a(x)',
      main = parse(text = paste('a(x) == ',
           as_txt_scalarpoly(coefs, syntax = 'expression', x = 'x'))))
-}
 }

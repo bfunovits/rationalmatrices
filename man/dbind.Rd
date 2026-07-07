@@ -42,7 +42,5 @@ dbind(3, x, y)
 dbind(3, x, y, z)
 
 # Example that throws an error
-\dontrun{
 dbind(1, x, y, z) # throws an error, since the array x,y,z are not compatible
-}
 }

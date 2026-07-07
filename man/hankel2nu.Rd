@@ -22,4 +22,3 @@ the Hankel matrix must have an attribute \code{order=c(m,n,f,p)}
 which describes the block size \eqn{(m,n)} and the number 
 of block rows (\eqn{f}) and block columns (\eqn{p}).
 }
-\keyword{internal}

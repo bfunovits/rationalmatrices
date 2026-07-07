@@ -28,10 +28,8 @@ companion_matrix(polm(diag(3)))        # zero degree polynomial
 companion_matrix(polm(dbind(d = 3, diag(2), -test_array(dim = c(2,2,1)))))
 companion_matrix(polm(dbind(d = 3, diag(2), -test_array(dim = c(2,2,2)))))
 
-\dontrun{
 # the following examples throw an error
 companion_matrix(polm(c(0,0,0,0.5))) # constant term is zero
 companion_matrix(polm(test_array(dim = c(2,1,3)))) # non-square polynomial
 companion_matrix(polm(test_array(dim = c(2,2,0)))) # zero polynomial
-}
 }

@@ -1,6 +1,6 @@
 Package: rationalmatrices
 Title: Classes and Methods for Rational Matrices
-Version: 0.3.3
+Version: 0.3.4
 Authors@R: 
     c(person(given = "Wolfgang", family = "Scherrer",
              role = c("aut"), email = "wolfgang.scherrer@tuwien.ac.at"),
@@ -31,10 +31,10 @@ Suggests:
     rmarkdown,
     testthat (>= 2.1.0),
     tibble
-RoxygenNote: 7.3.2
 LinkingTo: 
     Rcpp,
     RcppArmadillo
 RdMacros: Rdpack
 VignetteBuilder: knitr
 URL: https://bfunovits.github.io/rationalmatrices/
+Config/roxygen2/version: 8.0.0

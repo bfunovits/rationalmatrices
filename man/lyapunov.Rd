@@ -60,10 +60,8 @@ print(P)
 # issue a warning message
 P = lyapunov(A, Q, non_stable = 'warn')
 
-\dontrun{
 # throw an error
 P = lyapunov(A, Q, non_stable = 'stop')
-}
 }
 \references{
 \insertRef{Kitagawa77}{rationalmatrices}

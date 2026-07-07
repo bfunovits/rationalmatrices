@@ -68,4 +68,3 @@ all.equal(matrix(out$J \%*\% theta, nrow = m, ncol = m),
 \seealso{
 \code{\link{lyapunov}}.
 }
-\keyword{internal}

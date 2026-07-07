@@ -638,6 +638,31 @@ as.lmfd.pseries = function(obj, method, ...){
   return(pseries2lmfd(obj)$Xl)
 }
 
+
+#' @rdname as.lmfd
+#' @param lag.max Integer. Number of lags for the impulse response computation.
+#'   Defaults to \code{max(2 * s, 10)} where \code{s} is the state dimension of
+#'   \code{obj}. Must be large enough for the Hankel matrix to resolve the
+#'   Kronecker indices.
+#' @param tol Tolerance for the rank decision in the Kronecker-index computation
+#'   (passed to \code{\link{qr}}). Default: \code{sqrt(.Machine$double.eps)}.
+#' @export
+as.lmfd.stsp = function(obj, method = c("echelon"), lag.max = NULL,
+                        tol = sqrt(.Machine$double.eps), ...) {
+  method = match.arg(method)
+  d = dim(obj)
+  s = d[3]
+
+  if (is.null(lag.max)) {
+    lag.max = max(2L * s, 10L)
+  }
+  lag.max = as.integer(lag.max[1])
+
+  k = pseries(obj, lag.max = lag.max)
+  out = pseries2lmfd(k, tol = tol)
+  return(out$Xl)
+}
+
 # as.rmfd.____ methods ####
 
 #' Construct an RMFD Representation from Impulse Response

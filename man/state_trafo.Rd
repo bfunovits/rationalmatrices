@@ -45,8 +45,6 @@ obj1 = state_trafo(obj, T)
 
 # revert the transformation
 testthat::expect_equivalent(obj, state_trafo(obj1, T, inverse = TRUE))
-\dontrun{
 state_trafo(obj, stats::rnorm(9)) # dimension of T does not fit
 state_trafo(obj, c(1,0))          # T = diag(c(1,0)) is singular!
-}
 }

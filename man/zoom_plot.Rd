@@ -22,10 +22,12 @@ This function normally does not return; interrupt R to stop the application
 \description{
 The utility \code{zoom_plot} creates and runs a "shiny app" which displays two plots:
 Drawing (and dragging) a "brush" in the "control" plot at the bottom zooms into
-zooms into the selected x-range of the plot at the top.
-}
-\details{
-This utility is based on the \pkg{shiny} package.
+the selected x-range of the plot at the top.
+
+This utility is powered by the \pkg{shiny} package for interactive display.
+If \pkg{shiny} is not installed, the function exits with an informative message.
+The \code{requireNamespace("shiny")} guard at the top of the function body
+ensures the package works without \pkg{shiny} for non-interactive use.
 }
 \examples{
 \dontrun{

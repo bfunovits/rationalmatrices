@@ -37,4 +37,3 @@ convolve_3D(a,b,TRUE)
 This helper function is used for the multiplication of 
 \code{polm}, \code{lpolm} and \code{pseries} objects, see \code{\link{\%r\%}}.
 }
-\keyword{internal}

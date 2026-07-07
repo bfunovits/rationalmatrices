@@ -26,12 +26,10 @@ right (outer) margin. The outer margins of the plot are determined
 based on whether or not text or legend is put into the respective margin.
 }
 \examples{
-\dontrun{
 set_default_par()
 start_plot(xlab = 'x', ylab = 'y', main = 'main',
            legend_args = list(legend = c('eins','zwei'), fill = c('red','blue')))
            graphics::box(which = 'inner', col = 'red')
-}
 }
 \seealso{
 \code{\link[graphics]{legend}} and \code{\link[graphics]{par}}.

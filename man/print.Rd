@@ -91,11 +91,9 @@ print(a)
 a = polm(array(complex(real = stats::rnorm(2*1*3), 
                        imaginary = stats::rnorm(2*1*3)), dim = c(2,1,3)))
 print(a, digits = 2)
-\dontrun{
-# the format option 'character' is only implemented for polynomials matrices 
+# the format option 'character' is only implemented for polynomials matrices
 # with real coefficients!
 print(a, digits = 2, format = 'character')
-}
 
 # print a rational matrix in statespace form
 a = test_stsp(dim = c(3,3), s = 2)

@@ -42,8 +42,6 @@ is.stable(pseries(c))
 is.miniphase(b[,1:2])
 is.miniphase(as.stsp(c)[,1:2])
 
-\dontrun{
 is.miniphase(b)
 is.miniphase(c)
-}
 }
